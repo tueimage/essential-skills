@@ -201,8 +201,8 @@ division. `a % b` is a shorthand for `a - (a // b)`, for example `8 % 2` equals
 ###### Exercises
 
 1. Write a script that prints the square root of the integer 17. What class is the resulting value? Why?
+    
     * Code:
-
     ```python
     x = 17
     result = x ** 0.5
@@ -467,28 +467,28 @@ Strings also have methods, including some of the list methods discussed in the p
 In addition to the `count()` and `index()` methods, and the `format()` method we have seen before, there is also a `split` method, that can split a string into chunks:
 
 ```python
-    s = 'abcabcab'
-    l = s.split('c')  # l contains ['ab', 'ab', 'ab']
+s = 'abcabcab'
+l = s.split('c')  # l contains ['ab', 'ab', 'ab']
 ```
 
 or more useful
 
 ```python
-    sentence = 'The quick brown fox jumped over the lazy dog'
-    words = sentence.split(' ')
+sentence = 'The quick brown fox jumped over the lazy dog'
+words = sentence.split(' ')
 ```
 
 and a `find` method, that returns the index of the first occurence of a series of characters in a string
 
 ```python
-    sentence = 'The quick brown fox jumped over the lazy dog'
-    sentence.find('jumped')  # returns 20
+sentence = 'The quick brown fox jumped over the lazy dog'
+sentence.find('jumped')  # returns 20
 ```
 
 We can also slices strings:
 
 ```python
-    print(sentence[:20])  # prints 'The quick brown fox '
+print(sentence[:20])  # prints 'The quick brown fox '
 ```
 
 ### Tuples
@@ -496,13 +496,13 @@ We can also slices strings:
 Tuples are similar to lists, but are immutable. Instead of the square brackets, you use parentheses to define them:
 
 ```python
-    my_first_tuple = (1, 2, 2, 'a', 'b', 3)
+my_first_tuple = (1, 2, 2, 'a', 'b', 3)
 ```
 
 Tuples are mostly used for sequences that are guaranteed to be constant. We will see them return later in the section on functions. For now, be aware that you cannot assign to them, i.e.
 
 ```python
-    my_first_tuple[3] = 'Aardvark'
+my_first_tuple[3] = 'Aardvark'
 ```
 gives a `TypeError`, because the tuple type does not support indexing and slicing. The `list`-methods and functions that do not mutate are applicable to tuples as well, including indexing and slicing, the `len()` function, and the `count()` and `index()` methods.
 
@@ -513,13 +513,13 @@ gives a `TypeError`, because the tuple type does not support indexing and slicin
 Python's sets are similar to sets in mathematics: they are sequences of unique items. They are rarely used, but it is good to know they exist. They are defined with curly braces:
 
 ```python
-    a_set = {1, 2, 3, 'a'}
+a_set = {1, 2, 3, 'a'}
 ```
 
 Because all items in a set are unique, it is useless to add the same item more than once. The following definition results in the same set as the one above:
 
 ```python
-    a_set = {1, 2, 3, 'a', 'a', 'a', 'a'}
+a_set = {1, 2, 3, 'a', 'a', 'a', 'a'}
 ```
 For the same reason, the `count` method is not supported, and the `index` method is not supported for the reason that `set`s do not care about the order of their contents.
 
@@ -527,7 +527,7 @@ Sets support the `remove()` method, and an `add()` method (not append!) to add a
 
 
 ```python
-    print(set([1, 1, 2, 3, 3, 3]))  # prints {1, 2, 3}
+print(set([1, 1, 2, 3, 3, 3]))  # prints {1, 2, 3}
 ```
 
 Adding values that already are in the set has no effect, just as removing values that are *not* in the set.
@@ -538,36 +538,46 @@ Adding values that already are in the set has no effect, just as removing values
 
 Finally, Python has a dictionary type called `dict`. A `dict` maps keys to values, like an English dictionary maps words to descriptions. You could actually define an English dictionary using the curly brace dictionary syntax:
 
-    my_dictionary = {
-        'aardvark': 'a nocturnal badger-sized burrowing mammal of Africa, with long ears, a tubular snout, and a long extensible tongue, feeding on ants and termites.',
-        'aardwolf': 'a black-striped nocturnal African mammal that feeds mainly on termites.',
-        'abaca': 'a large herbaceous Asian plant of the banana family, yielding Manila hemp.',
-    }
+```python
+my_dictionary = {
+    'aardvark': 'a nocturnal badger-sized burrowing mammal of Africa, with long ears, a tubular snout, and a long extensible tongue, feeding on ants and termites.',
+    'aardwolf': 'a black-striped nocturnal African mammal that feeds mainly on termites.',
+    'abaca': 'a large herbaceous Asian plant of the banana family, yielding Manila hemp.',
+}
+```
 
 Instead of by index, you retrieve items from the dictionary using the keys, for example
 
-    my_dictionary['abaca']
+```python
+my_dictionary['abaca']
+```
 
 You can also add or change items using this syntax:
 
-    my_dictionary['aback'] = 'towards or situated to the rear; back'
-    my_dictionary['aardvark'] = 'an eclectic big band founded in 1973'
+```python
+my_dictionary['aback'] = 'towards or situated to the rear; back'
+my_dictionary['aardvark'] = 'an eclectic big band founded in 1973'
+```
 
 Dictionaries have two important methods to retrieve the keys and values:
 
-    print(my_dictionary.keys())  # prints 'dict_keys(['aardvark', 'aardwolf', 'abaca', 'aback'])'
-
+```python
+print(my_dictionary.keys())  # prints 'dict_keys(['aardvark', 'aardwolf', 'abaca', 'aback'])'
+```
 You can probably predict what the `values` method does now.
 
 The `dict_keys` and `dict_values` type can be converted to a list using the list constructor function:
 
-    print(list(my_dictionary.keys()))  # prints '['aardvark', 'aardwolf', 'abaca', 'aback']'
+```python
+print(list(my_dictionary.keys()))  # prints '['aardvark', 'aardwolf', 'abaca', 'aback']'
+```
 
 Dictionaries also support the `pop()` method that removes an value by key, i.e.
 
-    d = {'a': 1, 'b': 2, 'c': 3}
-    v = d.pop('b')  # v now contains 2, d is now {'a': 1, 'c': 3}
-
+```python
+d = {'a': 1, 'b': 2, 'c': 3}
+v = d.pop('b')  # v now contains 2, d is now {'a': 1, 'c': 3}
+```
 
 ###### Exercises
 
@@ -582,7 +592,7 @@ Dictionaries also support the `pop()` method that removes an value by key, i.e.
     words = desc.split(' ')
     words.reverse()
     print(words)
-    ```python
+    ```
 
     * The last two lines can also be replaced by `print(words[::-1])`.
 
@@ -591,45 +601,59 @@ Dictionaries also support the `pop()` method that removes an value by key, i.e.
 
 As we have seen before, `list`, `set`, and `dict` are mutable types: you can change elements of them after defining them:
 
-    l = [1, 2, 3]
-    l[2] = 100   # l is now [1, 2, 100]
+```python
+l = [1, 2, 3]
+l[2] = 100   # l is now [1, 2, 100]
+```
 
 On the otherhand, types like `tuple` and `str` are not mutable: you have to re-assign them to change them, i.e. this does not work
 
-    s = 'abc'
-    t = (1, 2, 3)
+```python
+s = 'abc'
+t = (1, 2, 3)
 
-    ...
+...
 
-    s[0] = 'd'  # This will result in an error.
-    t[0] = 42   # This will result in an error.
+s[0] = 'd'  # This will result in an error.
+t[0] = 42   # This will result in an error.
+```
 
 instead you would need to explicitly re-assign the values for `s` and `t`
 
-    s = 'abc'
-    t = (1, 2, 3)
+```python
+s = 'abc'
+t = (1, 2, 3)
 
-    ...
+...
 
-    s = 'dbc'
-    t = (42, 2, 3)
+s = 'dbc'
+t = (42, 2, 3)
+```
 
 Mutable values are assigned to *by reference*. To explain what this means, let's look at an example. If you assign a list to a variable `l`, like this
 
-    l = [1, 2, 3]
+```python
+l = [1, 2, 3]
+```
 
 `l` actually contains a list with *references* to where the numbers 1, 2, and 3 are stored in memory. Basically, `l` is not a list of numbers, but a list of *addresses* in memory where the numbers are stored.
 When you make a copy of the list, by doing
-    
-    m = l
+
+```python    
+m = l
+```
 
 you are *not* copying the numbers, but the addresses. When you change a list, for example by assigning a new number to an element of the list
 
-    l[1] = 100
+```python
+l[1] = 100
+```
 
 not the element itself get changed, but the number at that address in memory is changed. This has the consequence that
 
-    print(m[1])
+```python
+print(m[1])
+```
 
 will now also print `100`, because `l[1]` and `m[1]` both contain the same address, and we have changed the number at that address to `100`. This is illustrated in the diagram below, where the addresses are drawn as arrows.
 
@@ -647,31 +671,39 @@ will now also print `100`, because `l[1]` and `m[1]` both contain the same addre
 
 For loops in Python are relatively simple: you can only apply them to sequences. If you need a for loop, you need some kind of sequence (like a list, tuple, string, dictionary, or set) to loop over. Always. For loops can therefore be used to apply something to all items in a list, for example printing them:
 
-    l = ['ONE', 'TWO', 'THREE', 'FOUR']
-    for item in l:
-        print(item)
+```python
+l = ['ONE', 'TWO', 'THREE', 'FOUR']
+for item in l:
+    print(item)
+```
 
 This will invoke the print function on every item in the list. Every iteration of the loop it will assign one item from the list to the variable `item`, which it will print. Note the `:` at the end of the for-statement. This is important, as it signifies that a new block of code starts. This new block is indented, not by convention, but as a rule! The code will not run if you do not do this correctly.
 
 The name `item` is just an arbitrary placeholder name. You can use any name, as long as you do it consistently. For example,
 
-    for number in l:
-        print(number)
+```python
+for number in l:
+    print(number)
 
-    for a in l:
-        print(a)
+for a in l:
+    print(a)
+```
 
 all do the same.
 
 Sometimes, you want to perform the same task a fixed number of times. For this purpose you can use the `range()` function. A range returns a sequence between two numbers, with a certain step size, for example `range(0, 10, 2)` denotes every second number between 0 and (but not including) 10. You can use ranges in combination with for loops:
 
-    for x in range(0, 10, 2):
-        print(x)
+```python
+for x in range(0, 10, 2):
+    print(x)
+```
 
 If you only supply the range function with two arguments, it will assume a step size of 1. If you only supply one argument, it will assume that it should start at 0, hence
 
-    for i in range(3):
-        print(i)
+```python
+for i in range(3):
+    print(i)
+```
 
 will print 0, 1, and 2 on separate lines.
 
@@ -679,108 +711,131 @@ will print 0, 1, and 2 on separate lines.
 
 1. Write code that computes the sum of an arbitrary list of numbers, for example the list `l = [1, 2, 3.0]`
 
+    * Code
+
     ```python
-        sum = 0
-        for value in l:
-            sum = sum + value
-        print(sum)
-    ```python
+    sum = 0
+    for value in l:
+        sum = sum + value
+    print(sum)
+    ```
 
 2. The factorial of a positive integer n, denoted by n!, is the product of all positive integers (i.e. larger than zero) less than or equal to n. For example, 5! = 5 * 4 * 3 * 2 * 1. Use a for loop to compute the factorial of 15.
 
+    * Code
+
     ```python
-        factorial = 1
-        for i in range(1, 16):
-            factorial = factorial * i
-    ```python
+    factorial = 1
+    for i in range(1, 16):
+        factorial = factorial * i
+    ```
 
 
 ### If, else, elif
 
 Python has an if-else construct for conditionals. Like the for loop syntax, it follows an indented block structure, where each line before a block ends in a colon `:`. It looks like this:
 
-    if condition:
-        # Execute this code if condition equals true
-    else:
-        # Execute this code otherwise
+```python
+if condition:
+    # Execute this code if condition equals true
+else:
+    # Execute this code otherwise
+```
 
 For example, given a number `x` we can check if it is even or odd:
 
-    if x % 2 == 0:
-        # x is even, because there is no remainder after division by 2
-        print('x is even')
-    else:
-        print('x is odd')
+```python
+if x % 2 == 0:
+    # x is even, because there is no remainder after division by 2
+    print('x is even')
+else:
+    print('x is odd')
+```
 
 The else block is optional:
-    
-    l = [1, 2, 3]
-    if len(l) > 10:
-        print('List is full!')
+
+```python 
+l = [1, 2, 3]
+if len(l) > 10:
+    print('List is full!')
+```
 
 Sometimes, you want to check for multiple conditions. Then you can use the elif statement. For example, if we first want to check if a list is empty before checking how many items it is 'full', we can do this
 
-    if len(l) == 0:
-        print('List is empty')
-    elif len(l) < 10:
-        print('List contains less than 10 items')
-    else:
-        print('List contains more than 10 items')
+```python
+if len(l) == 0:
+    print('List is empty')
+elif len(l) < 10:
+    print('List contains less than 10 items')
+else:
+    print('List contains more than 10 items')
+```
 
 You can add as many `elif` statements between the `if` and `else` as you want. You can also nest if blocks, by indenting once more, i.e.
 
-    if condition1:
-        if condition2:
-            print('both true')
-        else:
-            print('only 1 is true')
+```python
+if condition1:
+    if condition2:
+        print('both true')
     else:
-        if condition2:
-            print('only 2 is true')
-        else:
-            print('both false')
-
-However, this would be equal to
-
-    if condition1:
-        if condition2:
-            print('both true')
-        else:
-            print('only 1 is true')
-    elif condition2:
+        print('only 1 is true')
+else:
+    if condition2:
         print('only 2 is true')
     else:
         print('both false')
+```
+
+However, this would be equal to
+
+```python
+if condition1:
+    if condition2:
+        print('both true')
+    else:
+        print('only 1 is true')
+elif condition2:
+    print('only 2 is true')
+else:
+    print('both false')
+```
 
 You can combine multiple conditions using the `and` and `or` keywords, for example:
-    
-    if condition1 and condition2:
-        print('both are true')
 
-    if condition1 or condition2:
-        print('at least one of the conditions is true')
+```python    
+if condition1 and condition2:
+    print('both are true')
+
+if condition1 or condition2:
+    print('at least one of the conditions is true')
+```
 
 There are special conditionals to check if an item is in a list, or a letter is in a string, using the keyword `in`:
 
-    the_list = [1, 2, 3, 9, 0]
+```python
+the_list = [1, 2, 3, 9, 0]
 
-    if 9 in my_list:
-        print('Yes, 9 is in the list')
-
+if 9 in my_list:
+    print('Yes, 9 is in the list')
+```
 
 ### While loops
 
 While loops combine the idea of repeating tasks with conditionals. The syntax is as follows:
 
-    while `condition`:
-        # This code will repeat until the condition is NOT true any more.
+```python
+while `condition`:
+    # This code will repeat until the condition is NOT true any more.
+```
 
 for example,
 
-    x = 0
-    while x < 10:
-        x = x + 1
-        print(x)
+```python
+x = 0
+while x < 10:
+    x = x + 1
+    print(x)
+```
 
 will add one to x and print x until x equals 10.
 
@@ -793,38 +848,46 @@ In machine learning, you will not often need a while loop, and it is better to u
 
 Sometimes, it is better to stop looping once a secondary condition is met. You can do this doing the break statement. For example:
 
-    for i in range(n):
-        if condition:
-            break
-
+```python
+for i in range(n):
+    if condition:
+        break
+```
 
 ### Zipping and enumerating
 
 Sometimes, you have two lists that you want to iterate over in parallel. You can zip them together using the `zip`-function:
 
-    english = ['one', 'two', 'three', 'four', 'five', 'six', 'seven']
-    italian = ['uno', 'due', 'tre', 'quattro', 'cinque',
-        'sei', 'sette', 'otto', 'nove', 'dieci']
-    roman_numerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII']
+```python
+english = ['one', 'two', 'three', 'four', 'five', 'six', 'seven']
+italian = ['uno', 'due', 'tre', 'quattro', 'cinque',
+    'sei', 'sette', 'otto', 'nove', 'dieci']
+roman_numerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII']
 
-    for i, j, k in zip(english, italian, roman_numerals):
-        print(k, i, j)
+for i, j, k in zip(english, italian, roman_numerals):
+    print(k, i, j)
+```
 
 Sometimes it may be useful to know the index of the items you iterate over. There are two options then:
 
-    for i in range(len(roman_numerals)):
-        print(i, roman_numerals[i])
+```python
+for i in range(len(roman_numerals)):
+    print(i, roman_numerals[i])
+```
 
-Or more elegant
+Or more elegantly
 
-    for i, x in enumerate(roman_numerals):
-        print(i, x)
+```python
+for i, x in enumerate(roman_numerals):
+    print(i, x)
+```
 
 Or even combine them:
-    
-    for i, (x, y, z) in enumerate(zip(english, italian, roman_numerals)):
-        print(i, x, y, z)
 
+```python    
+for i, (x, y, z) in enumerate(zip(english, italian, roman_numerals)):
+    print(i, x, y, z)
+```
 
 ###### Exercises
 
@@ -862,25 +925,33 @@ We already have seen some of Python's built-in functions pop-up here and there: 
 
 You can write your own functions using the `def` keyword. For example:
 
+```python
     def my_first_function():
         print('Hello world')
+```
 
 You can call (run) this function by typing `my_first_function()` in the console, or below the function definition. If you do not do that, the function will still be defined, it is just not used.
 This function has zero arguments: the sequence of arguments between the parentheses is empty.
 
 Functions can have arguments that can be used in the function's body, for example:
 
+```python
     def greet(name):
         print('Hello {}'.format(name))
+```
 
 Which you can call like this:
 
+```python
     greet('you')  # This will print 'Hello you'
+```
 
 `name` has become a placeholder variable, but this variable can have an arbitrary name, i.e.
 
+```python
     def greet(someone):
         print('Hello {}'.format(someone))
+```
 
 has the same effect.
 
@@ -888,24 +959,30 @@ has the same effect.
 
 Functions like the `len`-function return a value, i.e. 
 
+```python
     list_length = len(my_list)
+```
 
 results in the variable `list_length` to contain an integer value.
 
 Your own functions can return values using the `return` keyword, for example
 
+```python
     def add(n1, n2):
         sum = n1 + n2
         return sum
+```
 
 The function stops after the `return` keyword, so any code after it will not be executed
 
+```python
     def add(n1, n2):
         sum = n1 + n2
         return sum
         print('This will not be printed')
 
     print(add(1, 2)) # This will be printed.
+```
 
 ###### Exercises
 
@@ -920,7 +997,7 @@ The function stops after the `return` keyword, so any code after it will not be 
         return sum
 
     print(inner_product([1.0, 2.0, 3.0], [4.5, 3.2, 0]))  # Should print 10.9
-    ```python
+    ```
 
     * Alternatively:
     ```python
@@ -931,7 +1008,8 @@ The function stops after the `return` keyword, so any code after it will not be 
         return sum
 
     print(inner_product([1.0, 2.0, 3.0], [4.5, 3.2, 0]))  # Should print 10.9
-    ```python
+    ```
+
 2. Expand the function by adding a check if the lists are the same size. If not, print a warning. Test it on two lists of different length.
 
     * Code
@@ -944,7 +1022,7 @@ The function stops after the `return` keyword, so any code after it will not be 
             return sum
         else:
             print('Input lists are different in length.')
-    ```python
+    ```
 
     * Alternatively, this also works
     ```python
@@ -955,35 +1033,42 @@ The function stops after the `return` keyword, so any code after it will not be 
                 sum = sum + a * b
             return sum
         print('Input lists are different in length.')
-    ```python
+    ```
     If the lists are the same length, the print-function will not be called.
 
 #### Multiple return values
 
 Of course you can also return lists, sets, tuples, or dictionaries from functions. For example, you could create a function that adds the elements of two lists:
 
+```python
     def translate_point(translation, point):
         new_point = []
         for a, b in zip(translation, point):
             new_list.append(a + b)
         return new_point
+```
 
 You can also use this functionality to return multiple values, for example,
 
+```python
     def swap_values(a, b):
         return [b, a]
+```
 
 The call to this function can implicitly unpack the a and b variables:
 
+```python
     [x, y] = swap_values(1, 2)  # now x = 2, y = 1
+```
 
 In fact, you can have multiple return values, like this too:
 
+```python
     def swap_values(a, b):
         return b, a
 
     x, y = swap_values(1, 2)
-
+```
 
 ###### Exercises
 
@@ -1001,7 +1086,7 @@ In fact, you can have multiple return values, like this too:
 
 
     a, c = circle(10)  # Should return ~314, ~62.4
-    ```python
+    ```
 
 
 * Write a function that takes two strings as its arguments and returns True if any of the letters in the first string occur in the second string, and False if not.
@@ -1014,7 +1099,7 @@ In fact, you can have multiple return values, like this too:
                 return True  # Once we find one letter that is
                              # also in the second string we can stop looking.
         return False
-    ```python
+    ```
 
 * Write a function that returns True if a number is prime, and False otherwise.
     
@@ -1027,7 +1112,7 @@ In fact, you can have multiple return values, like this too:
             if x % i == 0:
                 return False
         return True
-    ```python
+    ```
 
 * Write a function that returns a list of all primes smaller than N, where N is an argument to the function. Use the function you wrote in the previous question.
     
@@ -1039,7 +1124,7 @@ In fact, you can have multiple return values, like this too:
             if is_prime(i):
                 l.append(i)
         return l
-    ```python
+    ```
 
 * Write a function that replaces all values in a list with 0.
 
@@ -1048,7 +1133,7 @@ In fact, you can have multiple return values, like this too:
     def replace_values(l):
         for i in range(len(l)):
             l[i] = 0
-    ```python
+    ```
 
     * Remember that assignments to lists are *by reference*. It is not necessary to return `l` from the function.
 
@@ -1057,19 +1142,25 @@ In fact, you can have multiple return values, like this too:
 
 In the case of the `translate_point` function we have seen before 
 
+```python
     def translate_point(translation, point):
         new_point = []
         for a, b in zip(translation, point):
             new_list.append(a + b)
         return new_point
+```
 
 it is not quite clear which argument is the translation vector, and which one is the point when you call it. Luckily, you can call a function while explicitly naming the arguments:
 
+```python
     new_point = translate_point(translation=[1, 2], point=[3, 4])
+```
 
 This helps you distinguish the arguments, and helps to let you figure out which argument goes where. In fact, you are allowed to change the order when you name the arguments, such that
 
+```python
     new_point = translate_point(point=[3, 4], translation=[1, 2])
+```
 
 would be equivalent. This is especially useful when you have functions with a lot of arguments, and you do not want to have to scroll back to the function definition.
 
