@@ -79,7 +79,9 @@ Python programs are often called scripts, which implies that Python is a high-
 level language: you don't need much code to be productive. The most simple
 program in Python is only one line:
 
-    print('Hello world')  # This will print the text string 'Hello world'
+```python
+print('Hello world')  # This will print the text string 'Hello world'
+```
 
 Not surprisingly, this will use the built-in `print` function to display the
 line `Hello world` on the screen. All text after the `#`-sign is a comment that will
@@ -106,10 +108,12 @@ display an error message. Although these error messages can be intimidating,
 they usually contain helpful hints about what went wrong and where. For example,
 if you try to execute the code `print 'Hello world'`, Python will come back with
 
-    File "script.py", line 1 
-     print 'Hello world'
+```python
+File "script.py", line 1 
+print 'Hello world'
 
-    SyntaxError: Missing parentheses in call to 'print'. Did you mean print("hello")?
+SyntaxError: Missing parentheses in call to 'print'. Did you mean print("hello")?
+```
 
 In this case, it is clear that you forgot the parentheses. It will also point
 out where it found the mistake: at the end of the string in line 1 of your
@@ -126,29 +130,35 @@ high someone on StackOverflow or Reddit has already figured it out.
 In Python, variables are declared and defined in one line. You never have to
 specify the class of a variable because Python will be smart enough to figure that out. Therefore, whether you are defining integer, string, decimal, or boolean values, the syntax for defining a variable is always the same:
 
-    a = 9
-    b = 'Some string'
-    c = 1.23
-    d = True
+```python
+a = 9
+b = 'Some string'
+c = 1.23
+d = True
+```
 
 Each of these four variables has their own respective class, namely `int` for integer values,
 `str` for text strings, `float` for decimal values, and `bool` for the boolean values True and False. You can show the class of a variable using the built-in
 `type()` function:
 
-    print(type(a), type(b), type(c)) # Prints "<class 'int'> <class 'str'>
-    <class 'float'>".
+```python
+print(type(a), type(b), type(c)) # Prints "<class 'int'> <class 'str'> <class 'float'>".
+```
 
 You are free to choose your own variable names. It is however convention to only use lower case letters, numbers and underscores in variable names, so it is preferred to use `my_awesome_variable` over `myAwesomeVariable`. There is an exception for variables that contain the same value throughout running your program: they should be capitals to show they should not be changed. They can be used for mathematical constants or to communicate constraints or parameters in your code, for example
 
-    PI = 3.14159
-    MAX_VALUE = 100
-
+```python
+PI = 3.14159
+MAX_VALUE = 100
+```
 
 ## Operators on numeric variables
 
 Numeric variable types include `int` for integers and `float` for decimals. To be complete we are also mentioning the type `complex`, which can represent complex values, for example
     
-    c = 3 + 4j
+```python
+c = 3 + 4j
+```
 
 We will not discuss them in the remainder of this document, as they are rarely used.
 
@@ -176,9 +186,11 @@ operators `==` and `!=`. These will return a boolean value, i.e. `True` or
 larger than or equal, and smaller than or equal using the operators `>`, `<`,
 `>=`, and `<=`.
 
-    1 + 2 + 3 > 6  # gives False
-    1 + 2 + 3 >= 10  # gives True
-    1 + 2 + 3 != 6  # gives False
+```python
+1 + 2 + 3 > 6  # gives False
+1 + 2 + 3 >= 10  # gives True
+1 + 2 + 3 != 6  # gives False
+```
 
 Finaly, you can use the modulus operator `%` to find the remainder of a
 division. `a % b` is a shorthand for `a - (a // b)`, for example `8 % 2` equals
@@ -191,7 +203,7 @@ division. `a % b` is a shorthand for `a - (a // b)`, for example `8 % 2` equals
 1. Write a script that prints the square root of the integer 17. What class is the resulting value? Why?
     * Code:
 
-    ```
+    ```python
     x = 17
     result = x ** 0.5
     print(result)  # 4.123105625617661
@@ -216,48 +228,57 @@ Strings can contain character combinations that have special meaning,
 for example '\n' which is a newline character, and '\t' which is a tab. You can use
 these as follows
 
-    s = 'This is a very long sentence that is so long that it will\nnot fit on one line.'
-    t = '\tThis line starts with a tab. \t See?'
+```python
+s = 'This is a very long sentence that is so long that it will\nnot fit on one line.'
+t = '\tThis line starts with a tab. \t See?'
+```
 
 If you print these strings, you get
 
-    This is a very long sentence that is so long that it will surely
-    not fit on one line.
+```python
+This is a very long sentence that is so long that it will surely
+not fit on one line.
+```
 
 and
 
+```python
     This line starts with a tab.     See?
-
+```
 
 ### Concatenation
 
 Somewhat surprisingly, strings can be concatenated (joined) with the `+`-operator:
 
-    a = 'abc'
-    b = 'def'
-    c = a + b
-    print(c)  # prints "abcdef"
-
-
+```python
+a = 'abc'
+b = 'def'
+c = a + b
+print(c)  # prints "abcdef"
+```
 
 ### Converting variables to strings
 
 Other types can be converted to strings using the built-in `str`-function:
 
-    print('The square root of ' + str(1024) + ' is ' + str(32) + '.') # prints
-    "The square root of 1024 is 32.""
+```python
+print('The square root of ' + str(1024) + ' is ' + str(32) + '.') # prints "The square root of 1024 is 32.""
+```
 
 There is a nicer way to do this, by using so-called format strings, which have
 place holders for other variables. This uses the `str`-type's `format` method to
 fill-in the place holders. The place holders are indicated with \{\}:
 
-    print('The square root of {} is {}'.format(1024, 32)) # prints "The square
-    root of 1024 is 32."
+```python
+print('The square root of {} is {}'.format(1024, 32)) # prints "The square root of 1024 is 32."
+```
 
 The format string syntax is very powerful. One useful feature is the ability to
 truncate floating point values to a specific precision, for example to three decimals:
 
-    print('{:.3f}'.format(1.618033989))  # prints "1.618"
+```python
+print('{:.3f}'.format(1.618033989))  # prints "1.618"
+```
 
 The remaining details on this syntax are beyond the scope of this module, but
 can be found online at [https://docs.python.org/3/library/string.html#formatstrings](https://docs.python.org/3/library/string.html#formatstrings).
@@ -268,13 +289,15 @@ can be found online at [https://docs.python.org/3/library/string.html#formatstri
 
 If you want to display a lot of text, you can use three quotation marks to indicate that a string will span multiple lines in your script, for example
 
-    long_text = """Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-    enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-    ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-    in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-    sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-    mollit anim id est laborum."""
+```python
+long_text = """Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
+in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+mollit anim id est laborum."""
+```
 
 If you print this variable, you will notice that it treats the line breaks literally, and you do not have to include any `\n` characters.
 
@@ -283,8 +306,10 @@ If you print this variable, you will notice that it treats the line breaks liter
 
 Given the following code
     
-    x = 81
-    y = 23
+```python
+x = 81
+y = 23
+```
 
 * Write a third line that uses a format string and the variables `x` and `y` to print '81 plus 23 equals 104'
     * `print('{} plus {} equals {}'.format(x, y, x + y))`
@@ -306,11 +331,15 @@ Lists can contain any combination of types. To define a list `countries` that
 contains the strings `"The Netherlands"`, `"Belgium"`, `"Luxembourg"` you can
 type:
 
-    countries = ["The Netherlands", "Belgium", "Luxembourg"]
+```python
+countries = ["The Netherlands", "Belgium", "Luxembourg"]
+```
 
 Lists can also contain mixed types:
 
-    numbers = ["one", 2, "three", 4.0, 5, "six", 7, "EIGHT", 'nine', "10.0"]
+```python
+numbers = ["one", 2, "three", 4.0, 5, "six", 7, "EIGHT", 'nine', "10.0"]
+```
 
 Lists can be 'indexed', that is, you can retrieve items from the list using the
 index of that item. Items start at 0, such that `best_country = countries[0]`
@@ -319,7 +348,9 @@ will result in the variable `best_country` containing `"The Netherlands"`, and
 
 Lists are also *mutable*, which means we can change the contents of an item in the list by index, for example we can change the eighth item in the list to Roman numerals using
 
-    numbers[7] = 'VIII'
+```python
+numbers[7] = 'VIII'
+```
 
 which will result in `numbers` now containing `["one", 2, "three", 4.0, 5, "six", 7, "VIII", 'nine', "10.0"]`.
 
@@ -327,11 +358,15 @@ which will result in `numbers` now containing `["one", 2, "three", 4.0, 5, "six"
 ##### Slicing lists
 The index syntax can also be used to *slice* lists, that is, create "sub lists" from an existing list. For example, to get to the first four numbers, from the list that we defined before, we can type
 
-    small_number = numbers[0:4]
+```python
+small_number = numbers[0:4]
+```
 
 Here `:` slices the array from index 0 to (but not including!) index 4. We can also define as step size when slicing a list:
 
-    odd_numbers = numbers[0:8:2]
+```python
+odd_numbers = numbers[0:8:2]
+```
 
 where the `2` at the end specifies that we should take every second item. Hence, between the slicing operator takes the form `start_index:end_index:step_size`.   
 
@@ -350,13 +385,17 @@ An overview of the slicing syntax is given in the following table:
 
 The slicing syntax can also be used to *set* values in a list, for example
 
-    l = ['a', 'b', 'c', 'd']
-    l[:2] = ['x', 'y']  # l now contains ['x', 'y', 'c', 'd']
+```python
+l = ['a', 'b', 'c', 'd']
+l[:2] = ['x', 'y']  # l now contains ['x', 'y', 'c', 'd']
+```
 
 Be careful, as the results may be unexpected if you do not supply the same number of items. The fact that the following code does not give an error may surprise you:
 
-    l = ['a', 'b', 'c', 'd']
-    l[:2] = ['x', 'y', 'z']
+```python
+l = ['a', 'b', 'c', 'd']
+l[:2] = ['x', 'y', 'z']
+```
 
 It is therefore best to always match the length of the lists on both sides of the `=`-sign.
 
@@ -365,48 +404,61 @@ It is therefore best to always match the length of the lists on both sides of th
 
 Like strings, lists can be concatenated using the `+`-operator:
 
-    a = [1, 2, 3]
-    b = [4, 5, 6, 7]
-    c = a + b
+```python
+a = [1, 2, 3]
+b = [4, 5, 6, 7]
+c = a + b
+```
 
 In prinicple, you can use the same syntax to add an item to an existing list:
 
-    l = [1, 2, 3]
-    l = l + [4]  # l now contains [1, 2, 3, 4]
+```python
+l = [1, 2, 3]
+l = l + [4]  # l now contains [1, 2, 3, 4]
+```
 
 However, this is very slow for large lists (Python first has to retrieve the list from memory, concatenate it with that one item, and then put it back), and there is a much faster solution, using a list *method* called `append()`, which looks like this
 
-    l = [1, 2, 3]
-    l.append(4)  # l now contains [1, 2, 3, 4]
+```python
+l = [1, 2, 3]
+l.append(4)  # l now contains [1, 2, 3, 4]
+```
 
 A method is a function associated with a specific type of variable, in this case lists. A method can have arguments, in this case the 4. The syntax above means 'apply the `append` method with the argument `4` to the list variable `l`'. Other list methods include `index`, which shows the index of a specific item, and `count()`, which counts how many times an item occurs in a list:
 
-    l = [1, 1, 2, 3, 2, 3, 3, 3, 1]
-    l.count(1)  # Counts how many times 1 occurs in list l
-    l.index(2)  # Gives the index of the first occurence of 2 in l
+```python
+l = [1, 1, 2, 3, 2, 3, 3, 3, 1]
+l.count(1)  # Counts how many times 1 occurs in list l
+l.index(2)  # Gives the index of the first occurence of 2 in l
+```
 
 We can also insert or remove items from the list using list methods. The `insert()` method can insert an item at a specific index, while the `remove()` method looks for the first occurence of an item and removes it from the list. The `pop()` method removes (and returns) the last item of the list.
 
-    l = ['one', 'two', 'four']
-    l.insert(2, 'three')  # l now contains ['one', 'two', 'three', 'four']
-    l.remove('two')  # l now contains ['one', three', 'four']
-    v = l.pop()  # l now contains ['one', three'], v contains 'four'
+```python
+l = ['one', 'two', 'four']
+l.insert(2, 'three')  # l now contains ['one', 'two', 'three', 'four']
+l.remove('two')  # l now contains ['one', three', 'four']
+v = l.pop()  # l now contains ['one', three'], v contains 'four'
+```
 
 Likewise there are methods to reverse and sort the list *in place*
-    
-    l = ['b', 'c', 'a']
-    l.sort()
-    print(l)  # prints ['a', 'b', 'c']
-    l.reverse()
-    print(l)  # prints ['c', 'b', 'a']
+
+```python    
+l = ['b', 'c', 'a']
+l.sort()
+print(l)  # prints ['a', 'b', 'c']
+l.reverse()
+print(l)  # prints ['c', 'b', 'a']
+```
 
 Finally, there is a *function* (not a method!) that is very useful when working with lists and strings, called `len()` that gets you the length:
 
-    l = ['a', 'b', 'c']
-    print(len(l))  # prints 3
-    s = 'abcdef'
-    print(len(s))  # prints 6
-
+```python
+l = ['a', 'b', 'c']
+print(len(l))  # prints 3
+s = 'abcdef'
+print(len(s))  # prints 6
+```
 
 ##### String methods
 
@@ -414,34 +466,44 @@ Strings also have methods, including some of the list methods discussed in the p
 
 In addition to the `count()` and `index()` methods, and the `format()` method we have seen before, there is also a `split` method, that can split a string into chunks:
 
+```python
     s = 'abcabcab'
     l = s.split('c')  # l contains ['ab', 'ab', 'ab']
+```
 
 or more useful
 
+```python
     sentence = 'The quick brown fox jumped over the lazy dog'
     words = sentence.split(' ')
+```
 
 and a `find` method, that returns the index of the first occurence of a series of characters in a string
 
+```python
     sentence = 'The quick brown fox jumped over the lazy dog'
     sentence.find('jumped')  # returns 20
+```
 
 We can also slices strings:
 
+```python
     print(sentence[:20])  # prints 'The quick brown fox '
-
+```
 
 ### Tuples
 
 Tuples are similar to lists, but are immutable. Instead of the square brackets, you use parentheses to define them:
 
+```python
     my_first_tuple = (1, 2, 2, 'a', 'b', 3)
+```
 
 Tuples are mostly used for sequences that are guaranteed to be constant. We will see them return later in the section on functions. For now, be aware that you cannot assign to them, i.e.
 
+```python
     my_first_tuple[3] = 'Aardvark'
-
+```
 gives a `TypeError`, because the tuple type does not support indexing and slicing. The `list`-methods and functions that do not mutate are applicable to tuples as well, including indexing and slicing, the `len()` function, and the `count()` and `index()` methods.
 
 
@@ -450,17 +512,23 @@ gives a `TypeError`, because the tuple type does not support indexing and slicin
 
 Python's sets are similar to sets in mathematics: they are sequences of unique items. They are rarely used, but it is good to know they exist. They are defined with curly braces:
 
+```python
     a_set = {1, 2, 3, 'a'}
+```
 
 Because all items in a set are unique, it is useless to add the same item more than once. The following definition results in the same set as the one above:
 
+```python
     a_set = {1, 2, 3, 'a', 'a', 'a', 'a'}
-
+```
 For the same reason, the `count` method is not supported, and the `index` method is not supported for the reason that `set`s do not care about the order of their contents.
 
 Sets support the `remove()` method, and an `add()` method (not append!) to add a new item to a set. You can use the `set()` function to turn a list or tuple into a set of unique items:
 
+
+```python
     print(set([1, 1, 2, 3, 3, 3]))  # prints {1, 2, 3}
+```
 
 Adding values that already are in the set has no effect, just as removing values that are *not* in the set.
 
@@ -508,13 +576,13 @@ Dictionaries also support the `pop()` method that removes an value by key, i.e.
 
 2. Given `my_dictionary` as given above, write code that takes the second description, and prints the individual words of the description in reverse order.
     * Code:
-    ```
+    ```python
     key = list(my_dictionary.keys())[1]
     desc = my_dictionary[key]
     words = desc.split(' ')
     words.reverse()
     print(words)
-    ```
+    ```python
 
     * The last two lines can also be replaced by `print(words[::-1])`.
 
@@ -611,20 +679,20 @@ will print 0, 1, and 2 on separate lines.
 
 1. Write code that computes the sum of an arbitrary list of numbers, for example the list `l = [1, 2, 3.0]`
 
-    ```
+    ```python
         sum = 0
         for value in l:
             sum = sum + value
         print(sum)
-    ```
+    ```python
 
 2. The factorial of a positive integer n, denoted by n!, is the product of all positive integers (i.e. larger than zero) less than or equal to n. For example, 5! = 5 * 4 * 3 * 2 * 1. Use a for loop to compute the factorial of 15.
 
-    ```
+    ```python
         factorial = 1
         for i in range(1, 16):
             factorial = factorial * i
-    ```
+    ```python
 
 
 ### If, else, elif
@@ -763,7 +831,7 @@ Or even combine them:
 * Write code that checks for each number between 0 and 100 if it is divisible by 3. If so, print this number if it is also divisible by 5 or 7.
 
     * Code
-    ```
+    ```python
     for i in range(101):
         if i % 3 == 0:
             if i % 7 == 0 or i % 5 == 0:
@@ -773,7 +841,7 @@ Or even combine them:
 * A prime number is a number larger than 1 that is only divisible by 1 and itself. Write code to check if 12829 is prime.
 
     * Code
-    ```
+    ```python
     x = 12829
     for i in range(2, x):
         if x % i == 0:
@@ -844,7 +912,7 @@ The function stops after the `return` keyword, so any code after it will not be 
 1. Write a function that takes two lists as arguments, and returns the inner product of the list. The inner product is the sum of the elementwise products of the list. Test your code by calling it with two lists of floats.
 
     * Code
-    ```
+    ```python
     def inner_product(l1, l2):
         sum = 0
         for a, b in zip(l1, l2):
@@ -852,10 +920,10 @@ The function stops after the `return` keyword, so any code after it will not be 
         return sum
 
     print(inner_product([1.0, 2.0, 3.0], [4.5, 3.2, 0]))  # Should print 10.9
-    ```
+    ```python
 
     * Alternatively:
-    ```
+    ```python
     def inner_product(l1, l2):
         sum = 0
         for i in range(len(l1)):
@@ -863,11 +931,11 @@ The function stops after the `return` keyword, so any code after it will not be 
         return sum
 
     print(inner_product([1.0, 2.0, 3.0], [4.5, 3.2, 0]))  # Should print 10.9
-    ```
+    ```python
 2. Expand the function by adding a check if the lists are the same size. If not, print a warning. Test it on two lists of different length.
 
     * Code
-    ```
+    ```python
     def inner_product(l1, l2):
         if len(l1) == len(l2):
             sum = 0
@@ -876,10 +944,10 @@ The function stops after the `return` keyword, so any code after it will not be 
             return sum
         else:
             print('Input lists are different in length.')
-    ```
+    ```python
 
     * Alternatively, this also works
-    ```
+    ```python
     def inner_product(l1, l2):
         if len(l1) == len(l2):
             sum = 0
@@ -887,7 +955,7 @@ The function stops after the `return` keyword, so any code after it will not be 
                 sum = sum + a * b
             return sum
         print('Input lists are different in length.')
-    ```
+    ```python
     If the lists are the same length, the print-function will not be called.
 
 #### Multiple return values
@@ -922,7 +990,7 @@ In fact, you can have multiple return values, like this too:
 * Write a function that takes a circle's radius as its argument and returns the circle's surface area and circumference. Call the function to check if it works.
 
     * Code
-    ```
+    ```python
     PI = 3.141592654
 
 
@@ -933,25 +1001,25 @@ In fact, you can have multiple return values, like this too:
 
 
     a, c = circle(10)  # Should return ~314, ~62.4
-    ```
+    ```python
 
 
 * Write a function that takes two strings as its arguments and returns True if any of the letters in the first string occur in the second string, and False if not.
 
     * Code
-    ```
+    ```python
     def string_overlap(s1, s2):
         for letter in s1:
             if letter in s2:
                 return True  # Once we find one letter that is
                              # also in the second string we can stop looking.
         return False
-    ```
+    ```python
 
 * Write a function that returns True if a number is prime, and False otherwise.
     
     * Code
-    ```
+    ```python
     def is_prime(x):
         if x < 2:
             return False
@@ -959,28 +1027,28 @@ In fact, you can have multiple return values, like this too:
             if x % i == 0:
                 return False
         return True
-    ```
+    ```python
 
 * Write a function that returns a list of all primes smaller than N, where N is an argument to the function. Use the function you wrote in the previous question.
     
     * Code
-    ```
+    ```python
     def primes_up_to(n):
         l = []
         for i in range(2, n):
             if is_prime(i):
                 l.append(i)
         return l
-    ```
+    ```python
 
 * Write a function that replaces all values in a list with 0.
 
     * Code
-    ```
+    ```python
     def replace_values(l):
         for i in range(len(l)):
             l[i] = 0
-    ```
+    ```python
 
     * Remember that assignments to lists are *by reference*. It is not necessary to return `l` from the function.
 
