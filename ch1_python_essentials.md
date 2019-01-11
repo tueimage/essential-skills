@@ -94,7 +94,7 @@ production code.
 
 ###### Exercises
 
-1. Type the above program in the Spyder editor panel (the left-most panel). Save the file with the extenstion .py and
+1. Type the above program in the Spyder editor panel (the left-most panel). Save the file with the extension .py and
 run it by clicking on the green 'play' button in the toolbar. If everything is
 setup correctly, the IPython console panel on the right should show the printed text.
 
@@ -194,7 +194,7 @@ larger than or equal, and smaller than or equal using the operators `>`, `<`,
 1 + 2 + 3 != 6  # gives False
 ```
 
-Finaly, you can use the modulus operator `%` to find the remainder of a
+Finally, you can use the modulus operator `%` to find the remainder of a
 division. `a % b` is a shorthand for `a - (a // b)`, for example `8 % 2` equals
 `0` and `8 % 3` equals `2`, etc. This is convenient to see if an integer is divisible by another integer, because if that is true, the remainder of that devision will be zero.
 
@@ -215,7 +215,7 @@ division. `a % b` is a shorthand for `a - (a // b)`, for example `8 % 2` equals
 
     * The type of the result is a float, because the exponent is a float.
 
-2. What error do you get when you run `print(81 + 'Fourty-two')`? Can you explain the name of the error?
+2. What error do you get when you run `print(81 + 'Forty-two')`? Can you explain the name of the error?
     * This will result in a `TypeError: unsupported operand type(s) for +: 'int' and 'str'`: the types of the two things you are trying to add are not supported by the `+`-operator.
 
 3. What is the result of the calculation `2 ** 3 / 2 + 8`? What is the type? Why?
@@ -319,14 +319,14 @@ y = 23
 ```
 
 1. Write a third line that uses a format string and the variables `x` and `y` to print '81 plus 23 equals 104'
-    * Code
+    * Code:
     ```python
     print('{} plus {} equals {}'.format(x, y, x + y))
     ```
 2. Write a fourth line that uses a format string and the variables `x` and `y` to print '81 divided by 23 equals 3 with a remainder of 12'
-    * Code
+    * Code:
     ```python
-    print('{} devided by {} equals {} with a remainder of {}'.format(x, y, x // y, x % y))`
+    print('{} divided by {} equals {} with a remainder of {}'.format(x, y, x // y, x % y))`
     ```
 
 ---
@@ -425,7 +425,7 @@ b = [4, 5, 6, 7]
 c = a + b
 ```
 
-In prinicple, you can use the same syntax to add an item to an existing list:
+In principle, you can use the same syntax to add an item to an existing list:
 
 ```python
 l = [1, 2, 3]
@@ -447,7 +447,7 @@ l.count(1)  # Counts how many times 1 occurs in list l
 l.index(2)  # Gives the index of the first occurence of 2 in l
 ```
 
-We can also insert or remove items from the list using list methods. The `insert()` method can insert an item at a specific index, while the `remove()` method looks for the first occurence of an item and removes it from the list. The `pop()` method removes (and returns) the last item of the list.
+We can also insert or remove items from the list using list methods. The `insert()` method can insert an item at a specific index, while the `remove()` method looks for the first occurrence of an item and removes it from the list. The `pop()` method removes (and returns) the last item of the list.
 
 ```python
 l = ['one', 'two', 'four']
@@ -545,7 +545,7 @@ Sets support the `remove()` method, and an `add()` method (not append!) to add a
 print(set([1, 1, 2, 3, 3, 3]))  # prints {1, 2, 3}
 ```
 
-Adding values that already are in the set has no effect, just as removing values that are *not* in the set.
+Adding values that already are in the set has no effect.
 
 
 
@@ -626,7 +626,7 @@ l = [1, 2, 3]
 l[2] = 100   # l is now [1, 2, 100]
 ```
 
-On the otherhand, types like `tuple` and `str` are not mutable: you have to re-assign them to change them, i.e. this does not work
+On the other hand, types like `tuple` and `str` are not mutable: you have to re-assign them to change them, i.e. this does not work
 
 ```python
 s = 'abc'
@@ -732,7 +732,7 @@ will print 0, 1, and 2 on separate lines.
 
 1. Write code that computes the sum of an arbitrary list of numbers, for example the list `l = [1, 2, 3.0]`
 
-    * Code
+    * Code:
 
     ```python
     sum = 0
@@ -743,7 +743,7 @@ will print 0, 1, and 2 on separate lines.
 
 2. The factorial of a positive integer n, denoted by n!, is the product of all positive integers (i.e. larger than zero) less than or equal to n. For example, 5! = 5 * 4 * 3 * 2 * 1. Use a for loop to compute the factorial of 15.
 
-    * Code
+    * Code:
 
     ```python
     factorial = 1
@@ -919,7 +919,7 @@ for i, (x, y, z) in enumerate(zip(english, italian, roman_numerals)):
 
 1. Write code that checks for each number between 0 and 100 if it is divisible by 3. If so, print this number if it is also divisible by 5 or 7.
 
-    * Code
+    * Code:
     ```python
     for i in range(101):
         if i % 3 == 0:
@@ -929,7 +929,7 @@ for i, (x, y, z) in enumerate(zip(english, italian, roman_numerals)):
 
 2. A prime number is a number larger than 1 that is only divisible by 1 and itself. Write code to check if 12829 is prime.
 
-    * Code
+    * Code:
     ```python
     x = 12829
     for i in range(2, x):
@@ -1016,9 +1016,9 @@ The function stops after the `return` keyword, so any code after it will not be 
 
 ###### Exercises
 
-1. Write a function that takes two lists as arguments, and returns the inner product of the list. The inner product is the sum of the elementwise products of the list. Test your code by calling it with two lists of floats.
+1. Write a function that takes two lists as arguments, and returns the inner product of the list. The inner product is the sum of the element-wise products of the list. Test your code by calling it with two lists of floats.
 
-    * Code
+    * Code:
     ```python
     def inner_product(l1, l2):
         sum = 0
@@ -1042,7 +1042,7 @@ The function stops after the `return` keyword, so any code after it will not be 
 
 2. Expand the function by adding a check if the lists are the same size. If not, print a warning. Test it on two lists of different length.
 
-    * Code
+    * Code:
     ```python
     def inner_product(l1, l2):
         if len(l1) == len(l2):
@@ -1065,6 +1065,25 @@ The function stops after the `return` keyword, so any code after it will not be 
         print('Input lists are different in length.')
     ```
     If the lists are the same length, the print-function will not be called.
+
+3. Write a function called `unique()` that takes a list as argument, and returns a new list containing all unique values in the list.
+
+    * Code:
+    ```python
+    def unique(l):
+        m = []
+        for x in l:
+            if x not in m:
+                m.append(x)
+        return m
+    ```
+    or exploiting sets:
+    ```python
+    def unique(l):
+        s = set(l)
+        m = list(s)
+        return l
+    ```
 
 ---
 
@@ -1109,7 +1128,7 @@ In fact, you can have multiple return values, like this too:
 
 1. Write a function that takes a circle's radius as its argument and returns the circle's surface area and circumference. Call the function to check if it works.
 
-    * Code
+    * Code:
     ```python
     PI = 3.141592654
 
@@ -1125,7 +1144,7 @@ In fact, you can have multiple return values, like this too:
 
 2. Write a function that takes two strings as its arguments and returns True if any of the letters in the first string occur in the second string, and False if not.
 
-    * Code
+    * Code:
     ```python
     def string_overlap(s1, s2):
         for letter in s1:
@@ -1137,7 +1156,7 @@ In fact, you can have multiple return values, like this too:
 
 3. Write a function that returns True if a number is prime, and False otherwise.
     
-    * Code
+    * Code:
     ```python
     def is_prime(x):
         if x < 2:
@@ -1150,7 +1169,7 @@ In fact, you can have multiple return values, like this too:
 
 4. Write a function that returns a list of all primes smaller than N, where N is an argument to the function. Use the function you wrote in the previous question.
     
-    * Code
+    * Code:
     ```python
     def primes_up_to(n):
         l = []
@@ -1162,7 +1181,7 @@ In fact, you can have multiple return values, like this too:
 
 5. Write a function that replaces all values in a list with 0.
 
-    * Code
+    * Code:
     ```python
     def replace_values(l):
         for i in range(len(l)):
@@ -1236,9 +1255,9 @@ Now, running `is_prime(56, debug=True)` will print that 21 is not divisible by 2
 
 ## Classes
 
-So-far we have seen a few built-in variable types or *classes*: `int`, `float`, `complex`, `str`, `list`, `set`, `dict`, and `tuple`. A *class definition* describes how a variable of a certain class *behaves* and what *attributes* it has. The behaviour is defined in the form of *method definitions*: for example, the `list` class has method definitions for the behaviours 'sorting' and 'counting'. The content of the list is one of its attributes.
+So-far we have seen a few built-in variable types or *classes*: `int`, `float`, `complex`, `str`, `list`, `set`, `dict`, and `tuple`. A *class definition* describes how a variable of a certain class *behaves* and what *attributes* it has. The behavior is defined in the form of *method definitions*: for example, the `list` class has method definitions for the behaviors 'sorting' and 'counting'. The content of the list is one of its attributes.
 
-Classes are important in so-called object-oriented programming. In Python, the concepts of objects and variables are interchangable: every Python object is a variable and every variable is an object. We will keep using the term variable throughout this module.
+Classes are important in so-called object-oriented programming. In Python, the concepts of objects and variables are interchangeable: every Python object is a variable and every variable is an object. We will keep using the term variable throughout this module.
 
 
 You can make your own class definition using the `class` keyword. In the following example we are going to construct a class definition for a new `Car` type. The `Car` can `accelerate`, and `brake` to a halt, which will be its two methods. It will have two attributes: `color` and `current_speed`. In the class definition, the attributes are indicated by the prefix `self`. Each method will have `self` as argument. By convention, the names of classes you define yourself are capitalized to make them standout between function and variables names.
@@ -1290,7 +1309,7 @@ The role of `self` in the class definition is that of a placeholder: in the code
 
 1. Make a class definition for a 2D `Point` class that has no methods (other than `__init__`), and has two attributes for the `x` and `y` coordinates.
     
-    * Code
+    * Code:
     ```python
     class Point:
         def __init__(self, x, y):
@@ -1300,7 +1319,7 @@ The role of `self` in the class definition is that of a placeholder: in the code
 
 2. Make a class definition for a 2D `Translation` class that has a method called `transform` that translates a Point. The class should have two attributes for the `dx` and `dy` for the translation in x and y direction.
 
-    * Code
+    * Code:
     ```python
     class Translation:
         def __init__(self, dx, dy):
@@ -1314,7 +1333,7 @@ The role of `self` in the class definition is that of a placeholder: in the code
 
 3. Test you classes by using them to make a `Point(3, 4)` that you translate using `Translation(4, 2)` and test if the translation is correct.
 
-    * Code
+    * Code:
     ```python
     p = Point(3, 4)
     print('Old point was at ({}, {})'.format(p.x, p.y))
