@@ -312,10 +312,15 @@ y = 23
 ```
 
 * Write a third line that uses a format string and the variables `x` and `y` to print '81 plus 23 equals 104'
-    * `print('{} plus {} equals {}'.format(x, y, x + y))`
-* Write a fourth line that uses a format string and the variables `x` and `y` to print '81 devided by 23 equals 3 with a remainder of 12'
-    * `print('{} devided by {} equals {} with a remainder of {}'.format(x, y, x // y, x % y))`
-
+    * Code
+    ```python
+    print('{} plus {} equals {}'.format(x, y, x + y))
+    ```
+* Write a fourth line that uses a format string and the variables `x` and `y` to print '81 divided by 23 equals 3 with a remainder of 12'
+    * Code
+    ```python
+    print('{} devided by {} equals {} with a remainder of {}'.format(x, y, x // y, x % y))`
+    ```
 
 ## Container types
 
@@ -1165,7 +1170,7 @@ This helps you distinguish the arguments, and helps to let you figure out which 
 would be equivalent. This is especially useful when you have functions with a lot of arguments, and you do not want to have to scroll back to the function definition.
 
 
-<!-- #### Default arguments
+#### Default arguments
 
 Function arguments can be defined as optional if they have a default value in their definition, for example,
 
@@ -1195,5 +1200,96 @@ A particular application of this functionality is debugging. If you have a compl
         return True
 
 Now, running `is_prime(56, debug=True)` will print that 21 is not divisible by 2, 3, 4, 5, and 6, but is divisible by 7, whereas `is_prime(56)` will not.
- -->
+
+
+
+## Classes
+
+So-far we have seen a few built-in variable types or *classes*: `int`, `float`, `complex`, `str`, `list`, `set`, `dict`, and `tuple`. A *class definition* describes how a variable of a certain class *behaves* and what *attributes* it has. The behaviour is defined in the form of *method definitions*: for example, the `list` class has method definitions for the behaviours 'sorting' and 'counting'. The content of the list is one of its attributes.
+
+---
+
+Classes are important in so-called object-oriented programming. In Python, the concepts of objects and variables are interchangable: every Python object is a variable and every variable is an object. We will keep using the term variable throughout this module.
+
+---
+
+You can make your own class definition using the `class` keyword. In the following example we are going to construct a class definition for a new `Car` type. The `Car` can `accelerate`, and `brake` to a halt, which will be its two methods. It will have two attributes: `color` and `current_speed`. In the class definition, the attributes are indicated by the prefix `self`. Each method will have `self` as argument. By convention, the names of classes you define yourself are capitalized to make them standout between function and variables names.
+
+```python
+class Car:
+    def __init__(self, car_color, start_speed=0):
+        self.color = car_color
+        self.current_speed = start_speed
+
+    def accelerate(self, velocity):
+        self.current_speed = self.current_speed + velocity
+
+    def brake(self):
+        self.current_speed = 0
+```
+
+We can now use this class definition to make new car variables:
+
+```python
+my_car = Car(car_color='red', start_speed=20)
+my_second_car = Car(car_color='blue')
+```
+
+While `Car(...)` may look like a function, it is actually the class *constructor*: a factory function that makes new cars. In fact, the statement above internally calls the `__init__()` method that is in the class definition, and therefore has the same arguments. In the definition of the `__init__()` method we assign the color and speed to the attributes `color` and `current_speed`. You can inspect the attributes using the so-called dot-syntax:
+
+```python
+print(my_car.speed)  # prints 20
+print(my_car.color)  # prints 'red'
+print(my_second_car.speed)  # prints 0, the default start_speed
+```
+
+The methods can also be called with the dot-syntax, for example we can accelerate and brake the car:
+
+```python
+my_car.accelerate(50)
+print(my_car.speed)  # prints 70
+
+my_car.brake()
+print(my_car.speed)  # prints 0
+```
+
+The role of `self` in the class definition is that of a placeholder: in the code above, `self` is substituted by `my_car`.
+
+
+#### Exercises
+
+1. Make a class definition for a 2D `Point` class that has no methods (other than `__init__`), and has two attributes for the `x` and `y` coordinates.
+    
+    * Code
+    ```python
+    class Point:
+        def __init__(self, x, y):
+            self.x = x
+            self.y = y
+    ```
+
+2. Make a class definition for a 2D `Translation` class that has a method called `transform` that translates a Point. The class should have two attributes for the `dx` and `dy` for the translation in x and y direction.
+
+    * Code
+    ```python
+    class Translation:
+        def __init__(self, dx, dy):
+            self.dx = dx
+            self.dy = dy
+
+        def transform(self, point):
+            point.x = point.x + self.dx
+            point.y = point.y + self.dy
+    ```
+
+3. Test you classes by using them to make a `Point(3, 4)` that you translate using `Translation(4, 2)` and test if the translation is correct.
+
+    * Code
+    ```python
+    p = Point(3, 4)
+    print('Old point was at ({}, {})'.format(p.x, p.y))
+    t = Translation(4, 2)
+    t.transform(p)
+    print('New point is at ({}, {})'.format(p.x, p.y))
+    ```
 
