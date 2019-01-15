@@ -117,7 +117,9 @@ print(matrix[:, 1])
 will print all rows (indicated by the `:`) and the second column (indicated by the `1`).
 
 
-#### Exercises
+---
+
+###### Exercises
 
 Given this code
 
@@ -140,6 +142,8 @@ How do you obtain
 
 * the last column of the matrix?
     * `m[:, -1]`
+
+---
 
 
 ## Assigning at indices
@@ -223,7 +227,9 @@ a[0] = 0  # also changes b!
 print(b)  # prints [0, 2, 3]
 ```
 
-#### Exercises
+---
+
+###### Exercises
 
 Given the matrix 
 ```python
@@ -243,6 +249,9 @@ write code that
 for i in range(len(m)):
     m[i, i] = 2
 ```
+
+---
+
 
 ## Reshaping and transposing
 
@@ -289,9 +298,9 @@ Note that none of the methods change the arrays on which they act, which means t
 you have to put the result into a new variable if you want to use it.
 
 
+---
 
-
-#### Exercises
+###### Exercises
 
 * Reshape the array `m = np.array([[1, 2], [3, 4], [5, 6], [7, 8]])` to the shape `(3, 3)`
 
@@ -316,6 +325,10 @@ you have to put the result into a new variable if you want to use it.
     a = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
     rotated_a = a.transpose()[::-1]
     ```
+
+---
+
+
 
 
 
