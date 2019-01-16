@@ -130,7 +130,9 @@ high someone on StackOverflow or Reddit has already figured it out.
 ## Variables and classes
 
 In Python, variables are declared and defined in one line. You never have to
-specify the class of a variable because Python will be smart enough to figure that out. Therefore, whether you are defining integer, string, decimal, or boolean values, the syntax for defining a variable is always the same:
+specify the class of a variable because Python will be smart enough to figure
+that out. Therefore, whether you are defining integer, string, decimal, or
+boolean values, the syntax for defining a variable is always the same:
 
 ```python
 a = 9
@@ -139,15 +141,22 @@ c = 1.23
 d = True
 ```
 
-Each of these four variables has their own respective class, namely `int` for integer values,
-`str` for text strings, `float` for decimal values, and `bool` for the boolean values True and False. You can show the class of a variable using the built-in
-`type()` function:
+Each of these four variables has their own respective class, namely `int` for
+integer values, `str` for text strings, `float` for decimal values, and `bool`
+for the boolean values True and False. You can show the class of a variable
+using the built-in `type()` function:
 
 ```python
 print(type(a), type(b), type(c)) # Prints "<class 'int'> <class 'str'> <class 'float'>".
 ```
 
-You are free to choose your own variable names. It is however convention to only use lower case letters, numbers and underscores in variable names, so it is preferred to use `my_awesome_variable` over `myAwesomeVariable`. There is an exception for variables that contain the same value throughout running your program: they should be capitals to show they should not be changed. They can be used for mathematical constants or to communicate constraints or parameters in your code, for example
+You are free to choose your own variable names. It is however convention to only
+use lower case letters, numbers and underscores in variable names, so it is
+preferred to use `my_awesome_variable` over `myAwesomeVariable`. There is an
+exception for variables that contain the same value throughout running your
+program: they should be capitals to show they should not be changed. They can be
+used for mathematical constants or to communicate constraints or parameters in
+your code, for example
 
 ```python
 PI = 3.14159
@@ -156,15 +165,20 @@ MAX_VALUE = 100
 
 ## Operators on numeric variables
 
-Numeric variable types include `int` for integers and `float` for decimals. To be complete we are also mentioning the type `complex`, which can represent complex values, for example
+Numeric variable types include `int` for integers and `float` for decimals. To
+be complete we are also mentioning the type `complex`, which can represent
+complex values, for example
     
 ```python
 c = 3 + 4j
 ```
 
-We will not discuss them in the remainder of this document, as they are rarely used.
+We will not discuss them in the remainder of this document, as they are rarely
+used.
 
-The numeric types can be used with standard mathematical operators for computation. You can add (`+`), subtract (`-`), multiply (`*`), and divide (`/`) them, and use exponentiation (`**`). The order of operations is
+The numeric types can be used with standard mathematical operators for
+computation. You can add (`+`), subtract (`-`), multiply (`*`), and divide (`/`)
+them, and use exponentiation (`**`). The order of operations is
 
 1. Exponentiation
 * Multiplication
@@ -172,9 +186,11 @@ The numeric types can be used with standard mathematical operators for computati
 * Addition
 * Subtraction
 
-Using parentheses you can force a different order, such that `(1 + 2) * 3` will result in `9` and `1 + 2 * 3` will result in `7`. Nothing special there.
+Using parentheses you can force a different order, such that `(1 + 2) * 3` will
+result in `9` and `1 + 2 * 3` will result in `7`. Nothing special there.
 
-There are some caveats in the types that are returned by these operators. This is a frequent source of bugs, so be careful.
+There are some caveats in the types that are returned by these operators. This
+is a frequent source of bugs, so be careful.
 
 * Exponentiation, adding, multiplying, and subtracting integers will return an integer, i.e. `2 ** 3 + 1 + 2 * 3` returns `15`.
 * Exponentiations, additions, multiplications, and subtractions containing *at least one* `float` will return a `float`, i.e. `2 ** 3 + 1.0 + 2 * 3` returns `15.0`, not `15`. 
@@ -196,7 +212,9 @@ larger than or equal, and smaller than or equal using the operators `>`, `<`,
 
 Finally, you can use the modulus operator `%` to find the remainder of a
 division. `a % b` is a shorthand for `a - (a // b)`, for example `8 % 2` equals
-`0` and `8 % 3` equals `2`, etc. This is convenient to see if an integer is divisible by another integer, because if that is true, the remainder of that devision will be zero.
+`0` and `8 % 3` equals `2`, etc. This is convenient to see if an integer is
+divisible by another integer, because if that is true, the remainder of that
+devision will be zero.
 
 
 ---
@@ -216,6 +234,7 @@ division. `a % b` is a shorthand for `a - (a // b)`, for example `8 % 2` equals
     * The type of the result is a float, because the exponent is a float.
 
 2. What error do you get when you run `print(81 + 'Forty-two')`? Can you explain the name of the error?
+
     * This will result in a `TypeError: unsupported operand type(s) for +: 'int' and 'str'`: the types of the two things you are trying to add are not supported by the `+`-operator.
 
 3. What is the result of the calculation `2 ** 3 / 2 + 8`? What is the type? Why?
@@ -260,6 +279,12 @@ a = 'abc'
 b = 'def'
 c = a + b
 print(c)  # prints "abcdef"
+```
+
+Likewise, strings can be multiplied with a scalar value, i.e. `9 * 'la' + ' can\'t hear you'` results in `lalalalalalalalala can't hear you`. The back-slash in the middle of `can\'t` is there to print a `'` because `'` is also used to surround string values. Another example:
+
+```python
+s = 'She says: \'y\'all\'ll\'ven\'t\'d any strawberries no more because y\'all\' m\'stn\'t\'ve more fruit,\' by which she means: \'you all will have not had strawberries no more because you all must not have more fruit\' and I\'m pretty sure that isn\'t grammatically correct nor makes any sense.'
 ```
 
 ### Converting variables to strings
@@ -330,7 +355,6 @@ y = 23
     ```
 
 ---
-
 
 ## Container types
 
@@ -1224,32 +1248,61 @@ would be equivalent. This is especially useful when you have functions with a lo
 
 Function arguments can be defined as optional if they have a default value in their definition, for example,
 
-    def greet(name='stranger'):
-        print('Hello {}'.format(name))
+```python
+def greet(name='stranger'):
+    print('Hello {}'.format(name))
+```
 
 can now be called as
 
-    greet()
+```python
+greet()
+```
 
 upon which it will print 'Hello stranger', or as
 
-    greet('you')
+```python
+greet('you')
+```
 
 upon which it will print 'Hello you'.
 
 A particular application of this functionality is debugging. If you have a complex function that is hard to program, you could include a `debug` flag as an argument in your function, that you put to `False` by default. When `debug` is set to `True`, the function will print messages to show what it does:
 
-    def is_prime(k, debug=False):
-        for i in range(2, k):
-            if k % i == 0:
-                if debug:
-                    print('{} is divisible by {}'.format(k, i))
-                return False
-            elif debug:
-                print('{} is not divisible by {}'.format(k, i))
-        return True
+```python
+def is_prime(k, debug=False):
+    for i in range(2, k):
+        if k % i == 0:
+            if debug:
+                print('{} is divisible by {}'.format(k, i))
+            return False
+        elif debug:
+            print('{} is not divisible by {}'.format(k, i))
+    return True
+```
 
 Now, running `is_prime(56, debug=True)` will print that 21 is not divisible by 2, 3, 4, 5, and 6, but is divisible by 7, whereas `is_prime(56)` will not.
+
+---
+
+
+###### Exercises
+
+1. Write a function called `root()` that will compute the square root of the first argument `k` and has an optional argument `order` that specifies the order of the root. If the order is odd the function should print message if the number is negative.
+
+    * Code
+
+    ```python
+def root(k, order=2):
+    if order % 2 == 0:
+        if k < 0:
+            print('Invalid computation: negative'
+                  ' argument of {}-order root.'.format(order))
+            return
+    return k ** (1 / order)
+    ```
+
+---
 
 
 
@@ -1282,7 +1335,8 @@ my_car = Car(car_color='red', start_speed=20)
 my_second_car = Car(car_color='blue')
 ```
 
-While `Car(...)` may look like a function, it is actually the class *constructor*: a factory function that makes new cars. In fact, the statement above internally calls the `__init__()` method that is in the class definition, and therefore has the same arguments. In the definition of the `__init__()` method we assign the color and speed to the attributes `color` and `current_speed`. You can inspect the attributes using the so-called dot-syntax:
+Note that you do not have to define the `start_speed`, as it has a default value 0. 
+While `Car(...)` may look like a function, it is actually the class *constructor*: a factory function that makes new cars. In fact, the statement above internally calls the magic initialization method `__init__()` that is in the class definition, and therefore has the same arguments. In the definition of the `__init__()` method we assign the color and speed to the attributes `color` and `current_speed`. You can inspect the attributes using the so-called dot-syntax:
 
 ```python
 print(my_car.speed)  # prints 20
@@ -1341,6 +1395,37 @@ The role of `self` in the class definition is that of a placeholder: in the code
     t.transform(p)
     print('New point is at ({}, {})'.format(p.x, p.y))
     ```
+
+4. Given the following class
+
+    ```python
+    class Rocket:
+        def __init__(self):
+            self.speed = 0
+
+        def launch(self, speed, direction='up'):
+            if direction == 'down':
+                print('Rocket crashed into the ground')
+            self.speed = speed
+    ```
+
+    What happens when
+
+    * You initiate a new rocket `my_rocket`, i.e. `my_rocket = Rocket()`? Without evaluating code, what value does `my_rocket.speed` have?
+
+        * A new rocket is assigned to `my_rocket`. In the `__init__` function, the `speed` attribute of this rocket is set to 0.
+
+    * What happens to `my_rocket.speed` when you run `my_rocket.launch(100, 'up')`?
+
+        * `my_rocket.speed` is set to 100
+
+    * What happens when you run `my_rocket.launch(300)`?
+
+        * `my_rocket.speed` is set to 300. `direction` is assumed to be `up`.
+
+    * What happens when you run `my_rocket.launch(100, 200, 300)`? Can you explain the error message?
+
+        * You run the `launch` method with the wrong number of arguments. You get the error `TypeError: launch() takes from 2 to 3 positional arguments but 4 were given`. The reason: because `self` is implicitly passed to the `launch()` method, and you have passed three arguments yourself, the total number of arguments is four. The method only accepts two (`self` and `speed`) or three (`self`, `speed`, and `direction`) arguments.
 
 ---
 
