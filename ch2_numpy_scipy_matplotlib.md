@@ -892,7 +892,6 @@ We will come back to this in the next section when we are going to give a short 
 2. Make a 3x3 image with a red cross on a blue background and show it with `plt.imshow()`.
 
 <details><summary>Answer</summary><p>
-Code:
 
 ```python
 image = np.array([
