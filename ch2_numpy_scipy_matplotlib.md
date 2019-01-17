@@ -891,18 +891,18 @@ We will come back to this in the next section when we are going to give a short 
 
 2. Make a 3x3 image with a red cross on a blue background and show it with `plt.imshow()`.
 
-    <details><summary>Answer</summary><p>
+<details><summary>Answer</summary><p>
 
-    ```python
-    image = np.array([
-        [[0, 0, 1], [1, 0, 0], [0, 0, 1]],
-        [[1, 0, 0], [1, 0, 0], [1, 0, 0]],
-        [[0, 0, 1], [1, 0, 0], [0, 0, 1]]
-    ], dtype='float32')
-    plt.imshow(image)
-    ```
+```python
+image = np.array([
+    [[0, 0, 1], [1, 0, 0], [0, 0, 1]],
+    [[1, 0, 0], [1, 0, 0], [1, 0, 0]],
+    [[0, 0, 1], [1, 0, 0], [0, 0, 1]]
+], dtype='float32')
+plt.imshow(image)
+```
 
-    </p></details>
+</p></details>
 
 ---
 
