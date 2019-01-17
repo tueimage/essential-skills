@@ -131,19 +131,34 @@ m = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]])
 How do you obtain
 
 * the first row of the matrix?
-    * `m[0]`
+    
+    <details><summary>Answer</summary><p>
+    `m[0]`
+    </p></details>
 
 * the second row of the matrix?
-    * `m[1]`
+    
+    <details><summary>Answer</summary><p>
+    `m[1]`
+    </p></details>
 
 * every second row of the matrix?
-    * `m[::2]`
+    
+    <details><summary>Answer</summary><p>
+    `m[::2]`
+    </p></details>
 
 * every second column of the matrix?
-    * `m[:, ::2]`
+    
+    <details><summary>Answer</summary><p>
+    `m[:, ::2]`
+    </p></details>
 
 * the last column of the matrix?
-    * `m[:, -1]`
+    
+    <details><summary>Answer</summary><p>
+    `m[:, -1]`
+    </p></details>
 
 ---
 
@@ -240,17 +255,23 @@ m = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
 write code that
 
 * Replaces the rightmost column with zeroes
-    * `m[:, -1] = 0`
+    <details><summary>Answer</summary><p>
+    `m[:, -1] = 0`
+    </p></details>
 
 * Replaces every second row with ones
-    * `m[::2] = 1`
+    <details><summary>Answer</summary><p>
+    `m[::2] = 1`
+    </p></details>
 
 * Puts a `2` in every element on the diagonal
-    * Code:
+    <details><summary>Answer</summary><p>
+    Code:
     ```python
     for i in range(len(m)):
         m[i, i] = 2
     ```
+    </p></details>
 
 ---
 
@@ -312,11 +333,15 @@ you have to put the result into a new variable if you want to use it.
 
 * Reshape the array `m = np.array([[1, 2], [3, 4], [5, 6], [7, 8]])` to the shape `(3, 3)`
 
-    * This results in a `ValueError` because the shape does not fit the array.
+    <details><summary>Answer</summary><p>
+    This results in a `ValueError` because the shape does not fit the array.
+    </p></details>
 
 * What happens when you transpose a vector like np.array([1, 2, 3, 4])? Why?
 
-    * `transpose()` reverses the order of the axes. For a 1D array reversing the order has no effect.
+    <details><summary>Answer</summary><p>
+    `transpose()` reverses the order of the axes. For a 1D array reversing the order has no effect.
+    </p></details>
 
 * Given the matrix `np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])`, write code that rotates the elements 90 degrees anticlockwise, such that you obtain a matrix
 
@@ -328,11 +353,12 @@ you have to put the result into a new variable if you want to use it.
     ]
     ```
 
-    * Code:
+    <details><summary>Answer</summary><p>
     ```python
     a = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
     rotated_a = a.transpose()[::-1]
     ```
+    </p></details>
 
 ---
 
@@ -395,17 +421,20 @@ a1.dot(v1)
 ###### Exercises
 
 1. What happens when you try to multiply a 2x3 array with a 3x2 array elementwise? Can you explain why?
-    * You get a `ValueError` because the shapes are incompatible: NumPy can not broadcast one array to that of the other.
+    <details><summary>Answer</summary><p>
+    You get a `ValueError` because the shapes are incompatible: NumPy can not broadcast one array to that of the other.
+    </p></details>
 
 2. Calculate the dot-product between the matrix 
 $$\left(\begin{matrix}1 & 0 & 1\\\\2 & 1 & 2\\\\1 & 0 & 1\end{matrix}\right)$$
 and its transpose.
-    * Code
-
+    
+    <details><summary>Answer</summary><p>
     ```python
     a = np.array([[1, 0, 1], [2, 1, 2], [1, 0, 1]])
     b = a.dot(a.transpose())  # yields [[2, 4, 2], [4, 9, 4], [2, 4, 2]]
     ```
+    </p></details>
 
 ---
 
@@ -518,16 +547,24 @@ NumPy has a sub-library for linear algebra, called `linalg`. Examples:
 Given the matrix `a = np.array([[1, 2, 0], [1, 3, 1], [2, 1, 2]])` and vector `y = array([2, 4, 1])`, calculate:
 
 * The matrix eigenvalues and eigenvectors
-    * `np.linalg.eig(a)`
+    <details><summary>Answer</summary><p>
+    `np.linalg.eig(a)`
+    </p></details>
 
 * The solution of a x = y
-    * `np.linalg.inv(a).dot(y)`
+    <details><summary>Answer</summary><p>
+    `np.linalg.inv(a).dot(y)`
+    </p></details>
 
 * The Frobenius norm of `a`
-    * `np.linalg.norm(a)` or `np.linalg.norm(a, ord=2)`
+    <details><summary>Answer</summary><p>
+    `np.linalg.norm(a)` or `np.linalg.norm(a, ord=2)`
+    </p></details>
 
 * Calculate the length (magnitude) of `y`
-    * `np.linalg.norm(y)` or `np.linalg.norm(y, ord=2)`
+    <details><summary>Answer</summary><p>
+    `np.linalg.norm(y)` or `np.linalg.norm(y, ord=2)`
+    </p></details>
 
 ---
 
@@ -548,8 +585,10 @@ which saves the array `a` in binary format to the file `my_file.npy`.
 ###### Exercises
 
 1. Make two vector arrays with 1,000 elements. Convert the first to 8-bit integers, and the second to 64-bit integers. Save them both to different `*.npy` files. How much space do these files take on your hard drive? Can you explain why?
-
-    * The 8-bit array should take about 8,000 bits, or 1000 bytes, so roughly 1 kB. the 64-bit array should take about 64,000 bits, or 8000 bytes, or 8 kB. Because of metainformation, the actual `*.npy` files will take more space on your hard drive, but they should roughly show the difference in size.
+    
+    <details><summary>Answer</summary><p>
+    The 8-bit array should take about 8,000 bits, or 1000 bytes, so roughly 1 kB. the 64-bit array should take about 64,000 bits, or 8000 bytes, or 8 kB. Because of metainformation, the actual `*.npy` files will take more space on your hard drive, but they should roughly show the difference in size.
+    </p></details>
 
 ---
 
@@ -739,7 +778,7 @@ plt.show()
 ```
 
 ```python
-plt.hist([data1, data2])
+plt.hist([data1, data2], bins=10)  # bins is the number of columns in the histogram
 plt.show()
 ```
 
@@ -796,7 +835,36 @@ plt.show()
 
 We will come back to this in the next section when we are going to give a short introduction to image analysis libraries.
 
+---
 
+###### Exercises
+
+1. Make a figure with five subplots, each showing a histogram of a Gamma distribution, having shape parameters 1, 2, 3, 4, and 5, and each having scale 3.0.
+
+    <details><summary>Answer</summary><p>
+    ```python
+    fig, ax = plt.subplots(1, 5)
+    for i in range(5):
+        sample = np.random.gamma(shape=i, scale=3, size=1000)
+        ax[i].hist(sample, bins=100)
+    plt.show()
+    ```
+    </p></details>
+
+2. Make a 3x3 image with a red cross on a blue background and show it with `plt.imshow()`.
+
+    <details><summary>Answer</summary><p>
+    ```python
+    image = np.array([
+        [[0, 0, 1], [1, 0, 0], [0, 0, 1]],
+        [[1, 0, 0], [1, 0, 0], [1, 0, 0]],
+        [[0, 0, 1], [1, 0, 0], [0, 0, 1]]
+    ], dtype='float32')
+    plt.imshow(image)
+    ```
+    </p></details>
+
+---
 
 
 ## Image analysis libraries
