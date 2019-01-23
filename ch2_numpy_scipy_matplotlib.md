@@ -448,12 +448,11 @@ a1.dot(v1)
 
     </p></details>
 
-2. Calculate the dot-product between the matrix 
+2. Calculate the dot-product between the matrix
 
-<a href="https://www.codecogs.com/eqnedit.php?latex=\left(\begin{matrix}1&space;&&space;0&space;&&space;1\\\\2&space;&&space;1&space;&&space;2\\\\1&space;&&space;0&space;&&space;1\end{matrix}\right)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\left(\begin{matrix}1&space;&&space;0&space;&&space;1\\\\2&space;&&space;1&space;&&space;2\\\\1&space;&&space;0&space;&&space;1\end{matrix}\right)" title="\left(\begin{matrix}1 & 0 & 1\\\\2 & 1 & 2\\\\1 & 0 & 1\end{matrix}\right)" /></a>
+    <a href="https://www.codecogs.com/eqnedit.php?latex=\left(\begin{matrix}1&space;&&space;0&space;&&space;1\\\\2&space;&&space;1&space;&&space;2\\\\1&space;&&space;0&space;&&space;1\end{matrix}\right)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\left(\begin{matrix}1&space;&&space;0&space;&&space;1\\\\2&space;&&space;1&space;&&space;2\\\\1&space;&&space;0&space;&&space;1\end{matrix}\right)" title="\left(\begin{matrix}1 & 0 & 1\\\\2 & 1 & 2\\\\1 & 0 & 1\end{matrix}\right)" /></a>
 
-and its transpose.
-    
+    and its transpose.
     <details><summary>Answer</summary><p>
 
     ```python
@@ -887,7 +886,7 @@ We will come back to this in the next section when we are going to give a short 
     fig, ax = plt.subplots(1, 5)
     for i in range(5):
         sample = np.random.gamma(shape=i, scale=3, size=1000)
-        ax[i].hist(sample, bins=100)
+        ax[i].hist(sample,  bins=100)
     plt.show()
     ```
 
