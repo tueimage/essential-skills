@@ -50,10 +50,6 @@ matrix = np.array(
 
 which assigns the two-dimensional array
 
-<img src="https://latex.codecogs.com/svg.latex?\left(\begin{matrix}1 & 2 & 3\\\\4 & 5 & 6\\\\7 & 8 & 9\end{matrix}\right)" title="\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" />
-
-<img src="https://latex.codecogs.com/svg.latex?\Large&space;x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" title="\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" />
-
 <a href="https://www.codecogs.com/eqnedit.php?latex=\left(\begin{matrix}1&space;&&space;2&space;&&space;3\\\\4&space;&&space;5&space;&&space;6\\\\7&space;&&space;8&space;&&space;9\end{matrix}\right)" target="_blank"><img src="https://latex.codecogs.com/svg.latex?\left(\begin{matrix}1&space;&&space;2&space;&&space;3\\\\4&space;&&space;5&space;&&space;6\\\\7&space;&&space;8&space;&&space;9\end{matrix}\right)" title="\left(\begin{matrix}1 & 2 & 3\\\\4 & 5 & 6\\\\7 & 8 & 9\end{matrix}\right)" /></a>
 
 to the variable `matrix`. As you can see, the matrix is defined as a list of lists. 
@@ -453,7 +449,9 @@ a1.dot(v1)
     </p></details>
 
 2. Calculate the dot-product between the matrix 
-$$\left(\begin{matrix}1 & 0 & 1\\\\2 & 1 & 2\\\\1 & 0 & 1\end{matrix}\right)$$
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=\left(\begin{matrix}1&space;&&space;0&space;&&space;1\\\\2&space;&&space;1&space;&&space;2\\\\1&space;&&space;0&space;&&space;1\end{matrix}\right)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\left(\begin{matrix}1&space;&&space;0&space;&&space;1\\\\2&space;&&space;1&space;&&space;2\\\\1&space;&&space;0&space;&&space;1\end{matrix}\right)" title="\left(\begin{matrix}1 & 0 & 1\\\\2 & 1 & 2\\\\1 & 0 & 1\end{matrix}\right)" /></a>
+
 and its transpose.
     
     <details><summary>Answer</summary><p>
@@ -861,11 +859,7 @@ There are more `cmap` options available. A list can be found [here](https://matp
 
 Colormaps are nice, but they *do not* allow you to actually show RGB color images, like the ones you make with a digital camera. However, `imshow` automatically shows RGB channels if it receives a 3D array, where the last axis has length 3. This last axis is then treated as the intensity of the red, green, and blue channels. Such an array would look like this:
 
-$$\left(\begin{matrix}
-(r, g, b) & \cdots & (r, g, b)\\\\
-\vdots & \ddots & \vdots\\\\
-(r, g, b) & \cdots & (r, g, b)\\\\
-\end{matrix}\right)$$
+<a href="https://www.codecogs.com/eqnedit.php?latex=\left(\begin{matrix}&space;(r,&space;g,&space;b)&space;&&space;\cdots&space;&&space;(r,&space;g,&space;b)\\\\&space;\vdots&space;&&space;\ddots&space;&&space;\vdots\\\\&space;(r,&space;g,&space;b)&space;&&space;\cdots&space;&&space;(r,&space;g,&space;b)&space;\end{matrix}\right)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\left(\begin{matrix}&space;(r,&space;g,&space;b)&space;&&space;\cdots&space;&&space;(r,&space;g,&space;b)\\\\&space;\vdots&space;&&space;\ddots&space;&&space;\vdots\\\\&space;(r,&space;g,&space;b)&space;&&space;\cdots&space;&&space;(r,&space;g,&space;b)&space;\end{matrix}\right)" title="\left(\begin{matrix} (r, g, b) & \cdots & (r, g, b)\\\\ \vdots & \ddots & \vdots\\\\ (r, g, b) & \cdots & (r, g, b) \end{matrix}\right)" /></a>
 
 However, it is important that the values in the matrix are either floats (!) between 0 and 1, or **unsigned 8-bit integers (i.e. np.uint8)** between 0 and 255, otherwise you get a lot of nonsense.
 
