@@ -16,7 +16,7 @@ with Matplotlib.
 NumPy is a library: a collection of classes, constants, and functions that you can import to
 use in your own code. NumPy supports multi-dimensional arrays and matrices, linear
 algebra operations, and has a large collection of functions for mathematical operations. The full
-NumPy documentation can be found (here)[https://docs.scipy.org/doc/numpy-1.15.0/reference/index.html].
+NumPy documentation can be found [here](https://docs.scipy.org/doc/numpy-1.15.0/reference/index.html).
 If you are lost, that website is a good start on the quest for a solution.
 
 To start out, first import the NumPy library.
@@ -500,7 +500,7 @@ np.linspace(0, 1, 6)  # returns array([0.0, 0.2, 0.4, 0.6, 0.8, 1.0])
 
 ### Data types in NumPy
 
-NumPy has its own variant of numeric types. It does not use the built-in Python types `int` and `float`, but has types for certain precisions, which is the number of bytes used to store a value. For example, NumPy has types to store integers called `np.int8`, `np.int16`, `np.int32`, and `np.int64`. `np.int8` can store numbers between -128 and 127, while the `np.int64` type can store numbers between -9223372036854775808 and 9223372036854775807. Floats are represented by either `np.float32` or `np.float64`. 
+NumPy has its own variant of numeric types. It does not use the built-in Python types `int` and `float`, but has types for certain precisions, which is the number of bytes used to store a value. For example, NumPy has types to store integers called `np.int8`, `np.int16`, `np.int32`, and `np.int64`. `np.int8` can store numbers between -128 and 127, while the `np.int64` type can store numbers between -9223372036854775808 and 9223372036854775807. A variant of the integer types called 'unsigned integers' can only store positive values, and are indicated by `np.uint8`, `np.uint16`, `np.uint32`, and `np.uint64`. Their ranges all start at one, which results in the `np.uint8` being able to store values between 0 and 255. Floats are represented by either `np.float32` or `np.float64`, and are always signed, i.e. they can also store negative values.
 
 Naturally, an `np.int64` takes up eight times as much space in memory compared to an `np.int8`. When you are having a lot of data (large medical images for example) in memory, it becomes important what type you use. That is why every construction function mentioned in the previous section has a `dtype` parameter in which you can set the datatype, for example
 
@@ -655,6 +655,13 @@ Matplotlib is a library that lets you make plots and show images. The Matplotlib
 ```python
 import matplotlib.pyplot as plt
 ```
+
+---
+
+If you import multiple libraries in the same script, it is good practice to import them both *at the top of the script*. In general, it is bad practice to import libraries anywhere else than at the top of your script.
+Therefore, if you import NumPy and Matplotlib, put the two import statements *both* at the top.
+
+---
 
 Let's make a basic plot:
 
@@ -848,7 +855,7 @@ plt.show()
 
 There are more `cmap` options available. A list can be found [here](https://matplotlib.org/users/colormaps.html).
 
-Colormaps are nice, but the *do not* allow you to actually show RGB color images, like the ones you make with a digital camera. `imshow` automatically shows RGB channels if it receives a 3D array, where the last axis has length 3. This last axis is then treated as the intensity of the red, green, and blue channels. Such an array would look like this:
+Colormaps are nice, but they *do not* allow you to actually show RGB color images, like the ones you make with a digital camera. However, `imshow` automatically shows RGB channels if it receives a 3D array, where the last axis has length 3. This last axis is then treated as the intensity of the red, green, and blue channels. Such an array would look like this:
 
 $$\left(\begin{matrix}
 (r, g, b) & \cdots & (r, g, b)\\\\
@@ -856,7 +863,7 @@ $$\left(\begin{matrix}
 (r, g, b) & \cdots & (r, g, b)\\\\
 \end{matrix}\right)$$
 
-However, it is important that the values in the matrix are floats (!) between 0 and 1, otherwise you get a lot of nonsense.
+However, it is important that the values in the matrix are either floats (!) between 0 and 1, or **unsigned 8-bit integers (i.e. np.uint8)** between 0 and 255, otherwise you get a lot of nonsense.
 
 ```python
 color_image = np.array([
@@ -906,9 +913,162 @@ We will come back to this in the next section when we are going to give a short 
 ---
 
 
-## Image analysis libraries
+## Using other libraries
 
-Scipy
-Loading images
-Ndimage objects
-Examples of functions
+To conclude this chapter we are going to work with some actual images. To do this we import the `imageio` library. 
+
+```python
+import imageio
+```
+
+The 'io' in `imageio` stands for input and output, which tells you that this library will only be used for reading and writing image files. `imageio` supports almost all 2D image formats, such as `jpg`, `bmp`, `gif`, and `tiff`.
+
+You can read any such file on your computer if you supply the path of the image to the `imageio.imread()` function, like this
+
+```python
+my_image = imageio.imread('path/to/image')
+```
+
+`my_image` now contains a NumPy array with the intensities of the image. If it is a color image, it will be loaded in the format we discussed at the end of the previous section. You can show the image using Matplotlib:
+
+```
+plt.imshow(my_image)
+plt.show()
+```
+
+
+---
+
+###### Exercises
+
+1. Load a color image using `imageio`. Make changes to the image array, such that the image becomes a grayscale image. Show the color and grayscale images next to eachother. If you can not find an image, you can use the path `imagio:chelsea.png`, which loads one of the example images in `imageio`. 
+    
+    <details><summary>Answer</summary><p>
+
+    ```python
+    color_image = imageio.imread('imageio:chelsea.png')
+    grayscale_image = np.mean(color_image, axis=2)
+    fig, ax = plt.subplots(1, 2)
+    ax[0].imshow(color_image)
+        ax[1].imshow(grayscale_image, cmap='gray')  # If you do not use the gray color map, Matplotlib will use its default color map.
+    plt.show()
+    ```
+
+    </p></details> 
+
+---
+
+
+### SciPy
+
+SciPy is the final library we are going to discuss in this chapter, but this time we will let you read the documentation on this package yourself. You will need this for the exercises at the end, but you may also need it for a project. The documentation can be found [here](https://scipy.org/docs.html).
+
+SciPy has a number of sub-libraries for statistics, optimization, interpolation, some more linear algebra, and image analysis. We are going to focus on the latter one, which is called `scipy.ndimage` and adds support for N-dimensional images: images of dimensions two and up. However, the other sub-libaries may also be relevant and useful in your own projects.
+
+Let's look at an example in the SciPy documentation: the `scipy.ndimage.median_filter()` function. The median filter replaces each pixel in an image with the median of its neighborhood. If we look at the documentation, we find out that the *prototype* of this function is
+
+```python
+scipy.ndimage.median_filter(input, size=None, footprint=None, output=None, mode='reflect', cval=0.0, origin=0)
+```
+
+The function has one obligatory argument named `input`. Below the prototype, we can find that this parameter should be an input array. Next, we find that there are optional argument for `size`, `footprint`, `output`,  `mode`, `cval`, and `origin`. Note that the documentation explicitly states to define either the `size` or the `footprint`. 
+
+
+---
+
+###### Exercises
+
+1. Use the median filter (with the size set to `(5, 5)`) on the grayscale version of the image that you loaded previously, and show the result next to the original image.
+
+    <details><summary>Answer</summary><p>
+
+    ```python
+    after_median_filter = scipy.ndimage.median_filter(grayscale_image, size=(5, 5))
+    fig, ax = plt.subplots(1, 2)
+    ax[0].imshow(color_image)
+        ax[1].imshow(grayscale_image, cmap='gray')  # If you do not use the gray color map, Matplotlib will use its default color map.
+    plt.show()
+    ```
+
+    </p></details> 
+
+2. Use the median filter on the image, but this time test all multiples of 5 between 5 and 50 for `size`. Show each resulting image in its own subplot.
+
+    <details><summary>Answer</summary><p>
+
+    ```python
+    sizes = range(5, 51, 5)
+
+    fig, ax = plt.subplots(1, len(sizes))
+    
+    for i, size in enumerate(sizes):
+        after_median_filter = scipy.ndimage.median_filter(grayscale_image, size=(size, size))
+        ax[i].imshow(after_median_filter, cmap='gray')   
+    
+    plt.show()
+    ```
+
+    </p></details> 
+
+3. Using `SciPy`, show the image and a Gaussian filtered version of the grayscale image. Use a scale (sigma) of 5 pixels.
+
+    <details><summary>Answer</summary><p>
+    The documentation shows a function called `gaussian_filter()`, which has two obligatory parameters: `input` for the image, and `sigma` for the scale (the `sigma` in the Gaussian function). The result will show a blurred image. If you increase the sigma, the image will appear to be more blurred.
+    ```python
+    gaussian_filtered = scipy.ndimage.gaussian_filter(grayscale_image, sigma=5)
+    fig, ax = plt.subplots(1, 2)
+    ax[0].imshow(grayscale_image, cmap='gray')
+    ax[1].imshow(gaussian_filtered, cmap='gray')
+    plt.show()
+    ```
+
+    </p></details> 
+
+4. Compute the Gaussian gradient magnitude of the image at a scale of 5 pixels.
+
+    <details><summary>Answer</summary><p>
+    Very similar to the previous answer. In this case, the gradient of the image is computed, which will show the edges of the image in each direction, after which the magnitude (L2-norm) of the gradient vector is computed.
+
+    ```python
+    gradient_magnitude = scipy.ndimage.gaussian_gradient_magnitude(grayscale_image, sigma=5)
+    fig, ax = plt.subplots(1, 2)
+    ax[0].imshow(grayscale_image, cmap='gray')
+    ax[1].imshow(gradient_magnitude, cmap='gray')
+    plt.show()
+    ```
+
+    </p></details> 
+
+5. Rotate the image 45° anticlockwise.
+
+    <details><summary>Answer</summary><p>
+    Very similar to the previous answer. In this case, the gradient of the image is computed, which will show the edges of the image in each direction, after which the magnitude (L2-norm) of the gradient vector is computed.
+
+    ```python
+    rotated = scipy.ndimage.rotate(grayscale_image, angle=45)
+    fig, ax = plt.subplots(1, 2)
+    ax[0].imshow(grayscale_image, cmap='gray')
+    ax[1].imshow(rotated, cmap='gray')
+    plt.show()
+    ```
+
+    </p></details> 
+
+6. Threshold the image at 50% of the maximum intensity in the image.
+
+    <details><summary>Answer</summary><p>
+    This is a trick question, as you do not need SciPy to do this. You can use NumPy's ability to show where an array is larger than a threshold:
+
+    ```python
+    threshold = 0.5 * grayscale_image.max()
+    thresholded = grayscale_image > threshold
+    fig, ax = plt.subplots(1, 2)
+    ax[0].imshow(grayscale_image, cmap='gray')
+    ax[1].imshow(thresholded, cmap='gray')
+    plt.show()
+    ```
+
+    In the second line, the `>` is evaluated before assignment to `thresholded`, so it is executed as `thresholded = (grayscale > threshold)`. The NumPy data type of `thresholded` is `bool`.
+    </p></details>
+
+

@@ -99,7 +99,7 @@ run it by clicking on the green 'play' button in the toolbar. If everything is
 setup correctly, the IPython console panel on the right should show the printed text.
 
 Should your code take a long time to run and you want to stop the script, click
-the button with the red square in title bar of the IPython panel or press Control-C.
+the button with the red square in title bar of the IPython panel or press <kbd>Control-C</kbd>.
 
 ---
 
