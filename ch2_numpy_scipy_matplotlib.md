@@ -51,8 +51,10 @@ matrix = np.array(
 which assigns the two-dimensional array
 
 <img src="https://latex.codecogs.com/svg.latex?\left(\begin{matrix}1 & 2 & 3\\\\4 & 5 & 6\\\\7 & 8 & 9\end{matrix}\right)" title="\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" />
+<img src="https://latex.codecogs.com/svg.latex?\left(\begin{matrix}1 & 2 & 3\\\\4 & 5 & 6\\\\7 & 8 & 9\end{matrix}\right)" title="\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" />
 
 <img src="https://latex.codecogs.com/svg.latex?\Large&space;x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" title="\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" />
+<img src="https://latex.codecogs.com/svg.latex?\Large&space;\left(\begin{matrix}1 & 2 & 3\\\\4 & 5 & 6\\\\7 & 8 & 9\end{matrix}\right)" title="\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" />
 
 $$\left(\begin{matrix}1 & 2 & 3\\\\4 & 5 & 6\\\\7 & 8 & 9\end{matrix}\right)$$
 
