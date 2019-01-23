@@ -50,8 +50,11 @@ matrix = np.array(
 
 which assigns the two-dimensional array
 
-<img src="https://latex.codecogs.com/gif.latex?\left(\begin{matrix}1 & 2 & 3\\\\4 & 5 & 6\\\\7 & 8 & 9\end{matrix}\right)"/>
+<img src="https://latex.codecogs.com/svg.latex?\left(\begin{matrix}1 & 2 & 3\\\\4 & 5 & 6\\\\7 & 8 & 9\end{matrix}\right)" title="\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" />
 
+<img src="https://latex.codecogs.com/svg.latex?\Large&space;x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" title="\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" />
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=\left(\begin{matrix}1 & 2 & 3\\\\4 & 5 & 6\\\\7 & 8 & 9\end{matrix}\right)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\left(\begin{matrix}1 & 2 & 3\\\\4 & 5 & 6\\\\7 & 8 & 9\end{matrix}\right)" title="\left(\begin{matrix}1 & 2 & 3\\\\4 & 5 & 6\\\\7 & 8 & 9\end{matrix}\right)" /></a>
 
 to the variable `matrix`. As you can see, the matrix is defined as a list of lists. 
 For a three-dimensional array, you would need a list of lists of lists. For a simple
