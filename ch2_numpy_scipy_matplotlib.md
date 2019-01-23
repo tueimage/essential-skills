@@ -51,14 +51,10 @@ matrix = np.array(
 which assigns the two-dimensional array
 
 <img src="https://latex.codecogs.com/svg.latex?\left(\begin{matrix}1 & 2 & 3\\\\4 & 5 & 6\\\\7 & 8 & 9\end{matrix}\right)" title="\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" />
-<img src="https://latex.codecogs.com/svg.latex?\left(\begin{matrix}1 & 2 & 3\\\\4 & 5 & 6\\\\7 & 8 & 9\end{matrix}\right)" title="\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" />
 
 <img src="https://latex.codecogs.com/svg.latex?\Large&space;x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" title="\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" />
-<img src="https://latex.codecogs.com/svg.latex?\Large&space;\left(\begin{matrix}1 & 2 & 3\\\\4 & 5 & 6\\\\7 & 8 & 9\end{matrix}\right)" title="\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" />
 
-$$\left(\begin{matrix}1 & 2 & 3\\\\4 & 5 & 6\\\\7 & 8 & 9\end{matrix}\right)$$
-
-<a href="https://www.codecogs.com/eqnedit.php?latex=x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" title="x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" /></a>
+<a href="https://www.codecogs.com/eqnedit.php?latex=\left(\begin{matrix}1&space;&&space;2&space;&&space;3\\\\4&space;&&space;5&space;&&space;6\\\\7&space;&&space;8&space;&&space;9\end{matrix}\right)" target="_blank"><img src="https://latex.codecogs.com/svg.latex?\left(\begin{matrix}1&space;&&space;2&space;&&space;3\\\\4&space;&&space;5&space;&&space;6\\\\7&space;&&space;8&space;&&space;9\end{matrix}\right)" title="\left(\begin{matrix}1 & 2 & 3\\\\4 & 5 & 6\\\\7 & 8 & 9\end{matrix}\right)" /></a>
 
 to the variable `matrix`. As you can see, the matrix is defined as a list of lists. 
 For a three-dimensional array, you would need a list of lists of lists. For a simple
