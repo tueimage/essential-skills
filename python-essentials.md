@@ -225,6 +225,7 @@ devision will be zero.
 * Write a script that prints the square root of the integer 17. What class is the resulting value? Why?
     
     <details><summary>Answer</summary><p>
+
     ```python
     x = 17
     result = x ** 0.5
@@ -352,16 +353,20 @@ y = 23
 
 * Write a third line that uses a format string and the variables `x` and `y` to print '81 plus 23 equals 104'
     <details><summary>Answer</summary><p>
+
     ```python
     print('{} plus {} equals {}'.format(x, y, x + y))
     ```
+    
     </p></details>
 
 * Write a fourth line that uses a format string and the variables `x` and `y` to print '81 divided by 23 equals 3 with a remainder of 12'
     <details><summary>Answer</summary><p>
+    
     ```python
     print('{} divided by {} equals {} with a remainder of {}'.format(x, y, x // y, x % y))`
     ```
+    
     </p></details>
 
 ---
@@ -640,6 +645,7 @@ v = d.pop('b')  # v now contains 2, d is now {'a': 1, 'c': 3}
 
 * Given `my_dictionary` as given above, write code that takes the second description, and prints the individual words of the description in reverse order.
     <details><summary>Answer</summary><p>
+
     ```python
     key = list(my_dictionary.keys())[1]
     desc = my_dictionary[key]
@@ -777,6 +783,7 @@ will print 0, 1, and 2 on separate lines.
         sum = sum + value
     print(sum)
     ```
+
     </p></details>
 
 * The factorial of a positive integer n, denoted by n!, is the product of all positive integers (i.e. larger than zero) less than or equal to n. For example, 5! = 5 * 4 * 3 * 2 * 1. Use a for loop to compute the factorial of 15.
@@ -788,6 +795,7 @@ will print 0, 1, and 2 on separate lines.
     for i in range(1, 16):
         factorial = factorial * i
     ```
+
     </p></details>
 
 ---
@@ -959,17 +967,20 @@ for i, (x, y, z) in enumerate(zip(english, italian, roman_numerals)):
 * Write code that checks for each number between 0 and 100 if it is divisible by 3. If so, print this number if it is also divisible by 5 or 7.
 
     <details><summary>Answer</summary><p>
+
     ```python
     for i in range(101):
         if i % 3 == 0:
             if i % 7 == 0 or i % 5 == 0:
                 print(i)
     ```
+
     </p></details>
 
 * A prime number is a number larger than 1 that is only divisible by 1 and itself. Write code to check if 12829 is prime.
 
     <details><summary>Answer</summary><p>
+
     ```python
     x = 12829
     for i in range(2, x):
@@ -1060,6 +1071,7 @@ The function stops after the `return` keyword, so any code after it will not be 
 * Write a function that takes two lists as arguments, and returns the inner product of the list. The inner product is the sum of the element-wise products of the list. Test your code by calling it with two lists of floats.
 
     <details><summary>Answer</summary><p>
+
     ```python
     def inner_product(l1, l2):
         sum = 0
@@ -1080,11 +1092,13 @@ The function stops after the `return` keyword, so any code after it will not be 
 
     print(inner_product([1.0, 2.0, 3.0], [4.5, 3.2, 0]))  # Should print 10.9
     ```
+    
     </p></details>
 
 * Expand the function by adding a check if the lists are the same size. If not, print a warning. Test it on two lists of different length.
 
     <details><summary>Answer</summary><p>
+
     ```python
     def inner_product(l1, l2):
         if len(l1) == len(l2):
@@ -1097,6 +1111,7 @@ The function stops after the `return` keyword, so any code after it will not be 
     ```
 
     Alternatively, this also works
+
     ```python
     def inner_product(l1, l2):
         if len(l1) == len(l2):
@@ -1106,12 +1121,14 @@ The function stops after the `return` keyword, so any code after it will not be 
             return sum
         print('Input lists are different in length.')
     ```
+
     If the lists are the same length, the print-function will not be called.
     </p></details>
 
 * Write a function called `unique()` that takes a list as argument, and returns a new list containing all unique values in the list.
 
     <details><summary>Answer</summary><p>
+
     ```python
     def unique(l):
         m = []
@@ -1120,7 +1137,9 @@ The function stops after the `return` keyword, so any code after it will not be 
                 m.append(x)
         return m
     ```
+
     or exploiting sets:
+
     ```python
     def unique(l):
         s = set(l)
@@ -1173,6 +1192,7 @@ In fact, you can have multiple return values, like this too:
 * Write a function that takes a circle's radius as its argument and returns the circle's surface area and circumference. Call the function to check if it works.
 
     <details><summary>Answer</summary><p>
+
     ```python
     PI = 3.141592654
 
@@ -1185,12 +1205,14 @@ In fact, you can have multiple return values, like this too:
 
     a, c = circle(10)  # Should return ~314, ~62.4
     ```
+
     </p></details>
 
 
 * Write a function that takes two strings as its arguments and returns True if any of the letters in the first string occur in the second string, and False if not.
 
     <details><summary>Answer</summary><p>
+
     ```python
     def string_overlap(s1, s2):
         for letter in s1:
@@ -1199,11 +1221,13 @@ In fact, you can have multiple return values, like this too:
                              # also in the second string we can stop looking.
         return False
     ```
+
     </p></details>
 
 * Write a function that returns True if a number is prime, and False otherwise.
     
     <details><summary>Answer</summary><p>
+
     ```python
     def is_prime(x):
         if x < 2:
@@ -1213,11 +1237,13 @@ In fact, you can have multiple return values, like this too:
                 return False
         return True
     ```
+
     </p></details>
 
 * Write a function that returns a list of all primes smaller than N, where N is an argument to the function. Use the function you wrote in the previous question.
     
     <details><summary>Answer</summary><p>
+
     ```python
     def primes_up_to(n):
         l = []
@@ -1226,11 +1252,13 @@ In fact, you can have multiple return values, like this too:
                 l.append(i)
         return l
     ```
+
     </p></details>
 
 * Write a function that replaces all values in a list with 0.
 
     <details><summary>Answer</summary><p>
+
     ```python
     def replace_values(l):
         for i in range(len(l)):
@@ -1390,17 +1418,20 @@ The role of `self` in the class definition is that of a placeholder: in the code
 * Make a class definition for a 2D `Point` class that has no methods (other than `__init__`), and has two attributes for the `x` and `y` coordinates.
     
     <details><summary>Answer</summary><p>
+    
     ```python
     class Point:
         def __init__(self, x, y):
             self.x = x
             self.y = y
     ```
+
     </p></details>
 
 * Make a class definition for a 2D `Translation` class that has a method called `transform` that translates a Point. The class should have two attributes for the `dx` and `dy` for the translation in x and y direction.
 
     <details><summary>Answer</summary><p>
+
     ```python
     class Translation:
         def __init__(self, dx, dy):
@@ -1411,11 +1442,13 @@ The role of `self` in the class definition is that of a placeholder: in the code
             point.x = point.x + self.dx
             point.y = point.y + self.dy
     ```
+
     </p></details>
 
 * Test you classes by using them to make a `Point(3, 4)` that you translate using `Translation(4, 2)` and test if the translation is correct.
 
     <details><summary>Answer</summary><p>
+
     ```python
     p = Point(3, 4)
     print('Old point was at ({}, {})'.format(p.x, p.y))
@@ -1423,6 +1456,7 @@ The role of `self` in the class definition is that of a placeholder: in the code
     t.transform(p)
     print('New point is at ({}, {})'.format(p.x, p.y))
     ```
+    
     </p></details>
 
 * Given the following class
