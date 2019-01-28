@@ -1,12 +1,12 @@
 # Numerical and scientific computing in Python
 
-So-far we have seen basic functionality of Python required to write your own
+So far, we have seen basic functionality of Python required to write your own
 scientific programs. What has been lacking is a way to implement numeric code.
 
 In this chapter we will look at four libraries that are often used for working
 with Python in numeric and scientific computing: NumPy, SciPy, Matplotlib, and
-Skimage. We start with the basics of NumPy, to look at some linear algebra and
-ways to import  and export data, and then will move onto plotting that data
+Skimage. We start with the basics of NumPy, look at some linear algebra functions and
+importing and exporting data, and then we will move onto visualizing (plotting) that data
 with Matplotlib.
 
 
@@ -26,8 +26,8 @@ import numpy as np
 ```
 
 This statement imports the library. If you use a function, class, or constant from the library, you
-need to prefixe it with `np.`, for example if you want to use the NumPy's square root function `sqrt`
-you type
+need to prefix it with `np.`, for example if you want to use the NumPy's square root function `sqrt`
+you type:
 
 ```python
 print(np.sqrt(9))  # prints 3.0
@@ -54,7 +54,7 @@ which assigns the two-dimensional array
 
 to the variable `matrix`. As you can see, the matrix is defined as a list of lists. 
 For a three-dimensional array, you would need a list of lists of lists. For a simple
-vector, you can just use a single list
+vector, you can just use a single list:
 
 ```python
 vector = np.array([1, 2, 3])
@@ -70,7 +70,7 @@ print(vector.ndim)  # prints 1
 
 Note that `ndim` is not a method: it is not followed by parentheses, and does not
 actively have to compute something. Another property you can use is `shape` which
-gives you the size along each axis of the array
+gives you the size along each axis of the array:
 
 ```python
 print(matrix.shape)  # prints (3, 3) because matrix is a 3x3 array
@@ -79,7 +79,7 @@ print(vector.shape)  # prints (3, ) because vector is a 3x1 array
 
 The order of the shapes is similar to the ordering of matrix axes: first the
 length in *i*-direction (downwards) is given, then the *j*-direction (left-to-right).
-You can also use the `len` function to get the length of the first axis.
+You can also use the `len` function to get the length of the first axis:
 
 ```python
 m = np.array([[1, 2], [3, 4], [5, 6], [7, 8]])
@@ -97,20 +97,20 @@ print(matrix[0])  # prints the first element (i.e. array([1, 2, 3]))
 print(matrix[1:])  # prints elements starting from index 1 (i.e. array([[4, 5, 6], [7, 8, 9]]))
 ```
 
-In the `matrix[0]` example, you obtain a new array, that you can index again, e.g.
+In the `matrix[0]` example, you obtain a new array, that you can index again, e.g.:
 
 ```python
 print(matrix[0][1])  # prints the second element of the first element (array([2, 3])[1], i.e. 3) 
 ```
 
-You can write this more cleanly as
+You can write this more cleanly as:
 
 ```python
 print(matrix[0, 1])
 ```
 
 Of course you can also slice an array in this way. If you want to get all elements
-along a certain axis, you can use `:` as an index, for example
+along a certain axis, you can use `:` as an index, for example, 
 
 ```python
 print(matrix[:, 1])
@@ -130,7 +130,7 @@ m = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]])
 ```
 How do you obtain
 
-* the first row of the matrix?
+* The first row of the matrix?
     
     <details><summary>Answer</summary><p>
 
@@ -138,7 +138,7 @@ How do you obtain
 
     </p></details>
 
-* the second row of the matrix?
+* The second row of the matrix?
     
     <details><summary>Answer</summary><p>
 
@@ -146,7 +146,7 @@ How do you obtain
 
     </p></details>
 
-* every second row of the matrix?
+* Every second row of the matrix?
     
     <details><summary>Answer</summary><p>
 
@@ -154,7 +154,7 @@ How do you obtain
 
     </p></details>
 
-* every second column of the matrix?
+* Every second column of the matrix?
     
     <details><summary>Answer</summary><p>
 
@@ -162,7 +162,7 @@ How do you obtain
 
     </p></details>
 
-* the last column of the matrix?
+* The last column of the matrix?
     
     <details><summary>Answer</summary><p>
 
@@ -175,7 +175,7 @@ How do you obtain
 
 ### Assigning at indices
 
-Like with lists, you can assign directly to parts of an array, for example
+Like with lists, you can assign directly to parts of an array, for example,
 
 ```python
 matrix[:2, :2] = np.array([[10, 20], [30, 40]])
@@ -193,7 +193,7 @@ now contains
 ```
 
 Be careful to match the shape of the matrix on the right side of the `=`-sign
-with the indices on the left: if you are assigning to a 2x2 block, make sure
+with the indices on the left: if you are assigning to a 2×2 block, make sure
 the array on the right is the same size. NumPy will try to 'broadcast' the array
 on the righthandside such that it fits the part you want to assign to, for example for
 
@@ -212,13 +212,13 @@ the righthandside has shape (1, 2), but the lefthandside has
 ]
 ```
 
-If the righthandside has shape (2, 1), for example
+If the righthandside has shape (2, 1), for example,
 
 ```python
 matrix[:2, :2] = np.array([[10], [20]])
 ```
 
-the result will be
+the result will be:
 
 ```python    
 [
@@ -229,13 +229,13 @@ the result will be
 ```
 
 If you only put one value on the righthandside, NumPy will just put that value
-in every element that you are assigning to:
+in every element that you are assigning to. For example, 
 
 ```python
 matrix[:2, :2] = 42
 ```
 
-gives the result
+gives the result:
 
 ```python
 [
@@ -245,7 +245,7 @@ gives the result
 ]
 ```
 Be careful: like lists, arrays are mutable variables, which means they assign
-*by reference*, i.e.
+*by reference*, i.e.:
 
 ```python
 a = np.array([1, 2, 3])
@@ -316,7 +316,8 @@ that you supply to the method. You can let NumPy figure out what the length of o
 
 ```python
 v = np.array([1, 2, 3])
-v.reshape(-1, 1)  # means: the last axis should have length 1, and NumPy will figure out the length of the first axis (3 in this case)
+v.reshape(-1, 1)  # means: the last axis should have length 1, 
+                  # and NumPy will figure out the length of the first axis (3 in this case)
 print(v)  # prints [[1], [2], [3]]
 ```
 
@@ -390,7 +391,7 @@ you have to put the result into a new variable if you want to use it.
 
 #### Elementwise products
 
-Any NumPy array can be multiplied with a scalar using the `*`-operator, for example `2 * np.array([1, 2, 3])` and `np.array([1, 2, 3]) * 2` yield `np.array([2, 4, 6])`. You can also do multiplication of two arrays. The multiplication will be elementwise, i.e. `np.array([1, 2, 3]) * np.array([2, 3, 4])` yields `np.array([2, 6, 12])`. The results are again subject to broadcasting, so be careful. Some examples: for 
+Any NumPy array can be multiplied with a scalar using the `*`-operator, for example `2 * np.array([1, 2, 3])` and `np.array([1, 2, 3]) * 2` yield `np.array([2, 4, 6])`. You can also do multiplication of two arrays. The multiplication will be elementwise, i.e. `np.array([1, 2, 3]) * np.array([2, 3, 4])` yields `np.array([2, 6, 12])`. The results are again subject to broadcasting, so be careful. Some examples: 
 
 ```python
 a = np.array([1, 2, 3])
@@ -413,7 +414,7 @@ v2 = np.array([4, 5, 6])
 print(v1.dot(v2))  # prints 32
 ```
 
-The inner product also can be applied to two matrices, as you are probably used to from your linear algebra courses. In that case you need to multiply N x M arrays with M x N arrays to obtain a N x N array, for example:
+The inner product also can be applied to two matrices, as you are probably used to from your linear algebra courses. In that case you need to multiply N ×M arrays with M×N arrays to obtain a N×N array, for example:
 
 ```python
 a1 = np.array([[1, 2, 3], [4, 5, 6]])
@@ -422,14 +423,14 @@ a1.dot(a2)  # yields [[22, 28], [49, 64]]
 a2.dot(a1)  # yields [[9, 12, 15], [19, 26, 33], [39, 40, 51]]
 ```
 
-If you want to multiply a NxM matrix with a vector, you need to make sure that the vector is represented by a length N array, for example
+If you want to multiply a N×M matrix with a vector, you need to make sure that the vector is represented by a length N array, for example:
 
 ```python
 v1 = np.array([1, 2, 3])
 a1.dot(v1)  # yields [14, 32]
 ```
 
-Alternatively, you can do the same thing using an Nx1 matrix:
+Alternatively, you can do the same thing using an N×1 matrix:
 
 ```python
 v1 = np.array([[1], [2], [3]])
@@ -441,10 +442,10 @@ a1.dot(v1)
 
 ###### Exercises
 
-1. What happens when you try to multiply a 2x3 array with a 3x2 array elementwise? Can you explain why?
+1. What happens when you try to multiply a 2×3 array with a 3×2 array elementwise? Can you explain why?
     <details><summary>Answer</summary><p>
 
-    You get a `ValueError` because the shapes are incompatible: NumPy can not broadcast one array to that of the other.
+    You get a `ValueError` because the shapes are incompatible: NumPy cannot broadcast one array to that of the other.
 
     </p></details>
 
@@ -470,7 +471,7 @@ a1.dot(v1)
 
 NumPy has a few default matrices that you can obtain using the functions `np.ones()`, `np.zeros()`, and `np.eye()`. The first two generate matrices filled with ones and zeros. Their argument is a shape tuple, for example `np.zeros((4, 2))` gives you `[[0, 0], [0, 0], [0, 0], [0, 0]]`. `np.eye()` generates identity matrices, for example `np.eye(3)` generates `[[1, 0, 0], [0, 1, 0], [0, 0, 1]]`.
 
-These construction function are useful when you are filling large matrices using code. In the previous chapter, you have seen that you can construct lists using the `append()` method to add elements to a list. For NumPy arrays such functionality does not exist, because this method is generally quite slow. It is much faster to generate an array of a certain size using `np.ones()` or `np.zeros()`, and then fill the elements. For example
+These construction functions are useful when you are filling large matrices using code. In the previous chapter, you have seen that you can construct lists using the `append()` method to add elements to a list. For NumPy arrays such functionality does not exist, because this method is generally quite slow. It is much faster to generate an array of a certain size using `np.ones()` or `np.zeros()`, and then fill the elements. For example
 
 ```python
 a = np.zeros((5, 5))
@@ -479,7 +480,7 @@ for i in range(5):
         a[i, j] = i * j
 ```
 
-fills an empty 5x5 matrix.
+fills an empty 5×5 matrix.
 
 There are also two functions that generate template vectors. `np.arange()` is similar to the function `range()`, but returns an `ndarray` instead of a range object, and also allows decimal values as arguments:
 
@@ -490,7 +491,7 @@ np.arange(5.2, 10.2)  # returns array([5.2, 6.2, 7.2, 8.2, 9.2])
 np.arange(0, 10, 2.5)  # returns array([0, 2.5, 5, 7.5])
 ```
 
-The `np.linspace()` function does something similar, but instead of defining the start, end (not included), and step, you define that start, end (included!), and number of elements you want. For example
+The `np.linspace()` function does something similar, but instead of defining the start, end (not included), and step, you define that start, end (included!), and number of elements you want. For example:
 
 ```python
 np.linspace(0, 10, 11)  # returns array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]), notice that 10 is included
@@ -501,9 +502,9 @@ np.linspace(0, 1, 6)  # returns array([0.0, 0.2, 0.4, 0.6, 0.8, 1.0])
 
 ### Data types in NumPy
 
-NumPy has its own variant of numeric types. It does not use the built-in Python types `int` and `float`, but has types for certain precisions, which is the number of bytes used to store a value. For example, NumPy has types to store integers called `np.int8`, `np.int16`, `np.int32`, and `np.int64`. `np.int8` can store numbers between -128 and 127, while the `np.int64` type can store numbers between -9223372036854775808 and 9223372036854775807. A variant of the integer types called 'unsigned integers' can only store positive values, and are indicated by `np.uint8`, `np.uint16`, `np.uint32`, and `np.uint64`. Their ranges all start at one, which results in the `np.uint8` being able to store values between 0 and 255. Floats are represented by either `np.float32` or `np.float64`, and are always signed, i.e. they can also store negative values.
+NumPy has its own variant of numeric types. It does not use the built-in Python types `int` and `float`, but has types for certain precisions, which is the number of bytes used to store a value. For example, NumPy has types to store integers called `np.int8`, `np.int16`, `np.int32`, and `np.int64`. `np.int8` can store numbers between -128 and 127, while the `np.int64` type can store numbers between -9223372036854775808 and 9223372036854775807. A variant of the integer types called 'unsigned integers' can only store positive values, and are indicated by `np.uint8`, `np.uint16`, `np.uint32`, and `np.uint64`. Their ranges all start at zero, which results in the `np.uint8` being able to store values between 0 and 255. Floats are represented by either `np.float32` or `np.float64`, and are always signed, i.e. they can also store negative values.
 
-Naturally, an `np.int64` takes up eight times as much space in memory compared to an `np.int8`. When you are having a lot of data (large medical images for example) in memory, it becomes important what type you use. That is why every construction function mentioned in the previous section has a `dtype` parameter in which you can set the datatype, for example
+Naturally, an `np.int64` takes up eight times as much space in memory compared to an `np.int8`. When you are having a lot of data (large medical images for example) in memory, it becomes important what type you use. That is why every construction function mentioned in the previous section has a `dtype` parameter in which you can set the datatype, for example:
 
 ```python
 a = np.arange(0, 10)  # returns array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
@@ -527,7 +528,7 @@ print(c.dtype)  # prints dtype('float64')
 
 ### Mathematical functions
 
-NumPy has many functions for mathematical functions. In general, they are what you expect. One thing to keep in mind is that if you supply an array instead of a scalar, the function will be evaluated elementwise.
+NumPy implements many mathematical functions. In general, they do what you expect. One thing to keep in mind is that if you supply an array instead of a scalar, the function will be evaluated elementwise.
 
 | syntax                                                                          | meaning                                                                               |
 | ------------------------------------------------------------------------------- | -------------------------------------------------------------------                   |
@@ -546,7 +547,7 @@ NumPy has many functions for mathematical functions. In general, they are what y
 | `np.cov()`                                                                      | Return the covariance between two lists or arrays of the same shape                   |
 | `np.cross()`                                                                    | Returns the cross product of two 3D vectors                                           |
 
-The functions `np.mean()`, `np.median()`, `np.std()`, `np.var()` have an optional `axis` argument that can specify along which axis of an ND array you calculate the statistic, for example
+The functions `np.mean()`, `np.median()`, `np.std()`, `np.var()` have an optional `axis` argument that can specify along which axis of an ND array you calculate the statistic, for example:
 
 ```python
 a = np.array([[1, 1, 1], [3, 0, 0]])
@@ -631,7 +632,7 @@ which saves the array `a` in binary format to the file `my_file.npy`.
 
 ### Random numbers
 
-NumPy can generate arrays of random numbers with `np.random` sublibrary. Those arrays can drawn from uniform and normal distributions.
+NumPy can generate arrays of random numbers with `np.random` sublibrary. Those arrays can drawn from uniform and normal distributions. Here are some specific examples:
 
 * `np.random.random_integers(low=5, high=10, size=(3, 2))` gives an array of shape 3x2 with random integers between 5 and 10. The integers are uniformly distributed.
 * `np.random.uniform(low=4, high=9, size=(3, 2))` gives an array of shape 3x2 with uniformly distributed random numbers between 4 and 9.
@@ -651,7 +652,7 @@ generates a set of three random items in `a`.
 
 ## Matplotlib
 
-Matplotlib is a library that lets you make plots and show images. The Matplotlib documentation can be found [here](https://matplotlib.org/contents.html). Matplotlib is usually imported under the prefix `plt`, like so
+Matplotlib is a library that lets you make plots and show images. The syntax of many of the functions provided by this library closely follows the syntax of the corresponding MATLAB functions. The Matplotlib documentation can be found [here](https://matplotlib.org/contents.html). Matplotlib is usually imported under the prefix `plt`, like so:
 
 ```python
 import matplotlib.pyplot as plt
@@ -672,7 +673,7 @@ y = x ** 2
 plt.plot(x, y)
 ```
 
-That code makes an array of floating point values between -10 and 10, and evaluates the square y = x^2, and then plots y agains x. However, if you do this in a script, it will not show the plot yet. You need to type
+This example makes an array of floating point values between -10 and 10, evaluates the quadratic function y = x^2, and then plots y against x. However, if you do this in a script, it will not show the plot yet. You need to type
 
 ```python
 plt.show()
@@ -693,7 +694,7 @@ y3 = x ** 4
 plt.plot(x, y1, x, y2, x, y4)
 ```
 
-By default, you will get a line plot, but you can also specify to plot dashed lines, or markers for the individual points using a format string for every line
+By default, you will get a line plot, but you can also specify to plot dashed lines, or markers for the individual points using a format string for every line:
 
 ```python
 x = np.linspace(-10, 10, 100)
@@ -733,7 +734,7 @@ You can also specify colors of the markers by preceding the marker with certain 
 | `k`           | black                 |
 | `w`           | white                 |
 
-Alternatively, you can also have multiple calls to the `plt.plot()` function, like this
+Alternatively, you can also have multiple calls to the `plt.plot()` function, like this:
 
 ```python
 x = np.linspace(-10, 10, 100)
@@ -765,7 +766,7 @@ plt.plot(x, y3, '*')
 plt.show()
 ```
 
-If you want to show multiple plots side by side in one figure, you can make figure. Often, you want to make a new figure, with a certain layout of subplots using the `plt.subplots()` function which returns a new figure and a list of axes. For example, to make a 2x3 array of subplots, you can use:
+If you want to show multiple plots side by side in one figure, you can make subplots. Often, you want to make a new figure, with a certain layout of subplots using the `plt.subplots()` function which returns a new figure and a list of axes. For example, to make a 2x3 array of subplots, you can use:
 
 ```python
 fig, ax = plt.subplots(2, 3)
@@ -781,7 +782,7 @@ plt.show()
 
 The `ax` variable is in fact a NumPy array filled with subplots that you can index like any array, hence `ax[0, 0]` is the subplot on the left of the top row, and `ax[1, 1]` is in the middle of the bottom row. 
 
-If there is overlap between the subplots, you can call `plt.tight_layout()` before `plt.show()`. `plt.subplots()` also has an optional `figsize` parameter, that allows you to make a figure of a certain size, specified as a tuple with the width and height in inches: `fig, ax = plt.subplots(2, 3, figsize=(6, 4))`
+If there is overlap between the subplots, you can call `plt.tight_layout()` before `plt.show()`. `plt.subplots()` also has an optional `figsize` parameter, that allows you to make a figure of a certain size, specified as a tuple with the width and height in inches: `fig, ax = plt.subplots(2, 3, figsize=(6, 4))`.
 
 
 ### Titles, legends, labels
@@ -833,7 +834,7 @@ plt.errorbar(x, y, yerr=[errors, errors])
 plt.show()
 ```
 
-Of course, you can also plot boxplots, histograms, and errorbarplots in subplots, by using the `boxplot()`, `hist()`, and `errorbar()` methods of an axis object.
+Of course, you can also plot boxplots, histograms, and errorbar plots in subplots, by using the `boxplot()`, `hist()`, and `errorbar()` methods of an axis object.
 
 
 ### Showing images
@@ -846,7 +847,7 @@ plt.imshow(a)
 plt.show()
 ```
 
-As you can see, Matplotlib has chosen some colors for you. If you don't like these, you can change them with the `cmap` parameter. For example, to show grayscale images, you can use
+As you can see, Matplotlib has chosen some colors for you. If you don't like these, you can change them with the `cmap` parameter. For example, to show grayscale images, you can use:
 
 ```python
 a = np.array([[1, 2, 3], [2, 3, 1], [3, 1, 2]])
@@ -860,7 +861,7 @@ Colormaps are nice, but they *do not* allow you to actually show RGB color image
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=\left(\begin{matrix}&space;(r,&space;g,&space;b)&space;&&space;\cdots&space;&&space;(r,&space;g,&space;b)\\\\&space;\vdots&space;&&space;\ddots&space;&&space;\vdots\\\\&space;(r,&space;g,&space;b)&space;&&space;\cdots&space;&&space;(r,&space;g,&space;b)&space;\end{matrix}\right)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\left(\begin{matrix}&space;(r,&space;g,&space;b)&space;&&space;\cdots&space;&&space;(r,&space;g,&space;b)\\\\&space;\vdots&space;&&space;\ddots&space;&&space;\vdots\\\\&space;(r,&space;g,&space;b)&space;&&space;\cdots&space;&&space;(r,&space;g,&space;b)&space;\end{matrix}\right)" title="\left(\begin{matrix} (r, g, b) & \cdots & (r, g, b)\\\\ \vdots & \ddots & \vdots\\\\ (r, g, b) & \cdots & (r, g, b) \end{matrix}\right)" /></a>
 
-However, it is important that the values in the matrix are either floats (!) between 0 and 1, or **unsigned 8-bit integers (i.e. np.uint8)** between 0 and 255, otherwise you get a lot of nonsense.
+However, it is important that the values in the matrix are either **floats** between 0 and 1, or **unsigned 8-bit integers** (i.e. np.uint8) between 0 and 255, otherwise what will be displayed will be a lot of nonsense.
 
 ```python
 color_image = np.array([
@@ -910,7 +911,7 @@ We will come back to this in the next section when we are going to give a short 
 ---
 
 
-## Using other libraries
+### Using other libraries
 
 To conclude this chapter we are going to work with some actual images. To do this we import the `imageio` library. 
 
@@ -920,7 +921,7 @@ import imageio
 
 The 'io' in `imageio` stands for input and output, which tells you that this library will only be used for reading and writing image files. `imageio` supports almost all 2D image formats, such as `jpg`, `bmp`, `gif`, and `tiff`.
 
-You can read any such file on your computer if you supply the path of the image to the `imageio.imread()` function, like this
+You can read any such file on your computer if you supply the path of the image to the `imageio.imread()` function, like this:
 
 ```python
 my_image = imageio.imread('path/to/image')
@@ -938,7 +939,7 @@ plt.show()
 
 ###### Exercises
 
-1. Load a color image using `imageio`. Make changes to the image array, such that the image becomes a grayscale image. Show the color and grayscale images next to eachother. If you can not find an image, you can use the path `imagio:chelsea.png`, which loads one of the example images in `imageio`. 
+1. Load a color image using `imageio`. Make changes to the image array, such that the image becomes a grayscale image. Show the color and grayscale images next to each other. If you can not find an image, you can use the path `imagio:chelsea.png`, which loads one of the example images in `imageio`. 
     
     <details><summary>Answer</summary><p>
 
@@ -956,19 +957,19 @@ plt.show()
 ---
 
 
-### SciPy
+## SciPy
 
 SciPy is the final library we are going to discuss in this chapter, but this time we will let you read the documentation on this package yourself. You will need this for the exercises at the end, but you may also need it for a project. The documentation can be found [here](https://scipy.org/docs.html).
 
 SciPy has a number of sub-libraries for statistics, optimization, interpolation, some more linear algebra, and image analysis. We are going to focus on the latter one, which is called `scipy.ndimage` and adds support for N-dimensional images: images of dimensions two and up. However, the other sub-libaries may also be relevant and useful in your own projects.
 
-Let's look at an example in the SciPy documentation: the `scipy.ndimage.median_filter()` function. The median filter replaces each pixel in an image with the median of its neighborhood. If we look at the documentation, we find out that the *prototype* of this function is
+Let's look at an example in the SciPy documentation: the `scipy.ndimage.median_filter()` function. The median filter replaces each pixel in an image with the median of its neighborhood. If we look at the documentation, we find out that the *prototype* of this function is:
 
 ```python
 scipy.ndimage.median_filter(input, size=None, footprint=None, output=None, mode='reflect', cval=0.0, origin=0)
 ```
 
-The function has one obligatory argument named `input`. Below the prototype, we can find that this parameter should be an input array. Next, we find that there are optional argument for `size`, `footprint`, `output`,  `mode`, `cval`, and `origin`. Note that the documentation explicitly states to define either the `size` or the `footprint`. 
+The function has one mandatory argument named `input`. Below the prototype specification, we can find that this parameter is the input array, i.e. the input image that needs to be filtered with a median filter. Next, we find that there are optional argument for `size`, `footprint`, `output`,  `mode`, `cval`, and `origin`. Note that the documentation explicitly states to define either the `size` or the `footprint`. 
 
 
 ---

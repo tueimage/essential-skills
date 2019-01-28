@@ -5,11 +5,12 @@ code is relatively easy to understand, but it is also very scalable: it is ideal
 for small prototypes, but can be used for large complex programs equally well.
 Because there are powerful libraries for scientific computation available for
 Python, such as NumPy, SciPy, Matplotlib, and TensorFlow, it has become the most
-popular programming language for deep learning applications.
+popular programming language for (deep) machine learning and image analysis 
+applications, including medical image analysis.
 
 This chapter gives you a crash course in Python. It covers the bare essentials,
 and assumes you have some programming experience for scientific computation, for
-example in MatLab. If you have never used Python before, it is useful to try the
+example in MATLAB. If you have never used Python before, it is useful to try the
 examples in this chapter yourself while reading it.
 
 In this module, we will use a particular distribution of Python called
@@ -36,7 +37,7 @@ can skip the next section.
 Go to **anaconda.org/downloads** and look for a download button. Make sure you
 download the Python 3.7 (or higher) version.
 
-* On Windows and macOS you can simply open the installer and  follow the instructions
+* On Windows and macOS you can simply open the installer and follow the instructions
 * On Linux you open the Terminal and navigate to the folder to which you downloaded 
 the installer. Change the permissions to enable execution of the installer by
 typing `chmod +x Anaconda3-X.sh` where `X` is the rest of the downloaded file's
@@ -61,7 +62,7 @@ this to launch the Spyder editor.
 ![The Anaconda navigator](figures/anaconda_nav.png)
 Spyder is an Integrated Development Environment or IDE. It is basically an
 editor specifically tailored to writing, running, and debugging Python code.
-Of course you can also write Python code in other editors or IDEs, but for the
+Of course, you can also write Python code in other editors or IDEs, but for the
 purpose of this tutorial, we will use Spyder.
 
 ![The Spyder editor](figures/spyder_first.png)
@@ -108,7 +109,7 @@ the button with the red square in title bar of the IPython panel or press <kbd>C
 Whenever you make a mistake in your code, Python will
 display an error message. Although these error messages can be intimidating,
 they usually contain helpful hints about what went wrong and where. For example,
-if you try to execute the code `print 'Hello world'`, Python will come back with
+if you try to execute the code `print 'Hello world'`, Python will come back with:
 
 ```python
 File "script.py", line 1 
@@ -180,7 +181,7 @@ The numeric types can be used with standard mathematical operators for
 computation. You can add (`+`), subtract (`-`), multiply (`*`), and divide (`/`)
 them, and use exponentiation (`**`). The order of operations is
 
-1. Exponentiation
+* Exponentiation
 * Multiplication
 * Division
 * Addition
@@ -196,7 +197,7 @@ is a frequent source of bugs, so be careful.
 * Exponentiations, additions, multiplications, and subtractions containing *at least one* `float` will return a `float`, i.e. `2 ** 3 + 1.0 + 2 * 3` returns `15.0`, not `15`. 
 * Division *always* returns a `float`, i.e. `10 / 5` returns `2.0`, not `2`. To ensure the result of a division is rounded down to an integer, you can use the special integer division operator `//` i.e. `10 // 5` will return `2`. It will always round *down* to the closest integer.
 * Division by 0 will result in a `ZeroDivisionError` which will stop your program if you do not take care to solve it.
-* By default, there is no square root operator. You can use the power operator for this, i.e. `9 ** 0.5` returns `3.0`, or you can import a library that has a square root function, which we will see in the next chapter.
+* By default, there is no square root operator. You can use the power operator for this, i.e. `9 ** 0.5` returns `3.0`, or you can import a library that has a square root function, which is dicussed in the the [module on SciPy](numpy-scipy-matplotlib.md).
 
 You can also check equality and inequality of numeric variables, using the
 operators `==` and `!=`. These will return a boolean value, i.e. `True` or
@@ -221,9 +222,9 @@ devision will be zero.
 
 ###### Exercises
 
-1. Write a script that prints the square root of the integer 17. What class is the resulting value? Why?
+* Write a script that prints the square root of the integer 17. What class is the resulting value? Why?
     
-    * Code:
+    <details><summary>Answer</summary><p>
     ```python
     x = 17
     result = x ** 0.5
@@ -231,14 +232,20 @@ devision will be zero.
     print(type(result))  # <class 'float'>
     ```
 
-    * The type of the result is a float, because the exponent is a float.
+    The type of the result is a float, because the exponent is a float.
+    </p></details>
 
-2. What error do you get when you run `print(81 + 'Forty-two')`? Can you explain the name of the error?
+* What error do you get when you run `print(81 + 'Forty-two')`? Can you explain the name of the error?
 
-    * This will result in a `TypeError: unsupported operand type(s) for +: 'int' and 'str'`: the types of the two things you are trying to add are not supported by the `+`-operator.
+    <details><summary>Answer</summary><p>
+    This will result in a `TypeError: unsupported operand type(s) for +: 'int' and 'str'`: the types of the two things you are trying to add are not supported by the `+`-operator.
+    </p></details>
 
-3. What is the result of the calculation `2 ** 3 / 2 + 8`? What is the type? Why?
-    * The order in which this is calculated is `2 ** 3 / 2 + 8 = 8 / 2 + 8 = 4.0 + 8 = 12.0`. The result is a `float` because there is a normal division in the computation.
+* What is the result of the calculation `2 ** 3 / 2 + 8`? What is the type? Why?
+    
+    <details><summary>Answer</summary><p>
+    The order in which this is calculated is `2 ** 3 / 2 + 8 = 8 / 2 + 8 = 4.0 + 8 = 12.0`. The result is a `float` because there is a normal division in the computation.
+    </p></details>
 
 ---
 
@@ -249,7 +256,7 @@ Strings are any text between single (`'`) or double (`"`) quotation marks. By
 convention, we will only use single quotation marks for string definitions.
 
 Strings can contain character combinations that have special meaning,
-for example '\n' which is a newline character, and '\t' which is a tab. You can use
+for example, '\n' which is a newline character, and '\t' which is a tab. You can use
 these as follows
 
 ```python
@@ -260,7 +267,7 @@ t = '\tThis line starts with a tab. \t See?'
 If you print these strings, you get
 
 ```python
-This is a very long sentence that is so long that it will surely
+This is a very long sentence that is so long that it will
 not fit on one line.
 ```
 
@@ -304,7 +311,7 @@ print('The square root of {} is {}'.format(1024, 32)) # prints "The square root 
 ```
 
 The format string syntax is very powerful. One useful feature is the ability to
-truncate floating point values to a specific precision, for example to three decimals:
+truncate floating-point values to a specific precision, for example to three decimals:
 
 ```python
 print('{:.3f}'.format(1.618033989))  # prints "1.618"
@@ -343,16 +350,19 @@ x = 81
 y = 23
 ```
 
-1. Write a third line that uses a format string and the variables `x` and `y` to print '81 plus 23 equals 104'
-    * Code:
+* Write a third line that uses a format string and the variables `x` and `y` to print '81 plus 23 equals 104'
+    <details><summary>Answer</summary><p>
     ```python
     print('{} plus {} equals {}'.format(x, y, x + y))
     ```
-2. Write a fourth line that uses a format string and the variables `x` and `y` to print '81 divided by 23 equals 3 with a remainder of 12'
-    * Code:
+    </p></details>
+
+* Write a fourth line that uses a format string and the variables `x` and `y` to print '81 divided by 23 equals 3 with a remainder of 12'
+    <details><summary>Answer</summary><p>
     ```python
     print('{} divided by {} equals {} with a remainder of {}'.format(x, y, x // y, x % y))`
     ```
+    </p></details>
 
 ---
 
@@ -385,7 +395,7 @@ index of that item. Items start at 0, such that `best_country = countries[0]`
 will result in the variable `best_country` containing `"The Netherlands"`, and
 `numbers[3]` will return `4.0`. 
 
-Lists are also *mutable*, which means we can change the contents of an item in the list by index, for example we can change the eighth item in the list to Roman numerals using
+Lists are also *mutable*, which means we can change the contents of an item in the list by index, for example we can change the eighth item in the list to Roman numerals using:
 
 ```python
 numbers[7] = 'VIII'
@@ -414,7 +424,7 @@ An overview of the slicing syntax is given in the following table:
 | syntax            | meaning                                           | result                                                        |
 | ---               | ---                                               | ---                                                           |
 | `numbers[0:4] `   | the first four items                              | ["one", 2, "three", 4.0]                                      |
-| `numbers[:4] `    | the same as numbers[0:4]                          | ["one", 2, "three", 4.0]                                      |
+| `numbers[:4] `    | the same as `numbers[0:4]`                        | ["one", 2, "three", 4.0]                                      |
 | `numbers[-1] `    | the last item in the list                         | "10.0"                                                        |
 | `numbers[3:]`     | from the fourth item to the last item of the list | [ 4.0, 5, "six", 7, "VIII", 'nine', "10.0"]                   |
 | `numbers[:] `     | all items of the list, i.e. the same list         | ["one", 2, "three", 4.0, 5, "six", 7, "VIII", 'nine', "10.0"] |
@@ -456,7 +466,7 @@ l = [1, 2, 3]
 l = l + [4]  # l now contains [1, 2, 3, 4]
 ```
 
-However, this is very slow for large lists (Python first has to retrieve the list from memory, concatenate it with that one item, and then put it back), and there is a much faster solution, using a list *method* called `append()`, which looks like this
+However, this is very slow for large lists (Python first has to retrieve the list from memory, concatenate it with that one item, and then put it back), and there is a much faster solution, using a list *method* called `append()`, which looks like this:
 
 ```python
 l = [1, 2, 3]
@@ -480,7 +490,7 @@ l.remove('two')  # l now contains ['one', three', 'four']
 v = l.pop()  # l now contains ['one', three'], v contains 'four'
 ```
 
-Likewise there are methods to reverse and sort the list *in place*
+Likewise there are methods to reverse and sort the list *in place*: 
 
 ```python    
 l = ['b', 'c', 'a']
@@ -517,7 +527,7 @@ sentence = 'The quick brown fox jumped over the lazy dog'
 words = sentence.split(' ')
 ```
 
-and a `find` method, that returns the index of the first occurence of a series of characters in a string
+and a `find` method, that returns the index of the first occurence of a series of characters in a string:
 
 ```python
 sentence = 'The quick brown fox jumped over the lazy dog'
@@ -611,7 +621,7 @@ The `dict_keys` and `dict_values` type can be converted to a list using the list
 print(list(my_dictionary.keys()))  # prints '['aardvark', 'aardwolf', 'abaca', 'aback']'
 ```
 
-Dictionaries also support the `pop()` method that removes an value by key, i.e.
+Dictionaries also support the `pop()` method that removes an value by key, i.e.:
 
 ```python
 d = {'a': 1, 'b': 2, 'c': 3}
@@ -623,11 +633,13 @@ v = d.pop('b')  # v now contains 2, d is now {'a': 1, 'c': 3}
 
 ###### Exercises
 
-1. Are `dict`s mutable or not?
-    * Yes they are, as there are ways to change, add, or remove the values in a dictionary, e.g. by assigning at a specific index, or by using the `pop`-method.
+* Are `dict`s mutable or not?
+    <details><summary>Answer</summary><p>
+    Yes they are, as there are ways to change, add, or remove the values in a dictionary, e.g. by assigning at a specific index, or by using the `pop`-method.
+    </p></details>
 
-2. Given `my_dictionary` as given above, write code that takes the second description, and prints the individual words of the description in reverse order.
-    * Code:
+* Given `my_dictionary` as given above, write code that takes the second description, and prints the individual words of the description in reverse order.
+    <details><summary>Answer</summary><p>
     ```python
     key = list(my_dictionary.keys())[1]
     desc = my_dictionary[key]
@@ -636,7 +648,8 @@ v = d.pop('b')  # v now contains 2, d is now {'a': 1, 'c': 3}
     print(words)
     ```
 
-    * The last two lines can also be replaced by `print(words[::-1])`.
+    The last two lines can also be replaced by `print(words[::-1])`.
+    </p></details>
 
 ---
 
@@ -650,7 +663,7 @@ l = [1, 2, 3]
 l[2] = 100   # l is now [1, 2, 100]
 ```
 
-On the other hand, types like `tuple` and `str` are not mutable: you have to re-assign them to change them, i.e. this does not work
+On the other hand, types like `tuple` and `str` are not mutable: you have to re-assign them to change them, i.e. this does not work:
 
 ```python
 s = 'abc'
@@ -662,7 +675,7 @@ s[0] = 'd'  # This will result in an error.
 t[0] = 42   # This will result in an error.
 ```
 
-instead you would need to explicitly re-assign the values for `s` and `t`
+Instead, you would need to explicitly re-assign the values for `s` and `t`:
 
 ```python
 s = 'abc'
@@ -674,7 +687,7 @@ s = 'dbc'
 t = (42, 2, 3)
 ```
 
-Mutable values are assigned to *by reference*. To explain what this means, let's look at an example. If you assign a list to a variable `l`, like this
+Mutable values are assigned to *by reference*. To explain what this means, let's look at an example. If you assign a list to a variable `l`, like this:
 
 ```python
 l = [1, 2, 3]
@@ -754,9 +767,9 @@ will print 0, 1, and 2 on separate lines.
 
 ###### Exercises
 
-1. Write code that computes the sum of an arbitrary list of numbers, for example the list `l = [1, 2, 3.0]`
+* Write code that computes the sum of an arbitrary list of numbers, for example the list `l = [1, 2, 3.0]`
 
-    * Code:
+    <details><summary>Answer</summary><p>
 
     ```python
     sum = 0
@@ -764,16 +777,18 @@ will print 0, 1, and 2 on separate lines.
         sum = sum + value
     print(sum)
     ```
+    </p></details>
 
-2. The factorial of a positive integer n, denoted by n!, is the product of all positive integers (i.e. larger than zero) less than or equal to n. For example, 5! = 5 * 4 * 3 * 2 * 1. Use a for loop to compute the factorial of 15.
+* The factorial of a positive integer n, denoted by n!, is the product of all positive integers (i.e. larger than zero) less than or equal to n. For example, 5! = 5 * 4 * 3 * 2 * 1. Use a for loop to compute the factorial of 15.
 
-    * Code:
+    <details><summary>Answer</summary><p>
 
     ```python
     factorial = 1
     for i in range(1, 16):
         factorial = factorial * i
     ```
+    </p></details>
 
 ---
 
@@ -807,7 +822,7 @@ if len(l) > 10:
     print('List is full!')
 ```
 
-Sometimes, you want to check for multiple conditions. Then you can use the elif statement. For example, if we first want to check if a list is empty before checking how many items it is 'full', we can do this
+Sometimes, you want to check for multiple conditions. Then you can use the elif statement. For example, if we first want to check if a list is empty before checking how many items it is 'full', we can do this:
 
 ```python
 if len(l) == 0:
@@ -818,7 +833,7 @@ else:
     print('List contains more than 10 items')
 ```
 
-You can add as many `elif` statements between the `if` and `else` as you want. You can also nest if blocks, by indenting once more, i.e.
+You can add as many `elif` statements between the `if` and `else` as you want. You can also nest if blocks, by indenting once more, i.e.:
 
 ```python
 if condition1:
@@ -833,7 +848,7 @@ else:
         print('both false')
 ```
 
-However, this would be equal to
+However, this would be equal to:
 
 ```python
 if condition1:
@@ -941,19 +956,20 @@ for i, (x, y, z) in enumerate(zip(english, italian, roman_numerals)):
 
 ###### Exercises
 
-1. Write code that checks for each number between 0 and 100 if it is divisible by 3. If so, print this number if it is also divisible by 5 or 7.
+* Write code that checks for each number between 0 and 100 if it is divisible by 3. If so, print this number if it is also divisible by 5 or 7.
 
-    * Code:
+    <details><summary>Answer</summary><p>
     ```python
     for i in range(101):
         if i % 3 == 0:
             if i % 7 == 0 or i % 5 == 0:
                 print(i)
     ```
+    </p></details>
 
-2. A prime number is a number larger than 1 that is only divisible by 1 and itself. Write code to check if 12829 is prime.
+* A prime number is a number larger than 1 that is only divisible by 1 and itself. Write code to check if 12829 is prime.
 
-    * Code:
+    <details><summary>Answer</summary><p>
     ```python
     x = 12829
     for i in range(2, x):
@@ -964,13 +980,14 @@ for i, (x, y, z) in enumerate(zip(english, italian, roman_numerals)):
     ```
 
     If this prints 'Finished' before printing 'No', `x` is a prime number.
+    </p></details>
 
 ---
 
 
 ## Functions
 
-So far, all code that we have written has been run linearly: the Python interpreter starts interpreting your code from the start of you .py-file, except for loops where it sometimes executes parts multiple times, and conditional statements, where it may skip some lines, depending on the context. While this is relatively easy to understand for the small problems we have used so-far, it becomes difficult for larger programs. It is best to *compartmentalize* some code into functions, that are easy to test and provide structure to your code.
+So far, all code that we have written has been run linearly: the Python interpreter starts interpreting your code from the start of you .py-file, except for loops where it sometimes executes parts multiple times, and conditional statements, where it may skip some lines, depending on the context. While this is relatively easy to understand for the small problems we have used so far, it becomes difficult for larger programs. It is best to *compartmentalize* some code into functions, that can implement functionality that can be reused multiple times, are easy to test and provide structure to your code.
 
 We already have seen some of Python's built-in functions pop-up here and there: `print`, `type`, `len`, `enumerate`, `zip`, `range`, `list` are all functions. Functions can have any number of arguments, sometimes a certain number is required: `print` is happy even with no arguments at all, `type`, `len`, and `list` will only except one argument, whereas `range` excepts one, two, or three arguments.
 
@@ -1024,7 +1041,7 @@ Your own functions can return values using the `return` keyword, for example
         return sum
 ```
 
-The function stops after the `return` keyword, so any code after it will not be executed
+The function stops after the `return` keyword, so any code after it will not be executed:
 
 ```python
     def add(n1, n2):
@@ -1040,9 +1057,9 @@ The function stops after the `return` keyword, so any code after it will not be 
 
 ###### Exercises
 
-1. Write a function that takes two lists as arguments, and returns the inner product of the list. The inner product is the sum of the element-wise products of the list. Test your code by calling it with two lists of floats.
+* Write a function that takes two lists as arguments, and returns the inner product of the list. The inner product is the sum of the element-wise products of the list. Test your code by calling it with two lists of floats.
 
-    * Code:
+    <details><summary>Answer</summary><p>
     ```python
     def inner_product(l1, l2):
         sum = 0
@@ -1053,7 +1070,7 @@ The function stops after the `return` keyword, so any code after it will not be 
     print(inner_product([1.0, 2.0, 3.0], [4.5, 3.2, 0]))  # Should print 10.9
     ```
 
-    * Alternatively:
+    Alternatively:
     ```python
     def inner_product(l1, l2):
         sum = 0
@@ -1063,10 +1080,11 @@ The function stops after the `return` keyword, so any code after it will not be 
 
     print(inner_product([1.0, 2.0, 3.0], [4.5, 3.2, 0]))  # Should print 10.9
     ```
+    </p></details>
 
-2. Expand the function by adding a check if the lists are the same size. If not, print a warning. Test it on two lists of different length.
+* Expand the function by adding a check if the lists are the same size. If not, print a warning. Test it on two lists of different length.
 
-    * Code:
+    <details><summary>Answer</summary><p>
     ```python
     def inner_product(l1, l2):
         if len(l1) == len(l2):
@@ -1078,7 +1096,7 @@ The function stops after the `return` keyword, so any code after it will not be 
             print('Input lists are different in length.')
     ```
 
-    * Alternatively, this also works
+    Alternatively, this also works
     ```python
     def inner_product(l1, l2):
         if len(l1) == len(l2):
@@ -1089,10 +1107,11 @@ The function stops after the `return` keyword, so any code after it will not be 
         print('Input lists are different in length.')
     ```
     If the lists are the same length, the print-function will not be called.
+    </p></details>
 
-3. Write a function called `unique()` that takes a list as argument, and returns a new list containing all unique values in the list.
+* Write a function called `unique()` that takes a list as argument, and returns a new list containing all unique values in the list.
 
-    * Code:
+    <details><summary>Answer</summary><p>
     ```python
     def unique(l):
         m = []
@@ -1108,13 +1127,14 @@ The function stops after the `return` keyword, so any code after it will not be 
         m = list(s)
         return l
     ```
+    </p></details>
 
 ---
 
 
 #### Multiple return values
 
-Of course you can also return lists, sets, tuples, or dictionaries from functions. For example, you could create a function that adds the elements of two lists:
+Of course, you can also return lists, sets, tuples, or dictionaries from functions. For example, you could create a function that adds the elements of two lists:
 
 ```python
     def translate_point(translation, point):
@@ -1150,9 +1170,9 @@ In fact, you can have multiple return values, like this too:
 
 ###### Exercises
 
-1. Write a function that takes a circle's radius as its argument and returns the circle's surface area and circumference. Call the function to check if it works.
+* Write a function that takes a circle's radius as its argument and returns the circle's surface area and circumference. Call the function to check if it works.
 
-    * Code:
+    <details><summary>Answer</summary><p>
     ```python
     PI = 3.141592654
 
@@ -1165,10 +1185,12 @@ In fact, you can have multiple return values, like this too:
 
     a, c = circle(10)  # Should return ~314, ~62.4
     ```
+    </p></details>
 
-2. Write a function that takes two strings as its arguments and returns True if any of the letters in the first string occur in the second string, and False if not.
 
-    * Code:
+* Write a function that takes two strings as its arguments and returns True if any of the letters in the first string occur in the second string, and False if not.
+
+    <details><summary>Answer</summary><p>
     ```python
     def string_overlap(s1, s2):
         for letter in s1:
@@ -1177,10 +1199,11 @@ In fact, you can have multiple return values, like this too:
                              # also in the second string we can stop looking.
         return False
     ```
+    </p></details>
 
-3. Write a function that returns True if a number is prime, and False otherwise.
+* Write a function that returns True if a number is prime, and False otherwise.
     
-    * Code:
+    <details><summary>Answer</summary><p>
     ```python
     def is_prime(x):
         if x < 2:
@@ -1190,10 +1213,11 @@ In fact, you can have multiple return values, like this too:
                 return False
         return True
     ```
+    </p></details>
 
-4. Write a function that returns a list of all primes smaller than N, where N is an argument to the function. Use the function you wrote in the previous question.
+* Write a function that returns a list of all primes smaller than N, where N is an argument to the function. Use the function you wrote in the previous question.
     
-    * Code:
+    <details><summary>Answer</summary><p>
     ```python
     def primes_up_to(n):
         l = []
@@ -1202,17 +1226,19 @@ In fact, you can have multiple return values, like this too:
                 l.append(i)
         return l
     ```
+    </p></details>
 
-5. Write a function that replaces all values in a list with 0.
+* Write a function that replaces all values in a list with 0.
 
-    * Code:
+    <details><summary>Answer</summary><p>
     ```python
     def replace_values(l):
         for i in range(len(l)):
             l[i] = 0
     ```
 
-    * Remember that assignments to lists are *by reference*. It is not necessary to return `l` from the function.
+    Remember that assignments to lists are *by reference*. It is not necessary to return `l` from the function.
+    </p></details>
 
 ---
 
@@ -1293,13 +1319,13 @@ Now, running `is_prime(56, debug=True)` will print that 21 is not divisible by 2
     * Code
 
     ```python
-def root(k, order=2):
-    if order % 2 == 0:
-        if k < 0:
-            print('Invalid computation: negative'
-                  ' argument of {}-order root.'.format(order))
-            return
-    return k ** (1 / order)
+    def root(k, order=2):
+        if order % 2 == 0:
+            if k < 0:
+                print('Invalid computation: negative'
+                      ' argument of {}-order root.'.format(order))
+                return
+        return k ** (1 / order)
     ```
 
 ---
@@ -1308,7 +1334,7 @@ def root(k, order=2):
 
 ## Classes
 
-So-far we have seen a few built-in variable types or *classes*: `int`, `float`, `complex`, `str`, `list`, `set`, `dict`, and `tuple`. A *class definition* describes how a variable of a certain class *behaves* and what *attributes* it has. The behavior is defined in the form of *method definitions*: for example, the `list` class has method definitions for the behaviors 'sorting' and 'counting'. The content of the list is one of its attributes.
+So far we have seen a few built-in variable types or *classes*: `int`, `float`, `complex`, `str`, `list`, `set`, `dict`, and `tuple`. A *class definition* describes how a variable of a certain class *behaves* and what *attributes* it has. The behavior is defined in the form of *method definitions*: for example, the `list` class has method definitions for the behaviors 'sorting' and 'counting'. The content of the list is one of its attributes.
 
 Classes are important in so-called object-oriented programming. In Python, the concepts of objects and variables are interchangeable: every Python object is a variable and every variable is an object. We will keep using the term variable throughout this module.
 
@@ -1361,19 +1387,20 @@ The role of `self` in the class definition is that of a placeholder: in the code
 
 ###### Exercises
 
-1. Make a class definition for a 2D `Point` class that has no methods (other than `__init__`), and has two attributes for the `x` and `y` coordinates.
+* Make a class definition for a 2D `Point` class that has no methods (other than `__init__`), and has two attributes for the `x` and `y` coordinates.
     
-    * Code:
+    <details><summary>Answer</summary><p>
     ```python
     class Point:
         def __init__(self, x, y):
             self.x = x
             self.y = y
     ```
+    </p></details>
 
-2. Make a class definition for a 2D `Translation` class that has a method called `transform` that translates a Point. The class should have two attributes for the `dx` and `dy` for the translation in x and y direction.
+* Make a class definition for a 2D `Translation` class that has a method called `transform` that translates a Point. The class should have two attributes for the `dx` and `dy` for the translation in x and y direction.
 
-    * Code:
+    <details><summary>Answer</summary><p>
     ```python
     class Translation:
         def __init__(self, dx, dy):
@@ -1384,10 +1411,11 @@ The role of `self` in the class definition is that of a placeholder: in the code
             point.x = point.x + self.dx
             point.y = point.y + self.dy
     ```
+    </p></details>
 
-3. Test you classes by using them to make a `Point(3, 4)` that you translate using `Translation(4, 2)` and test if the translation is correct.
+* Test you classes by using them to make a `Point(3, 4)` that you translate using `Translation(4, 2)` and test if the translation is correct.
 
-    * Code:
+    <details><summary>Answer</summary><p>
     ```python
     p = Point(3, 4)
     print('Old point was at ({}, {})'.format(p.x, p.y))
@@ -1395,8 +1423,9 @@ The role of `self` in the class definition is that of a placeholder: in the code
     t.transform(p)
     print('New point is at ({}, {})'.format(p.x, p.y))
     ```
+    </p></details>
 
-4. Given the following class
+* Given the following class
 
     ```python
     class Rocket:
@@ -1413,19 +1442,27 @@ The role of `self` in the class definition is that of a placeholder: in the code
 
     * You initiate a new rocket `my_rocket`, i.e. `my_rocket = Rocket()`? Without evaluating code, what value does `my_rocket.speed` have?
 
+        <details><summary>Answer</summary><p>
         * A new rocket is assigned to `my_rocket`. In the `__init__` function, the `speed` attribute of this rocket is set to 0.
+        </p></details>
 
     * What happens to `my_rocket.speed` when you run `my_rocket.launch(100, 'up')`?
 
+        <details><summary>Answer</summary><p>
         * `my_rocket.speed` is set to 100
+        </p></details>
 
     * What happens when you run `my_rocket.launch(300)`?
 
+        <details><summary>Answer</summary><p>
         * `my_rocket.speed` is set to 300. `direction` is assumed to be `up`.
+        </p></details>
 
     * What happens when you run `my_rocket.launch(100, 200, 300)`? Can you explain the error message?
 
+        <details><summary>Answer</summary><p>
         * You run the `launch` method with the wrong number of arguments. You get the error `TypeError: launch() takes from 2 to 3 positional arguments but 4 were given`. The reason: because `self` is implicitly passed to the `launch()` method, and you have passed three arguments yourself, the total number of arguments is four. The method only accepts two (`self` and `speed`) or three (`self`, `speed`, and `direction`) arguments.
+        </p></details>
 
 ---
 
