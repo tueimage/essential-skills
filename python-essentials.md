@@ -1485,19 +1485,25 @@ The role of `self` in the class definition is that of a placeholder: in the code
     * What happens to `my_rocket.speed` when you run `my_rocket.launch(100, 'up')`?
 
         <details><summary>Answer</summary><p>
+
         `my_rocket.speed` is set to 100
+
         </p></details>
 
     * What happens when you run `my_rocket.launch(300)`?
 
         <details><summary>Answer</summary><p>
+
         `my_rocket.speed` is set to 300. `direction` is assumed to be `up`.
+
         </p></details>
 
     * What happens when you run `my_rocket.launch(100, 200, 300)`? Can you explain the error message?
 
         <details><summary>Answer</summary><p>
+
         You run the `launch` method with the wrong number of arguments. You get the error `TypeError: launch() takes from 2 to 3 positional arguments but 4 were given`. The reason: because `self` is implicitly passed to the `launch()` method, and you have passed three arguments yourself, the total number of arguments is four. The method only accepts two (`self` and `speed`) or three (`self`, `speed`, and `direction`) arguments.
+        
         </p></details>
 
 ---
