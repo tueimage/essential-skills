@@ -10,4 +10,4 @@ We are currently working on the following tutorials:
 * Working with medical images in Python
 * Deep learning with Keras
 * Linux essentials
-* Code version control woth Git
+* Code version control with Git
