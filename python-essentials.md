@@ -1342,9 +1342,9 @@ Now, running `is_prime(56, debug=True)` will print that 21 is not divisible by 2
 
 ###### Exercises
 
-1. Write a function called `root()` that will compute the square root of the first argument `k` and has an optional argument `order` that specifies the order of the root. If the order is odd the function should print message if the number is negative.
+* Write a function called `root()` that will compute the square root of the first argument `k` and has an optional argument `order` that specifies the order of the root. If the order is odd the function should print message if the number is negative.
 
-    * Code
+    <details><summary>Answer</summary><p>
 
     ```python
     def root(k, order=2):
@@ -1355,6 +1355,8 @@ Now, running `is_prime(56, debug=True)` will print that 21 is not divisible by 2
                 return
         return k ** (1 / order)
     ```
+
+    </p></details>
 
 ---
 
@@ -1456,7 +1458,7 @@ The role of `self` in the class definition is that of a placeholder: in the code
     t.transform(p)
     print('New point is at ({}, {})'.format(p.x, p.y))
     ```
-    
+
     </p></details>
 
 * Given the following class
