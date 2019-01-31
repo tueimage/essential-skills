@@ -32,6 +32,7 @@ the code in this module, and you will need to upgrade by following the
 installation instructions below. If it says anything higher than Python 3.0, you
 can skip the next section.
 
+
 ### Installation instructions
 
 Go to **anaconda.org/downloads** and look for a download button. Make sure you
@@ -51,13 +52,13 @@ sufficient to complete this module. If you plan to use Anaconda with a
 different editor than the default one, or if you will be running Python on a server,
 it is best to choose yes.**
 
+
 ### Running code
 
 In this section we are going to run code for the first time. The
 first step is to fire up the Anaconda navigator. On start-up it should be
 showing all applications that come with the Anaconda installation. We will use
 this to launch the Spyder editor.
-
 
 ![The Anaconda navigator](figures/anaconda_nav.png)
 Spyder is an Integrated Development Environment or IDE. It is basically an
@@ -71,7 +72,6 @@ The Spyder window is divided into three panels by default: an editor window on
 the left showing the current file, a help panel in the top right, and a console
 in the bottom right. You can leave it like that, but it is good to be aware that
 other layouts are available in the Window menu in the menu bar.
-
 
 
 ### A first script
@@ -104,10 +104,33 @@ the button with the red square in title bar of the IPython panel or press <kbd>C
 
 ---
 
+
+### Jupyter notebooks
+
+Instead of running scripts in Spyder or another editor, you can run scripts in so-called
+Jupyter notebooks. They are similar to Mathematica's notebooks or MATLAB's Live Scripts: and provide you interactive ways
+to run your code in a file format in which you can combine code with text, and even mathematical expressions in LaTeX. They work very well for demonstration purposes and small experiments. For large projects, it is better to use plain '\*.py' files in a text editor like Spyder.
+
+To start Jupyter, click on the Jupyter Notebook icon in the Anaconda Navigator. This will launch the Jupyter notebook interface in your browser. It will probably show your user or home folder first.
+
+![The Jupyter start screen](figures/jupyter_start.png)
+
+From this interface, you can navigate to a folder where you want to save your notebooks. In that folder click the New button at the top right to make a new Python 3 notebook.
+
+![An empty Jupyter notebook](figures/new_notebook.png)
+
+You see a first empty 'cell' in which you can type code. In this cell you can write a print statement like the one above. When you want to execute the code in a cell, press <kbd>Shift-Enter</kbd>. From the notebook's menu bar (not the browser's) you can change the type of a cell, in `Cell` -> `Cell type`. You can change the cell type to `Markdown` to write text using the Markdown syntax which you can mix with LaTeX code. When you press <kbd>Shift-Enter</kbd> they are formatted to the marked up text or the actual equations:
+
+Before <kbd>Shift-Enter</kbd>   |   After <kbd>Shift-Enter</kbd>
+------    |  ------
+![Before <kbd>Shift-Enter</kbd>](figures/jupyter_notebook_raw.png) | ![After <kbd>Shift-Enter</kbd>](figures/jupyter_notebook_evaluated.png)
+
+Jupyter notebooks run a so-called Python 'kernel'. Should your script take longer than you hoped, or it crashes altogheter, you can always press the stop button (the black square) or the reload kernel buttion (the rounded arrow next to it) in the toolbar.
+
 ### Errors and exceptions
 
 Whenever you make a mistake in your code, Python will
-display an error message. Although these error messages can be intimidating,
+display an error message in Spyder's console or in a notebook's cell. Although these error messages can be intimidating,
 they usually contain helpful hints about what went wrong and where. For example,
 if you try to execute the code `print 'Hello world'`, Python will come back with:
 
@@ -909,7 +932,7 @@ while x < 10:
 
 will add one to x and print x until x equals 10.
 
-If the condition is never met, the loop will run forever, so be careful to define your conditions well. If this should ever happen, remember that Spyder has a stop button to force your script to stop. You can also press Ctrl-C to stop your script.
+If the condition is never met, the loop will run forever, so be careful to define your conditions well. If this should ever happen, remember that Spyder and Jupyter have a stop button to force your script to stop. You can also press Ctrl-C to stop your script in Spyder.
 
 In machine learning, you will not often need a while loop, and it is better to use for loops whenever possible.
 
@@ -1369,7 +1392,7 @@ So far we have seen a few built-in variable types or *classes*: `int`, `float`, 
 Classes are important in so-called object-oriented programming. In Python, the concepts of objects and variables are interchangeable: every Python object is a variable and every variable is an object. We will keep using the term variable throughout this module.
 
 
-You can make your own class definition using the `class` keyword. In the following example we are going to construct a class definition for a new `Car` type. The `Car` can `accelerate`, and `brake` to a halt, which will be its two methods. It will have two attributes: `color` and `current_speed`. In the class definition, the attributes are indicated by the prefix `self`. Each method will have `self` as argument. By convention, the names of classes you define yourself are capitalized to make them standout between function and variables names.
+You can make your own class definition using the `class` keyword. In the following example we are going to construct a class definition for a new `Car` type. The `Car` can `accelerate`, and `brake` to a halt, which will be its two methods. It will have two attributes: `color` and `current_speed`. In the class definition, the attributes are indicated by the prefix `self`. Each method will have `self` as argument. By convention, the names of classes you define yourself are capitalized to make them stand out between function and variables names.
 
 ```python
 class Car:
@@ -1476,29 +1499,29 @@ The role of `self` in the class definition is that of a placeholder: in the code
 
     What happens when
 
-    * You initiate a new rocket `my_rocket`, i.e. `my_rocket = Rocket()`? Without evaluating code, what value does `my_rocket.speed` have?
+    * You initiate a new rocket `rocket`, i.e. `rocket = Rocket()`? Without evaluating code, what value does `rocket.speed` have?
 
         <details><summary>Answer</summary><p>
-        A new rocket is assigned to `my_rocket`. In the `__init__` function, the `speed` attribute of this rocket is set to 0.
+        A new rocket is assigned to `rocket`. In the `__init__` function, the `speed` attribute of this rocket is set to 0.
         </p></details>
 
-    * What happens to `my_rocket.speed` when you run `my_rocket.launch(100, 'up')`?
-
-        <details><summary>Answer</summary><p>
-
-        `my_rocket.speed` is set to 100
-
-        </p></details>
-
-    * What happens when you run `my_rocket.launch(300)`?
+    * What happens to `rocket.speed` when you run `rocket.launch(100, 'up')`?
 
         <details><summary>Answer</summary><p>
 
-        `my_rocket.speed` is set to 300. `direction` is assumed to be `up`.
+        `rocket.speed` is set to 100
 
         </p></details>
 
-    * What happens when you run `my_rocket.launch(100, 200, 300)`? Can you explain the error message?
+    * What happens when you run `rocket.launch(300)`?
+
+        <details><summary>Answer</summary><p>
+
+        `rocket.speed` is set to 300. `direction` is assumed to be `up`.
+
+        </p></details>
+
+    * What happens when you run `rocket.launch(100, 200, 300)`? Can you explain the error message?
 
         <details><summary>Answer</summary><p>
 

@@ -660,8 +660,20 @@ import matplotlib.pyplot as plt
 
 ---
 
+**Tip**
 If you import multiple libraries in the same script, it is good practice to import them both *at the top of the script*. In general, it is bad practice to import libraries anywhere else than at the top of your script.
 Therefore, if you import NumPy and Matplotlib, put the two import statements *both* at the top.
+
+---
+
+**Tip**
+If you are using Matplotlib in a Jupyter notebook, putting the following code in *the first cell of your notebook*:
+
+```python
+%matplotlib inline
+```
+
+will work like magic: any figure you create will be displayed inline in your notebook. If you do this, you can also ignore all `plt.show()` commands in the remainder of this chapter, as your plots do not need to be shown in separate windows anymore.
 
 ---
 
