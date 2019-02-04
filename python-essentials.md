@@ -127,6 +127,7 @@ Before <kbd>Shift-Enter</kbd>   |   After <kbd>Shift-Enter</kbd>
 
 Jupyter notebooks run a so-called Python 'kernel'. Should your script take longer than you hoped, or it crashes altogheter, you can always press the stop button (the black square) or the reload kernel buttion (the rounded arrow next to it) in the toolbar.
 
+
 ### Errors and exceptions
 
 Whenever you make a mistake in your code, Python will
@@ -312,11 +313,7 @@ c = a + b
 print(c)  # prints "abcdef"
 ```
 
-Likewise, strings can be multiplied with a scalar value, i.e. `9 * 'la' + ' can\'t hear you'` results in `lalalalalalalalala can't hear you`. The back-slash in the middle of `can\'t` is there to print a `'` because `'` is also used to surround string values. Another example:
-
-```python
-s = 'She says: \'y\'all\'ll\'ven\'t\'d any strawberries no more because y\'all\' m\'stn\'t\'ve more fruit,\' by which she means: \'you all will have not had strawberries no more because you all must not have more fruit\' and I\'m pretty sure that isn\'t grammatically correct nor makes any sense.'
-```
+Likewise, strings can be multiplied with a scalar value, i.e. `9 * 'la' + ' can\'t hear you'` results in `lalalalalalalalala can't hear you`. The back-slash in the middle of `can\'t` is there to print a `'` because `'` is also used to surround string values.
 
 ### Converting variables to strings
 
