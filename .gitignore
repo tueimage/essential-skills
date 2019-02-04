@@ -1,4 +1,0 @@
-# Specify filepatterns you want git to ignore.
-*.key
-.ipynb_checkpoints
-
