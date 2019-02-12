@@ -552,6 +552,29 @@ To log out, you press <kbd>Ctrl-B</kbd> and then you press <kbd>D</kbd> to 'deta
 `tmux` has plenty more options that are very useful, but slightly outside of the scope of this tutorial. Tutorials on using `tmux` are abundant on the internet however, so if you are interested have a look at them.
 
 
+## Installing additional programs and packages
+
+The availability of installation options will depend on your rights and the system you are using. We are assuming you are using Ubuntu here. You can install and update programs using the `apt` command. For example, if you want to install a medical image viewer, you can install ITKSnap by 
+
+```bash
+sudo apt install itksnap
+```
+
+`sudo` indicates you need an admin account, which you may have for your own PC but not for the server. In that case, inquire with the administrator how to proceed.
+
+Python packages can be installed in your own user folder, for which you do not need an admin account. You can install them with the `pip` command. For example, to install TensorFlow 1.3.0, Keras 2.0.0, and SimpleITK you can run
+
+```
+pip install --user tensorflow-gpu==1.3.0
+
+pip install --user keras==2.0.0
+
+pip install --user simpleitk
+```
+
+To remove packages, use `pip uninstall <package_name>`.
+
+
 ## Extras
 
 There are plenty more Linux commands that can be very useful, but it goes too far to list them all here. The ones we use a lot are listed below. They are handy, but not required to use Linux.
@@ -571,5 +594,8 @@ There are plenty more Linux commands that can be very useful, but it goes too fa
 * `head` behaves like `tail` but then for the first `-n` lines. No `-f` flag is available however.
 
 * `|` lets you divert output of one command to another command, for example, you can chain `grep` commands like this: `grep import my_clock.py | grep date` to only show lines that contain `import` and `date`.
+
+* `history` lets you view all commands you have typed. You can use it with `grep` to search in it, by piping the output, like this: `history | grep python`.
+
 
 
