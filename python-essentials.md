@@ -60,7 +60,7 @@ first step is to fire up the Anaconda navigator. On start-up it should be
 showing all applications that come with the Anaconda installation. We will use
 this to launch the Spyder editor.
 
-![The Anaconda navigator](figures/anaconda_nav.png)
+![The Anaconda navigator](figures/anaconda_nav.png | width=600)
 Spyder is an Integrated Development Environment or IDE. It is basically an
 editor specifically tailored to writing, running, and debugging Python code.
 Of course, you can also write Python code in other editors or IDEs, but for the
