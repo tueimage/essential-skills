@@ -4,7 +4,9 @@ During one of your projects or courses you may have to work with Linux. One prom
 
 If you are using Linux on your own PC you can use the graphical user interface, which has the windows, text fields, and application windows that you are used to. However, mostly when using Linux, you will interact with Linux using a Terminal: a text-based interface on which you can type commands. When using a remote server, you will have no choice but to use the Terminal.
 
-In this chapter, we will assume you work with a Terminal application to interact with a Linux machine. If you use your own PC with Linux, you can start the Terminal application, skip the next section. If you are going to use a Linux server, you will need the steps in the following section to connect to the server first.
+This chapter has no explicit exercises, as it works best as a tutorial: just follow along the instructions in the text.
+
+We will assume you work with a Terminal application to interact with a Linux machine. If you use your own PC with Linux, you can start the Terminal application and skip the next section. If you are going to use a Linux server, you will need the steps in the following section to connect to the server first.
 
 
 
@@ -485,7 +487,7 @@ At the moment, GPUs 0 and 2 are occupied (indexes start at 0). As you can see, t
 
 *If you are using Theano (with or without Lasagne), the process is slightly different. You can set the GPU with the THEANO_FLAGS variable instead.*
 
-In Keras and TensorFlow, you can select a GPU using the `CUDA_VISIBLE_DEVICES` environemnt variable. An environment variable is a variable in Linux that is used by everything that runs in the current environment, i.e. the current Terminal window. You can set these at the Bash prompt, like this:
+In Keras and TensorFlow, you can select a GPU using the `CUDA_VISIBLE_DEVICES` environment variable. An environment variable is a variable in Linux that is used by everything that runs in the current environment, i.e. the current Terminal window. You can set these at the Bash prompt, like this:
 
 ```bash
 $ CUDA_VISIBLE_DEVICES=1

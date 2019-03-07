@@ -128,7 +128,7 @@ Before <kbd>Shift-Enter</kbd>   |   After <kbd>Shift-Enter</kbd>
 Jupyter notebooks run a so-called Python 'kernel'. Should your script take longer than you hoped, or it crashes altogheter, you can always press the stop button (the black square) or the reload kernel buttion (the rounded arrow next to it) in the toolbar.
 
 
-### Errors and exceptions
+### Errors, warnings, and exceptions
 
 Whenever you make a mistake in your code, Python will
 display an error message in Spyder's console or in a notebook's cell. Although these error messages can be intimidating,
@@ -150,6 +150,18 @@ understanding them is essential to writing scripts. In general, keep in mind
 that the error messages Python gives are actually useful in your quest for a
 working script. And if you still do not understand what is wrong, the chance is
 high someone on StackOverflow or Reddit has already figured it out.
+
+Error messages are also called 'Exceptions' in Python because they deal with
+'exceptional conditions'.
+
+Some Python libraries (more on those later) can also display warnings. These
+are there to warn you of less than ideal conditions of your code. For example,
+a warning message may say that the code is unnecessarily slow, or that the functions
+or classes (more on those later as well) you are using have been deprecated: they
+will be removed in future versions of the library and you should stop using them.
+Warnings will not stop your code from running, but it may be wise to understand
+what they are about to make sure your code is in good shape. Again, looking up
+the warning online is the best start of understanding what is going on.
 
 
 ## Variables and classes
@@ -1379,7 +1391,6 @@ Now, running `is_prime(56, debug=True)` will print that 21 is not divisible by 2
     </p></details>
 
 ---
-
 
 
 ## Classes
