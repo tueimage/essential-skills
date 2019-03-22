@@ -37,10 +37,11 @@ The conventions are summarized [here](https://www.python.org/dev/peps/pep-0008/)
 * Do not use more than one blank line otherwise.
 * Put spaces around every operator, e.g. `1 + 1 == 2`, `x = 3`, not `1+1==2` and `x=3`.
 * Do not put spaces around `=` when defining keyword arguments in functions, e.g. `translate_point(translation=[1, 2], point=[3, 4])`.
+* Put all `import` statements at the top of a file. It is best not to import packages within functions or classes.
 
 ### Use doc strings
 
-If your project becomes larger, it is useful to use doc strings for documentation. Doc strings are strings at the start of classes, methods, and functions that describe what they do. For complicated functions, it also worthwile to mention which arguments are expected, what their types are, and what the function returns. Often the following format is used:
+When your project becomes larger, it is useful to use doc strings for documentation. Doc strings are strings at the start of classes, methods, and functions that describe what they do. For complicated functions, it also worthwhile to mention which arguments are expected, what their types are, and what the function returns. Often the following format is used:
 
 ```python
 def translate_point(translation, point):
@@ -61,4 +62,34 @@ def translate_point(translation, point):
 
 ### Separate large code bases into modules
 
-__init__.py
+When you have a lot of code it can become quite a hassle to maintain an overview of all your functions and classes. In that case, it is best to split-up your code over multiple `*.py` files. In Python, such a file is called a module. For example, when you are developing a deep learning method for liver segmentation in MR images, you can have a module for loading the image and segmentations and creating a training set out of them, a module in which the network is defined, a module that trains the network, and a module that provides functions for validation. You can import a module to get access to the functions and classes in that module. For example, if you have a file `network.py` that looks like this
+
+```python
+# network.py
+
+def create_segmentation_network():
+    cnn = ...
+    # ... etc.
+    return cnn
+```
+
+you can get to the `create_network()` function from another file in the same folder using
+
+```python
+# main.py
+
+from . import network
+
+my_network = network.create_segmentation_network()
+```
+
+You can read the `from . import network` statement as 'import the module network.py from the current folder'. Alternatively, you can also directly import a function from a module, like this:
+
+```python
+# main.py
+
+from .network import create_segmentation_network
+
+my_network = create_segmentation_network()
+```
+

@@ -31,6 +31,15 @@ pip install git+https://github.com/tueimage/slycer
 With these three packages you are all set for the remainder of this chapter.
 
 
+## Working with 2D image files (i.e. `*.jpg`, `*.png`, `*.tiff`)
+
+As we have seen previously, 2D images can be loaded using the `imageio` package. For example, using
+
+```python
+import imageio
+some_image = imageio.imread('path/to/image.png')
+```
+
 ## Working with `*.mhd` files
 
 `*.mhd` files are used in Elastix and the ITK software packages. These files can 
