@@ -213,7 +213,7 @@ print(dicom_image)
 (7fe0, 0010) Pixel Data                          OW: Array of 524288 bytes
 ```
 
-As you can see, each parameter has two hexadecimal numbers associated with it. These are the Dicom tags. You can use these tags to get to specific information. For example, if you want to know the manufacturer of the scanner, you need the `(0080, 0070)` tag, which is `0x080070` in hexadecimal:
+As you can see, each parameter has two hexadecimal numbers associated with it. These are the Dicom tags. You can use these tags to get to specific information. For example, if you want to know the manufacturer of the scanner, you need the `(0080, 0070)` tag, or `0x080070` in hexadecimal:
 
 ```python
 dicom_image[0x080070]
@@ -225,8 +225,58 @@ You can however also just type
 dicom_image.Manufacturer
 ```
 
-which is a lot nicer. As you can see there is a plethora of data in a Dicom file. Important parameters are the `PixelSpacing` and `SliceThickness`, which tell you the physical dimensions of the data. Furthermore, it is nice to know where this slice was located in axial direction, which is shown by `SliceLocation`. Because Dicom files are not necessarily in the right order, you can use this slice location to order the slices if you load a 3D volume.
+which is a lot nicer. As you can see there is a plethora of data in a Dicom file. Important parameters are the `PixelSpacing` and `SliceThickness`, which tell you the physical dimensions of the data. Furthermore, it is nice to know where this slice was located in axial direction, which is shown by `SliceLocation`. Because Dicom filenames are not necessarily in the right order, you can use this slice location to order the slices if you load a 3D volume. The `PixelData` field contains the actual pixel data in binary format. It is a flat vector, however. Using the `pixel_array` attribute of the `FileDataSet` object, you get a much nicer Numpy array of the slice's data:
 
+```python
+image = dicom_image.pixel_array
+```
+
+This image can be plotted with Matplotlib's `imshow()` function.
+
+
+#### Reading 3D Dicom data
+
+Because 3D Dicom data is distributed over multiple files, one for each slice, you first need to obtain all the filenames.
+You can use the built-in Python module `os` to list the filenames in the Dicom directory
+
+```python
+import os
+import pydicom
+
+path = '/folder/to/a/3d/volume'
+dicom_filenames = os.listdir(path)
+```
+
+Then, it is a matter of loading each of those files into a list:
+
+```python
+list_of_slices = []
+for filename in dicom_filenames:
+    list_of_slices.append(pydicom.dcmread(filename))
+```
+
+`list_of_slices` now contains the `FileDataSet` objects, each containing one slice of the volume. To order these, we write a small utility function. We use this as the sorting key.
+
+```python
+def order_by_slice_location(slice):
+    return float(slice.SliceLocation)
+
+list_of_slices.sort(key=order_by_slice_location, reverse=True)
+```
+
+Now, the `list_of_slices` is ordered from superior to inferior along the axial direction. Note that we need to set the `reverse` flag to `True` to get this ordering, as the z-coordinate decreases in this direction, and the `sort()` method sorts the list in ascending order without it.
+
+Now, we only need to get the array of pixels in each slice to get the full volume:
+
+```python
+volume_list = []
+for slice in list_of_slices:
+    volume_list.append(slice.pixel_array)
+
+image = np.array(volume_list)
+```
+
+`image` now contains the 3D volume, which can be plotted or used for further analysis.
 
 
 ## Plotting 3D image files
