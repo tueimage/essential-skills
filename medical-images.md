@@ -237,7 +237,7 @@ This image can be plotted with Matplotlib's `imshow()` function.
 #### Reading 3D Dicom data
 
 Because 3D Dicom data is distributed over multiple files, one for each slice, you first need to obtain all the filenames.
-You can use the built-in Python module `os` to list the filenames in the Dicom directory
+You can use the built-in Python module `os` to list the filenames in the Dicom directory:
 
 ```python
 import os
@@ -255,7 +255,7 @@ for filename in dicom_filenames:
     list_of_slices.append(pydicom.dcmread(filename))
 ```
 
-`list_of_slices` now contains the `FileDataSet` objects, each containing one slice of the volume. To order these, we write a small utility function. We use this as the sorting key.
+`list_of_slices` now contains the `FileDataSet` objects, each containing one slice of the volume. To order these, we write a small utility function. We use this function as the sorting key.
 
 ```python
 def order_by_slice_location(slice):
@@ -264,7 +264,7 @@ def order_by_slice_location(slice):
 list_of_slices.sort(key=order_by_slice_location, reverse=True)
 ```
 
-Now, the `list_of_slices` is ordered from superior to inferior along the axial direction. Note that we need to set the `reverse` flag to `True` to get this ordering, as the z-coordinate decreases in this direction, and the `sort()` method sorts the list in ascending order without it.
+Now, the `list_of_slices` is ordered from superior to inferior along the axial direction. Note that we need to set the `reverse` flag to `True` to get this ordering, as the z-coordinate decreases in this direction, and the `list` method `sort()` sorts the list in ascending order without it.
 
 Now, we only need to get the array of pixels in each slice to get the full volume:
 
