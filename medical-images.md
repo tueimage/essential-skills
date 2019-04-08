@@ -105,6 +105,8 @@ sitk.WriteImage(random_itk_image, '/destination/path/for/image.mhd')
 
 ## Working with Dicom files
 
+Dicom is the primary format for medical images. Like the `*.mhd`, Dicom splits an image into metadata and raw data. Contrary to `*.mhd` files, the raw data and the header are in the same file. Almost all vendors of medical imaging hardware use a version of this format. As a consequence, the headers in Dicom files form different manufacturers can be very different. The Python package `pydicom` can be used to load Dicom files and access the header parameters.
+
 ## Plotting 3D image files
 
 
