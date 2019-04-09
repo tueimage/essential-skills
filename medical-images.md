@@ -334,13 +334,7 @@ plt.imshow(image_array[0])
 plt.show()
 ```
 
-However, 3D images can not be easily shown this way. Luckily, there is a convenient viewer package on the IMAG/e GitHub repository. It makes plots similar to `imshow()` that can be scrolled through. You can install it with
-
-```
-pip install --user git+https://github.com/tueimage/scrollview
-```
-
-Once installed, you can use it like this:
+However, 3D images can not be easily shown this way. Luckily, the `ScrollView` package you installed at the beginning of the chapter, gives you a class to scroll through 3D images on a Matplotlib axis:
 
 ```
 import matplotlib.pyplot as plt
@@ -349,3 +343,5 @@ form scrollview import ScrollView
 fig, ax = plt.subplots()
 ScrollView(your_3d_image).plot(ax)
 ```
+
+You can now use your scroll wheel to move through the slices of the image.
