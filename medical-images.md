@@ -103,7 +103,7 @@ random_itk_image.SetSpacing([1.1, 0.98]) # Each pixel is 1.1 x 0.98 mm^2
 sitk.WriteImage(random_itk_image, '/destination/path/for/image.mhd')
 ```
 
-## Working with Dicom files
+<!-- ## Working with Dicom files
 
 Dicom is the primary format for medical images. Like the `*.mhd`, Dicom splits an image into metadata and raw data. Contrary to `*.mhd` files however, the raw data and the header are in the same file. Almost all vendors of 3D medical imaging hardware use a version of this format. As a consequence, the headers in Dicom files form different manufacturers can be very different. The Python package `pydicom` can be used to load Dicom files and access the header parameters.
 
@@ -277,10 +277,66 @@ image = np.array(volume_list)
 ```
 
 `image` now contains the 3D volume, which can be plotted or used for further analysis.
+ -->
+
+## Reading and writing Dicom files with SimpleITK
+
+SimpleITK can also read (and write) Dicom files. It uses the same functions as `*.mhd` files:
+
+```python
+itk_image = sitk.ReadImage('/path/to/dicom/file.dcm')
+image_array = sitk.GetArrayFromImage(itk_image)
+```
+
+for reading, and for writing
+
+```python
+new_itk_image = sitk.GetImageFromArray(image_array)
+sitk.WriteImage(new_itk_image, '/path/to/new/dicom/file.dcm')
+```
+
+Dicom files have header information with a plethora of information on the image you are loading: from simple things like the image size, to the birthdate of the patient or the manufacturer of the scanner. Each Dicom metadata field has a key, which is called a Dicom tag. SimpleITK gives you access to the available tags in the Dicom file using the `GetMetaDataKeys()` method.
+
+```python
+print(itk_image.GetMetaDataKeys())
+```
+
+```
+('0008|0005',
+ '0008|0008',
+ '0008|0016',
+ '0008|0018',
+ '0008|0020',
+ ...
+ '0040|a075',
+ '0040|a123',
+ '0040|a124',
+ '0070|0084',
+ '0088|0140')
+```
+
+You can use the list of tags [here](https://www.dicomlibrary.com/dicom/dicom-tags/) to see what each tag does. Then, you can get to a specific tag by using the `GetMetaData()` method. You can use these tags to get to specific information. For example, if you want to know the manufacturer of the scanner, you need the `(0080, 0070)` tag:
+
+```python
+print(itk_image.GetMetaData('0008|0070'))
+```
+```
+'GE MEDICAL SYSTEMS'
+```
 
 
 ## Plotting 3D image files
 
+Once you have loaded your images, you can show (2D slices of) them using Matplotlib, i.e.
 
+```python
+plt.imshow(image_array[0])
+plt.show()
+```
+
+However, 3D images can not be easily shown this way. Luckily, there is a convenient viewer package on the IMAG/e GitHub repository, that you can install with
+
+```
+pip install --user git+https://github.com/tueimage/
 
 
