@@ -61,7 +61,6 @@ During this chapter, we will use `git status` frequently to keep track of what i
 
 
 #### Committing versions
-
 Let's add a file to our repository called `vector.py`, which will contain a Python class for vectors. Open the file, copy-paste the following code:
 
 ```python
@@ -272,10 +271,110 @@ $ git checkout master
 (At least, assuming you have not changed branches, more on that later.)
 Be careful though. If you make changes in a checked out commit, these will not be saved, unless you commit them, and *merge* them. That is possible, but is beyond the scope of this tutorial.
 
+###### Exercises
+
+* Add a method `__len__()` to the `Vector` class:
+    ```python
+        def __len__(self):
+            return len(self.elements)
+    ```
+    Commit the change and add an appropriate message.
+    
+    <details><summary>Answer</summary><p>
+    `git commit -a -m 'Added __len__() method'
+    </p></details>
+
+* Add a file called `test.py` with the following content:
+    ```python
+    from .vector import Vector
+    v1 = Vector(1, 2, 3)
+    v2 = Vector(3, 2, 1)
+    print(v1)
+    print(len(v2))
+    print(v1 + v2)
+    ```
+
+    And commit this change to the repository
+
+    <details><summary>Answer</summary><p>
+    ```bash
+    git add test.py
+    git commit -a -m 'Added test module'
+    ```
+    </p></details>
+
+* Delete the `test.py` and commit this change to the repository
+    <details><summary>Answer</summary><p>
+    ```bash
+    git rm test.py
+    git commit -a -m 'Removed test module'
+    ```
+    </p></details>
+
+* Revert to the previous commit to retrieve the test module
+    <details><summary>Answer</summary><p>
+    ```bash
+    git revert HEAD~2
+    ```
+    </p></details>
+
 
 ## Branching and merging
 
+Consider the following situation: you have a perfectly working folder full of wonderful code. Now, someone asks you to add some extra complex functionality to your code. This new code might break your perfect code, introduce bugs, or otherwise disturb your quiet life. Of course, Git allows you to go back in time to when things were working fine, but that would also remove all the work you did on the new functionality.
+
+In this case, it is best to make a new *branch* in your repository.
+Whenever you make a branch, the history of the repository splits in two.You can make commits in the new branch without it affecting the history or code in your main *master* branch.
+
+The way this is often used is to have a stable master branch that contains well-tested code, and a development branch that has new functionality that has not been fully-tested yet. Once the new code *is* fully tested, you can merge the changes in the development branch into the master branch.
+
+
 #### Branching
+
+Creating and switching branches can be done using the `git checkout` command. In fact, switching branches is a little similar to switching to previous commits. Let's create a new branch called `addition`:
+
+```bash
+git checkout -b 'addition'
+```
+
+Git will respond with `Switched to a new branch 'addition'`. In this branch you can make changes to the code. For example, we can add an `__add__()` method to our `Vector` class, that returns the number of elements:
+
+```python
+class Vector:
+    def __init__(self, *elements):
+        self.elements = elements
+
+    def __repr__(self):
+        s = '['
+        for x in self.elements:
+            s += str(x) + ', '
+        s += ']'
+        return s
+
+    def __add__(self, other):
+        assert len(self) == len(other)
+        sums = []
+        for a, b in zip(self.elements, other.elements):
+            sums.append(a + b)
+        return Vector(*sums)
+```
+
+Now, we commit this change:
+
+```bash
+git commit -a -m 'Added __add__() method'
+```
+
+Remember that this change is only reflected in the `addition` branch we are in. The `master` branch has not had the same update. Let's check that out:
+
+```bash
+$ git checkout master
+```
+
+
+
+
+
 Git branch
 Git checkout
 
