@@ -35,7 +35,7 @@ $ git init
 If Git is installed correctly, it will respond with something like
 
 ```
-Methode Initialized empty Git repository in /some/long/path/my_repository/.git/
+Initialized empty Git repository in /some/long/path/my_repository/.git/
 ```
 
 Now, to check the repository's status, you can type
@@ -201,7 +201,7 @@ $ git commit -a -m 'Deleted vector.py'
 ```
 
 
-#### Reverting to previous versions
+#### Undoing the last commit
 
 To revert the commit in which we deleted the file, we want to go back to go back to the state of the repository one commit before that. In Git, we can do this with with the `git revert` command. There are two ways of specifying to which commit you want to return: by specifying the identifier of the commit that is shown in `git log` or by using relative refererences.
 
@@ -229,7 +229,7 @@ In the `git log` you can find the identifier. In this case it is 52e352fbb0caf74
       Added vector.py
 ```
 
-Luckily you do not have to type in the whole thing. Only the first eight characters suffice, but if you type only the first few and press <kbd>Tab</kbd> it will auto-complete.
+Luckily you do not have to type in the whole thing. Only the first eight characters suffice, but, even better, if you type only the first few and press <kbd>Tab</kbd> it will auto-complete.
 
 ```bash
 $ git revert 52e352f
@@ -244,14 +244,33 @@ Upon quitting the editor, the reversion is committed, and the file `vector.py` s
 ##### Reverting by relative refererence
 
 If you know you how many commits you want to go back, you can use a relative
-reference when reverting. You can specify a reference relative to the current HEAD. HEAD is a tag that is always attached to the current state of the repository.
-If you want to undo the last commit, you want to go back two commits, by typing this:
+reference when reverting. You can specify a reference relative to the current HEAD. HEAD is a tag that is always attached to the last commit of the current branch (more on branches later).
+If you want to undo the last commit, you revert the commit tagged HEAD, by typing this:
 
 ```
-$ git revert HEAD~2
+$ git revert HEAD
 ```
 
 This will have the same effect as reverting by identifier.
+
+
+#### Undoing the N previous commits
+
+**This should only be done on local repositories or branches, i.e. branches that are on your own computer.**
+
+You can undo multiple commits using `git reset --hard`. You specify the commit you want to return to using an identifier or a relative reference. For example, you can type
+
+```
+$ git reset --hard 907ae2e2
+```
+
+or
+
+```
+$ git reset --hard HEAD~2
+```
+
+to revert two commits.
 
 
 #### Checking out commits
@@ -311,10 +330,10 @@ Be careful though. If you make changes in a checked out commit, these will not b
     ```
     </p></details>
 
-* Revert to the previous commit to retrieve the test module
+* Revert to the previous commit to restore the test module
     <details><summary>Answer</summary><p>
     ```bash
-    git revert HEAD~2
+    git revert HEAD~1
     ```
     </p></details>
 
@@ -351,6 +370,9 @@ class Vector:
         s += ']'
         return s
 
+    def __len__(self):
+        return len(self.elements)
+
     def __add__(self, other):
         assert len(self) == len(other)
         sums = []
@@ -369,19 +391,40 @@ Remember that this change is only reflected in the `addition` branch we are in. 
 
 ```bash
 $ git checkout master
+Switched to branch master
+$ more vector.py
+class Vector:
+    def __init__(self, *elements):
+        self.elements = elements
+
+    def __repr__(self):
+        s = '['
+        for x in self.elements:
+            s += str(x) + ', '
+        s += ']'
+        return s
 ```
 
 
-
-
-
-Git branch
-Git checkout
-
 #### Merging
 
-Merge conflicts
+Let's assume the new `__add__()` method has been extensively tested, and it works perfectly fine. We can now merge the feature branch `addition` into the master branch. This is done by first checking out the `master` branch if you haven't done so already,
 
+```bash
+$ git checkout master
+Already on 'master'
+```
+
+and typing
+
+```bash
+$ git merge addition
+```
+
+#### Merge conflicts
+
+Say you have made two new additional features to the `Vector` class, each in its own branch. 
+Now you want to merge both into master, so you checkout master, and merge the two
 
 
 
