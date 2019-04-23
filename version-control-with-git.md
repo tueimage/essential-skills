@@ -533,9 +533,11 @@ $ git commit -a -m 'Merged feature2 into master and solved merge conflict.'
     
     <details><summary>Answer</summary><p>
     Commands:
-    
-    `$ git checkout -b dev`
-    `$ git commit -a -m 'Added __abs__() method to Vector class'`
+
+    ```bash
+    $ git checkout -b dev
+    $ git commit -a -m 'Added __abs__() method to Vector class'
+    ```
     </p></details>
 
 * Go back to the `master` branch and add the following method to the `Vector` class:
@@ -573,5 +575,52 @@ $ git commit -a -m 'Merged feature2 into master and solved merge conflict.'
 
 ## Collaborating on Github
 
-Git push
-Git pull
+So-far, the repository has been on your PC, i.e. it was a *local repository*. You can move your repository to GitHub or any other online service for hosting repositories. If you want you can try it on GitHub by making a free account. In this final section, we are going to simulate an online repository to teach you the basics.
+
+To do this, make a new *empty* folder called `vector_example`, in a different location than where you would put your repositories. If you can't think of a good location, use your Desktop or Downloads folder. Navigate to this empty folder in the terminal, and type the following command:
+
+```
+git init --bare
+```
+
+This will make a bare repository. Bare repositories are usually hosted on a server. They are *not* meant for putting code in directly. They are only for storing a repository at a central place, such that anyone can edit and make commits to this repository. You can pretend that this repository lives on a drive in the cloud (like on GitHub).
+
+#### Cloning repositories
+
+*Cloning* means to make an exact copy of an online repository, including all previous commits. The corresponding command is `git clone`. For repositories on GitHub, such as the one on which this tutorial is stored, you can directly paste the link to the online repository after `git clone`. For example, 
+
+```bash
+git clone https://github.com/tueimage/essential-skills
+```
+
+will copy the repository to your computer.
+
+We can do something similar with the simulated 'online' repository on your computer. Again, it is important you execute the following *in a different folder than where you put the bare repository*:
+
+```
+$ git clone /path/to/bare/repository/vector_example
+Cloning into 'vector_example'...
+warning: You appear to have cloned an empty repository.
+done.
+```
+
+Naturally, this warning will not appear when you clone from an existing repository on GitHub. Now let's add the `vector.py` file from the previous sections, and commit this file:
+
+```
+$ git add vector.py
+$ git commit -m 'Added vector.py file'
+```
+
+Now, this file is added to the *local version of the repository*, which means it is not on the (simulated) online version. Let's change it there as well:
+
+```
+$ git push origin
+Counting objects: 3, done.
+Writing objects: 100% (3/3), 201 bytes | 201.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To vector_example
+ * [new branch]      master -> master
+```
+
+`origin` is a reference to the origin of the repository, i.e. where you cloned it from. The output shows that the changes in the master branch have been pushed to the online repository. In fact, *only* the changes in the master branch are updated using `git push`. If you want to push different branches, you first need to check these out.
+
