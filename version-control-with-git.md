@@ -300,6 +300,8 @@ Be careful though. If you make changes in a checked out commit, these will not b
     Commit the change and add an appropriate message.
     
     <details><summary>Answer</summary><p>
+    Command:
+
     `git commit -a -m 'Added __len__() method'
     </p></details>
 
@@ -316,6 +318,8 @@ Be careful though. If you make changes in a checked out commit, these will not b
     And commit this change to the repository
 
     <details><summary>Answer</summary><p>
+    Commands:
+
     ```bash
     git add test.py
     git commit -a -m 'Added test module'
@@ -324,6 +328,8 @@ Be careful though. If you make changes in a checked out commit, these will not b
 
 * Delete the `test.py` and commit this change to the repository
     <details><summary>Answer</summary><p>
+    Commands:
+
     ```bash
     git rm test.py
     git commit -a -m 'Removed test module'
@@ -332,8 +338,10 @@ Be careful though. If you make changes in a checked out commit, these will not b
 
 * Revert to the previous commit to restore the test module
     <details><summary>Answer</summary><p>
+    Command:
+
     ```bash
-    git revert HEAD~1
+    git revert HEAD
     ```
     </p></details>
 
@@ -541,6 +549,7 @@ $ git commit -a -m 'Merged feature2 into master and solved merge conflict.'
     Commit the change and add an appropriate message.
 
     <details><summary>Answer</summary><p>
+    Commands:
     `$ git checkout -b master`
     `$ git commit -a -m 'Added __abs__() method to Vector class'`
     </p></details>
@@ -548,12 +557,15 @@ $ git commit -a -m 'Merged feature2 into master and solved merge conflict.'
 * Merge the first branch into the `master` branch and solve the merge conflict.
     
     <details><summary>Answer</summary><p>
+    The merge command
+
     `$ git merge dev`
 
     will result in a merge conflict that can be solved by opening the `vector.py` file, and removing the version of the `__abs__()` method you don't like. Then, commit the new version, like this:
 
     `$ git commit -a -m 'Merged dev branch and solved merge conflict.'`   
     </p></details>
+
 
 
 ## Collaborating on Github
