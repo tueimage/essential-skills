@@ -423,9 +423,137 @@ $ git merge addition
 
 #### Merge conflicts
 
-Say you have made two new additional features to the `Vector` class, each in its own branch. 
-Now you want to merge both into master, so you checkout master, and merge the two
+Say you have made two new additional features to the `Vector` class, each in their own branch from master. Let's call the branches `feature1` and `feature2`, like this:
 
+```
+$ git checkout master
+$ git checkout -b feature1 
+Switched to branch 'feature1'
+
+        ... adding feature 1 ...
+
+$ git commit -a -m commit 'Added feature 1'
+[feature1 b016669] 2
+ 1 file changed, 1 insertion(+)
+
+$ git checkout master
+Switched to branch 'master'
+
+$ git checkout -b feature2
+Switched to branch 'feature2'
+
+        ... adding feature 2 ...
+
+$ git commit -a -m commit 'Added feature 2'
+[feature2 b016669] 2
+ 1 file changed, 1 insertion(+)
+
+```
+
+Now you want to merge both into master, so you checkout master, and merge the first feature:
+
+```
+$ git checkout master
+Switched to branch 'master'
+
+$ git merge feature1
+Updating 4e26bf7..b016669
+Fast-forward
+ vector.py | 1 +
+ 1 file changed, 1 insertion(+)
+```
+
+So far so good. Now, we also merge `feature2`:
+
+```
+$ git merge feature2
+```
+
+This will result in a warning:
+
+```
+Auto-merging vector.py
+CONFLICT (content): Merge conflict in vector.py
+Automatic merge failed; fix conflicts and then commit the result.
+```
+
+The reason for this is that both the `master` branch and the `feauter2` branch are changed after the branching point, and both have changes to the same file(s). This results in Git not knowing which of the two existing versions is the 'truth'. Should the result have feature1 but not feature2, or feature2 but not feature1, or both, or neither?
+
+This is called a *merge conflict*, and they are particularly abundant when collaborating. Luckily, merge conflicts are easy to solve. If you open the `vector.py` file you will see that Git has moved both features in the file, and you get to pick which version you want by removing text. For example, if the `__len__` and `__add__()` were added in `feature1` and `feature2` respectively, the file could look like this:
+
+```python
+class Vector:
+    def __init__(self, *elements):
+        self.elements = elements
+
+    def __repr__(self):
+        s = '['
+        for x in self.elements:
+            s += str(x) + ', '
+        s += ']'
+        return s
+
+<<<<<<< HEAD
+    def __len__(self):
+        return len(self.elements)
+
+=======
+    def __add__(self, other):
+        assert len(self) == len(other)
+        sums = []
+        for a, b in zip(self.elements, other.elements):
+            sums.append(a + b)
+        return Vector(*sums)
+>>>>>>> feature2
+```
+
+The part between <<<<<<< and >>>>>>> is different in the `master` and `feature2` branches. The part above the `=======` is in `master`, the part below in `feature2`. In this case, you can resolve the conflict by simply removing the lines with `<<<<<<<< HEAD`, `=======`, and `>>>>>>> feature2` and saving the file. Then a new commit will close the conflict definitively:
+
+```
+$ git commit -a -m 'Merged feature2 into master and solved merge conflict.'
+```
+
+###### Exercises
+
+* Create a new branch with an appropriate name and add the following method to the `Vector` class:
+
+    ```python
+        def __abs__(self):
+            return Vector(*[abs(x) for x in self.elements])   
+    ```
+    Commit the change and add an appropriate message.
+    
+    <details><summary>Answer</summary><p>
+    `$ git checkout -b dev`
+    `$ git commit -a -m 'Added __abs__() method to Vector class'`
+    </p></details>
+
+* Go back to the `master` branch and add the following method to the `Vector` class:
+
+    ```python
+        def __abs__(self):
+            c = 0
+            for x in self.elements:
+                c += x ** 2
+            return c ** 0.5
+    ```
+
+    Commit the change and add an appropriate message.
+
+    <details><summary>Answer</summary><p>
+    `$ git checkout -b master`
+    `$ git commit -a -m 'Added __abs__() method to Vector class'`
+    </p></details>
+
+* Merge the first branch into the `master` branch and solve the merge conflict.
+    
+    <details><summary>Answer</summary><p>
+    `$ git merge dev`
+
+    will result in a merge conflict that can be solved by opening the `vector.py` file, and removing the version of the `__abs__()` method you don't like. Then, commit the new version, like this:
+
+    `$ git commit -a -m 'Merged dev branch and solved merge conflict.'`   
+    </p></details>
 
 
 ## Collaborating on Github
