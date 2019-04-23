@@ -532,6 +532,8 @@ $ git commit -a -m 'Merged feature2 into master and solved merge conflict.'
     Commit the change and add an appropriate message.
     
     <details><summary>Answer</summary><p>
+    Commands:
+    
     `$ git checkout -b dev`
     `$ git commit -a -m 'Added __abs__() method to Vector class'`
     </p></details>
@@ -550,6 +552,7 @@ $ git commit -a -m 'Merged feature2 into master and solved merge conflict.'
 
     <details><summary>Answer</summary><p>
     Commands:
+
     `$ git checkout -b master`
     `$ git commit -a -m 'Added __abs__() method to Vector class'`
     </p></details>
