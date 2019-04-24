@@ -254,8 +254,7 @@ $ git commit -a -m 'Deleted vector.py'
 
 By the way, the history of the repository can be summarized in diagrams like below, which we will use in the next section to explain how to undo any unwanted changes. The `master` and `HEAD` labels will be discussed later.
 
-<!-- ![The history of the repository so-far contains three commits.](figures/git1.png) -->
-<img src="figures/git1.png" width="50%" height="50%" alt="The history of the repository so-far contains three commits."/>
+![The history of the repository so-far contains three commits.](figures/git1.png)
 
 #### Undoing the last commit
 
