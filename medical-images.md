@@ -305,7 +305,7 @@ image = np.array(volume_list)
 `image` now contains the 3D volume, which can be plotted or used for further analysis.
  -->
 
-## Reading and writing Dicom files with SimpleITK
+## Reading Dicom files with SimpleITK
 
 Dicom is the primary format for medical images. Like the `*.mhd`, Dicom splits an image into metadata and raw data. Contrary to `*.mhd` files however, the raw data and the header are in the same file. Almost all vendors of 3D medical imaging hardware use a version of this format. As a consequence, the headers in Dicom files form different manufacturers can be very different. The Python package `pydicom` can be used to load Dicom files and access the header parameters.
 
