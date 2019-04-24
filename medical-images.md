@@ -22,13 +22,13 @@ We are going to use SimpleITK to load `*.mhd` files later. To be able to DICOM a
 
 ## Working with 2D image files (i.e. `*.jpg`, `*.png`, `*.tiff`)
 
-To load images we import the `imageio` library. 
+To read and write images we import the `imageio` library. 
 
 ```python
 import imageio
 ```
 
-The 'io' in `imageio` stands for input and output, which tells you that this library will only be used for reading and writing image files. `imageio` supports almost all 2D image formats, such as `jpg`, `bmp`, `gif`, and `tiff`.
+`imageio` supports almost all 2D image formats, such as `jpg`, `bmp`, `gif`, and `tiff`.
 
 You can read any such file on your computer if you supply the path of the image to the `imageio.imread()` function, like this:
 
@@ -38,7 +38,7 @@ my_image = imageio.imread('path/to/image')
 
 `my_image` now contains a NumPy array with the intensities of the image. If it is a color image, it will be loaded in the format we discussed at the end of the previous section. You can show the image using Matplotlib:
 
-```
+```python
 plt.imshow(my_image)
 plt.show()
 ```
@@ -57,7 +57,7 @@ plt.show()
     grayscale_image = np.mean(color_image, axis=2)
     fig, ax = plt.subplots(1, 2)
     ax[0].imshow(color_image)
-        ax[1].imshow(grayscale_image, cmap='gray')  # If you do not use the gray color map, Matplotlib will use its default color map.
+    ax[1].imshow(grayscale_image, cmap='gray')  # If you do not use the gray color map, Matplotlib will use its default color map.
     plt.show()
     ```
 
@@ -129,7 +129,7 @@ random_itk_image.SetSpacing([1.1, 0.98]) # Each pixel is 1.1 x 0.98 mm^2
 sitk.WriteImage(random_itk_image, '/destination/path/for/image.mhd')
 ```
 
-<!-- ## Working with Dicom files
+<!-- ## Working with Dicom files using Pydicom
 
 Dicom is the primary format for medical images. Like the `*.mhd`, Dicom splits an image into metadata and raw data. Contrary to `*.mhd` files however, the raw data and the header are in the same file. Almost all vendors of 3D medical imaging hardware use a version of this format. As a consequence, the headers in Dicom files form different manufacturers can be very different. The Python package `pydicom` can be used to load Dicom files and access the header parameters.
 
@@ -307,7 +307,11 @@ image = np.array(volume_list)
 
 ## Reading and writing Dicom files with SimpleITK
 
-SimpleITK can also read (and write) Dicom files. It uses the same functions as `*.mhd` files:
+Dicom is the primary format for medical images. Like the `*.mhd`, Dicom splits an image into metadata and raw data. Contrary to `*.mhd` files however, the raw data and the header are in the same file. Almost all vendors of 3D medical imaging hardware use a version of this format. As a consequence, the headers in Dicom files form different manufacturers can be very different. The Python package `pydicom` can be used to load Dicom files and access the header parameters.
+
+Dicom files are usually 2D image files. Volumes are stored as folders of 2D Dicom files.
+
+Dicom files can also be read and written using SimpleITK. It uses the same functions as `*.mhd` files:
 
 ```python
 itk_image = sitk.ReadImage('/path/to/dicom/file.dcm')
@@ -371,3 +375,4 @@ ScrollView(your_3d_image).plot(ax)
 ```
 
 You can now use your scroll wheel to move through the slices of the image.
+
