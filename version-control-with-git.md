@@ -575,9 +575,9 @@ $ git commit -a -m 'Merged feature2 into master and solved merge conflict.'
 
 ## Collaborating on Github
 
-So-far, the repository has been on your PC, i.e. it was a *local repository*. You can move your repository to GitHub or any other online service for hosting repositories. If you want you can try it on GitHub by making a free account. In this final section, we are going to simulate an online repository to teach you the basics.
+So-far, the repository has been on your PC, i.e. it was a *local repository*. You can move your repository to GitHub or any other online service for hosting repositories. If you want you can try it on GitHub by making a free account. In this final section, we are going to simulate an online repository to teach you the basics of pushing to online repositories, but it will be difficult to cover all facets without actually having a project on which you collaborate.
 
-To do this, make a new *empty* folder called `vector_example`, in a different location than where you would put your repositories. If you can't think of a good location, use your Desktop or Downloads folder. Navigate to this empty folder in the terminal, and type the following command:
+To simulate an online repository, make a new *empty* folder called `vector_example`, in a different location than where you would put your repositories normally. If you can't think of a good location, use your Desktop or Downloads folder. Navigate to this empty folder in the terminal, and type the following command:
 
 ```
 git init --bare
@@ -604,7 +604,12 @@ warning: You appear to have cloned an empty repository.
 done.
 ```
 
-Naturally, this warning will not appear when you clone from an existing repository on GitHub. Now let's add the `vector.py` file from the previous sections, and commit this file:
+Naturally, this warning will not appear when you clone from an existing repository on GitHub. 
+
+
+#### Pushing to online repositories
+
+Let's add the `vector.py` file from the previous sections, and commit this file:
 
 ```
 $ git add vector.py
@@ -622,5 +627,67 @@ To vector_example
  * [new branch]      master -> master
 ```
 
-`origin` is a reference to the origin of the repository, i.e. where you cloned it from. The output shows that the changes in the master branch have been pushed to the online repository. In fact, *only* the changes in the master branch are updated using `git push`. If you want to push different branches, you first need to check these out.
+`origin` is a reference to the origin of the repository, i.e. where you cloned it from. The output shows that the changes in the master branch have been pushed to the online repository. In fact, *only* the changes in the master branch are updated using `git push`. If you want to push different branches, you first need to check these out. Alternatively, you can also specify which branch should be pushed, for example by doing
 
+```
+$ git push origin feature1
+```
+
+The output will show how many changes have been made.
+
+
+
+#### Fetching changes from online repositories
+
+So, how is this all implemented? Well, the online repository is also stored on your own computer as separate branches. For example, the `master` branch in the online repository is stored on your PC as well as the `origin/master` branch. You can inspect these branches by running
+
+```
+$ git branch -r
+```
+
+where `r` stands for 'remote'. You can quit from this view by pressing <kbd>q</kbd>. You will see that the following branches are there:
+
+```
+origin/HEAD -> origin/master
+origin/master
+```
+
+These remote branches should be explicitly updated by you. You can do this by running
+
+```
+$ git fetch origin
+```
+
+which will copy the exact contents of the online repository to the `origin/...` branches on you PC. If someone else has pushed changes to the repository that are not yet on your PC, `git fetch` will get them to you. However, they are not in your working tree (i.e. the local versions of the branches, e.g. `master`). To establish that, you need to merge the online branches into your local branches, simply by using `git merge`:
+
+```
+$ git checkout master
+Switched to branch master
+Your branch is three commits behind 'origin/master'
+$ git merge origin/master
+```
+
+There may be merge conflicts caused by your collaborator that you will first need to solve.
+
+
+#### Pushing changes when the online repository contains other changes
+
+If your collaborators have pushed changes to the repository before you are pushing your changes, there will be an error like this
+
+```
+$ git push origin
+ ! [rejected]        master -> master (non-fast forward)
+error: failed to push some refs to 'vector_example'
+```
+
+The 'non-fast forward' message means that the changes you made cannot just be applied to the online repository. You will first need to fetch the changes your collaborators made and merge them with your local branch.
+
+```
+$ git fetch origin
+$ git checkout master
+Switched to branch master
+Your branch is three commist behind 'origin/master'
+$ git merge origin/master
+    ... Solve merge conflicts here ...
+$ git push origin
+```
