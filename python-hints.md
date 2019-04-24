@@ -12,15 +12,15 @@ In general, functions should do a single logical thing. Ideally they should be n
 
 ### Use the existing modules
 
-Do not try to re-invent the wheel, it is already out there. It is nice to be able to implement complex algorithms yourself, but it is not the most productive way. If someone already did what you try to do and their code is available online, use their code! It is there fore a reason. In most cases, a good internet search containing the problem statement and the word 'python' will give you code bases to do what you want.
+Do not try to reinvent the wheel, it is already out there. It is nice to be able to implement complex algorithms yourself, but it is not always the most productive way. In most cases, a good internet search containing the problem statement and the word 'python' will give you code bases to do what you want.
 
 ### Use the documentation of the packages you use
 
-Most packages have online documentation, which is often very good. Use it!
+Most packages have online documentation, which is often of very good quality.
 
 ### Google and ask
 
-If you do not understand something even after reading the documentation, chances are someone asked the same question on a site like StackExchange or Reddit. Googling the problem you have (or even just the error message) should be the first step of solving a problem. If you cannot find the answer to your question, try asking it yourself on StackExchange. You will be surprised how many people want to help you if you ask a good question.
+If you do not understand something even after reading the documentation, chances are someone asked the same question on a site like StackExchange or Reddit. Googling the problem you have (or even just the error message) should be the first step of solving a problem. If you cannot find the answer to your question, try asking it yourself on StackExchange.
 
 ### Keep to the conventions
 
@@ -28,7 +28,7 @@ If you look at the code in this module, you may notice that we keep to a very st
 
 The conventions are summarized [here](https://www.python.org/dev/peps/pep-0008/). A quick summary:
 
-* Use four spaces for indentation. Do not use tabs.
+* Use four spaces for each level of indentation. Do not use tabs.
 * Put a maximum of one statement on every line.
 * Use lower case letters for function and variable names. Separate words by underscores, e.g. `my_awesome_function()`.
 * Use CamelCase for class names, e.g. `MyAwesomeClass`.
@@ -38,6 +38,8 @@ The conventions are summarized [here](https://www.python.org/dev/peps/pep-0008/)
 * Put spaces around every operator, e.g. `1 + 1 == 2`, `x = 3`, not `1+1==2` and `x=3`.
 * Do not put spaces around `=` when defining keyword arguments in functions, e.g. `translate_point(translation=[1, 2], point=[3, 4])`.
 * Put all `import` statements at the top of a file. It is best not to import packages within functions or classes.
+
+One additional convention is to have no lines longer than 79 characters. As a rule of thumb it is best to keep to this convention unless it hinders the readability of your code.
 
 ### Use doc strings
 
@@ -55,6 +57,9 @@ def translate_point(translation, point):
         list: The translated point.
     """
     new_point = []
+    if len(translation) != len(point):
+        raise ValueError('Translation and point have different number of '
+            'elements.')
     for a, b in zip(translation, point):
         new_list.append(a + b)
     return new_point

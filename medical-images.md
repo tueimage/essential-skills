@@ -2,8 +2,7 @@
 
 In this chapter, a few modules and methods for working with medical images are
 discussed. These packages are not included with the Anaconda installation you
-(may) have installed previously. Therefore this chapter will also discuss how to
-install packages in Python.
+(may) have installed previously. Therefore this chapter will also discuss how to install packages in Python.
 
 
 ## Installing extra Python packages
