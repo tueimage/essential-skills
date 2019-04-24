@@ -11,6 +11,55 @@ This tutorial is split into three parts: one part focussing on version control w
 
 Git is a command line tool. Although a plethora of GUI-based applications for interaction with Git exist, in this tutorial we are going to stick with the command line interface, as it is the most universal way to interact with Git: it will even work on remote computers, like computational servers, over SSH. Like in the Linux chapter, we are using the convention that the '$'-sign indicates a command line prompt, and that any command you type should not include this sign.
 
+## Installing Git
+
+#### Windows
+You can install Git-on-windows from this link: [https://git-scm.com/download/win](https://git-scm.com/download/win).
+
+#### macOS
+Open a Terminal window and type
+
+```bash
+$ git --version
+```
+
+which will automatically launch the installer.
+
+#### Ubuntu
+On most Linux distributions, Git is installed by default. 
+
+### Configuring Git
+
+You can test if Git is installed correctly by opening a Terminal window (e.g. Cygwin on Windows) and typing 
+
+```bash
+$ git --version
+```
+
+which should print `git version 2.17.1` or something similar. If that's the case you can also configure Git, by letting it know who you are:
+
+```bash
+$ git config --global user.name "Amalia van Oranje"
+$ git config --global user.email "amalia.v.oranje@tue.nl"
+```
+
+Let it also know which editor you want to use, for example if you want to use Notepad++ on Windows you can type
+
+```bash
+$ git config --global core.editor "'C:/Program Files/Notepad++/notepad++.exe' -multiInst -nosession"
+```
+
+or to use Gedit on Linux
+
+```bash
+$ git config --global core.editor 'gedit'
+```
+
+or TextEdit on macOS
+
+```bash
+$ git config --global core.editor 'open -e'
+```
 
 
 ## Local repositories
@@ -73,7 +122,7 @@ and save the file.
 
 If you now type `git status`, the following message should be shown:
 
-```
+```bash
 On branch master
 
 No commits yet
@@ -93,7 +142,7 @@ the files is not tracked yet, that is, Git does not save versions of this file.
 
 To let Git track the file, type 
 
-```
+```bash
 $ git add vector.py
 ```
 
@@ -115,6 +164,9 @@ Git tells you that, should you commit a new version, the addition of the new fil
 
 ```bash
 $ git commit -m 'Added vector.py'
+[master (root-commit) ee1af3e] Added vector.py
+ 1 file changed, 3 insertions(+)
+ create mode 100644 vector.py
 ```
 
 The `-m` flag lets you include a message for this commit, that you should use to document what you did since the previous commit. If we now again check `git status`, it prints
@@ -134,7 +186,7 @@ too see this:
 
 ```bash
 commit 7fa5007bc326ff8a4bf78912f41a21130d8165b9 (HEAD -> master)
-Author: Koen Eppenhof <k.a.j.eppenhof@tue.nl>
+Author: Amalia <amalia.v.oranje@tue.nl>
 Date:   Wed Apr 10 13:05:31 2019 +0200
 
     Added vector.py
@@ -184,11 +236,11 @@ You first need to 'stage' the changed files you want to commit with `git add` be
 
 ```bash
 $ git commit -a -m 'Added __repr__() method'
-``` 
+```
 
-instead, where `-a` stands for 'all changed files'. You can again use `git log` to see the history of commits.
+instead, where `-a` stands for 'all changed files'. You can again use `git log` to see the history of commits, which will show the new commit above the first one.
 
-When adding files you will still need to explicitly use `git add` however. When removing files, there is the equivalent `git rm`. This will both remove the file itself, as well as stop the version tracking of it:
+When adding *new* files you will still need to explicitly use `git add` however. When removing files, there is the equivalent `git rm`. This will both remove the file itself, as well as stop the version tracking of it:
 
 ```bash
 $ git rm vector.py
@@ -200,7 +252,6 @@ If you now type `ls`, no files will be shown. Let's first commit this new change
 $ git commit -a -m 'Deleted vector.py'
 ```
 
-
 #### Undoing the last commit
 
 To revert the commit in which we deleted the file, we want to go back to go back to the state of the repository one commit before that. In Git, we can do this with with the `git revert` command. There are two ways of specifying to which commit you want to return: by specifying the identifier of the commit that is shown in `git log` or by using relative refererences.
@@ -209,7 +260,7 @@ To revert the commit in which we deleted the file, we want to go back to go back
 
 In the `git log` you can find the identifier. In this case it is 52e352fbb0caf74c631c1054da1e6dcd4c690786.
 
-```
+```bash
   commit 52e352fbb0caf74c631c1054da1e6dcd4c690786
   Author: Koen Eppenhof <k.a.j.eppenhof@tue.nl>
   Date:   Wed Apr 10 14:11:36 2019 +0200
@@ -235,7 +286,7 @@ Luckily you do not have to type in the whole thing. Only the first eight charact
 $ git revert 52e352f
 ```
 
-This will open an editor in which you can type a commit message, although a 
+This will open the editor you set in the configuration (at the start of this tutorial) in which you can type a commit message, although a 
 default message reading `Revert "Deleted vector.py"` is provided there already.
 
 Upon quitting the editor, the reversion is committed, and the file `vector.py` should be back in the folder.
@@ -247,7 +298,7 @@ If you know you how many commits you want to go back, you can use a relative
 reference when reverting. You can specify a reference relative to the current HEAD. HEAD is a tag that is always attached to the last commit of the current branch (more on branches later).
 If you want to undo the last commit, you revert the commit tagged HEAD, by typing this:
 
-```
+```bash
 $ git revert HEAD
 ```
 
@@ -256,39 +307,62 @@ This will have the same effect as reverting by identifier.
 
 #### Undoing the N previous commits
 
-**This should only be done on local repositories or branches, i.e. branches that are on your own computer.**
+**This should only be done on local repositories or branches, i.e. branches that are on your own computer. If you use it on online repositories it can result in data loss.**
 
-You can undo multiple commits using `git reset --hard`. You specify the commit you want to return to using an identifier or a relative reference. For example, you can type
+You can undo multiple commits using `git reset --hard`. You specify the commit you want to return to using an identifier or a relative reference. For example, you can add the identifier
 
-```
+```bash
 $ git reset --hard 907ae2e2
 ```
 
-or
+or use the relative reference
 
-```
+```bash
 $ git reset --hard HEAD~2
 ```
 
-to revert two commits.
+to reset to the state of the repository two commits back. Note that this behavior is different from `revert` which *reverts* only those changes in the commit you specify, while `reset` *removes all commits after* the commit you specify. `reset` also does not require you to make a new commit because of this.
+
+To test `git reset`, you can reset back to the commit in which you added the `__repr__()` method, which will the commits in which you deleted `vector.py` and reverted this deletion. If you followed the tutorial so-far, you can establish this with 
+
+```bash
+$ git reset --hard HEAD~2
+```
+
+If you now look at `git log` you will see that the history of the repository has changed because two commits have been removed. This is exactly the reason why it is dangerous when you use it on online repositories that are also used by others.
 
 
 #### Checking out commits
 
 Finally, there is one more useful command that you can use to check out the status of the repository in a commit. Using `git checkout <IDENTIFIER>` or `git checkout <RELATIVE REFERENCE>` to set the state of the folder to that commit. You can use this to check out the contents of files in that commit.
 
-```
+```bash
 $ git checkout HEAD~1
+Note: checking out 'HEAD~1'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b <new-branch-name>
+
+HEAD is now at ee1af3e Added vector.py
+
 ```
 
-You can go back to the last commit by typing
+You are now in a detached HEAD state. That means that the commit you have checked out is no longer on a branch. HEAD is a label that points to the currently checked out commit, but the `master` branch in which you have been working is no longer associated with the same commit as HEAD is. 
 
-```
+To re-attach your HEAD and go back to the last commit, you type
+
+```bash
 $ git checkout master
 ```
 
 (At least, assuming you have not changed branches, more on that later.)
-Be careful though. If you make changes in a checked out commit, these will not be saved, unless you commit them, and *merge* them. That is possible, but is beyond the scope of this tutorial.
+Be careful though. If you make changes in a detached HEAD state, these will not be saved, unless you commit them to a new branch, and *merge* them. That is possible, but is beyond the scope of this tutorial.
 
 ###### Exercises
 
@@ -321,8 +395,8 @@ Be careful though. If you make changes in a checked out commit, these will not b
     Commands:
 
     ```bash
-    git add test.py
-    git commit -a -m 'Added test module'
+    $ git add test.py
+    $ git commit -a -m 'Added test module'
     ```
     </p></details>
 
@@ -331,27 +405,73 @@ Be careful though. If you make changes in a checked out commit, these will not b
     Commands:
 
     ```bash
-    git rm test.py
-    git commit -a -m 'Removed test module'
+    $ git rm test.py
+    $ git commit -a -m 'Removed test module'
     ```
     </p></details>
 
-* Revert to the previous commit to restore the test module
+* Go back to the previous commit to restore the test module
     <details><summary>Answer</summary><p>
     Command:
 
     ```bash
-    git revert HEAD
+    $ git revert HEAD
     ```
+    
+    to revert (undo) the last commit or
+
+    ```bash
+    $ git reset --hard HEAD~1
+    ```
+
+    to go back to the state of the repository one commit back.
+    </p></details>
+
+* Check the log of your repository.
+    <details><summary>Answer</summary><p>
+    Command:
+
+    ```bash
+    $ git log
+    ```
+    
+    This should return something like this:
+
+    ```bash
+    commit 83b56a05dcfbb3dfdcc9b0a4afc1fcaceb06c7ca (HEAD -> master)
+    Author: Koen Eppenhof <k.a.j.eppenhof@tue.nl>
+    Date:   Wed Apr 24 11:58:54 2019 +0200
+
+        Added test module.
+
+    commit ea580441c928ac34b7e7ec840154868c24236717
+    Author: Koen Eppenhof <k.a.j.eppenhof@tue.nl>
+    Date:   Wed Apr 24 11:58:23 2019 +0200
+
+        Added __len__() method
+
+    commit 1d27a9f3b571a4a12e1d157b4abd036ec089da44
+    Author: Koen Eppenhof <k.a.j.eppenhof@tue.nl>
+    Date:   Wed Apr 24 11:36:30 2019 +0200
+
+        Added __repr__() method
+
+    commit ee1af3e89c2d41be17c85ad3d0d6383836258ec8
+    Author: Koen Eppenhof <k.a.j.eppenhof@tue.nl>
+    Date:   Wed Apr 24 11:34:02 2019 +0200
+
+        Added vector.py
+    ```
+
     </p></details>
 
 
 ## Branching and merging
 
-Consider the following situation: you have a perfectly working folder full of wonderful code. Now, someone asks you to add some extra complex functionality to your code. This new code might break your perfect code, introduce bugs, or otherwise disturb your quiet life. Of course, Git allows you to go back in time to when things were working fine, but that would also remove all the work you did on the new functionality.
+Consider the following situation: you have a perfectly working folder full of wonderful code. Now, someone asks you to add some extra functionality to your code. This new code might break your perfect code, introduce bugs, or otherwise disturb your quiet life. Of course, Git allows you to go back in time to when things were working fine, but that would also remove all the work you did on the new functionality.
 
 In this case, it is best to make a new *branch* in your repository.
-Whenever you make a branch, the history of the repository splits in two.You can make commits in the new branch without it affecting the history or code in your main *master* branch.
+Whenever you make a branch, the history of the repository splits in two. You can make commits in the new branch without it affecting the history or code in your main *master* branch.
 
 The way this is often used is to have a stable master branch that contains well-tested code, and a development branch that has new functionality that has not been fully-tested yet. Once the new code *is* fully tested, you can merge the changes in the development branch into the master branch.
 
@@ -361,7 +481,7 @@ The way this is often used is to have a stable master branch that contains well-
 Creating and switching branches can be done using the `git checkout` command. In fact, switching branches is a little similar to switching to previous commits. Let's create a new branch called `addition`:
 
 ```bash
-git checkout -b 'addition'
+$ git checkout -b 'addition'
 ```
 
 Git will respond with `Switched to a new branch 'addition'`. In this branch you can make changes to the code. For example, we can add an `__add__()` method to our `Vector` class, that returns the number of elements:
@@ -392,7 +512,7 @@ class Vector:
 Now, we commit this change:
 
 ```bash
-git commit -a -m 'Added __add__() method'
+$ git commit -a -m 'Added __add__() method'
 ```
 
 Remember that this change is only reflected in the `addition` branch we are in. The `master` branch has not had the same update. Let's check that out:
@@ -411,8 +531,14 @@ class Vector:
             s += str(x) + ', '
         s += ']'
         return s
+
+    def __len__(self):
+        return len(self.elements)
 ```
 
+#### Listing all branches
+
+To get an overview of all branches, use the command `git branch`, which will show a list of the branches with the currently checked out branch indicated with an asterisk. You can close this view by typing <kbd>q</kbd>.
 
 #### Merging
 
@@ -433,7 +559,7 @@ $ git merge addition
 
 Say you have made two new additional features to the `Vector` class, each in their own branch from master. Let's call the branches `feature1` and `feature2`, like this:
 
-```
+```bash
 $ git checkout master
 $ git checkout -b feature1 
 Switched to branch 'feature1'
@@ -455,12 +581,11 @@ Switched to branch 'feature2'
 $ git commit -a -m commit 'Added feature 2'
 [feature2 b016669] 2
  1 file changed, 1 insertion(+)
-
 ```
 
 Now you want to merge both into master, so you checkout master, and merge the first feature:
 
-```
+```bash
 $ git checkout master
 Switched to branch 'master'
 
@@ -473,13 +598,13 @@ Fast-forward
 
 So far so good. Now, we also merge `feature2`:
 
-```
+```bash
 $ git merge feature2
 ```
 
 This will result in a warning:
 
-```
+```bash
 Auto-merging vector.py
 CONFLICT (content): Merge conflict in vector.py
 Automatic merge failed; fix conflicts and then commit the result.
@@ -517,9 +642,11 @@ class Vector:
 
 The part between <<<<<<< and >>>>>>> is different in the `master` and `feature2` branches. The part above the `=======` is in `master`, the part below in `feature2`. In this case, you can resolve the conflict by simply removing the lines with `<<<<<<<< HEAD`, `=======`, and `>>>>>>> feature2` and saving the file. Then a new commit will close the conflict definitively:
 
-```
+```bash
 $ git commit -a -m 'Merged feature2 into master and solved merge conflict.'
 ```
+
+In the exercises we will see how to solve a merge conflict when two versions of the same function exist in two branches.
 
 ###### Exercises
 
@@ -575,12 +702,12 @@ $ git commit -a -m 'Merged feature2 into master and solved merge conflict.'
 
 ## Collaborating on Github
 
-So-far, the repository has been on your PC, i.e. it was a *local repository*. You can move your repository to GitHub or any other online service for hosting repositories. If you want you can try it on GitHub by making a free account. In this final section, we are going to simulate an online repository to teach you the basics of pushing to online repositories, but it will be difficult to cover all facets without actually having a project on which you collaborate.
+So-far, the repository has been on your PC, i.e. it was a *local repository*. You can move your repository to GitHub or any other online service for hosting repositories. If you want you can try it on GitHub by making a free account. In this final section, we are going to simulate an online repository to convey the basics of pushing to online repositories, but it will be difficult to cover all facets without actually having a project on which you collaborate.
 
 To simulate an online repository, make a new *empty* folder called `vector_example`, in a different location than where you would put your repositories normally. If you can't think of a good location, use your Desktop or Downloads folder. Navigate to this empty folder in the terminal, and type the following command:
 
-```
-git init --bare
+```bash
+$ git init --bare
 ```
 
 This will make a bare repository. Bare repositories are usually hosted on a server. They are *not* meant for putting code in directly. They are only for storing a repository at a central place, such that anyone can edit and make commits to this repository. You can pretend that this repository lives on a drive in the cloud (like on GitHub).
@@ -590,35 +717,35 @@ This will make a bare repository. Bare repositories are usually hosted on a serv
 *Cloning* means to make an exact copy of an online repository, including all previous commits. The corresponding command is `git clone`. For repositories on GitHub, such as the one on which this tutorial is stored, you can directly paste the link to the online repository after `git clone`. For example, 
 
 ```bash
-git clone https://github.com/tueimage/essential-skills
+$ git clone https://github.com/tueimage/essential-skills
 ```
 
 will copy the repository to your computer.
 
 We can do something similar with the simulated 'online' repository on your computer. Again, it is important you execute the following *in a different folder than where you put the bare repository*:
 
-```
+```bash
 $ git clone /path/to/bare/repository/vector_example
 Cloning into 'vector_example'...
 warning: You appear to have cloned an empty repository.
 done.
 ```
 
-Naturally, this warning will not appear when you clone from an existing repository on GitHub. 
+Naturally, this warning will not appear when you clone from an existing repository on GitHub. The repository you have cloned is on your PC but leads a double live on the (simulated) online repository, where other people can change the contents.
 
 
 #### Pushing to online repositories
 
 Let's add the `vector.py` file from the previous sections, and commit this file:
 
-```
+```bash
 $ git add vector.py
 $ git commit -m 'Added vector.py file'
 ```
 
 Now, this file is added to the *local version of the repository*, which means it is not on the (simulated) online version. Let's change it there as well:
 
-```
+```bash
 $ git push origin
 Counting objects: 3, done.
 Writing objects: 100% (3/3), 201 bytes | 201.00 KiB/s, done.
@@ -629,38 +756,38 @@ To vector_example
 
 `origin` is a reference to the origin of the repository, i.e. where you cloned it from. The output shows that the changes in the master branch have been pushed to the online repository. In fact, *only* the changes in the master branch are updated using `git push`. If you want to push different branches, you first need to check these out. Alternatively, you can also specify which branch should be pushed, for example by doing
 
-```
+```bash
 $ git push origin feature1
 ```
 
-The output will show how many changes have been made.
+The output will show how many changes have been made and to which files.
 
 
 
 #### Fetching changes from online repositories
 
-So, how is this all implemented? Well, the online repository is also stored on your own computer as separate branches. For example, the `master` branch in the online repository is stored on your PC as well as the `origin/master` branch. You can inspect these branches by running
+So, how is this wrok? Well, the online repository is also stored on your own computer as separate branches. For example, the `master` branch in the online repository is stored on your PC as well as the `origin/master` branch. You can inspect these branches by running
 
-```
+```bash
 $ git branch -r
 ```
 
 where `r` stands for 'remote'. You can quit from this view by pressing <kbd>q</kbd>. You will see that the following branches are there:
 
-```
+```bash
 origin/HEAD -> origin/master
 origin/master
 ```
 
 These remote branches should be explicitly updated by you. You can do this by running
 
-```
+```bash
 $ git fetch origin
 ```
 
 which will copy the exact contents of the online repository to the `origin/...` branches on you PC. If someone else has pushed changes to the repository that are not yet on your PC, `git fetch` will get them to you. However, they are not in your working tree (i.e. the local versions of the branches, e.g. `master`). To establish that, you need to merge the online branches into your local branches, simply by using `git merge`:
 
-```
+```bash
 $ git checkout master
 Switched to branch master
 Your branch is three commits behind 'origin/master'
@@ -674,7 +801,7 @@ There may be merge conflicts caused by your collaborator that you will first nee
 
 If your collaborators have pushed changes to the repository before you are pushing your changes, there will be an error like this
 
-```
+```bash
 $ git push origin
  ! [rejected]        master -> master (non-fast forward)
 error: failed to push some refs to 'vector_example'
@@ -682,12 +809,35 @@ error: failed to push some refs to 'vector_example'
 
 The 'non-fast forward' message means that the changes you made cannot just be applied to the online repository. You will first need to fetch the changes your collaborators made and merge them with your local branch.
 
-```
+```bash
 $ git fetch origin
 $ git checkout master
 Switched to branch master
-Your branch is three commist behind 'origin/master'
+Your branch is three commits behind 'origin/master'
 $ git merge origin/master
     ... Solve merge conflicts here ...
 $ git push origin
 ```
+
+In effect, this is not much different from using branches on your local repository. To get a good grasp of using online repositories is to use them in practice. You can use this tutorial as a reference for the basic commands.
+
+
+## Further info
+
+This tutorial was written using the following references, which may be useful to learn more advanced applications of Git:
+
+* [Pro Git](https://git-scm.com/book/en/v2)
+    * The go-to reference for Git
+* [Learn Git Branching](https://learngitbranching.js.org)
+    * An interactive tutorial on advanced Git branching with diagrams
+
+This tutorial used the command line to use Git, however there are many GUI applications that you can use as well:
+
+* [Sublime Merge](https://www.sublimemerge.com/)
+    * Fully functional trial can be used indefinitely for free, available for Windows, macOS, and Linux
+* [SourceTree](https://www.sourcetreeapp.com/)
+    * Free, available for Windows and macOS
+* [GitKraken](https://www.gitkraken.com/) 
+    * Free, requires account, available for Windows, macOS, and Linux
+* [GitHub Desktop](https://desktop.github.com/)
+    * Free, requires Github account, available for Windows and macOS
