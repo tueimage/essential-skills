@@ -17,27 +17,54 @@ In the Terminal, the Windows Prompt, or the Anaconda Terminal, you can use `pip`
 pip install --user SimpleITK
 ```
 
-We are going to use SimpleITK to load `*.mhd` files later.
-
-To be able to DICOM files, also install the package `pydicom` this way.
-
-To view image files in Matplotlib, you can install our group's custom image viewer package using
-
-```bash
-pip install git+https://github.com/tueimage/slycer
-```
-
-With these three packages you are all set for the remainder of this chapter.
+We are going to use SimpleITK to load `*.mhd` files later. To be able to DICOM and 2D image files, also install the packages `pydicom` and `imageio` this way. 
 
 
 ## Working with 2D image files (i.e. `*.jpg`, `*.png`, `*.tiff`)
 
-As we have seen previously, 2D images can be loaded using the `imageio` package. For example, using
+To load images we import the `imageio` library. 
 
 ```python
 import imageio
-some_image = imageio.imread('path/to/image.png')
 ```
+
+The 'io' in `imageio` stands for input and output, which tells you that this library will only be used for reading and writing image files. `imageio` supports almost all 2D image formats, such as `jpg`, `bmp`, `gif`, and `tiff`.
+
+You can read any such file on your computer if you supply the path of the image to the `imageio.imread()` function, like this:
+
+```python
+my_image = imageio.imread('path/to/image')
+```
+
+`my_image` now contains a NumPy array with the intensities of the image. If it is a color image, it will be loaded in the format we discussed at the end of the previous section. You can show the image using Matplotlib:
+
+```
+plt.imshow(my_image)
+plt.show()
+```
+
+
+---
+
+###### Exercises
+
+1. Load a color image using `imageio`. Make changes to the image array, such that the image becomes a grayscale image. Show the color and grayscale images next to each other. If you can not find an image, you can use the path `imagio:chelsea.png`, which loads one of the example images in `imageio`. 
+    
+    <details><summary>Answer</summary><p>
+
+    ```python
+    color_image = imageio.imread('imageio:chelsea.png')
+    grayscale_image = np.mean(color_image, axis=2)
+    fig, ax = plt.subplots(1, 2)
+    ax[0].imshow(color_image)
+        ax[1].imshow(grayscale_image, cmap='gray')  # If you do not use the gray color map, Matplotlib will use its default color map.
+    plt.show()
+    ```
+
+    </p></details> 
+
+---
+
 
 ## Working with `*.mhd` files
 
@@ -66,7 +93,7 @@ This code loads the image and then retrieves the image array as a NumPy array.
 `*.mhd` files themselves are pure text header files that contain properties of the images.
 For example, for the example `chest_xray.mhd` file, the parameters read
 
-```
+```python
 ObjectType = Image
 NDims = 2
 BinaryData = True
@@ -333,9 +360,9 @@ plt.imshow(image_array[0])
 plt.show()
 ```
 
-However, 3D images can not be easily shown this way. Luckily, the `ScrollView` package you installed at the beginning of the chapter, gives you a class to scroll through 3D images on a Matplotlib axis:
+However, 3D images can not be easily shown this way. A 3D viewer is included with this educational module in the `code` folder. You can either paste the code in a new file and save it as `scrollview.py` in the same folder as your script. Then you can import it and us it like this:
 
-```
+```python
 import matplotlib.pyplot as plt
 form scrollview import ScrollView
 
