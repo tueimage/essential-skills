@@ -259,8 +259,8 @@ By the way, the history of the repository can be summarized in diagrams like bel
 
 <center>
 <img src="figures/git1.png" width="352">
-<br><b>
-The history of the repository so-far contains three commits.</b>
+<br><b><i>
+The history of the repository so-far contains three commits.</i></b>
 </center>
 
 #### Undoing the last commit
@@ -350,8 +350,8 @@ If you now look at `git log` you will see that the history of the repository has
 
 <center>
 <img src="figures/git5.png" width="346">
-<br><b>
-Resetting removes any subsequent commits from the history.</b>
+<br><b><i>
+Resetting removes any subsequent commits from the history.</i></b>
 </center>
 
 
@@ -388,16 +388,16 @@ You are now in a detached HEAD state. That means that the commit you have checke
 
 <center>
 <img src="figures/git2.png" width="253">
-<br><b>
-Checking out a commit moves the HEAD to that commit. The working directory will now contain the files in the state at that commit.</b>
+<br><b><i>
+Checking out a commit moves the HEAD to that commit. The working directory will now contain the files in the state at that commit.</i></b>
 </center>
 
 To re-attach your HEAD and go back to the last commit, you type
 
 <center>
 <img src="figures/git6.png" width="229">
-<br><b>
-Re-attached HEAD by checking out `master`.</b>
+<br><b><i>
+Re-attached HEAD by checking out `master`.</i></b>
 </center>
 
 
@@ -848,8 +848,8 @@ So, how does this work? The online repository is also stored on your own compute
 
 <center>
 <img src="figures/git_remote1.png" width="643">
-<br><b>
-There are three representations of the repository: the online repository (on GitHub for example), the representation of that online repository on your PC, and the working directory. The online repository has a new commit made by someone else.</b>
+<br><b><i>
+There are three representations of the repository: the online repository (on GitHub for example), the representation of that online repository on your PC, and the working directory. The online repository has a new commit made by someone else.</i></b>
 </center>
 
 You can inspect these branches by running
@@ -875,8 +875,8 @@ which will copy the exact contents of the online repository to the `origin/...` 
 
 <center>
 <img src="figures/git_remote2.png" width="643">
-<br><b>
-<tt>git fetch</tt> will update the local representations on your PC.</b>
+<br><b><i>
+<tt>git fetch</tt> will update the local representations on your PC.</i></b>
 </center>
 
 However, these changes are not in your working tree (i.e. the local versions of the branches, e.g. `master`). To establish that, you need to merge the online branches into your local branches, simply by using `git merge`:
@@ -892,8 +892,8 @@ The result will look like this:
 
 <center>
 <img src="figures/git_remote3.png" width="643">
-<br><b>
-<tt>git merge origin/master</tt> merges the changes in the online repository into your own working working tree.</b>
+<br><b><i>
+<tt>git merge origin/master</tt> merges the changes in the online repository into your own working working tree.</i></b>
 </center>
 
 
