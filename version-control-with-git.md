@@ -254,7 +254,7 @@ $ git commit -a -m 'Deleted vector.py'
 
 By the way, the history of the repository can be summarized in diagrams like below, which we will use in the next section to explain how to undo any unwanted changes. The `master` and `HEAD` labels will be discussed later.
 
-![The history of the repository so-far contains three commits.](figures/git1.pdf)
+![The history of the repository so-far contains three commits.](figures/git1.png)
 
 
 #### Undoing the last commit
@@ -296,7 +296,7 @@ default message reading `Revert "Deleted vector.py"` is provided there already.
 
 Upon quitting the editor, the reversion is committed, and the file `vector.py` should be back in the folder. The history now looks like this:
 
-![Reverting makes a new commit that does the reverse of the reverted commit.](figures/git3.pdf)
+![Reverting makes a new commit that does the reverse of the reverted commit.](figures/git3.png)
 
 
 ##### Reverting by relative refererence
@@ -338,7 +338,7 @@ $ git reset --hard HEAD~2
 
 If you now look at `git log` you will see that the history of the repository has changed because two commits have been removed. This is exactly the reason why it is dangerous when you use it on online repositories that are also used by others. This is reflected in this diagram:
 
-![Reverting makes a new commit that does the reverse of the reverted commit.](figures/git5.pdf)
+![Reverting makes a new commit that does the reverse of the reverted commit.](figures/git5.png)
 
 
 #### Checking out commits
@@ -364,11 +364,11 @@ HEAD is now at ee1af3e Added vector.py
 
 You are now in a detached HEAD state. That means that the commit you have checked out is no longer on a branch. HEAD is a label that points to the currently checked out commit, but the `master` branch in which you have been working is no longer associated with the same commit as HEAD is. 
 
-![Checking out a commit moves the HEAD to that commit. The working directory will now contain the files in the state at that commit.](figures/git2.pdf)
+![Checking out a commit moves the HEAD to that commit. The working directory will now contain the files in the state at that commit.](figures/git2.png)
 
 To re-attach your HEAD and go back to the last commit, you type
 
-![Re-attached HEAD by checking out `master`](figures/git6.pdf)
+![Re-attached HEAD by checking out `master`](figures/git6.png)
 
 ```bash
 $ git checkout master
@@ -499,7 +499,7 @@ $ git checkout -b 'addition'
 
 Git will respond with `Switched to a new branch 'addition'`. 
 
-![](figures/git_branching1.pdf)
+![](figures/git_branching1.png)
 
 In this branch you can make changes to the code. For example, we can add an `__add__()` method to our `Vector` class, that returns the number of elements:
 
@@ -532,7 +532,7 @@ Now, we commit this change:
 $ git commit -a -m 'Added __add__() method'
 ```
 
-![](figures/git_branching2.pdf)
+![](figures/git_branching2.png)
 
 Remember that this change is only reflected in the `addition` branch we are in. The `master` branch has not had the same update. Let's check that out:
 
@@ -574,7 +574,7 @@ and typing
 $ git merge addition
 ```
 
-![](figures/git_branching3.pdf)
+![](figures/git_branching3.png)
 
 
 #### Merge conflicts
@@ -605,7 +605,7 @@ $ git commit -a -m commit 'Added feature 2'
  1 file changed, 1 insertion(+)
 ```
 
-![](figures/git_branching4.pdf)
+![](figures/git_branching4.png)
 
 Now you want to merge both into master, so you checkout master, and merge the first feature:
 
@@ -620,7 +620,7 @@ Fast-forward
  1 file changed, 1 insertion(+)
 ```
 
-![](figures/git_branching5.pdf)
+![](figures/git_branching5.png)
 
 So far so good. Now, we also merge `feature2`:
 
@@ -628,7 +628,7 @@ So far so good. Now, we also merge `feature2`:
 $ git merge feature2
 ```
 
-![](figures/git_branching6.pdf)
+![](figures/git_branching6.png)
 
 This will result in a warning:
 
@@ -674,7 +674,7 @@ The part between <<<<<<< and >>>>>>> is different in the `master` and `feature2`
 $ git commit -a -m 'Merged feature2 into master and solved merge conflict.'
 ```
 
-![](figures/git_branching7.pdf)
+![](figures/git_branching7.png)
 
 In the exercises we will see how to solve a merge conflict when two versions of the same function exist in two branches.
 
@@ -798,7 +798,7 @@ The output will show how many changes have been made and to which files.
 
 So, how does this work? The online repository is also stored on your own computer as separate branches. For example, the `master` branch in the online repository is stored on your PC as well as the `origin/master` branch:
 
-![There are three representations of the repository: the online repository (on GitHub for example), the representation of that online repository on your PC, and the working directory. The online repository has a new commit made by someone else.](figures/git_remote1.pdf)
+![There are three representations of the repository: the online repository (on GitHub for example), the representation of that online repository on your PC, and the working directory. The online repository has a new commit made by someone else.](figures/git_remote1.png)
 
 You can inspect these branches by running
 
@@ -821,7 +821,7 @@ $ git fetch origin
 
 which will copy the exact contents of the online repository to the `origin/...` branches on you PC. If someone else has pushed changes to the repository that are not yet on your PC, `git fetch` will get them to you.
 
-![`git fetch` will update the local representations on your PC.](figures/git_remote2.pdf)
+![`git fetch` will update the local representations on your PC.](figures/git_remote2.png)
 
 However, these changes are not in your working tree (i.e. the local versions of the branches, e.g. `master`). To establish that, you need to merge the online branches into your local branches, simply by using `git merge`:
 
@@ -834,7 +834,7 @@ $ git merge origin/master
 
 The result will look like this:
 
-![`git merge origin/master` merges the changes in the online repository into your own working working tree.](figures/git_remote3.pdf)
+![`git merge origin/master` merges the changes in the online repository into your own working working tree.](figures/git_remote3.png)
 
 
 #### Pushing changes when the online repository contains other changes
