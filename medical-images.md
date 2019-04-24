@@ -7,7 +7,7 @@ discussed. These packages are not included with the Anaconda installation you
 
 ## Installing extra Python packages
 
-Anaconda comes with the `pip` package manager. You can run this from a Terminal window (on Linux or macOS) or a Command Prompt window on Windows, provided you have added the Anaconda distribution to your PATH during installation. Alternatively, you can open a prompt or terminal from the Anaconda Navigator by clicking on `Environments` in the left side bar, clicking on the green triangle, and then 'Open Terminal'.
+Anaconda comes with the `pip` package manager. You can run `pip` from a Terminal window (on Linux or macOS) or a Command Prompt or Cygwin window on Windows, provided you have added the Anaconda distribution to your PATH during installation. Alternatively, you can open a prompt or terminal from the Anaconda Navigator by clicking on `Environments` in the left side bar, clicking on the green triangle, and then 'Open Terminal'.
 
 ![Opening a Terminal window from the Anaconda Navigator](figures/anaconda_install_pip.png)
 
@@ -17,7 +17,7 @@ In the Terminal, the Windows Prompt, or the Anaconda Terminal, you can use `pip`
 pip install --user SimpleITK
 ```
 
-We are going to use SimpleITK to load `*.mhd` files later. To be able to DICOM and 2D image files, also install the packages `pydicom` and `imageio` this way. 
+We are going to use SimpleITK to load `*.mhd` adn DICOM files later. To be able to read 2D image files, also install the package `imageio` this way. 
 
 
 ## Working with 2D image files (i.e. `*.jpg`, `*.png`, `*.tiff`)
@@ -36,7 +36,7 @@ You can read any such file on your computer if you supply the path of the image 
 my_image = imageio.imread('path/to/image')
 ```
 
-`my_image` now contains a NumPy array with the intensities of the image. If it is a color image, it will be loaded in the format we discussed at the end of the previous section. You can show the image using Matplotlib:
+`my_image` now contains a NumPy array with the intensities of the image. If the file contains a color image, it will be loaded in the format we discussed at the end of the previous section. You can show the image using Matplotlib:
 
 ```python
 plt.imshow(my_image)
@@ -51,6 +51,8 @@ plt.show()
 1. Load a color image using `imageio`. Make changes to the image array, such that the image becomes a grayscale image. Show the color and grayscale images next to each other. If you can not find an image, you can use the path `imagio:chelsea.png`, which loads one of the example images in `imageio`. 
     
     <details><summary>Answer</summary><p>
+
+    Example code:
 
     ```python
     color_image = imageio.imread('imageio:chelsea.png')
@@ -71,6 +73,8 @@ plt.show()
 `*.mhd` files are used in Elastix and the ITK software packages. These files can 
 be opened using the SimpleITK package, which is a rather schizophrenic translation of
 ITK to Python. The functions in this package do *not* adhere to Python conventions. For example, all functions have capitalized camel case names (i.e. `ReadImage` instead of `read_image`). 
+The following code loads an image from the `example_data` folder in this repository and then retrieves the array of pixel intensities as a NumPy array.
+
 
 ```python
 import SimpleITK as sitk
@@ -88,10 +92,8 @@ plt.imshow(image_array, cmap='gray')
 plt.show()
 ```
 
-This code loads the image and then retrieves the image array as a NumPy array.
-
 `*.mhd` files themselves are pure text header files that contain properties of the images.
-For example, for the example `chest_xray.mhd` file, the parameters read
+For example, for the `chest_xray.mhd` file, the parameters read
 
 ```python
 ObjectType = Image
@@ -110,17 +112,17 @@ ElementDataFile = chest_xray.raw
 
 This shows that this chest X-ray is a 2D image, consisting of uncompressed binary data, with 1 mm x 1 mm pixels (`ElementSpacing`) and a size of 1024 by 1024. The `MET_DOUBLE` type will be converted to the `numpy.float64` dtype. SimpleITK image objects like `itk_image` have some methods to get and set these parameters. Because the names of the methods and parameters in the header file *do not match at all*, we give a summary of the most important ones below. Each of the `Get*` methods has a similar `Set*` method to change the parameter, e.g. `itk_image.SetOrigin([1, 0])`.
 
-| Method name      | Accessed parameter |
-| ---------------- | ------------------ |
-| `GetDimension()` | `NDims`            |
-| `GetSize()`      | `DimSize`          |
-| `GetOrigin()`    | `CenterOfRotation` |
-| `GetSpacing()`   | `ElementSpacing`   |
-| `GetDirection()` | `TransformMatrix`  |
+| Method name      | Accessed `*.mhd` parameter |
+| ---------------- | -------------------------- |
+| `GetDimension()` | `NDims`                    |
+| `GetSize()`      | `DimSize`                  |
+| `GetOrigin()`    | `CenterOfRotation`         |
+| `GetSpacing()`   | `ElementSpacing`           |
+| `GetDirection()` | `TransformMatrix`          |
 
 ### Writing `*.mhd` files
 
-You can convert any NumPy array to an ITK image using the `GetImageFromArray()` function. You can write the image to disk using `sitk.WriteImage()`. Before you write the image, you can use the setter methods to change the `ElementSpacing` parameter.
+You can convert any NumPy array to an ITK image using the `GetImageFromArray()` function. You can write the image to disk using `sitk.WriteImage()`. Before you write the image, you can use the setter methods to change the parameters.
 
 ```python
 random_data = np.random.rand(100, 100)
@@ -307,11 +309,11 @@ image = np.array(volume_list)
 
 ## Reading Dicom files with SimpleITK
 
-Dicom is the primary format for medical images. Like the `*.mhd`, Dicom splits an image into metadata and raw data. Contrary to `*.mhd` files however, the raw data and the header are in the same file. Almost all vendors of 3D medical imaging hardware use a version of this format. As a consequence, the headers in Dicom files form different manufacturers can be very different. The Python package `pydicom` can be used to load Dicom files and access the header parameters.
+Dicom is the primary format for medical images. Like the `*.mhd`, Dicom splits an image into metadata and raw data. Contrary to `*.mhd` files however, the raw data and the header are in the same file. Almost all vendors of 3D medical imaging hardware use a version of this format. As a consequence, the headers in Dicom files from different manufacturers can deviate extensively.
 
 Dicom files are usually 2D image files. Volumes are stored as folders of 2D Dicom files.
 
-Dicom files can also be read and written using SimpleITK. It uses the same functions as `*.mhd` files:
+Dicom files can also be read and written using SimpleITK. This requires the same functions that are used for loading `*.mhd` files:
 
 ```python
 itk_image = sitk.ReadImage('/path/to/dicom/file.dcm')
@@ -345,7 +347,7 @@ print(itk_image.GetMetaDataKeys())
  '0088|0140')
 ```
 
-You can use the list of tags [here](https://www.dicomlibrary.com/dicom/dicom-tags/) to see what each tag does. Then, you can get to a specific tag by using the `GetMetaData()` method. You can use these tags to get to specific information. For example, if you want to know the manufacturer of the scanner, you need the `(0080, 0070)` tag:
+You can use the list of tags [here](https://www.dicomlibrary.com/dicom/dicom-tags/) to see what each tag does. Then, you can get to a specific tag by using the `GetMetaData()` method. For example, if you want to know the manufacturer of the scanner, you need the `(0080, 0070)` tag:
 
 ```python
 print(itk_image.GetMetaData('0008|0070'))
@@ -364,11 +366,11 @@ plt.imshow(image_array[0])
 plt.show()
 ```
 
-However, 3D images can not be easily shown this way. A 3D viewer is included with this educational module in the `code` folder. You can either paste the code in a new file and save it as `scrollview.py` in the same folder as your script. Then you can import it and us it like this:
+However, 3D images can not be easily shown this way. A 3D viewer is included with this educational module in the `code` folder. You can either paste the code in a new file and save it as `scrollview.py` in the same folder as your script, or download the entire repository and copy the `scorllview.py` file to that folder. Then you can import it and us it like this:
 
 ```python
 import matplotlib.pyplot as plt
-form scrollview import ScrollView
+from scrollview import ScrollView
 
 fig, ax = plt.subplots()
 ScrollView(your_3d_image).plot(ax)
