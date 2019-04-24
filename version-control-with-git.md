@@ -252,6 +252,11 @@ If you now type `ls`, no files will be shown. Let's first commit this new change
 $ git commit -a -m 'Deleted vector.py'
 ```
 
+By the way, the history of the repository can be summarized in diagrams like below, which we will use in the next section to explain how to undo any unwanted changes. The `master` and `HEAD` labels will be discussed later.
+
+![The history of the repository so-far contains three commits.](figures/git1.pdf)
+
+
 #### Undoing the last commit
 
 To revert the commit in which we deleted the file, we want to go back to go back to the state of the repository one commit before that. In Git, we can do this with with the `git revert` command. There are two ways of specifying to which commit you want to return: by specifying the identifier of the commit that is shown in `git log` or by using relative refererences.
@@ -280,7 +285,7 @@ In the `git log` you can find the identifier. In this case it is 52e352fbb0caf74
       Added vector.py
 ```
 
-Luckily you do not have to type in the whole thing. Only the first eight characters suffice, but, even better, if you type only the first few and press <kbd>Tab</kbd> it will auto-complete.
+Luckily you do not have to type in the whole thing. Only the first seven characters suffice, but, even better, if you type only the first few and press <kbd>Tab</kbd> it will auto-complete.
 
 ```bash
 $ git revert 52e352f
@@ -289,7 +294,9 @@ $ git revert 52e352f
 This will open the editor you set in the configuration (at the start of this tutorial) in which you can type a commit message, although a 
 default message reading `Revert "Deleted vector.py"` is provided there already.
 
-Upon quitting the editor, the reversion is committed, and the file `vector.py` should be back in the folder.
+Upon quitting the editor, the reversion is committed, and the file `vector.py` should be back in the folder. The history now looks like this:
+
+![Reverting makes a new commit that does the reverse of the reverted commit.](figures/git3.pdf)
 
 
 ##### Reverting by relative refererence
@@ -329,7 +336,9 @@ To test `git reset`, you can reset back to the commit in which you added the `__
 $ git reset --hard HEAD~2
 ```
 
-If you now look at `git log` you will see that the history of the repository has changed because two commits have been removed. This is exactly the reason why it is dangerous when you use it on online repositories that are also used by others.
+If you now look at `git log` you will see that the history of the repository has changed because two commits have been removed. This is exactly the reason why it is dangerous when you use it on online repositories that are also used by others. This is reflected in this diagram:
+
+![Reverting makes a new commit that does the reverse of the reverted commit.](figures/git5.pdf)
 
 
 #### Checking out commits
@@ -355,7 +364,11 @@ HEAD is now at ee1af3e Added vector.py
 
 You are now in a detached HEAD state. That means that the commit you have checked out is no longer on a branch. HEAD is a label that points to the currently checked out commit, but the `master` branch in which you have been working is no longer associated with the same commit as HEAD is. 
 
+![Checking out a commit moves the HEAD to that commit. The working directory will now contain the files in the state at that commit.](figures/git2.pdf)
+
 To re-attach your HEAD and go back to the last commit, you type
+
+![Re-attached HEAD by checking out `master`](figures/git6.pdf)
 
 ```bash
 $ git checkout master
@@ -484,7 +497,11 @@ Creating and switching branches can be done using the `git checkout` command. In
 $ git checkout -b 'addition'
 ```
 
-Git will respond with `Switched to a new branch 'addition'`. In this branch you can make changes to the code. For example, we can add an `__add__()` method to our `Vector` class, that returns the number of elements:
+Git will respond with `Switched to a new branch 'addition'`. 
+
+![](figures/git_branching1.pdf)
+
+In this branch you can make changes to the code. For example, we can add an `__add__()` method to our `Vector` class, that returns the number of elements:
 
 ```python
 class Vector:
@@ -514,6 +531,8 @@ Now, we commit this change:
 ```bash
 $ git commit -a -m 'Added __add__() method'
 ```
+
+![](figures/git_branching2.pdf)
 
 Remember that this change is only reflected in the `addition` branch we are in. The `master` branch has not had the same update. Let's check that out:
 
@@ -555,6 +574,9 @@ and typing
 $ git merge addition
 ```
 
+![](figures/git_branching3.pdf)
+
+
 #### Merge conflicts
 
 Say you have made two new additional features to the `Vector` class, each in their own branch from master. Let's call the branches `feature1` and `feature2`, like this:
@@ -583,6 +605,8 @@ $ git commit -a -m commit 'Added feature 2'
  1 file changed, 1 insertion(+)
 ```
 
+![](figures/git_branching4.pdf)
+
 Now you want to merge both into master, so you checkout master, and merge the first feature:
 
 ```bash
@@ -596,11 +620,15 @@ Fast-forward
  1 file changed, 1 insertion(+)
 ```
 
+![](figures/git_branching5.pdf)
+
 So far so good. Now, we also merge `feature2`:
 
 ```bash
 $ git merge feature2
 ```
+
+![](figures/git_branching6.pdf)
 
 This will result in a warning:
 
@@ -645,6 +673,8 @@ The part between <<<<<<< and >>>>>>> is different in the `master` and `feature2`
 ```bash
 $ git commit -a -m 'Merged feature2 into master and solved merge conflict.'
 ```
+
+![](figures/git_branching7.pdf)
 
 In the exercises we will see how to solve a merge conflict when two versions of the same function exist in two branches.
 
@@ -766,7 +796,11 @@ The output will show how many changes have been made and to which files.
 
 #### Fetching changes from online repositories
 
-So, how is this wrok? Well, the online repository is also stored on your own computer as separate branches. For example, the `master` branch in the online repository is stored on your PC as well as the `origin/master` branch. You can inspect these branches by running
+So, how does this work? The online repository is also stored on your own computer as separate branches. For example, the `master` branch in the online repository is stored on your PC as well as the `origin/master` branch:
+
+![There are three representations of the repository: the online repository (on GitHub for example), the representation of that online repository on your PC, and the working directory. The online repository has a new commit made by someone else.](figures/git_remote1.pdf)
+
+You can inspect these branches by running
 
 ```bash
 $ git branch -r
@@ -785,7 +819,11 @@ These remote branches should be explicitly updated by you. You can do this by ru
 $ git fetch origin
 ```
 
-which will copy the exact contents of the online repository to the `origin/...` branches on you PC. If someone else has pushed changes to the repository that are not yet on your PC, `git fetch` will get them to you. However, they are not in your working tree (i.e. the local versions of the branches, e.g. `master`). To establish that, you need to merge the online branches into your local branches, simply by using `git merge`:
+which will copy the exact contents of the online repository to the `origin/...` branches on you PC. If someone else has pushed changes to the repository that are not yet on your PC, `git fetch` will get them to you.
+
+![`git fetch` will update the local representations on your PC.](figures/git_remote2.pdf)
+
+However, these changes are not in your working tree (i.e. the local versions of the branches, e.g. `master`). To establish that, you need to merge the online branches into your local branches, simply by using `git merge`:
 
 ```bash
 $ git checkout master
@@ -794,7 +832,9 @@ Your branch is three commits behind 'origin/master'
 $ git merge origin/master
 ```
 
-There may be merge conflicts caused by your collaborator that you will first need to solve.
+The result will look like this:
+
+![`git merge origin/master` merges the changes in the online repository into your own working working tree.](figures/git_remote3.pdf)
 
 
 #### Pushing changes when the online repository contains other changes
