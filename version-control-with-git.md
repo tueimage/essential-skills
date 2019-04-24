@@ -262,6 +262,7 @@ By the way, the history of the repository can be summarized in diagrams like bel
 <img src="figures/git1.png" width="352">
 <br><b><i>
 The history of the repository so-far contains three commits.</i></b>
+<hr>
 </center>
 
 #### Undoing the last commit
@@ -307,7 +308,8 @@ Upon quitting the editor, the reversion is committed, and the file `vector.py` s
 <hr>
 <img src="figures/git3.png" width="463">
 <br><b><i>
-Reverting results in a new commit that does the reverse of the reverted commit.</i></b><hr>
+Reverting results in a new commit that does the reverse of the reverted commit.</i></b>
+<hr>
 </center>
 
 
@@ -355,6 +357,7 @@ If you now look at `git log` you will see that the history of the repository has
 <img src="figures/git5.png" width="346">
 <br><b><i>
 Resetting removes any subsequent commits from the history.</i></b>
+<hr>
 </center>
 
 
@@ -394,6 +397,7 @@ You are now in a detached HEAD state. That means that the commit you have checke
 <img src="figures/git2.png" width="253">
 <br><b><i>
 Checking out a commit moves the HEAD to that commit. The working directory will now contain the files in the state at that commit.</i></b>
+<hr>
 </center>
 
 To re-attach your HEAD and go back to the last commit, you type
@@ -403,6 +407,7 @@ To re-attach your HEAD and go back to the last commit, you type
 <img src="figures/git6.png" width="229">
 <br><b><i>
 Re-attached HEAD by checking out `master`.</i></b>
+<hr>
 </center>
 
 
@@ -538,6 +543,7 @@ Git will respond with `Switched to a new branch 'addition'`.
 <center>
 <hr>
 <img src="figures/git_branching1.png" width="463">
+<hr>
 </center>
 
 In this branch you can make changes to the code. For example, we can add an `__add__()` method to our `Vector` class, that returns the number of elements:
@@ -574,6 +580,7 @@ $ git commit -a -m 'Added __add__() method'
 <center>
 <hr>
 <img src="figures/git_branching2.png" width="574">
+<hr>
 </center>
 
 
@@ -620,6 +627,7 @@ $ git merge addition
 <center>
 <hr>
 <img src="figures/git_branching3.png" width="574">
+<hr>
 </center>
 
 
@@ -655,6 +663,7 @@ $ git commit -a -m commit 'Added feature 2'
 <center>
 <hr>
 <img src="figures/git_branching4.png" width="631">
+<hr>
 </center>
 
 
@@ -674,6 +683,7 @@ Fast-forward
 <center>
 <hr>
 <img src="figures/git_branching5.png" width="632">
+<hr>
 </center>
 
 So far so good. Now, we also merge `feature2`:
@@ -685,6 +695,7 @@ $ git merge feature2
 <center>
 <hr>
 <img src="figures/git_branching6.png" width="806">
+<hr>
 </center>
 
 This will result in a warning:
@@ -734,6 +745,7 @@ $ git commit -a -m 'Merged feature2 into master and solved merge conflict.'
 <center>
 <hr>
 <img src="figures/git_branching7.png" width="809">
+<hr>
 </center>
 
 In the exercises we will see how to solve a merge conflict when two versions of the same function exist in two branches.
@@ -863,6 +875,7 @@ So, how does this work? The online repository is also stored on your own compute
 <img src="figures/git_remote1.png" width="643">
 <br><b><i>
 There are three representations of the repository: the online repository (on GitHub for example), the representation of that online repository on your PC, and the working directory. The online repository has a new commit made by someone else.</i></b>
+<hr>
 </center>
 
 You can inspect these branches by running
@@ -891,6 +904,7 @@ which will copy the exact contents of the online repository to the `origin/...` 
 <img src="figures/git_remote2.png" width="643">
 <br><b><i>
 <tt>git fetch</tt> will update the local representations on your PC.</i></b>
+<hr>
 </center>
 
 However, these changes are not in your working tree (i.e. the local versions of the branches, e.g. `master`). To establish that, you need to merge the online branches into your local branches, simply by using `git merge`:
@@ -909,6 +923,7 @@ The result will look like this:
 <img src="figures/git_remote3.png" width="643">
 <br><b><i>
 <tt>git merge origin/master</tt> merges the changes in the online repository into your own working working tree.</i></b>
+<hr>
 </center>
 
 
