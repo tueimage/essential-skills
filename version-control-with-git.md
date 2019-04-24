@@ -400,7 +400,15 @@ Checking out a commit moves the HEAD to that commit. The working directory will 
 <hr>
 </center>
 
+
+
 To re-attach your HEAD and go back to the last commit, you type
+
+```bash
+$ git checkout master
+```
+
+(At least, assuming you have not changed branches, more on that later.)
 
 <center>
 <hr>
@@ -410,12 +418,6 @@ Re-attached HEAD by checking out `master`.</i></b>
 <hr>
 </center>
 
-
-```bash
-$ git checkout master
-```
-
-(At least, assuming you have not changed branches, more on that later.)
 Be careful though. If you make changes in a detached HEAD state, these will not be saved, unless you commit them to a new branch, and *merge* them. That is possible, but is beyond the scope of this tutorial.
 
 ###### Exercises
