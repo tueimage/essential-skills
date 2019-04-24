@@ -40,7 +40,7 @@ which should print `git version 2.17.1` or something similar. If that's the case
 
 ```bash
 $ git config --global user.name "Amalia van Oranje"
-$ git config --global user.email "amalia.v.oranje@tue.nl"
+$ git config --global user.email "a.v.oranje@tue.nl"
 ```
 
 Let it also know which editor you want to use, for example if you want to use Notepad++ on Windows you can type
@@ -169,7 +169,7 @@ $ git commit -m 'Added vector.py'
  create mode 100644 vector.py
 ```
 
-The `-m` flag lets you include a message for this commit, that you should use to document what you did since the previous commit. If we now again check `git status`, it prints
+The `-m` flag lets you include a message for this commit, that you can/should use to document what you did since the previous commit. If we now again check `git status`, it prints
 
 ```bash
 On branch master
@@ -186,7 +186,7 @@ too see this:
 
 ```bash
 commit 7fa5007bc326ff8a4bf78912f41a21130d8165b9 (HEAD -> master)
-Author: Amalia <amalia.v.oranje@tue.nl>
+Author: Amalia van Oranje <amalia.v.oranje@tue.nl>
 Date:   Wed Apr 10 13:05:31 2019 +0200
 
     Added vector.py
@@ -262,19 +262,19 @@ In the `git log` you can find the identifier. In this case it is 52e352fbb0caf74
 
 ```bash
   commit 52e352fbb0caf74c631c1054da1e6dcd4c690786
-  Author: Koen Eppenhof <k.a.j.eppenhof@tue.nl>
+  Author: Amalia van Oranje <a.v.oranje@tue.nl>
   Date:   Wed Apr 10 14:11:36 2019 +0200
 
       Deleted vector.py
 
   commit 907ae2e2338cc302adca23d17cf2cfc72ed623d4
-  Author: Koen Eppenhof <k.a.j.eppenhof@tue.nl>
+  Author: Amalia van Oranje <a.v.oranje@tue.nl>
   Date:   Wed Apr 10 14:00:18 2019 +0200
 
       Added __repr__() method
 
   commit 7fa5007bc326ff8a4bf78912f41a21130d8165b9
-  Author: Koen Eppenhof <k.a.j.eppenhof@tue.nl>
+  Author: Amalia van Oranje <a.v.oranje@tue.nl>
   Date:   Wed Apr 10 13:05:31 2019 +0200
 
       Added vector.py
@@ -312,7 +312,7 @@ This will have the same effect as reverting by identifier.
 You can undo multiple commits using `git reset --hard`. You specify the commit you want to return to using an identifier or a relative reference. For example, you can add the identifier
 
 ```bash
-$ git reset --hard 907ae2e2
+$ git reset --hard 1d27a9f
 ```
 
 or use the relative reference
@@ -439,25 +439,25 @@ Be careful though. If you make changes in a detached HEAD state, these will not 
 
     ```bash
     commit 83b56a05dcfbb3dfdcc9b0a4afc1fcaceb06c7ca (HEAD -> master)
-    Author: Koen Eppenhof <k.a.j.eppenhof@tue.nl>
+    Author: Amalia van Oranje <a.v.oranje@tue.nl>
     Date:   Wed Apr 24 11:58:54 2019 +0200
 
         Added test module.
 
     commit ea580441c928ac34b7e7ec840154868c24236717
-    Author: Koen Eppenhof <k.a.j.eppenhof@tue.nl>
+    Author: Amalia van Oranje <a.v.oranje@tue.nl>
     Date:   Wed Apr 24 11:58:23 2019 +0200
 
         Added __len__() method
 
     commit 1d27a9f3b571a4a12e1d157b4abd036ec089da44
-    Author: Koen Eppenhof <k.a.j.eppenhof@tue.nl>
+    Author: Amalia van Oranje <a.v.oranje@tue.nl>
     Date:   Wed Apr 24 11:36:30 2019 +0200
 
         Added __repr__() method
 
     commit ee1af3e89c2d41be17c85ad3d0d6383836258ec8
-    Author: Koen Eppenhof <k.a.j.eppenhof@tue.nl>
+    Author: Amalia van Oranje <a.v.oranje@tue.nl>
     Date:   Wed Apr 24 11:34:02 2019 +0200
 
         Added vector.py
@@ -610,7 +610,7 @@ CONFLICT (content): Merge conflict in vector.py
 Automatic merge failed; fix conflicts and then commit the result.
 ```
 
-The reason for this is that both the `master` branch and the `feauter2` branch are changed after the branching point, and both have changes to the same file(s). This results in Git not knowing which of the two existing versions is the 'truth'. Should the result have feature1 but not feature2, or feature2 but not feature1, or both, or neither?
+The reason for this is that both the `master` branch and the `feature2` branch are changed after the branching point, and both have changes to the same file(s). This results in Git not knowing which of the two existing versions is the 'truth'. Should the result have feature1 but not feature2, or feature2 but not feature1, or both, or neither?
 
 This is called a *merge conflict*, and they are particularly abundant when collaborating. Luckily, merge conflicts are easy to solve. If you open the `vector.py` file you will see that Git has moved both features in the file, and you get to pick which version you want by removing text. For example, if the `__len__` and `__add__()` were added in `feature1` and `feature2` respectively, the file could look like this:
 
@@ -824,7 +824,7 @@ In effect, this is not much different from using branches on your local reposito
 
 ## Further info
 
-This tutorial was written using the following references, which may be useful to learn more advanced applications of Git:
+This tutorial was written using the following references, which are useful to learn more advanced applications of Git:
 
 * [Pro Git](https://git-scm.com/book/en/v2)
     * The go-to reference for Git
