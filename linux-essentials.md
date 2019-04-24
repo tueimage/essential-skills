@@ -443,7 +443,7 @@ $ fg
 
 ### When <kbd>Ctrl-C</kbd> is not enough
 
-If a script or program has crashed so badly it does not even respond to <kbd>Ctrl-C</kbd>, you can use <kbd>Ctrl-\</kbd> which will stop *everything associated with a process*. This is particularly useful when your script uses multiple threads (e.g. using the `multiprocessing` library in Python).
+If a script or program has crashed so badly it does not even respond to <kbd>Ctrl-C</kbd>, you can use <kbd>Ctrl-\\</kbd> which will stop *everything associated with a process*. This is particularly useful when your script uses multiple threads (e.g. using the `multiprocessing` library in Python).
 
 
 ## Running Python scripts on GPUs
