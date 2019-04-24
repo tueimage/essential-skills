@@ -225,7 +225,10 @@ no changes added to commit (use "git add" and/or "git commit -a")
 
 ```
 
-We can commit this change as well by typing 
+If you want to see exactly what has changed between the last commit and the current state,
+you can type `git diff` which will show the added method only.
+
+We can commit this change as by typing 
 
 ```bash
 $ git add vector.py
@@ -339,6 +342,13 @@ If you now look at `git log` you will see that the history of the repository has
 
 ![Reverting makes a new commit that does the reverse of the reverted commit.](figures/git5.png)
 
+#### Seeing differences between commit
+
+Using `git diff` you can also see differences between commits. For this you again need an identifier or reference. For example, if you want to know what changed in the last commit, type
+
+```bash
+$ git diff HEAD~1
+```
 
 #### Checking out commits
 
