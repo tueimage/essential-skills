@@ -5,9 +5,8 @@ scientific programs. What has been lacking is a way to implement numeric code.
 
 In this chapter we will look at four libraries that are often used for working
 with Python in numeric and scientific computing: NumPy, SciPy, Matplotlib, and
-Skimage. We start with the basics of NumPy, look at some linear algebra functions and
-importing and exporting data, and then we will move onto visualizing (plotting) that data
-with Matplotlib.
+Skimage. We start with the basics of NumPy, look at some linear algebra functions and importing and exporting data, and then we will move onto visualizing (plotting) that data
+with Matplotlib and processing images with SciPy.
 
 
 
@@ -923,51 +922,6 @@ We will come back to this in the next section when we are going to give a short 
 ---
 
 
-### Using other libraries
-
-To conclude this chapter we are going to work with some actual images. To do this we import the `imageio` library. 
-
-```python
-import imageio
-```
-
-The 'io' in `imageio` stands for input and output, which tells you that this library will only be used for reading and writing image files. `imageio` supports almost all 2D image formats, such as `jpg`, `bmp`, `gif`, and `tiff`.
-
-You can read any such file on your computer if you supply the path of the image to the `imageio.imread()` function, like this:
-
-```python
-my_image = imageio.imread('path/to/image')
-```
-
-`my_image` now contains a NumPy array with the intensities of the image. If it is a color image, it will be loaded in the format we discussed at the end of the previous section. You can show the image using Matplotlib:
-
-```
-plt.imshow(my_image)
-plt.show()
-```
-
-
----
-
-###### Exercises
-
-1. Load a color image using `imageio`. Make changes to the image array, such that the image becomes a grayscale image. Show the color and grayscale images next to each other. If you can not find an image, you can use the path `imagio:chelsea.png`, which loads one of the example images in `imageio`. 
-    
-    <details><summary>Answer</summary><p>
-
-    ```python
-    color_image = imageio.imread('imageio:chelsea.png')
-    grayscale_image = np.mean(color_image, axis=2)
-    fig, ax = plt.subplots(1, 2)
-    ax[0].imshow(color_image)
-        ax[1].imshow(grayscale_image, cmap='gray')  # If you do not use the gray color map, Matplotlib will use its default color map.
-    plt.show()
-    ```
-
-    </p></details> 
-
----
-
 
 ## SciPy
 
@@ -988,15 +942,30 @@ The function has one mandatory argument named `input`. Below the prototype speci
 
 ###### Exercises
 
+For each of the following questions, you can use the following code to generate an image of a white disk on a black background:
+
+```python
+si, sj = 63, 63
+image = np.zeros((si, sj))
+for i in range(si):
+    for j in range(sj):
+        if (i - si // 2) ** 2 + (j - sj // 2) ** 2 < (si // 3) ** 2:
+            image[i, j] = 1
+
+image += np.ceil(np.random.rand(si, sj) - 0.9)
+plt.imshow(image)
+plt.show()
+```
+
 1. Use the median filter (with the size set to `(5, 5)`) on the grayscale version of the image that you loaded previously, and show the result next to the original image.
 
     <details><summary>Answer</summary><p>
 
     ```python
-    after_median_filter = scipy.ndimage.median_filter(grayscale_image, size=(5, 5))
+    after_median_filter = scipy.ndimage.median_filter(image, size=(5, 5))
     fig, ax = plt.subplots(1, 2)
-    ax[0].imshow(color_image)
-        ax[1].imshow(grayscale_image, cmap='gray')  # If you do not use the gray color map, Matplotlib will use its default color map.
+    ax[0].imshow(image, cmap='gray')
+    ax[1].imshow(after_median_filter, cmap='gray')  # If you do not use the gray color map, Matplotlib will use its default color map.
     plt.show()
     ```
 
@@ -1010,11 +979,11 @@ The function has one mandatory argument named `input`. Below the prototype speci
     sizes = range(5, 51, 5)
 
     fig, ax = plt.subplots(1, len(sizes))
-    
+
     for i, size in enumerate(sizes):
-        after_median_filter = scipy.ndimage.median_filter(grayscale_image, size=(size, size))
+        after_median_filter = scipy.ndimage.median_filter(image, size=(size, size))
         ax[i].imshow(after_median_filter, cmap='gray')   
-    
+
     plt.show()
     ```
 
@@ -1024,10 +993,11 @@ The function has one mandatory argument named `input`. Below the prototype speci
 
     <details><summary>Answer</summary><p>
     The documentation shows a function called `gaussian_filter()`, which has two obligatory parameters: `input` for the image, and `sigma` for the scale (the `sigma` in the Gaussian function). The result will show a blurred image. If you increase the sigma, the image will appear to be more blurred.
+
     ```python
-    gaussian_filtered = scipy.ndimage.gaussian_filter(grayscale_image, sigma=5)
+    gaussian_filtered = scipy.ndimage.gaussian_filter(image, sigma=5)
     fig, ax = plt.subplots(1, 2)
-    ax[0].imshow(grayscale_image, cmap='gray')
+    ax[0].imshow(image, cmap='gray')
     ax[1].imshow(gaussian_filtered, cmap='gray')
     plt.show()
     ```
@@ -1040,9 +1010,9 @@ The function has one mandatory argument named `input`. Below the prototype speci
     Very similar to the previous answer. In this case, the gradient of the image is computed, which will show the edges of the image in each direction, after which the magnitude (L2-norm) of the gradient vector is computed.
 
     ```python
-    gradient_magnitude = scipy.ndimage.gaussian_gradient_magnitude(grayscale_image, sigma=5)
+    gradient_magnitude = scipy.ndimage.gaussian_gradient_magnitude(image, sigma=5)
     fig, ax = plt.subplots(1, 2)
-    ax[0].imshow(grayscale_image, cmap='gray')
+    ax[0].imshow(image, cmap='gray')
     ax[1].imshow(gradient_magnitude, cmap='gray')
     plt.show()
     ```
@@ -1055,9 +1025,9 @@ The function has one mandatory argument named `input`. Below the prototype speci
     Very similar to the previous answer. In this case, the gradient of the image is computed, which will show the edges of the image in each direction, after which the magnitude (L2-norm) of the gradient vector is computed.
 
     ```python
-    rotated = scipy.ndimage.rotate(grayscale_image, angle=45)
+    rotated = scipy.ndimage.rotate(image, angle=45)
     fig, ax = plt.subplots(1, 2)
-    ax[0].imshow(grayscale_image, cmap='gray')
+    ax[0].imshow(image, cmap='gray')
     ax[1].imshow(rotated, cmap='gray')
     plt.show()
     ```
@@ -1070,10 +1040,10 @@ The function has one mandatory argument named `input`. Below the prototype speci
     This is a trick question, as you do not need SciPy to do this. You can use NumPy's ability to show where an array is larger than a threshold:
 
     ```python
-    threshold = 0.5 * grayscale_image.max()
-    thresholded = grayscale_image > threshold
+    threshold = 0.5 * image.max()
+    thresholded = image > threshold
     fig, ax = plt.subplots(1, 2)
-    ax[0].imshow(grayscale_image, cmap='gray')
+    ax[0].imshow(image, cmap='gray')
     ax[1].imshow(thresholded, cmap='gray')
     plt.show()
     ```
