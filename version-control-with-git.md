@@ -1,15 +1,15 @@
 # Version control with Git
 
-Git is a version control system. You can use Git on any folder to turn it into
+Git is a version control system. You can use Git to turn any folder into
 a *repository* with version control. This means you can make changes in the folder and
 *commit* them to a new version of that folder. If you later regret the changes, or want to figure out how that nasty bug got into your code, you can *check out* previous versions of the folder, and
  *revert* to them.
 
-In addition to this, Git allows collaboration within a repository. You can make separate branches in which teams can work on different functionality. These branches are complete versions of the repository to which changes can be made. Each branch will have their own versioning history. Once the implementation of a new function is done and tested, the branches can be merged again. 
+In addition to this, Git can be used to collaborate in a team. You can make separate branches in the repository in which individual developers can work on different functionality. These branches are complete versions of the repository to which changes can be made. Each branch will have their own versioning history. Once the implementation of a new function is done and tested, the branches can be merged again. 
 
-This tutorial is split into three parts: one part focussing on version control within a local repository, one part that focuses on branching and mergine, and one on collaborating using GitHub.
+This tutorial is split into three parts: one part focussing on version control within a local repository, one part that focuses on branching and mergine, and one on collaborating using a remote repository, for example on GitHub.
 
-Git is a command line tool. Although a plethora of GUI-based applications for interaction with Git exist, in this tutorial we are going to stick with the command line interface, as it is the most universal way to interact with Git: it will even work on remote computers, like computational servers, over SSH. Like in the Linux chapter, we are using the convention that the '$'-sign indicates a command line prompt, and that any command you type should not include this sign.
+Git is a command line tool. Although a plethora of GUI-based applications for interaction with Git [exist](#further-info), in this tutorial we are going to stick with the command line interface, as it is the most universal way to interact with Git: it will even work on remote computers, like computational servers, over SSH. Like in the Linux chapter, we are using the convention that the '$'-sign indicates a command line prompt, and that any command you type should not include this sign. It is best if you follow along with the tutorial, because the exercises assume that you have a repository with a version history. We are going to use the coding of a `Vector` class in Python as an example, but it is not necessary to fully understand the Python code to follow the tutorial.
 
 ## Installing Git
 
@@ -103,14 +103,14 @@ No commits yet
 nothing to commit (create/copy files and use "git add" to track)
 ```
 
-This shows that you there have not been any changes to the repository yet (you have added no files or folders yet), and that you are currently on the branch called 'master'. For now, you can ignore any information on branches until the second part of this chapter.
+This shows that there have not been any changes to the repository yet (you have added no files or folders yet), and that you are currently on the branch called 'master'. For now, you can ignore any information on branches until the second part of this chapter.
 
 During this chapter, we will use `git status` frequently to keep track of what is happening with our repository.
 
 
 
 #### Committing versions
-Let's add a file to our repository called `vector.py`, which will contain a Python class for vectors. Open the file, copy-paste the following code:
+Let's add a file to our repository called `vector.py`. In this example file, we are going to code a class to work with vector objects in Python. Open the file and copy-paste the following code:
 
 ```python
 class Vector:
@@ -193,6 +193,7 @@ Date:   Wed Apr 10 13:05:31 2019 +0200
 (END)
 ```
 
+You can close this view by pressing <kbd>q</kbd>.
 
 #### Committing more changes
 
@@ -228,7 +229,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 If you want to see exactly what has changed between the last commit and the current state,
 you can type `git diff` which will show the added method only.
 
-We can commit this change as by typing 
+We can commit this change by typing 
 
 ```bash
 $ git add vector.py
@@ -241,9 +242,9 @@ You first need to 'stage' the changed files you want to commit with `git add` be
 $ git commit -a -m 'Added __repr__() method'
 ```
 
-instead, where `-a` stands for 'all changed files'. You can again use `git log` to see the history of commits, which will show the new commit above the first one.
+instead, where `-a` stands for 'all changed files'. When adding *new* files you will still need to explicitly use `git add` however. You can again use `git log` to see the history of commits, which will show the new commit above the first one.
 
-When adding *new* files you will still need to explicitly use `git add` however. When removing files, there is the equivalent `git rm`. This will both remove the file itself, as well as stop the version tracking of it:
+When removing files, there is the equivalent `git rm`. This will both remove the file itself, as well as stop the version tracking of it:
 
 ```bash
 $ git rm vector.py
@@ -271,7 +272,7 @@ To revert the commit in which we deleted the file, we want to go back to go back
 
 ##### Reverting by identifier
 
-In the `git log` you can find the identifier. In this case it is 52e352fbb0caf74c631c1054da1e6dcd4c690786.
+In the `git log` you can find the identifier of the commit you want to revert. In this case it is 52e352fbb0caf74c631c1054da1e6dcd4c690786.
 
 ```bash
   commit 52e352fbb0caf74c631c1054da1e6dcd4c690786
@@ -315,7 +316,7 @@ Reverting results in a new commit that does the reverse of the reverted commit.<
 
 ##### Reverting by relative refererence
 
-If you know you how many commits you want to go back, you can use a relative
+If you know how many commits you want to go back, you can use a relative
 reference when reverting. You can specify a reference relative to the current HEAD. HEAD is a tag that is always attached to the last commit of the current branch (more on branches later).
 If you want to undo the last commit, you revert the commit tagged HEAD, by typing this:
 
@@ -330,7 +331,7 @@ This will have the same effect as reverting by identifier.
 
 **This should only be done on local repositories or branches, i.e. branches that are on your own computer. If you use it on online repositories it can result in data loss.**
 
-You can undo multiple commits using `git reset --hard`. You specify the commit you want to return to using an identifier or a relative reference. For example, you can add the identifier
+You can undo multiple commits using `git reset --hard`. You specify the commit you want to *return to* using an identifier or a relative reference. For example, you can add the identifier
 
 ```bash
 $ git reset --hard 1d27a9f
@@ -342,7 +343,7 @@ or use the relative reference
 $ git reset --hard HEAD~2
 ```
 
-to reset to the state of the repository two commits back. Note that this behavior is different from `revert` which *reverts* only those changes in the commit you specify, while `reset` *removes all commits after* the commit you specify. `reset` also does not require you to make a new commit because of this.
+to reset to the state of the repository two commits back. Note that this behavior is different from `revert` which *reverts* only those changes in the commit you specify, while `reset` *removes all commits **after*** the commit you specify. `reset` also does not require you to make a new commit because of this.
 
 To test `git reset`, you can reset back to the commit in which you added the `__repr__()` method, which will the commits in which you deleted `vector.py` and reverted this deletion. If you followed the tutorial so-far, you can establish this with 
 
@@ -354,7 +355,7 @@ If you now look at `git log` you will see that the history of the repository has
 
 <center>
 <hr>
-<img src="figures/git5.png" width="346">
+<img src="figures/git5.png" width="465">
 <br><b><i>
 Resetting removes any subsequent commits from the history.</i></b>
 <hr>
@@ -399,8 +400,6 @@ You are now in a detached HEAD state. That means that the commit you have checke
 Checking out a commit moves the HEAD to that commit. The working directory will now contain the files in the state at that commit.</i></b>
 <hr>
 </center>
-
-
 
 To re-attach your HEAD and go back to the last commit, you type
 
@@ -524,7 +523,7 @@ Be careful though. If you make changes in a detached HEAD state, these will not 
 
 ## Branching and merging
 
-Consider the following situation: you have a perfectly working folder full of wonderful code. Now, someone asks you to add some extra functionality to your code. This new code might break your perfect code, introduce bugs, or otherwise disturb your quiet life. Of course, Git allows you to go back in time to when things were working fine, but that would also remove all the work you did on the new functionality.
+Consider the following situation: you have a perfectly working program in a folder full of wonderful code. Now, someone asks you to add some extra functionality to your code. This new code might break your perfect code, introduce bugs, or otherwise disturb your quiet life. Of course, Git allows you to go back in time to when things were working fine, but that would also remove all the work you did on the new functionality.
 
 In this case, it is best to make a new *branch* in your repository.
 Whenever you make a branch, the history of the repository splits in two. You can make commits in the new branch without it affecting the history or code in your main *master* branch.
@@ -635,7 +634,7 @@ $ git merge addition
 
 #### Merge conflicts
 
-Say you have made two new additional features to the `Vector` class, each in their own branch from master. Let's call the branches `feature1` and `feature2`, like this:
+Suppose you have made two new additional features to the `Vector` class, each in their own branch from master. Let's call the branches `feature1` and `feature2`, like this (don't type these commands, they are just an example):
 
 ```bash
 $ git checkout master
@@ -688,6 +687,7 @@ Fast-forward
 <hr>
 </center>
 
+The `master` branch and the `feature1` branch are now on the same commit.
 So far so good. Now, we also merge `feature2`:
 
 ```bash
@@ -708,7 +708,7 @@ CONFLICT (content): Merge conflict in vector.py
 Automatic merge failed; fix conflicts and then commit the result.
 ```
 
-The reason for this is that both the `master` branch and the `feature2` branch are changed after the branching point, and both have changes to the same file(s). This results in Git not knowing which of the two existing versions is the 'truth'. Should the result have feature1 but not feature2, or feature2 but not feature1, or both, or neither?
+The reason for this is that both the `master` branch and the `feature2` branch have both been changed after the branching point at commit `83b56a0`, and both have changes to the same file(s). This results in Git not knowing which of the two existing versions is the 'truth'. Should the result have feature1 but not feature2, or feature2 but not feature1, or both, or neither?
 
 This is called a *merge conflict*, and they are particularly abundant when collaborating. Luckily, merge conflicts are easy to solve. If you open the `vector.py` file you will see that Git has moved both features in the file, and you get to pick which version you want by removing text. For example, if the `__len__` and `__add__()` were added in `feature1` and `feature2` respectively, the file could look like this:
 
@@ -806,9 +806,9 @@ In the exercises we will see how to solve a merge conflict when two versions of 
 
 ## Collaborating on Github
 
-So-far, the repository has been on your PC, i.e. it was a *local repository*. You can move your repository to GitHub or any other online service for hosting repositories. If you want you can try it on GitHub by making a free account. In this final section, we are going to simulate an online repository to convey the basics of pushing to online repositories, but it will be difficult to cover all facets without actually having a project on which you collaborate.
+So-far, the repository has been on your PC, i.e. it was a *local repository*. You can move your repository to GitHub or any other online service for hosting repositories. If you want you can try it on GitHub by making a free account. In this final section, we are going to simulate an online repository to convey the basics of pushing to online repositories, but it will be difficult to cover all facets without actually having a project on which you collaborate with other people. In general, you will learn most by using it in practice.
 
-To simulate an online repository, make a new *empty* folder called `vector_example`, in a different location than where you would put your repositories normally. If you can't think of a good location, use your Desktop or Downloads folder. Navigate to this empty folder in the terminal, and type the following command:
+To simulate an online repository, make a new *empty* folder called `vector_example`, in a *different location* than where you would put your repositories normally. If you can't think of a good location, use your Desktop or Downloads folder. Navigate to this empty folder in the terminal, and type the following command:
 
 ```bash
 $ git init --bare
@@ -870,7 +870,7 @@ The output will show how many changes have been made and to which files.
 
 #### Fetching changes from online repositories
 
-So, how does this work? The online repository is also stored on your own computer as separate branches. For example, the `master` branch in the online repository is stored on your PC as well as the `origin/master` branch:
+So, how does this work? The online repository is also stored on your own computer as separate branches. For example, the `master` branch in the online repository is stored on your PC as the `origin/master` branch:
 
 <center>
 <hr>
@@ -899,7 +899,7 @@ These remote branches should be explicitly updated by you. You can do this by ru
 $ git fetch origin
 ```
 
-which will copy the exact contents of the online repository to the `origin/...` branches on you PC. If someone else has pushed changes to the repository that are not yet on your PC, `git fetch` will get them to you.
+which will download the exact contents of the online repository to the `origin/...` branches on you PC. If someone else has pushed changes to the repository that are not yet on your PC, `git fetch` will get them to you.
 
 <center>
 <hr>
