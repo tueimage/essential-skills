@@ -1538,4 +1538,3 @@ The role of `self` in the class definition is that of a placeholder: in the code
         </p></details>
 
 ---
-
