@@ -131,11 +131,11 @@ random_itk_image.SetSpacing([1.1, 0.98]) # Each pixel is 1.1 x 0.98 mm^2
 sitk.WriteImage(random_itk_image, '/destination/path/for/image.mhd')
 ```
 
-<!-- ## Working with Dicom files using Pydicom
+<!-- ## Working with DICOM files using Pydicom
 
-Dicom is the primary format for medical images. Like the `*.mhd`, Dicom splits an image into metadata and raw data. Contrary to `*.mhd` files however, the raw data and the header are in the same file. Almost all vendors of 3D medical imaging hardware use a version of this format. As a consequence, the headers in Dicom files form different manufacturers can be very different. The Python package `pydicom` can be used to load Dicom files and access the header parameters.
+DICOM is the primary format for medical images. Like the `*.mhd`, DICOM splits an image into metadata and raw data. Contrary to `*.mhd` files however, the raw data and the header are in the same file. Almost all vendors of 3D medical imaging hardware use a version of this format. As a consequence, the headers in DICOM files form different manufacturers can be very different. The Python package `pydicom` can be used to load DICOM files and access the header parameters.
 
-Dicom files are usually 2D image files. Volumes are stored as folders of 2D Dicom files. A Python library called `pydicom` can be used to read and write Dicom files:
+DICOM files are usually 2D image files. Volumes are stored as folders of 2D DICOM files. A Python library called `pydicom` can be used to read and write DICOM files:
 
 ```python
 import pydicom
@@ -241,7 +241,7 @@ print(dicom_image)
 (7fe0, 0010) Pixel Data                          OW: Array of 524288 bytes
 ```
 
-As you can see, each parameter has two hexadecimal numbers associated with it. These are the Dicom tags. You can use these tags to get to specific information. For example, if you want to know the manufacturer of the scanner, you need the `(0080, 0070)` tag, or `0x080070` in hexadecimal:
+As you can see, each parameter has two hexadecimal numbers associated with it. These are the DICOM tags. You can use these tags to get to specific information. For example, if you want to know the manufacturer of the scanner, you need the `(0080, 0070)` tag, or `0x080070` in hexadecimal:
 
 ```python
 dicom_image[0x080070]
@@ -253,7 +253,7 @@ You can however also just type
 dicom_image.Manufacturer
 ```
 
-which is a lot nicer. As you can see there is a plethora of data in a Dicom file. Important parameters are the `PixelSpacing` and `SliceThickness`, which tell you the physical dimensions of the data. Furthermore, it is nice to know where this slice was located in axial direction, which is shown by `SliceLocation`. Because Dicom filenames are not necessarily in the right order, you can use this slice location to order the slices if you load a 3D volume. The `PixelData` field contains the actual pixel data in binary format. It is a flat vector, however. Using the `pixel_array` attribute of the `FileDataSet` object, you get a much nicer Numpy array of the slice's data:
+which is a lot nicer. As you can see there is a plethora of data in a DICOM file. Important parameters are the `PixelSpacing` and `SliceThickness`, which tell you the physical dimensions of the data. Furthermore, it is nice to know where this slice was located in axial direction, which is shown by `SliceLocation`. Because DICOM filenames are not necessarily in the right order, you can use this slice location to order the slices if you load a 3D volume. The `PixelData` field contains the actual pixel data in binary format. It is a flat vector, however. Using the `pixel_array` attribute of the `FileDataSet` object, you get a much nicer Numpy array of the slice's data:
 
 ```python
 image = dicom_image.pixel_array
@@ -262,10 +262,10 @@ image = dicom_image.pixel_array
 This image can be plotted with Matplotlib's `imshow()` function.
 
 
-#### Reading 3D Dicom data
+#### Reading 3D DICOM data
 
-Because 3D Dicom data is distributed over multiple files, one for each slice, you first need to obtain all the filenames.
-You can use the built-in Python module `os` to list the filenames in the Dicom directory:
+Because 3D DICOM data is distributed over multiple files, one for each slice, you first need to obtain all the filenames.
+You can use the built-in Python module `os` to list the filenames in the DICOM directory:
 
 ```python
 import os
@@ -307,13 +307,13 @@ image = np.array(volume_list)
 `image` now contains the 3D volume, which can be plotted or used for further analysis.
  -->
 
-## Reading Dicom files with SimpleITK
+## Reading DICOM files with SimpleITK
 
-Dicom is the primary format for medical images. Like the `*.mhd`, Dicom splits an image into metadata and raw data. Contrary to `*.mhd` files however, the raw data and the header are in the same file. Almost all vendors of 3D medical imaging hardware use a version of this format. As a consequence, the headers in Dicom files from different manufacturers can deviate extensively.
+DICOM is the primary format for medical images. Like the `*.mhd`, DICOM splits an image into metadata and raw data. Contrary to `*.mhd` files however, the raw data and the header are in the same file. Almost all vendors of 3D medical imaging hardware use a version of this format. As a consequence, the headers in DICOM files from different manufacturers can deviate extensively.
 
-Dicom files are usually 2D image files. Volumes are stored as folders of 2D Dicom files.
+DICOM files are usually 2D image files. Volumes are stored as folders of 2D DICOM files.
 
-Dicom files can also be read and written using SimpleITK. This requires the same functions that are used for loading `*.mhd` files:
+DICOM files can also be read and written using SimpleITK. This requires the same functions that are used for loading `*.mhd` files:
 
 ```python
 itk_image = sitk.ReadImage('/path/to/dicom/file.dcm')
@@ -327,7 +327,7 @@ new_itk_image = sitk.GetImageFromArray(image_array)
 sitk.WriteImage(new_itk_image, '/path/to/new/dicom/file.dcm')
 ```
 
-Dicom files have header information with a plethora of information on the image you are loading: from simple things like the image size, to the birthdate of the patient or the manufacturer of the scanner. Each Dicom metadata field has a key, which is called a Dicom tag. SimpleITK gives you access to the available tags in the Dicom file using the `GetMetaDataKeys()` method.
+DICOM files have header information with a plethora of information on the image you are loading: from simple things like the image size, to the birthdate of the patient or the manufacturer of the scanner. Each DICOM metadata field has a key, which is called a DICOM tag. SimpleITK gives you access to the available tags in the DICOM file using the `GetMetaDataKeys()` method.
 
 ```python
 print(itk_image.GetMetaDataKeys())
@@ -359,9 +359,11 @@ print(itk_image.GetMetaData('0008|0070'))
 
 ## Plotting 3D image files
 
-Once you have loaded your images, you can show (2D slices of) them using Matplotlib, i.e.
+Once you have loaded your images, you can show (2D slices of) them using Matplotlib:
 
 ```python
+import matplotlib.pyplot as plt
+
 plt.imshow(image_array[0])
 plt.show()
 ```
