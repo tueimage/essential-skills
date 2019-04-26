@@ -1,4 +1,4 @@
-# Essential skills for medical image analysis
+# [Essential skills for medical image analysis](https://tueimage.github.io/essential-skills/)
 
 This repository contains a number of tutorials on essential skills for applying machine learning methods for medical image analysis.
 
