@@ -19,7 +19,7 @@
 * [Matplotlib](#matplotlib)
     * [Basic plotting](#basic-plotting)
     * [Figures and axes](#figures-and-axes)
-    * [Titles, legends, labels](#titles,-legends,-labels)
+    * [Titles, legends, labels](#titles-legends-labels)
     * [Other plots and diagrams](#other-plots-and-diagrams)
     * [Showing images](#showing-images)
 * [SciPy](#scipy)

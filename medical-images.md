@@ -3,10 +3,9 @@
 **Contents**
 
 * [Installing extra Python packages](#installing-extra-python-packages)
-* [Working with 2D image files (i.e. `*.jpg`, `*.png`, `*.tiff`)](#working-with-2d-image-files-(i.e.-`*.jpg`,-`*.png`,-`*.tiff`))
+* [Working with 2D image files (i.e. `*.jpg`, `*.png`, `*.tiff`)](#working-with-2d-image-files-ie-jpg-png-tiff)
 * [Working with `*.mhd` files](#working-with-`*.mhd`-files)
-* [Writing `*.mhd` files](#writing-`*.mhd`-files)
-    * [Reading 3D DICOM data](#reading-3d-dicom-data)
+* [Writing `*.mhd` files](#writing-mhd-files)
 * [Reading DICOM files with SimpleITK](#reading-dicom-files-with-simpleitk)
     * [Reading 3D DICOM data](#reading-3d-dicom-data)
 * [Plotting 3D image files](#plotting-3d-image-files)
