@@ -7,7 +7,6 @@ The tutorials are still work in progress. Thus far, the following tutorials are 
 * [Numerical and scientific computing in Python](scientific-computing.md)
 * [Working with medical images in Python](medical-images.md)
 * [Linux essentials](linux-essentials.md)
-* [Requesting a Linux account on a IMAG/e server](server-accounts.md)
 * [Git essentials](version-control-with-git.md)
 
 We are currently working on the following tutorial:

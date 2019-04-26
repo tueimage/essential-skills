@@ -3,9 +3,9 @@
 **Contents**
 
 * [Installing Git](#installing-git)
-            * [Windows](#windows)
-            * [macOS](#macos)
-            * [Ubuntu](#ubuntu)
+    * [Windows](#windows)
+    * [macOS](#macos)
+    * [Ubuntu](#ubuntu)
     * [Configuring Git](#configuring-git)
 * [Local repositories](#local-repositories)
     * [Turning a folder into a Git repository](#turning-a-folder-into-a-git-repository)
