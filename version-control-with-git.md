@@ -1,5 +1,34 @@
 # Version control with Git
 
+**Contents**
+
+* [Installing Git](#installing-git)
+            * [Windows](#windows)
+            * [macOS](#macos)
+            * [Ubuntu](#ubuntu)
+    * [Configuring Git](#configuring-git)
+* [Local repositories](#local-repositories)
+    * [Turning a folder into a Git repository](#turning-a-folder-into-a-git-repository)
+    * [Committing versions](#committing-versions)
+    * [Committing more changes](#committing-more-changes)
+    * [Undoing the last commit](#undoing-the-last-commit)
+        * [Reverting by identifier](#reverting-by-identifier)
+        * [Reverting by relative refererence](#reverting-by-relative-refererence)
+    * [Undoing the N previous commits](#undoing-the-n-previous-commits)
+    * [Seeing differences between commit](#seeing-differences-between-commit)
+    * [Checking out commits](#checking-out-commits)
+* [Branching and merging](#branching-and-merging)
+    * [Branching](#branching)
+    * [Listing all branches](#listing-all-branches)
+    * [Merging](#merging)
+    * [Merge conflicts](#merge-conflicts)
+* [Collaborating on Github](#collaborating-on-github)
+    * [Cloning repositories](#cloning-repositories)
+    * [Pushing to online repositories](#pushing-to-online-repositories)
+    * [Fetching changes from online repositories](#fetching-changes-from-online-repositories)
+    * [Pushing changes when the online repository contains other changes](#pushing-changes-when-the-online-repository-contains-other-changes)
+* [Further info](#further-info)
+
 Git is a version control system. You can use Git to turn any folder into
 a *repository* with version control. This means you can make changes in the folder and
 *commit* them to a new version of that folder. If you later regret the changes, or want to figure out how that nasty bug got into your code, you can *check out* previous versions of the folder, and
@@ -121,8 +150,8 @@ Let's add a file to our repository called `vector.py`. In this example file, we 
 
 ```python
 class Vector:
-    def __init__(self, *elements):
-        self.elements = elements
+        def __init__(self, *elements):
+                self.elements = elements
 ```
 
 and save the file.
@@ -135,9 +164,9 @@ On branch master
 No commits yet
 
 Untracked files:
-  (use "git add <file>..." to include in what will be committed)
+    (use "git add <file>..." to include in what will be committed)
 
-        vector.py
+                vector.py
 
 nothing added to commit but untracked files present (use "git add" to track)
 
@@ -161,9 +190,9 @@ On branch master
 No commits yet
 
 Changes to be committed:
-  (use "git rm --cached <file>..." to unstage)
+    (use "git rm --cached <file>..." to unstage)
 
-        new file:   vector.py
+                new file:     vector.py
 
 ```
 
@@ -194,9 +223,9 @@ too see this:
 ```bash
 commit 7fa5007bc326ff8a4bf78912f41a21130d8165b9 (HEAD -> master)
 Author: Amalia van Oranje <amalia.v.oranje@tue.nl>
-Date:   Wed Apr 10 13:05:31 2019 +0200
+Date:     Wed Apr 10 13:05:31 2019 +0200
 
-    Added vector.py
+        Added vector.py
 (END)
 ```
 
@@ -208,15 +237,15 @@ Let's change the `vector.py` by adding a `__repr__()` method to the class:
 
 ```python
 class Vector:
-    def __init__(self, *elements):
-        self.elements = elements
+        def __init__(self, *elements):
+                self.elements = elements
 
-    def __repr__(self):
-        s = '['
-        for x in self.elements:
-            s += str(x) + ', '
-        s += ']'
-        return s
+        def __repr__(self):
+                s = '['
+                for x in self.elements:
+                        s += str(x) + ', '
+                s += ']'
+                return s
 ```
 
 If you look at the status now, it says that the file has changed:
@@ -224,10 +253,10 @@ If you look at the status now, it says that the file has changed:
 ```bash
 On branch master
 Changes not staged for commit:
-  (use "git add <file>..." to update what will be committed)
-  (use "git checkout -- <file>..." to discard changes in working directory)
+    (use "git add <file>..." to update what will be committed)
+    (use "git checkout -- <file>..." to discard changes in working directory)
 
-        modified:   vector.py
+                modified:     vector.py
 
 no changes added to commit (use "git add" and/or "git commit -a")
 
@@ -282,23 +311,23 @@ To revert the commit in which we deleted the file, we want to go back to the sta
 In the `git log` you can find the identifier of the commit you want to revert. In this case it is 52e352fbb0caf74c631c1054da1e6dcd4c690786.
 
 ```bash
-  commit 52e352fbb0caf74c631c1054da1e6dcd4c690786
-  Author: Amalia van Oranje <a.v.oranje@tue.nl>
-  Date:   Wed Apr 10 14:11:36 2019 +0200
+    commit 52e352fbb0caf74c631c1054da1e6dcd4c690786
+    Author: Amalia van Oranje <a.v.oranje@tue.nl>
+    Date:     Wed Apr 10 14:11:36 2019 +0200
 
-      Deleted vector.py
+            Deleted vector.py
 
-  commit 907ae2e2338cc302adca23d17cf2cfc72ed623d4
-  Author: Amalia van Oranje <a.v.oranje@tue.nl>
-  Date:   Wed Apr 10 14:00:18 2019 +0200
+    commit 907ae2e2338cc302adca23d17cf2cfc72ed623d4
+    Author: Amalia van Oranje <a.v.oranje@tue.nl>
+    Date:     Wed Apr 10 14:00:18 2019 +0200
 
-      Added __repr__() method
+            Added __repr__() method
 
-  commit 7fa5007bc326ff8a4bf78912f41a21130d8165b9
-  Author: Amalia van Oranje <a.v.oranje@tue.nl>
-  Date:   Wed Apr 10 13:05:31 2019 +0200
+    commit 7fa5007bc326ff8a4bf78912f41a21130d8165b9
+    Author: Amalia van Oranje <a.v.oranje@tue.nl>
+    Date:     Wed Apr 10 13:05:31 2019 +0200
 
-      Added vector.py
+            Added vector.py
 ```
 
 Luckily you do not have to type in the whole thing. Only the first seven characters suffice, but, even better, if you type only the first few and press <kbd>Tab</kbd> it will auto-complete.
@@ -392,7 +421,7 @@ state without impacting any branches by performing another checkout.
 If you want to create a new branch to retain commits you create, you may
 do so (now or later) by using -b with the checkout command again. Example:
 
-  git checkout -b <new-branch-name>
+    git checkout -b <new-branch-name>
 
 HEAD is now at ee1af3e Added vector.py
 
@@ -426,106 +455,105 @@ Re-attached HEAD by checking out `master`.</i></b>
 
 Be careful though. If you make changes in a detached HEAD state, these will not be saved, unless you commit them to a new branch, and *merge* them. That is possible, but is beyond the scope of this tutorial.
 
-###### Exercises
 
 * Add a method `__len__()` to the `Vector` class:
-    ```python
-        def __len__(self):
-            return len(self.elements)
-    ```
-    Commit the change and add an appropriate message.
-    
-    <details><summary>Answer</summary><p>
-    Command:
+        ```python
+                def __len__(self):
+                        return len(self.elements)
+        ```
+        Commit the change and add an appropriate message.
+        
+        <details><summary>Answer</summary><p>
+        Command:
 
-    `git commit -a -m 'Added __len__() method'
-    </p></details>
+        `git commit -a -m 'Added __len__() method'
+        </p></details>
 
 * Add a file called `test.py` with the following content:
-    ```python
-    from .vector import Vector
-    v1 = Vector(1, 2, 3)
-    v2 = Vector(3, 2, 1)
-    print(v1)
-    print(len(v2))
-    print(v1 + v2)
-    ```
+        ```python
+        from .vector import Vector
+        v1 = Vector(1, 2, 3)
+        v2 = Vector(3, 2, 1)
+        print(v1)
+        print(len(v2))
+        print(v1 + v2)
+        ```
 
-    And commit this change to the repository
+        And commit this change to the repository
 
-    <details><summary>Answer</summary><p>
-    Commands:
+        <details><summary>Answer</summary><p>
+        Commands:
 
-    ```bash
-    $ git add test.py
-    $ git commit -a -m 'Added test module'
-    ```
-    </p></details>
+        ```bash
+        $ git add test.py
+        $ git commit -a -m 'Added test module'
+        ```
+        </p></details>
 
 * Delete the `test.py` and commit this change to the repository
-    <details><summary>Answer</summary><p>
-    Commands:
+        <details><summary>Answer</summary><p>
+        Commands:
 
-    ```bash
-    $ git rm test.py
-    $ git commit -a -m 'Removed test module'
-    ```
-    </p></details>
+        ```bash
+        $ git rm test.py
+        $ git commit -a -m 'Removed test module'
+        ```
+        </p></details>
 
 * Go back to the previous commit to restore the test module
-    <details><summary>Answer</summary><p>
-    Command:
+        <details><summary>Answer</summary><p>
+        Command:
 
-    ```bash
-    $ git revert HEAD
-    ```
-    
-    to revert (undo) the last commit or
+        ```bash
+        $ git revert HEAD
+        ```
+        
+        to revert (undo) the last commit or
 
-    ```bash
-    $ git reset --hard HEAD~1
-    ```
+        ```bash
+        $ git reset --hard HEAD~1
+        ```
 
-    to go back to the state of the repository one commit back.
-    </p></details>
+        to go back to the state of the repository one commit back.
+        </p></details>
 
 * Check the log of your repository.
-    <details><summary>Answer</summary><p>
-    Command:
+        <details><summary>Answer</summary><p>
+        Command:
 
-    ```bash
-    $ git log
-    ```
-    
-    This should return something like this:
+        ```bash
+        $ git log
+        ```
+        
+        This should return something like this:
 
-    ```bash
-    commit 83b56a05dcfbb3dfdcc9b0a4afc1fcaceb06c7ca (HEAD -> master)
-    Author: Amalia van Oranje <a.v.oranje@tue.nl>
-    Date:   Wed Apr 24 11:58:54 2019 +0200
+        ```bash
+        commit 83b56a05dcfbb3dfdcc9b0a4afc1fcaceb06c7ca (HEAD -> master)
+        Author: Amalia van Oranje <a.v.oranje@tue.nl>
+        Date:     Wed Apr 24 11:58:54 2019 +0200
 
-        Added test module.
+                Added test module.
 
-    commit ea580441c928ac34b7e7ec840154868c24236717
-    Author: Amalia van Oranje <a.v.oranje@tue.nl>
-    Date:   Wed Apr 24 11:58:23 2019 +0200
+        commit ea580441c928ac34b7e7ec840154868c24236717
+        Author: Amalia van Oranje <a.v.oranje@tue.nl>
+        Date:     Wed Apr 24 11:58:23 2019 +0200
 
-        Added __len__() method
+                Added __len__() method
 
-    commit 1d27a9f3b571a4a12e1d157b4abd036ec089da44
-    Author: Amalia van Oranje <a.v.oranje@tue.nl>
-    Date:   Wed Apr 24 11:36:30 2019 +0200
+        commit 1d27a9f3b571a4a12e1d157b4abd036ec089da44
+        Author: Amalia van Oranje <a.v.oranje@tue.nl>
+        Date:     Wed Apr 24 11:36:30 2019 +0200
 
-        Added __repr__() method
+                Added __repr__() method
 
-    commit ee1af3e89c2d41be17c85ad3d0d6383836258ec8
-    Author: Amalia van Oranje <a.v.oranje@tue.nl>
-    Date:   Wed Apr 24 11:34:02 2019 +0200
+        commit ee1af3e89c2d41be17c85ad3d0d6383836258ec8
+        Author: Amalia van Oranje <a.v.oranje@tue.nl>
+        Date:     Wed Apr 24 11:34:02 2019 +0200
 
-        Added vector.py
-    ```
+                Added vector.py
+        ```
 
-    </p></details>
+        </p></details>
 
 
 ## Branching and merging
@@ -558,25 +586,25 @@ In this branch you can make changes to the code. For example, we can add an `__a
 
 ```python
 class Vector:
-    def __init__(self, *elements):
-        self.elements = elements
+        def __init__(self, *elements):
+                self.elements = elements
 
-    def __repr__(self):
-        s = '['
-        for x in self.elements:
-            s += str(x) + ', '
-        s += ']'
-        return s
+        def __repr__(self):
+                s = '['
+                for x in self.elements:
+                        s += str(x) + ', '
+                s += ']'
+                return s
 
-    def __len__(self):
-        return len(self.elements)
+        def __len__(self):
+                return len(self.elements)
 
-    def __add__(self, other):
-        assert len(self) == len(other)
-        sums = []
-        for a, b in zip(self.elements, other.elements):
-            sums.append(a + b)
-        return Vector(*sums)
+        def __add__(self, other):
+                assert len(self) == len(other)
+                sums = []
+                for a, b in zip(self.elements, other.elements):
+                        sums.append(a + b)
+                return Vector(*sums)
 ```
 
 Now, we commit this change:
@@ -599,18 +627,18 @@ $ git checkout master
 Switched to branch master
 $ more vector.py
 class Vector:
-    def __init__(self, *elements):
-        self.elements = elements
+        def __init__(self, *elements):
+                self.elements = elements
 
-    def __repr__(self):
-        s = '['
-        for x in self.elements:
-            s += str(x) + ', '
-        s += ']'
-        return s
+        def __repr__(self):
+                s = '['
+                for x in self.elements:
+                        s += str(x) + ', '
+                s += ']'
+                return s
 
-    def __len__(self):
-        return len(self.elements)
+        def __len__(self):
+                return len(self.elements)
 ```
 
 #### Listing all branches
@@ -648,7 +676,7 @@ $ git checkout master
 $ git checkout -b feature1 
 Switched to branch 'feature1'
 
-        ... adding feature 1 ...
+                ... adding feature 1 ...
 
 $ git commit -a -m commit 'Added feature 1'
 [feature1 b016669] 2
@@ -660,7 +688,7 @@ Switched to branch 'master'
 $ git checkout -b feature2
 Switched to branch 'feature2'
 
-        ... adding feature 2 ...
+                ... adding feature 2 ...
 
 $ git commit -a -m commit 'Added feature 2'
 [feature2 b016669] 2
@@ -721,27 +749,27 @@ This is called a *merge conflict*, and they are particularly abundant when colla
 
 ```python
 class Vector:
-    def __init__(self, *elements):
-        self.elements = elements
+        def __init__(self, *elements):
+                self.elements = elements
 
-    def __repr__(self):
-        s = '['
-        for x in self.elements:
-            s += str(x) + ', '
-        s += ']'
-        return s
+        def __repr__(self):
+                s = '['
+                for x in self.elements:
+                        s += str(x) + ', '
+                s += ']'
+                return s
 
 <<<<<<< HEAD
-    def __len__(self):
-        return len(self.elements)
+        def __len__(self):
+                return len(self.elements)
 
 =======
-    def __add__(self, other):
-        assert len(self) == len(other)
-        sums = []
-        for a, b in zip(self.elements, other.elements):
-            sums.append(a + b)
-        return Vector(*sums)
+        def __add__(self, other):
+                assert len(self) == len(other)
+                sums = []
+                for a, b in zip(self.elements, other.elements):
+                        sums.append(a + b)
+                return Vector(*sums)
 >>>>>>> feature2
 ```
 
@@ -759,55 +787,54 @@ $ git commit -a -m 'Merged feature2 into master and solved merge conflict.'
 
 In the exercises we will see how to solve a merge conflict when two versions of the same function exist in two branches.
 
-###### Exercises
 
 * Create a new branch with an appropriate name and add the following method to the `Vector` class:
 
-    ```python
-        def __abs__(self):
-            return Vector(*[abs(x) for x in self.elements])   
-    ```
-    Commit the change and add an appropriate message.
-    
-    <details><summary>Answer</summary><p>
-    Commands:
+        ```python
+                def __abs__(self):
+                        return Vector(*[abs(x) for x in self.elements])     
+        ```
+        Commit the change and add an appropriate message.
+        
+        <details><summary>Answer</summary><p>
+        Commands:
 
-    ```bash
-    $ git checkout -b dev
-    $ git commit -a -m 'Added __abs__() method to Vector class'
-    ```
-    </p></details>
+        ```bash
+        $ git checkout -b dev
+        $ git commit -a -m 'Added __abs__() method to Vector class'
+        ```
+        </p></details>
 
 * Go back to the `master` branch and add the following method to the `Vector` class:
 
-    ```python
-        def __abs__(self):
-            c = 0
-            for x in self.elements:
-                c += x ** 2
-            return c ** 0.5
-    ```
+        ```python
+                def __abs__(self):
+                        c = 0
+                        for x in self.elements:
+                                c += x ** 2
+                        return c ** 0.5
+        ```
 
-    Commit the change and add an appropriate message.
+        Commit the change and add an appropriate message.
 
-    <details><summary>Answer</summary><p>
-    Commands:
+        <details><summary>Answer</summary><p>
+        Commands:
 
-    `$ git checkout -b master`
-    `$ git commit -a -m 'Added __abs__() method to Vector class'`
-    </p></details>
+        `$ git checkout -b master`
+        `$ git commit -a -m 'Added __abs__() method to Vector class'`
+        </p></details>
 
 * Merge the first branch into the `master` branch and solve the merge conflict.
-    
-    <details><summary>Answer</summary><p>
-    The merge command
+        
+        <details><summary>Answer</summary><p>
+        The merge command
 
-    `$ git merge dev`
+        `$ git merge dev`
 
-    will result in a merge conflict that can be solved by opening the `vector.py` file, and removing the version of the `__abs__()` method you don't like. Then, commit the new version, like this:
+        will result in a merge conflict that can be solved by opening the `vector.py` file, and removing the version of the `__abs__()` method you don't like. Then, commit the new version, like this:
 
-    `$ git commit -a -m 'Merged dev branch and solved merge conflict.'`   
-    </p></details>
+        `$ git commit -a -m 'Merged dev branch and solved merge conflict.'`     
+        </p></details>
 
 
 
@@ -862,7 +889,7 @@ Counting objects: 3, done.
 Writing objects: 100% (3/3), 201 bytes | 201.00 KiB/s, done.
 Total 3 (delta 0), reused 0 (delta 0)
 To vector_example
- * [new branch]      master -> master
+ * [new branch]            master -> master
 ```
 
 `origin` is a reference to the origin of the repository, i.e. where you cloned it from. The output shows that the changes in the master branch have been pushed to the online repository. In fact, *only* the changes in the master branch are updated using `git push`. If you want to push different branches, you first need to check these out. Alternatively, you can also specify which branch should be pushed, for example by doing
@@ -942,7 +969,7 @@ If your collaborators have pushed changes to the repository before you are pushi
 
 ```bash
 $ git push origin
- ! [rejected]        master -> master (non-fast forward)
+ ! [rejected]                master -> master (non-fast forward)
 error: failed to push some refs to 'vector_example'
 ```
 
@@ -954,7 +981,7 @@ $ git checkout master
 Switched to branch master
 Your branch is three commits behind 'origin/master'
 $ git merge origin/master
-    ... Solve merge conflicts here ...
+        ... Solve merge conflicts here ...
 $ git push origin
 ```
 
@@ -966,17 +993,17 @@ In effect, this is not much different from using branches on your local reposito
 This tutorial was written using the following references, which are useful to learn more advanced applications of Git:
 
 * [Pro Git](https://git-scm.com/book/en/v2)
-    * The go-to reference for Git
+        * The go-to reference for Git
 * [Learn Git Branching](https://learngitbranching.js.org)
-    * An interactive tutorial on advanced Git branching with diagrams
+        * An interactive tutorial on advanced Git branching with diagrams
 
 This tutorial used the command line to use Git, however there are many GUI applications that you can use as well:
 
 * [Sublime Merge](https://www.sublimemerge.com/)
-    * Fully functional trial can be used indefinitely for free, available for Windows, macOS, and Linux
+        * Fully functional trial can be used indefinitely for free, available for Windows, macOS, and Linux
 * [SourceTree](https://www.sourcetreeapp.com/)
-    * Free, available for Windows and macOS
+        * Free, available for Windows and macOS
 * [GitKraken](https://www.gitkraken.com/) 
-    * Free, requires account, available for Windows, macOS, and Linux
+        * Free, requires account, available for Windows, macOS, and Linux
 * [GitHub Desktop](https://desktop.github.com/)
-    * Free, requires Github account, available for Windows and macOS
+        * Free, requires Github account, available for Windows and macOS

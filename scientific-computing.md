@@ -1,5 +1,29 @@
 # Numerical and scientific computing in Python
 
+**Contents**
+
+* [NumPy](#numpy)
+        * [N-dimensional arrays](#n-dimensional-arrays)
+        * [Indexing arrays](#indexing-arrays)
+        * [Assigning at indices](#assigning-at-indices)
+        * [Reshaping and transposing](#reshaping-and-transposing)
+        * [Array products](#array-products)
+                * [Elementwise products](#elementwise-products)
+                * [Dot products](#dot-products)
+        * [Constructing matrices](#constructing-matrices)
+        * [Data types in NumPy](#data-types-in-numpy)
+        * [Mathematical functions](#mathematical-functions)
+        * [Linear algebra](#linear-algebra)
+        * [Loading and saving data](#loading-and-saving-data)
+        * [Random numbers](#random-numbers)
+* [Matplotlib](#matplotlib)
+        * [Basic plotting](#basic-plotting)
+        * [Figures and axes](#figures-and-axes)
+        * [Titles, legends, labels](#titles,-legends,-labels)
+        * [Other plots and diagrams](#other-plots-and-diagrams)
+        * [Showing images](#showing-images)
+* [SciPy](#scipy)
+
 So far, we have seen basic functionality of Python required to write your own
 scientific programs. What has been lacking is a way to implement numeric code.
 
@@ -7,8 +31,6 @@ In this chapter we will look at four libraries that are often used for working
 with Python in numeric and scientific computing: NumPy, SciPy, Matplotlib, and
 Skimage. We start with the basics of NumPy, look at some linear algebra functions and importing and exporting data, and then we will move onto visualizing (plotting) that data
 with Matplotlib and processing images with SciPy.
-
-
 
 ## NumPy
 

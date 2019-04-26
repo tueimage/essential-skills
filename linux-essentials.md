@@ -1,5 +1,25 @@
 # Linux essentials
 
+**Contents**
+
+* [Interacting with Linux](#interacting-with-linux)
+    * [Navigating up and down the hierarchy](#navigating-up-and-down-the-hierarchy)
+    * [Copying files and folders](#copying-files-and-folders)
+    * [Copying files and folders between computers](#copying-files-and-folders-between-computers)
+    * [(Re)moving files and folders](#(re)moving-files-and-folders)
+    * [File properties](#file-properties)
+    * [Disk usage](#disk-usage)
+* [Running programs and scripts](#running-programs-and-scripts)
+    * [Quitting](#quitting)
+    * [Pausing](#pausing)
+    * [When <kbd>Ctrl-C</kbd> is not enough](#when-<kbd>ctrl-c</kbd>-is-not-enough)
+* [Running Python scripts on GPUs](#running-python-scripts-on-gpus)
+    * [Running your script on a selected GPU in TensorFlow (with or without Keras)](#running-your-script-on-a-selected-gpu-in-tensorflow-(with-or-without-keras))
+    * [Limiting memory use in TensorFlow (with or without Keras)](#limiting-memory-use-in-tensorflow-(with-or-without-keras))
+* [Keep programs and scripts running after logging out](#keep-programs-and-scripts-running-after-logging-out)
+* [Installing additional programs and packages](#installing-additional-programs-and-packages)
+* [Extras](#extras)
+
 During one of your projects or courses you may have to work with Linux. One prominent example is when you will use a GPU-server for deep learning experiments. Linux is an operating system (OS), like Windows, Android, or iOS. There are many distributions (think 'versions') of Linux, and you will probably use a distribution called Ubuntu.
 
 If you are using Linux on your own PC you can use the graphical user interface, which has the windows, text fields, and application windows that you are used to. However, in most cases, you will interact with Linux using a Terminal: a text-based interface on which you can type commands. When using a remote server, you will have no choice but to use the Terminal.
@@ -477,7 +497,7 @@ You can limit the amount of GPU memory your script uses in the script itself, by
 This sets the fraction of memory that is used to approximately 5%. You can then run additional scripts on the same GPU.
 
 
-## Keep programs and scripts running after log out
+## Keep programs and scripts running after logging out
 
 If you lose connection with the server, everything you were running in the Terminal on that server stops running. This is not ideal. You can use a so-called terminal multiplexer or `tmux` to keep your scripts running in the background. To do this, type `tmux`. You will see a green bar appear at the bottom of the Terminal window, indicating that you are using the multiplexer. You can run anything you like inside this multiplexer window. To test it out, you can use the clock script we used before.
 
