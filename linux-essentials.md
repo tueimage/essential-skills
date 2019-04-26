@@ -448,7 +448,7 @@ If a script or program has crashed so badly it does not even respond to <kbd>Ctr
 
 ## Running Python scripts on GPUs
 
-If your script uses the GPU through, for example through the Python libraries `tensorflow-gpu` or `theano`, it will automatically occupy **ALL GPUS**. If you are sharing the machine with other people (i.e. on a GPU-server), this may be the fastest way to get on their nerves. You need to contain your script to only use one (or at least a subset) of the available GPUs.
+If your script uses the GPU, for example through the Python libraries `tensorflow-gpu` or `theano`, it will automatically occupy **ALL GPUS**. If you are sharing the machine with other people (i.e. on a GPU-server), this may be the fastest way to get on their nerves. You need to contain your script to only use one (or at least a subset) of the available GPUs.
 
 The first step is to check which GPUs are available. The BMT servers have a tool called `nvtop` to check this:
 
