@@ -70,11 +70,8 @@ plt.show()
 
 ## Working with `*.mhd` files
 
-`*.mhd` files are used in Elastix and the ITK software packages. These files can 
-be opened using the SimpleITK package, which is a rather schizophrenic translation of
-ITK to Python. The functions in this package do *not* adhere to Python conventions. For example, all functions have capitalized camel case names (i.e. `ReadImage` instead of `read_image`). 
+`*.mhd` files are used in Elastix and the ITK software packages. These files can be opened using the SimpleITK package, which is a rather schizophrenic translation of ITK to Python. The functions in this package do *not* adhere to Python conventions. For example, all functions have capitalized camel case names (i.e. `ReadImage` instead of `read_image`).
 The following code loads an image from the `example_data` folder in this repository and then retrieves the array of pixel intensities as a NumPy array.
-
 
 ```python
 import SimpleITK as sitk
@@ -82,7 +79,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 itk_image = sitk.ReadImage('example_data/chest_xray.mhd')
-image_array = sitk.GetArrayFromImage(itk_image)
+image_array = sitk.GetArrayViewFromImage(itk_image)
 
 # print the image's dimensions
 print(image_array.shape)
@@ -317,7 +314,7 @@ DICOM files can also be read and written using SimpleITK. This requires the same
 
 ```python
 itk_image = sitk.ReadImage('/path/to/dicom/file.dcm')
-image_array = sitk.GetArrayFromImage(itk_image)
+image_array = sitk.GetArrayViewFromImage(itk_image)
 ```
 
 for reading, and for writing
