@@ -7,7 +7,7 @@ a *repository* with version control. This means you can make changes in the fold
 
 In addition to this, Git can be used to collaborate in a team. You can make separate branches in the repository in which individual developers can work on different functionality. These branches are complete versions of the repository to which changes can be made. Each branch will have their own versioning history. Once the implementation of a new function is done and tested, the branches can be merged again. 
 
-This tutorial is split into three parts: one part focussing on version control within a local repository, one part that focuses on branching and mergine, and one on collaborating using a remote repository, for example on GitHub.
+This tutorial is split into three parts: one part focussing on version control within a local repository, one part that focuses on branching and merging, and one on collaborating using a remote repository, for example on GitHub.
 
 Git is a command line tool. Although a plethora of GUI-based applications for interaction with Git [exist](#further-info), in this tutorial we are going to stick with the command line interface, as it is the most universal way to interact with Git: it will even work on remote computers, like computational servers, over SSH. Like in the Linux chapter, we are using the convention that the '$'-sign indicates a command line prompt, and that any command you type should not include this sign. It is best if you follow along with the tutorial, because the exercises assume that you have a repository with a version history. We are going to use the coding of a `Vector` class in Python as an example, but it is not necessary to fully understand the Python code to follow the tutorial.
 
