@@ -379,7 +379,7 @@ amalia@saruman:~$ ls -lh *first*
 
 ## Running programs and scripts
 
-You now know how to get your data and code on the server, and how to organize it once you have done so. How to run that code? In this section, we are working with an Python script that you can save on the server. To run the examples, make a new folder in your home folder called `process_example`, and create a file called `lock.py`. Open the file in your favorite editor, and write the following code:
+You now know how to get your data and code on the server, and how to organize it once you have done so. How to run that code? In this section, we are working with an Python script that you can save on the server. To run the examples, make a new folder in your home folder called `process_example`, and create a file called `clock.py`. Open the file in your favorite editor, and write the following code:
 
 ```python
 import time
