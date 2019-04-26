@@ -813,7 +813,7 @@ In the exercises we will see how to solve a merge conflict when two versions of 
 
 ## Collaborating on Github
 
-So-far, the repository has been on your PC, i.e. it was a *local repository*. You can move your repository to GitHub or any other online service for hosting repositories. If you want you can try it on GitHub by making a free account. In this final section, we are going to simulate an online repository to convey the basics of pushing to online repositories, but it will be difficult to cover all facets without actually having a project on which you collaborate with other people. In general, you will learn most by using it in practice.
+So-far, the repository has been on your PC, i.e. it was a *local repository*. You can move your repository to GitHub or any other online service for hosting repositories (the TU/e has its own Git hosting service available at https://gitlab.tue.nl). If you want you can try it on GitHub by making a free account. In this final section, we are going to simulate an online repository to convey the basics of pushing to online repositories, but it will be difficult to cover all facets without actually having a project on which you collaborate with other people. In general, you will learn most by using it in practice.
 
 To simulate an online repository, make a new *empty* folder called `vector_example`, in a *different location* than where you would put your repositories normally. If you can't think of a good location, use your Desktop or Downloads folder. Navigate to this empty folder in the terminal, and type the following command:
 
