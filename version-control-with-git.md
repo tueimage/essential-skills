@@ -275,7 +275,7 @@ The history of the repository so-far contains three commits.</i></b>
 
 #### Undoing the last commit
 
-To revert the commit in which we deleted the file, we want to go back to go back to the state of the repository one commit before that. In Git, we can do this with with the `git revert` command. There are two ways of specifying to which commit you want to return: by specifying the identifier of the commit that is shown in `git log` or by using relative refererences.
+To revert the commit in which we deleted the file, we want to go back to the state of the repository one commit before that. In Git, we can do this with with the `git revert` command. There are two ways of specifying to which commit you want to return: by specifying the identifier of the commit that is shown in `git log` or by using relative refererences.
 
 ##### Reverting by identifier
 
