@@ -17,7 +17,7 @@ In the Terminal, the Windows Prompt, or the Anaconda Terminal, you can use `pip`
 pip install --user SimpleITK
 ```
 
-We are going to use SimpleITK to load `*.mhd` adn DICOM files later. To be able to read 2D image files, also install the package `imageio` this way. 
+We are going to use SimpleITK to load `*.mhd` and DICOM files later. To be able to read 2D image files, also install the package `imageio` this way. 
 
 
 ## Working with 2D image files (i.e. `*.jpg`, `*.png`, `*.tiff`)

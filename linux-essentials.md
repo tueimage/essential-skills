@@ -2,7 +2,7 @@
 
 During one of your projects or courses you may have to work with Linux. One prominent example is when you will use a GPU-server for deep learning experiments. Linux is an operating system (OS), like Windows, Android, or iOS. There are many distributions (think 'versions') of Linux, and you will probably use a distribution called Ubuntu.
 
-If you are using Linux on your own PC you can use the graphical user interface, which has the windows, text fields, and application windows that you are used to. However, mostly when using Linux, you will interact with Linux using a Terminal: a text-based interface on which you can type commands. When using a remote server, you will have no choice but to use the Terminal.
+If you are using Linux on your own PC you can use the graphical user interface, which has the windows, text fields, and application windows that you are used to. However, in most cases, you will interact with Linux using a Terminal: a text-based interface on which you can type commands. When using a remote server, you will have no choice but to use the Terminal.
 
 This chapter has no explicit exercises, as it works best as a tutorial: just follow along the instructions in the text.
 
@@ -379,7 +379,7 @@ amalia@saruman:~$ ls -lh *first*
 
 ## Running programs and scripts
 
-You now know how to get your data and code on the server, and how to organize it once you have done so. How to run that code? In this section, we are working with an Python script that you can save on the server. To run the examples, make a new folder in your home folder called `process_example`, and create a file called `lock.py`. Open the file in your favorite editor, and write the following code:
+You now know how to get your data and code on the server, and how to organize it once you have done so. How to run that code? In this section, we are working with an Python script that you can save on the server. To run the examples, make a new folder in your home folder called `process_example`, and create a file called `clock.py`. Open the file in your favorite editor, and write the following code:
 
 ```python
 import time
@@ -448,7 +448,7 @@ If a script or program has crashed so badly it does not even respond to <kbd>Ctr
 
 ## Running Python scripts on GPUs
 
-If your script uses the GPU through, for example through the Python libraries `tensorflow-gpu` or `theano`, it will automatically occupy **ALL GPUS**. If you are sharing the machine with other people (i.e. on a GPU-server), this may be the fastest way to get on their nerves. You need to contain your script to only use one (or at least a subset) of the available GPUs.
+If your script uses the GPU, for example through the Python libraries `tensorflow-gpu` or `theano`, it will automatically occupy **ALL GPUS**. If you are sharing the machine with other people (i.e. on a GPU-server), this may be the fastest way to get on their nerves. You need to contain your script to only use one (or at least a subset) of the available GPUs.
 
 The first step is to check which GPUs are available. The BMT servers have a tool called `nvtop` to check this:
 
