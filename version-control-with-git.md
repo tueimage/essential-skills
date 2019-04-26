@@ -26,7 +26,7 @@ $ git --version
 which will automatically launch the installer.
 
 #### Ubuntu
-On most Linux distributions, Git is installed by default. If git is not installed, in Ubuntu you can install it by typing the following command in the terminal:
+On most Linux distributions, Git is installed by default. If Git is not installed, in Ubuntu you can install it by typing the following command in the terminal:
 
 ```
 $ sudo apt install git
