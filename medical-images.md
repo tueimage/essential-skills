@@ -354,6 +354,51 @@ print(itk_image.GetMetaData('0008|0070'))
 ```
 
 
+#### Reading 3D DICOM data
+
+Because 3D DICOM data is distributed over multiple files, one for each slice, you first need to obtain all the filenames.
+You can use the built-in Python module `os` to list the filenames in the DICOM directory:
+
+```python
+import os
+import SimpleITK as sitk
+
+path = '/folder/to/a/3d/volume'
+dicom_filenames = os.listdir(path)
+```
+
+Then, it is a matter of loading each of those files into a list:
+
+```python
+list_of_slices = []
+for filename in dicom_filenames:
+    dicom_path = os.path.join(path, filename)
+    list_of_slices.append(sitk.ReadImage(filename))
+```
+
+`list_of_slices` now contains the `FileDataSet` objects, each containing one slice of the volume. To order these, we write a small utility function. We use this function as the sorting key.
+
+```python
+def order_by_slice_location(slice):
+    return float(slice.GetMetaData('0020|1041'))
+
+list_of_slices.sort(key=order_by_slice_location, reverse=True)
+```
+
+Now, the `list_of_slices` is ordered from superior to inferior along the axial direction. Note that we need to set the `reverse` flag to `True` to get this ordering, as the z-coordinate decreases in this direction, and the `list` method `sort()` sorts the list in ascending order without it.
+
+Now, we only need to get the array of pixels in each slice to get the full volume:
+
+```python
+volume_list = []
+for slice in list_of_slices:
+    volume_list.append(sitk.GetArrayViewFromImage(slice)[0])
+
+image_array = np.array(volume_list)
+```
+
+`image_array` now contains the 3D volume, which can be plotted or used for further analysis.
+
 ## Plotting 3D image files
 
 Once you have loaded your images, you can show (2D slices of) them using Matplotlib:
