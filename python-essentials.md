@@ -1,5 +1,43 @@
 # Python essentials 
 
+**Contents**
+
+* [Python essentials](#python-essentials-)
+    * [Getting started](#getting-started)
+        * [Installation instructions](#installation-instructions)
+        * [Running code](#running-code)
+        * [A first script](#a-first-script)
+        * [Jupyter notebooks](#jupyter-notebooks)
+        * [Errors, warnings, and exceptions](#errors,-warnings,-and-exceptions)
+    * [Variables and classes](#variables-and-classes)
+    * [Operators on numeric variables](#operators-on-numeric-variables)
+    * [Strings](#strings-)
+        * [Concatenation](#concatenation)
+        * [Converting variables to strings](#converting-variables-to-strings)
+        * [Multiline strings](#multiline-strings)
+    * [Container types](#container-types)
+        * [Lists](#lists)
+            * [Slicing lists](#slicing-lists)
+            * [List functions and methods](#list-functions-and-methods)
+        * [String methods](#string-methods)
+        * [Tuples](#tuples)
+        * [Sets](#sets)
+        * [Dictionaries](#dictionaries)
+    * [Mutability, immutability, and copying](#mutability,-immutability,-and-copying)
+    * [Loops and control](#loops-and-control)
+        * [For loops](#for-loops)
+        * [If, else, elif](#if,-else,-elif)
+        * [While loops](#while-loops)
+        * [Breaking out of loops](#breaking-out-of-loops)
+        * [Zipping and enumerating](#zipping-and-enumerating)
+    * [Functions](#functions)
+        * [Returning values from functions](#returning-values-from-functions)
+        * [Multiple return values](#multiple-return-values)
+        * [Named arguments](#named-arguments)
+        * [Default arguments](#default-arguments)
+    * [Classes](#classes)
+
+
 Python is a high-level programming language that emphasizes readability. Python
 code is relatively easy to understand, but it is also very scalable: it is ideal
 for small prototypes, but can be used for large complex programs equally well.
@@ -546,7 +584,7 @@ s = 'abcdef'
 print(len(s))  # prints 6
 ```
 
-##### String methods
+### String methods
 
 Strings also have methods, including some of the list methods discussed in the previous section. However, strings are *immutable*: you can not change them. You can use all the list methods that read from lists (e.g. `count()`, `index()`, and the `len()` function) also on strings, but not the methods that *change* lists (`append()`, `insert()`, `remove()`, `pop()`).
 
