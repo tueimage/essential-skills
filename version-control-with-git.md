@@ -24,9 +24,9 @@
     * [Merge conflicts](#merge-conflicts)
 * [Collaborating on Github](#collaborating-on-github)
     * [Cloning repositories](#cloning-repositories)
-    * [Pushing to online repositories](#pushing-to-online-repositories)
-    * [Fetching changes from online repositories](#fetching-changes-from-online-repositories)
-    * [Pushing changes when the online repository contains other changes](#pushing-changes-when-the-online-repository-contains-other-changes)
+    * [Pushing to remote repositories](#pushing-to-remote-repositories)
+    * [Fetching changes from remote repositories](#fetching-changes-from-remote-repositories)
+    * [Pushing changes when the remote repository contains other changes](#pushing-changes-when-the-remote-repository-contains-other-changes)
 * [Further info](#further-info)
 
 Git is a version control system. You can use Git to turn any folder into
@@ -365,7 +365,7 @@ This will have the same effect as reverting by identifier.
 
 #### Undoing the N previous commits
 
-**This should only be done on local repositories or branches, i.e. branches that are on your own computer. If you use it on online repositories it can result in data loss.**
+**This should only be done on local repositories or branches, i.e. branches that are on your own computer. If you use it on remote repositories it can result in data loss.**
 
 You can undo multiple commits using `git reset --hard`. You specify the commit you want to *return to* using an identifier or a relative reference. For example, you can add the identifier
 
@@ -387,7 +387,7 @@ To test `git reset`, you can reset back to the commit in which you added the `__
 $ git reset --hard HEAD~2
 ```
 
-If you now look at `git log` you will see that the history of the repository has changed because two commits have been removed. This is exactly the reason why it is dangerous when you use it on online repositories that are also used by others. This is reflected in this diagram:
+If you now look at `git log` you will see that the history of the repository has changed because two commits have been removed. This is exactly the reason why it is dangerous when you use it on remote repositories that are also used by others. This is reflected in this diagram:
 
 <center>
 <hr>
@@ -666,6 +666,14 @@ $ git merge addition
 <hr>
 </center>
 
+If you want, you can now delete the branch by typing
+
+```bash
+$ git branch -d addition
+```
+
+If you do this without merging first, Git will give you a warning. If you really want to get rid of the unmerged branch, you can replace `-d` with `-D` to force the deletion.
+
 
 #### Merge conflicts
 
@@ -836,13 +844,22 @@ In the exercises we will see how to solve a merge conflict when two versions of 
         `$ git commit -a -m 'Merged dev branch and solved merge conflict.'`     
         </p></details>
 
+* Delete the `dev` branch
+    
+        <details><summary>Answer</summary><p>
+        Use the following command:
+
+        `$ git branch -d dev`
+
+        </p></details>
+
 
 
 ## Collaborating on Github
 
-So-far, the repository has been on your PC, i.e. it was a *local repository*. You can move your repository to GitHub or any other online service for hosting repositories (the TU/e has its own Git hosting service available at https://gitlab.tue.nl). If you want you can try it on GitHub by making a free account. In this final section, we are going to simulate an online repository to convey the basics of pushing to online repositories, but it will be difficult to cover all facets without actually having a project on which you collaborate with other people. In general, you will learn most by using it in practice.
+So-far, the repository has been on your PC, i.e. it was a *local repository*. You can move your repository to GitHub or any other remote service for hosting repositories (the TU/e has its own Git hosting service available at https://gitlab.tue.nl). If you want you can try it on GitHub by making a free account. In this final section, we are going to simulate a remote repository to convey the basics of pushing to remote repositories, but it will be difficult to cover all facets without actually having a project on which you collaborate with other people. In general, you will learn most by using it in practice.
 
-To simulate an online repository, make a new *empty* folder called `vector_example`, in a *different location* than where you would put your repositories normally. If you can't think of a good location, use your Desktop or Downloads folder. Navigate to this empty folder in the terminal, and type the following command:
+To simulate a remote repository, make a new *empty* folder called `vector_example`, in a *different location* than where you would put your repositories normally. If you can't think of a good location, use your Desktop or Downloads folder. Navigate to this empty folder in the terminal, and type the following command:
 
 ```bash
 $ git init --bare
@@ -852,7 +869,7 @@ This will make a bare repository. Bare repositories are usually hosted on a serv
 
 #### Cloning repositories
 
-*Cloning* means to make an exact copy of an online repository, including all previous commits. The corresponding command is `git clone`. For repositories on GitHub, such as the one on which this tutorial is stored, you can directly paste the link to the online repository after `git clone`. For example, 
+*Cloning* means to make an exact copy of a remote repository, including all previous commits. The corresponding command is `git clone`. For repositories on GitHub, such as the one on which this tutorial is stored, you can directly paste the link to the remote repository after `git clone`. For example, 
 
 ```bash
 $ git clone https://github.com/tueimage/essential-skills
@@ -860,7 +877,7 @@ $ git clone https://github.com/tueimage/essential-skills
 
 will copy the repository to your computer.
 
-We can do something similar with the simulated 'online' repository on your computer. Again, it is important you execute the following *in a different folder than where you put the bare repository*:
+We can do something similar with the simulated 'remote' repository on your computer. Again, it is important you execute the following *in a different folder than where you put the bare repository*:
 
 ```bash
 $ git clone /path/to/bare/repository/vector_example
@@ -869,10 +886,10 @@ warning: You appear to have cloned an empty repository.
 done.
 ```
 
-Naturally, this warning will not appear when you clone from an existing repository on GitHub. The repository you have cloned is on your PC but leads a double live on the (simulated) online repository, where other people can change the contents.
+Naturally, this warning will not appear when you clone from an existing repository on GitHub. The repository you have cloned is on your PC but leads a double live on the (simulated) remote repository, where other people can change the contents.
 
 
-#### Pushing to online repositories
+#### Pushing to remote repositories
 
 Let's add the `vector.py` file from the previous sections, and commit this file:
 
@@ -881,7 +898,7 @@ $ git add vector.py
 $ git commit -m 'Added vector.py file'
 ```
 
-Now, this file is added to the *local version of the repository*, which means it is not on the (simulated) online version. Let's change it there as well:
+Now, this file is added to the *local version of the repository*, which means it is not on the (simulated) remote version. Let's change it there as well:
 
 ```bash
 $ git push origin
@@ -892,7 +909,7 @@ To vector_example
  * [new branch]            master -> master
 ```
 
-`origin` is a reference to the origin of the repository, i.e. where you cloned it from. The output shows that the changes in the master branch have been pushed to the online repository. In fact, *only* the changes in the master branch are updated using `git push`. If you want to push different branches, you first need to check these out. Alternatively, you can also specify which branch should be pushed, for example by doing
+`origin` is a reference to the origin of the repository, i.e. where you cloned it from. The output shows that the changes in the master branch have been pushed to the remote repository. In fact, *only* the changes in the master branch are updated using `git push`. If you want to push different branches, you first need to check these out. Alternatively, you can also specify which branch should be pushed, for example by doing
 
 ```bash
 $ git push origin feature1
@@ -902,15 +919,15 @@ The output will show how many changes have been made and to which files.
 
 
 
-#### Fetching changes from online repositories
+#### Fetching changes from remote repositories
 
-So, how does this work? The online repository is also stored on your own computer as separate branches. For example, the `master` branch in the online repository is stored on your PC as the `origin/master` branch:
+So, how does this work? The remote repository is also stored on your own computer as separate branches. For example, the `master` branch in the remote repository is stored on your PC as the `origin/master` branch:
 
 <center>
 <hr>
 <img src="figures/git_remote1.png" width="643">
 <br><b><i>
-There are three representations of the repository: the online repository (on GitHub for example), the representation of that online repository on your PC, and the working directory. The online repository has a new commit made by someone else.</i></b>
+There are three representations of the repository: the remote repository (on GitHub for example), the representation of that remote repository on your PC, and the working directory. The remote repository has a new commit made by someone else.</i></b>
 <hr>
 </center>
 
@@ -933,7 +950,7 @@ These remote branches should be explicitly updated by you. You can do this by ru
 $ git fetch origin
 ```
 
-which will download the exact contents of the online repository to the `origin/...` branches on you PC. If someone else has pushed changes to the repository that are not yet on your PC, `git fetch` will get them to you.
+which will download the exact contents of the remote repository to the `origin/...` branches on you PC. If someone else has pushed changes to the repository that are not yet on your PC, `git fetch` will get them to you.
 
 <center>
 <hr>
@@ -943,7 +960,7 @@ which will download the exact contents of the online repository to the `origin/.
 <hr>
 </center>
 
-However, these changes are not in your working tree (i.e. the local versions of the branches, e.g. `master`). To establish that, you need to merge the online branches into your local branches, simply by using `git merge`:
+However, these changes are not in your working tree (i.e. the local versions of the branches, e.g. `master`). To establish that, you need to merge the remote branches into your local branches, simply by using `git merge`:
 
 ```bash
 $ git checkout master
@@ -958,12 +975,12 @@ The result will look like this:
 <hr>
 <img src="figures/git_remote3.png" width="643">
 <br><b><i>
-<tt>git merge origin/master</tt> merges the changes in the online repository into your own working working tree.</i></b>
+<tt>git merge origin/master</tt> merges the changes in the remote repository into your own working working tree.</i></b>
 <hr>
 </center>
 
 
-#### Pushing changes when the online repository contains other changes
+#### Pushing changes when the remote repository contains other changes
 
 If your collaborators have pushed changes to the repository before you are pushing your changes, there will be an error like this
 
@@ -973,7 +990,7 @@ $ git push origin
 error: failed to push some refs to 'vector_example'
 ```
 
-The 'non-fast forward' message means that the changes you made cannot just be applied to the online repository. You will first need to fetch the changes your collaborators made and merge them with your local branch.
+The 'non-fast forward' message means that the changes you made cannot just be applied to the remote repository. You will first need to fetch the changes your collaborators made and merge them with your local branch.
 
 ```bash
 $ git fetch origin
@@ -985,7 +1002,19 @@ $ git merge origin/master
 $ git push origin
 ```
 
-In effect, this is not much different from using branches on your local repository. To get a good grasp of using online repositories is to use them in practice. You can use this tutorial as a reference for the basic commands.
+In effect, this is not much different from using branches on your local repository. To get a good grasp of using remote repositories is to use them in practice. You can use this tutorial as a reference for the basic commands.
+
+
+#### Creating and deleting branches on a remote repostory. 
+
+To create a new branch on the remote repository, you can simply create the branch on your local version and push like normal. The new branch will automatically appear on the remote repository.
+To delete a remote branch, you need to issue an extra command on top of `git branch -d branch_name`, namely
+
+```bash
+$ git push origin --delete branch_name
+```
+
+The reason for this, is extra safety. It can happen that someone else is working on the branch you just haphazardly deleted, which is why you need to explicitly push branch deletions to the remote repository.
 
 
 ## Further info
