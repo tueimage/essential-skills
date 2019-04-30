@@ -32,16 +32,16 @@ We will assume you work with a Terminal application to interact with a Linux mac
 
 Start the terminal application of your computer i.e. Cygwin on Windows, Gnome-Terminal in Ubuntu Linux, or Terminal.app in macOS.
 
-A black screen with white text (or a white screen with black text if you are using macOS) will appear. There is probably a blinking cursor and a `$`-sign visible on the screen. There may be some text in front of the dollar sign like the user name or computer name that you can ignore for now. The `$`-sign is called the Bash 'prompt'. Bash is the program that you run the commands in. From this prompt you can type commands. When your command is finished you can press enter to see the result, which will be printed below the command you typed.
+A black screen with white text (or a white screen with black text if you are using macOS) will appear. There is probably a blinking cursor and a `$`-sign visible on the screen. There may be some text in front of the dollar sign like the user name or computer name that you can ignore for now. Because it is different on every system, we are going to just use `$` throughout this tutorial. The `$`-sign is called the Bash 'prompt'. Bash is the program that you run the commands in. From this prompt you can type commands. When your command is finished you can press enter to see the result, which will be printed below the command you typed.
 For example, if you type `whoami` and press enter, your user name will appear. 
 Below that you get a new prompt on which you can enter new commands. If you type `date` it will display the current date and time.
 
 ```bash
-    $ whoami
-    amalia
+$ whoami
+amalia
 
-    $ date
-    Fri Feb  8 09:35:28 CET 2019
+$ date
+Fri Feb  8 09:35:28 CET 2019
 ```
 
 Although it is nice to be able to recall your name should you forget it, or see what time and day it is, there are far more useful commands in Linux. Most of these commands let you interact with files on your PC or on a remote server. Whether you use them on a server, or use them on your local Linux PC, they behave the same way.
@@ -49,37 +49,37 @@ Although it is nice to be able to recall your name should you forget it, or see 
 Like any operating system, Linux works with hierarchies of file folders, also called directories in Linux. At the top level of this hierarchy, or 'root', you have a folder called `/`. From there, you have several subfolders. One of them is called `/home` in which the user folders are. If you have an account on the computer, there should be one with your user name called `/home/amalia` for example. In that 'home folder' you can save your files, your code, and if there is enough space (inquire with the administrator if you want to be sure), your data. Because you so often use your home folder, there is a shorter way of typing it: a tilde or `~`. When in Linux the promp shows this tilde, it means that you are currently in that folder. You can also check with the `pwd` command (short for print/present working directory):
 
 ```bash
-amalia@saruman:~$ pwd
+$ pwd
 /home/amalia
 ```
 
 In the directory you can inspect files and folders, run programs, and create, move, and delete files or folders. If you want to see what the content of the current directory are, you use the `ls` command. `ls` will show you a list of the contents of the folder. There is a chance that this folder is currently empty, so it will probably show nothing. Let's change that by typing `mkdir my_first_folder`. `mkdir` stands for 'make directory'. If you type `ls` again, you will see it shows the new folder:
 
 ```bash
-amalia@saruman:~$ ls
+$ ls
 
-amalia@saruman:~$ mkdir my_first_folder
+$ mkdir my_first_folder
 
-amalia@saruman:~$ ls
+$ ls
 my_first_folder
 
 ```
 
-Wonderful. Now you can navigate to this folder by typing `cd my_first_folder`. Note that the prompt changes to reflect the new working directory.
+Wonderful. Now you can navigate to this folder by typing `cd my_first_folder`.
 
 ```bash
-amalia@saruman:~$ cd my_first_folder
+$ cd my_first_folder
 
-amalia@saruman:~/my_first_folder$ 
+$ 
 
 ```
 
 In here, let's make a new text file using the `touch` command:
 
 ```bash
-amalia@saruman:~/my_first_folder$ touch my_first_file.txt
+$ touch my_first_file.txt
 
-amalia@saruman:~/my_first_folder$ ls
+$ ls
 my_first_file.txt
 ```
 
@@ -101,28 +101,28 @@ Now your file contains some text, and you can show it in the Terminal using the 
 We have seen that you can navigate down the hierarhcy by typing `cd` with the folder's name. However, you can also change directory using the full path:
 
 ```bash
-amalia@saruman:~/my_first_folder$ cd ~
+$ cd ~
 
-amalia@saruman:~$ cd ~/my_first_folder
+$ cd ~/my_first_folder
 
-amalia@saruman:~/my_first_folder$
+$
 ```
 
 If you want to move one level *up* you can use `cd ..`. `..` always denotes the parent folder of the current working directory, i.e.
 
 ```bash
-amalia@saruman:~/my_first_folder$ cd ..
+$ cd ..
 
-amalia@saruman:~$ mkdir my_second_folder
+$ mkdir my_second_folder
 
-amalia@saruman:~$ ls
+$ ls
 my_first_folder     my_second_folder
 
-amalia@saruman:~$ cd my_first_folder
+$ cd my_first_folder
 
-amalia@saruman:~/my_first_folder$ cd ../my_second_folder
+$ cd ../my_second_folder
 
-amalia@saruman:~/my_second_folder$
+$
 ```
 
 The last command combines both concepts: "move one folder up the hierarchy and change to the one with the name 'my_second_folder'."
@@ -141,16 +141,16 @@ Tip
 You can copy files using the `cp` command. Behind the command you type one or more files you want to copy, and the destination. The destination can be a new file name or a destination folder:
 
 ```bash
-amalia@saruman:~/my_first_folder$ cp my_first_file.txt copy_of_file.txt
+$ cp my_first_file.txt copy_of_file.txt
 
-amalia@saruman:~/my_first_folder$ ls
+$ ls
 copy_of_file.txt    my_first_file.txt
 
-amalia@saruman:~/my_first_folder$ cp my_first_file.txt copy_of_file.txt ../my_second_folder
+$ cp my_first_file.txt copy_of_file.txt ../my_second_folder
 
-amalia@saruman:~/my_first_folder$ cd ../my_second_folder
+$ cd ../my_second_folder
 
-amalia@saruman:~/my_second_folder$ ls
+$ ls
 copy_of_file.txt    my_first_file.txt
 
 ```
@@ -160,22 +160,22 @@ If the destination is a folder, you can also copy multiple files (or folders) to
 If you want to copy a folder with its content, you use the `cp` command with a `-r` flag, which means `recursive` copy. Recursive copying also copies everything *inside* a folder.
 
 ```bash
-amalia@saruman:~/my_second_folder$ cd
+$ cd
 
-amalia@saruman:~$ cp -r my_first_folder copy_of_first_folder
+$ cp -r my_first_folder copy_of_first_folder
 
-amalia@saruman:~$ ls
+$ ls
 copy_of_first_folder    my_first_folder     my_second_folder
 ```
 
 **Be careful!** If the destination folder does not exist yet, the folder's copy will get the name of the destination you specify. However, if the destination folder *does* exist, the folder you copy is copied *into* the destination folder. Note the difference in the following example in which the destination already existed:
 
 ```bash
-amalia@saruman:~$ cp -r my_first_folder my_second_folder
+$ cp -r my_first_folder my_second_folder
 
-amalia@saruman:~$ cd my_second_folder
+$ cd my_second_folder
 
-amalia@saruman:~/my_second_folder$ ls
+/my_second_folder$ ls
 copy_of_file.txt    my_first_file.text     my_first_folder
 
 ```
@@ -207,14 +207,14 @@ Of course it helps if you replace `folder/on/server` and `/folder/on/your/pc` wi
 You can remove files using the `rm` command:
 
 ```bash
-amalia@saruman:~$ cd my_first_folder
+$ cd my_first_folder
 
-amalia@saruman:~/my_first_folder$ ls
+$ ls
 copy_of_file.txt    my_first_file.txt
 
-amalia@saruman:~/my_first_folder$ rm my_first_file.txt
+$ rm my_first_file.txt
 
-amalia@saruman:~/my_first_folder$ ls
+$ ls
 copy_of_file.txt 
 ```
 
@@ -223,12 +223,12 @@ Likewise, you can remove folders using the `rm -r` command to do it recursively 
 Moving files and folders can be done using the `mv` command. This works similarly to the `cp` command (including the `-r` flag), naturally without copying:
 
 ```bash
-amalia@saruman:~/my_second_folder$ ls
+$ ls
 copy_of_file.txt    my_first_file.txt     my_first_folder
 
-amalia@saruman:~/my_second_folder$ mv my_first_file.txt my_newly_named_file.txt
+$ mv my_first_file.txt my_newly_named_file.txt
 
-amalia@saruman:~/my_second_folder$ ls
+$ ls
 copy_of_first_folder    my_first_$ ls
 copy_of_file.txt    my_first_folder    my_newly_named_file.txt
 ```
@@ -243,7 +243,7 @@ Like with the `cp` command, the `mv` command can move multiple files or folders 
 You have probably noticed that a lot of interaction with Linux goes through using the `ls` and `cd` commands. The `ls` command can even be more useful if you use a few flags. For example, try to run the following in your home folder:
 
 ```bash
-amalia@saruman:~$ ls -lh
+$ ls -lh
 
 total 12
 drwxrwxr-x 2 amalia amalia 4.0K Feb  8 16:54 copy_of_first_folder
@@ -271,7 +271,7 @@ This shows quite some information, that you don't need to understand fully at th
 Surprisingly, `ls` or `ls -l(h)` does not show everything inside the folder, because some of it can be hidden. If you want to show all the hidden stuff in your home folder, include the `-a` flag, like this:
 
 ```bash
-amalia@saruman:~$ ls -lah
+$ ls -lah
 
 total 12
 drwx------ 8 amalia amalia 4.0K Feb  8 14:02 .
@@ -293,14 +293,14 @@ Your result may include other files or folders as well. The files starting with 
 As we have seen, the `ls -lh` command does not really help for establishing how much disk space a folder takes, because the folder's contents are not included. You can use the `du -sh` command instead. `du` stands for disk usage. The `-s` is there to list a total for a folder (otherwise it will list all files/folders in side it). The `-h` does the same as in the `ls -lh` command: it makes sure that the sizes are humanly readable (hence `-h`) and formatted to kilobytes, megabytes, and gigabytes.
 
 ```bash
-amalia@saruman:~$ du -sh my_first_folder
+$ du -sh my_first_folder
 8.0K    my_first_folder
 ```
 
 If you want to do this for multiple folders, you can simply add other file names. You can use a *wildcard* to include all files and folders in the current working directory:
 
 ```bash
-amalia@saruman:~$ du -sh *
+$ du -sh *
 8.0K    copy_of_first_folder
 8.0K    my_first_folderi
 8.0K    my_second_folder
@@ -314,12 +314,12 @@ Tip
 : The wildcards trick also works for the `ls`, `cp`, `mv`, and `rm` commands to list, copy, move, or remove multiple files. It also works if you want to match part of a name, i.e.
 
 ```
-amalia@saruman:~$ ls -lh *
+$ ls -lh *
 8.0K    copy_of_first_folder
 8.0K    my_first_folder
 8.0K    my_second_folder
 
-amalia@saruman:~$ ls -lh *first*
+$ ls -lh *first*
 8.0K    copy_of_first_folder
 8.0K    my_first_folder
 
@@ -350,7 +350,7 @@ while True:
 This script will print the time every second. Save the file. Check with `cat` or `more` if the file has been written.
 Note that this script contains an infinite loop. It won't stop on its own.
 
-Run the file with the command `python my_clock.py`. The script should print the current time every second.
+Run the file with the command `$ python my_clock.py`. The script should print the current time every second.
 
 
 
@@ -404,6 +404,8 @@ If your script uses the GPU, for example through the Python libraries `tensorflo
 The first step is to check which GPUs are available. The BMT servers have a tool called `nvtop` to check this:
 
 ```bash
+$ nvtop
+
  GPU 0: GeForce GTX TITAN X                                                    P8
  --------------------------------------------------------------------------------
    Util:               0%   Temp: ------       57C    Fan: --            22%
@@ -511,22 +513,22 @@ To log out, you press <kbd>Ctrl-B</kbd> and then you press <kbd>D</kbd> to 'deta
 The availability of installation options will depend on your rights on the system you are using. We are assuming you are using Ubuntu here (which is installed on TU/e servers by default). You can install and update programs using the `apt` command. For example, if you want to install a medical image viewer, you can install ITKSnap with 
 
 ```bash
-sudo apt install itksnap
+$ sudo apt install itksnap
 ```
 
 `sudo` indicates you need an admin account, which you may have for your own PC but not for the server. In that case, inquire with the administrator how to proceed.
 
 Python packages can be installed in your own user folder, for which you do not need an admin account. You can install them with the `pip` command. For example, to install TensorFlow 1.3.0, Keras 2.0.0, or SimpleITK you can run
 
+```bash
+$ pip install --user tensorflow-gpu==1.3.0
+
+$ pip install --user keras==2.0.0
+
+$ pip install --user simpleitk
 ```
-pip install --user tensorflow-gpu==1.3.0
 
-pip install --user keras==2.0.0
-
-pip install --user simpleitk
-```
-
-To remove packages, use `pip uninstall <package_name>`.
+To remove packages, use `$ pip uninstall <package_name>`.
 
 
 ## More on permissions
@@ -535,14 +537,14 @@ In the (File properties)[#file-properties] section, we have briefly looked at pe
 
 To change the permissions on a file you own to forbid writing to it, simply type something like
 
-```
-chmod u-w some_filename
+```bash
+$ chmod u-w some_filename
 ```
 
 There `u` here refers to who the permissions are changed for, the `-` should be read as a 'minus' for 'removing', and the `w` for 'writing', i.e. this line says: 'Modify the permissions for the file `some_filename` such that the user that owns the file can no longer write to it'. Other options instead of `u` include `g` for group, `o` for others, and `a` for all. Other options instead of `w` are `r` for reading and `x` for executing. By using `+` you can add permissions, for example
 
-```
-chmod u+x some_filename
+```bash
+$ chmod u+x some_filename
 ```
 
 Let's you, the user (hence `u`), execute (hence `x`) the code in `some_filename`. This turns `some_filename` into a executable program.
@@ -556,7 +558,7 @@ Of course, you can write much more involved scripts in here, that truly are full
 
 You can do the same thing with Python scripts. That requires one extra comment be placed at the top of your Python file which tells it where to find the Python interpreter. First, we need to know where the Python interpreter is located on your system:
 
-```
+```bash
 $ which python
 /home/amalia/anaconda3/bin/python
 ```
