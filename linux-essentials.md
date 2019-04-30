@@ -330,7 +330,7 @@ amalia@saruman:~$ ls -lh *first*
 
 ## Running programs and scripts
 
-You now know how to get your data and code on the server, and how to organize it once you have done so. How to run that code? In this section, we are working with an Python script that you can save on the server. To run the examples, make a new folder in your home folder called `process_example`, and create a file called `clock.py`. Open the file in your favorite editor, and write the following code:
+You now know how to get your data and code on the server, and how to organize it once you have done so. How to run that code? In this section, we are working with an Python script that you can save on the server. To run the examples, make a new folder in your home folder called `process_example`, and create a file called `my_clock.py`. Open the file in your favorite editor, and write the following code:
 
 ```python
 import time
@@ -350,7 +350,7 @@ while True:
 This script will print the time every second. Save the file. Check with `cat` or `more` if the file has been written.
 Note that this script contains an infinite loop. It won't stop on its own.
 
-Run the file with the command `python clock.py`. The script should print the current time every second.
+Run the file with the command `python my_clock.py`. The script should print the current time every second.
 
 
 
@@ -374,19 +374,19 @@ You will notice that the Python interpreter does respond to <kbd>Ctrl-C</kbd> by
 Sometimes it can be useful to pause a program temporarily, then do something else, and continue the program. You can press <kbd>Ctrl-Z</kbd> to pause virtually any program. It will put the current program in a sort of hibernation state, letting you do other things in the Terminal window. You can continue the program with the `fg` command. Note that the Terminal will print the process id of the current program when you pause it:
 
 ```
-$ python -i clock.py
+$ python -i my_clock.py
 08:31:18
 08:31:19
 08:31:20
 ^Z
-[1]  + 27152 suspended  python -i clock.py
+[1]  + 27152 suspended  python -i my_clock.py
 ```
 
 In this case, the program id is 27152. When you issue the `fg` command, it will continue:
 
 ```
 $ fg
-[1]  + 27152 continued  python -i clock.py
+[1]  + 27152 continued  python -i my_clock.py
 08:32:21
 08:32:22
 08:32:23
@@ -499,7 +499,7 @@ This sets the fraction of memory that is used to approximately 5%. You can then 
 
 ## Keep programs and scripts running after logging out
 
-If you lose connection with the server, everything you were running in the Terminal on that server stops running. This is not ideal. You can use a so-called terminal multiplexer or `tmux` to keep your scripts running in the background. To do this, type `tmux`. You will see a green bar appear at the bottom of the Terminal window, indicating that you are using the multiplexer. You can run anything you like inside this multiplexer window. To test it out, you can use the clock script we used before.
+If you lose connection with the server, everything you were running in the Terminal on that server stops running. This is not ideal. You can use a so-called terminal multiplexer or `tmux` to keep your scripts running in the background. To do this, type `tmux`. You will see a green bar appear at the bottom of the Terminal window, indicating that you are using the multiplexer. You can run anything you like inside this multiplexer window. To test it out, you can use the my_clock script we used before.
 
 To log out, you press <kbd>Ctrl-B</kbd> and then you press <kbd>D</kbd> to 'detach' from the current session. Anything you had running in the window will continue, even when you log out. When you want to go back to it, you can type the command `tmux -a` to 'attach' to the last session you had running. `tmux` is very powerful, allowing you to have multiple panels that run different things side-by-side. You can also have multiple sessions running in parallel, by detaching from the current session, and starting a new one by just typing `tmux` again. Use `tmux ls` to list all running sessions. With `tmux -a -t <session number>` you can attach to a specific session.
 
@@ -508,7 +508,7 @@ To log out, you press <kbd>Ctrl-B</kbd> and then you press <kbd>D</kbd> to 'deta
 
 ## Installing additional programs and packages
 
-The availability of installation options will depend on your rights on the system you are using. We are assuming you are using Ubuntu here (which is installed on TU/e servers by default). You can install and update programs using the `apt` command. For example, if you want to install a medical image viewer, you can install ITKSnap by 
+The availability of installation options will depend on your rights on the system you are using. We are assuming you are using Ubuntu here (which is installed on TU/e servers by default). You can install and update programs using the `apt` command. For example, if you want to install a medical image viewer, you can install ITKSnap with 
 
 ```bash
 sudo apt install itksnap
@@ -529,9 +529,104 @@ pip install --user simpleitk
 To remove packages, use `pip uninstall <package_name>`.
 
 
+## More on permissions
+
+In the (File properties)[#file-properties] section, we have briefly looked at permissions. At some point, you may require to change these permissions on your own files, i.e. those for which `ls -l` shows your username. Those files, your username 'owns'. Only the administrator of a computer can change the ownership of the files. What you yourself can change however, are the permissions. You can set them using the `chmod` command. Remember that the permissions dictate if a file can be 1. read, 2. written to, or 3. executed by 1. users, 2. groups, or 3. everyone. 'Executed' here means 'run'. We have already seen that all folders are executable, which simply means 'accessible'.
+
+To change the permissions on a file you own to forbid writing to it, simply type something like
+
+```
+chmod u-w some_filename
+```
+
+There `u` here refers to who the permissions are changed for, the `-` should be read as a 'minus' for 'removing', and the `w` for 'writing', i.e. this line says: 'Modify the permissions for the file `some_filename` such that the user that owns the file can no longer write to it'. Other options instead of `u` include `g` for group, `o` for others, and `a` for all. Other options instead of `w` are `r` for reading and `x` for executing. By using `+` you can add permissions, for example
+
+```
+chmod u+x some_filename
+```
+
+Let's you, the user (hence `u`), execute (hence `x`) the code in `some_filename`. This turns `some_filename` into a executable program.
+
+
+## Running your own programs
+
+Programs can be run using the `./` or `sh` commands. One way of writing them is using so-called shell scripts, which consist of the commands you have been typing on the prompt so-far. For example, if you save the code `cd ~; ls -l` to a file called `list_home.sh`, make it an executable by running `chmod u+x list_home.sh`, you can run it by typing `./list_home.sh`, which will (believe it or not) navigate to your home folder and list the files and folders in it. Note that the dot in `./` refers to the current folder.
+
+Of course, you can write much more involved scripts in here, that truly are full programs (e.g. there are for loops and if statements available on the command line as well). That goes beyond this short tutorial, but if you search for 'shell scripts' you are bound to find some good tutorials on this subject.
+
+You can do the same thing with Python scripts. That requires one extra comment be placed at the top of your Python file which tells it where to find the Python interpreter. First, we need to know where the Python interpreter is located on your system:
+
+```
+$ which python
+/home/amalia/anaconda3/bin/python
+```
+
+Let's add that information to the my_clock script:
+
+```python
+#!/home/amalia/anaconda3/bin/python
+import time
+import datetime
+
+while True:
+    # create a datetime object for the current date and time
+    now = datetime.datetime.now()
+
+    # print the time in hours:minutes:seconds format
+    print('{:02d}:{:02d}:{:02d}'.format(now.hour, now.minute, now.second))
+
+    # wait a second
+    time.sleep(1)
+```
+
+Now, make the script executable:
+
+```bash
+$ chmod u+x clock.py
+```
+
+And run it with
+
+```bash
+$ ./clock.py
+14:51:09
+14:51:10
+14:51:11
+```
+
+## The PATH variable and ~/.bashrc file
+
+If the `./` is bothering you, here is the explanation for it: Linux has a lot of scripts and programs that you can run without that `./`, examples include `tmux`, and `python`, and `nvtop`, and `htop`, and even `du`. The reason you do not need the `./` there, is because these programs are in your PATH. The PATH variable is a Linux variable that lists all locations in which Linux is looking for executables when you try to run them without `./`. By requiring that you use `./` for scripts that are not on the path, Linux makes sure you cannot overwrite the default ones. For example, if you have an executable file called `du` in your folder, how should Linux know which `du` to run? The program that shows disk usage? Or this obscure file you wrote?
+
+The answer is, it is using that version that it can find in the PATH variable. To inspect the PATH variable on your computer, you can type
+
+```bash
+$ echo $PATH
+/home/amalia/bin:/home/amalia/.local/bin:/home/amalia/anaconda3/bin:/usr/local/cuda-8.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+```
+
+The locations are separated by colons. As you can see, one of the locations is the `anaconda3/bin` folder. We have seen in the previous section that that is where we can find the Python executable. This is the reason why Linux knows where to look when you type `python` on the command line. The `du` program is in `/usr/bin/` which is also part of the PATH.
+
+If you want, you can add folders to this path. For example, if you have a folder `scripts` on your home folder that contains some executable scripts like `clock.py`, you can add that folder to PATH by typing
+
+```bash
+$ export PATH="/home/amalia/scripts:$PATH"
+```
+
+Here, we are basically redefining PATH by appending the `scripts` folder. Now, you can type
+
+```
+$ my_clock
+14:57:29
+14:57:30
+14:57:31
+```
+
+Congratulations are in order, you just made a fully functioning Linux program! However, if you logout and back in, you will notice the PATH file has been reset. You can change this by adding the line `export PATH="/home/amalia/scripts:$PATH` to the `.bashrc` file in your home folder. This file will be run every time you log in, and the PATH variable will be updated automatically. If you look around in the `.bashrc` file, you will see that this file also contains an `export PATH=` statement for the `anaconda` installation.
+
 ## Extras
 
-There are plenty more Linux commands that can be very useful, but it goes too far to list them all here. The ones we use a lot are listed below. These can be convenient, but they are in no way required for casual use.
+There are plenty more Linux commands that can be very useful, but it goes too far to list them all here. A few of the more useful ones are listed below. These can be convenient, but they are in no way required for casual Linux use.
 
 * `man` for manual let's you view a command's documentation. For example, type `man ls` to view all options for the `ls` command. You can navigate with the arrow keys and page up/down keys. Quit the manual by typing `q`.
 
@@ -539,15 +634,15 @@ There are plenty more Linux commands that can be very useful, but it goes too fa
 
 * `less` is a more advanced alternative to `more` that also let's you navigate with the page up/down keys. There are more options, like searching, which have the same commands as the `vim` editor.
 
-* `grep` (**g**lobally search a **r**egular **e**xpression and **p**rint) to find text in files, for example `grep import clock.py` finds the lines where an import statement is used.
+* `grep` (**g**lobally search a **r**egular **e**xpression and **p**rint) to find text in files, for example `grep import my_clock.py` finds the lines where an import statement is used.
 
-* `>` lets you divert the output of a command to a file, for example `grep import clock.py > test.txt` will put the import statements in a new file called `test.txt`. This can be useful when your script outputs a lot of logging information that you wish to save.
+* `>` lets you divert the output of a command to a file, for example `grep import my_clock.py > test.txt` will put the import statements in a new file called `test.txt`. This can be useful when your script outputs a lot of logging information that you wish to save.
 
 * `tail` prints the final lines of a file. You can set how many lines are shown with the `-n <number>` flag. If you use the `-f` flag, it will update the view with recent additions to the file, which is ideal for log files created with `>`. For example, if you use `python clock.py > times.txt` and view the file in another Terminal or `tmux` instance with `tail -f times.txt`, it will update the window with the recently printed times.
 
 * `head` behaves like `tail` but then for the first `-n` lines. No `-f` flag is available however.
 
-* `|` lets you divert output of one command to another command, for example, you can chain `grep` commands like this: `grep import clock.py | grep date` to only show lines that contain `import` and `date`.
+* `|` lets you divert output of one command to another command, for example, you can chain `grep` commands like this: `grep import my_clock.py | grep date` to only show lines that contain `import` and `date`.
 
 * `history` lets you view all commands you have typed. You can use it with `grep` to search in it, by piping the output, like this: `history | grep python`.
 
