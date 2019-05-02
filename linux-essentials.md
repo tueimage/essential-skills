@@ -587,13 +587,13 @@ while True:
 Now, make the script executable:
 
 ```bash
-$ chmod u+x clock.py
+$ chmod u+x my_clock.py
 ```
 
 And run it with
 
 ```bash
-$ ./clock.py
+$ ./my_clock.py
 14:51:09
 14:51:10
 14:51:11
@@ -612,7 +612,7 @@ $ echo $PATH
 
 The locations are separated by colons. As you can see, one of the locations is the `anaconda3/bin` folder. We have seen in the previous section that that is where we can find the Python executable. This is the reason why Linux knows where to look when you type `python` on the command line. The `du` program is in `/usr/bin/` which is also part of the PATH.
 
-If you want, you can add folders to this path. For example, if you have a folder `scripts` on your home folder that contains some executable scripts like `clock.py`, you can add that folder to PATH by typing
+If you want, you can add folders to this path. For example, if you have a folder `scripts` on your home folder that contains some executable scripts like `my_clock.py`, you can add that folder to PATH by typing
 
 ```bash
 $ export PATH="/home/amalia/scripts:$PATH"
@@ -643,7 +643,7 @@ There are plenty more Linux commands that can be very useful, but it goes too fa
 
 * `>` lets you divert the output of a command to a file, for example `grep import my_clock.py > test.txt` will put the import statements in a new file called `test.txt`. This can be useful when your script outputs a lot of logging information that you wish to save.
 
-* `tail` prints the final lines of a file. You can set how many lines are shown with the `-n <number>` flag. If you use the `-f` flag, it will update the view with recent additions to the file, which is ideal for log files created with `>`. For example, if you use `python clock.py > times.txt` and view the file in another Terminal or `tmux` instance with `tail -f times.txt`, it will update the window with the recently printed times.
+* `tail` prints the final lines of a file. You can set how many lines are shown with the `-n <number>` flag. If you use the `-f` flag, it will update the view with recent additions to the file, which is ideal for log files created with `>`. For example, if you use `python my_clock.py > times.txt` and view the file in another Terminal or `tmux` instance with `tail -f times.txt`, it will update the window with the recently printed times.
 
 * `head` behaves like `tail` but then for the first `-n` lines. No `-f` flag is available however.
 
