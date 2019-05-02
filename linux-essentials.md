@@ -18,6 +18,9 @@
     * [Limiting memory use in TensorFlow (with or without Keras)](#limiting-memory-use-in-tensorflow-with-or-without-keras)
 * [Keep programs and scripts running after logging out](#keep-programs-and-scripts-running-after-logging-out)
 * [Installing additional programs and packages](#installing-additional-programs-and-packages)
+* [More on file permsissions](#more-on-file-permissions)
+* [Running your own programs](#running-your-own-programs)
+* [The PATH variable and ~/.bashrc file](#the-path-variable-and-bashrc-file)
 * [Extras](#extras)
 
 During one of your projects or courses you may have to work with Linux. One prominent example is when you will use a GPU-server for deep learning experiments. Linux is an operating system (OS), like Windows, Android, or iOS. There are many distributions (think 'versions') of Linux, and you will probably use a distribution called Ubuntu.
@@ -531,7 +534,7 @@ $ pip install --user simpleitk
 To remove packages, use `$ pip uninstall <package_name>`.
 
 
-## More on permissions
+## More on file permissions
 
 In the (File properties)[#file-properties] section, we have briefly looked at permissions. At some point, you may require to change these permissions on your own files, i.e. those for which `ls -l` shows your username. Those files, your username 'owns'. Only the administrator of a computer can change the ownership of the files. What you yourself can change however, are the permissions. You can set them using the `chmod` command. Remember that the permissions dictate if a file can be 1. read, 2. written to, or 3. executed by 1. users, 2. groups, or 3. everyone. 'Executed' here means 'run'. We have already seen that all folders are executable, which simply means 'accessible'.
 

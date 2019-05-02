@@ -497,14 +497,14 @@ An overview of the slicing syntax is given in the following table:
 
 | syntax            | meaning                                           | result                                                        |
 | ---               | ---                                               | ---                                                           |
-| `numbers[0:4] `   | the first four items                              | ["one", 2, "three", 4.0]                                      |
-| `numbers[:4] `    | the same as `numbers[0:4]`                        | ["one", 2, "three", 4.0]                                      |
-| `numbers[-1] `    | the last item in the list                         | "10.0"                                                        |
-| `numbers[3:]`     | from the fourth item to the last item of the list | [ 4.0, 5, "six", 7, "VIII", 'nine', "10.0"]                   |
-| `numbers[:] `     | all items of the list, i.e. the same list         | ["one", 2, "three", 4.0, 5, "six", 7, "VIII", 'nine', "10.0"] |
-| `numbers[0:4:2] ` | every second item of the first four numbers       | ["one", "three"]                                              |
-| `numbers[3::2] `  | every second item starting at the fourth item     | [4.0, "six", "VIII", "10.0"]                                  |
-| `numbers[::2] `   | every second item                                 | ["one", "three", 5, 7, 'nine']                                |
+| `numbers[0:4] `   | the first four items                              | `["one", 2, "three", 4.0]`                                      |
+| `numbers[:4] `    | the same as `numbers[0:4]`                        | `["one", 2, "three", 4.0]`                                      |
+| `numbers[-1] `    | the last item in the list                         | `"10.0"`                                                        |
+| `numbers[3:]`     | from the fourth item to the last item of the list | `[ 4.0, 5, "six", 7, "VIII", 'nine', "10.0"]`                   |
+| `numbers[:] `     | all items of the list, i.e. the same list         | `["one", 2, "three", 4.0, 5, "six", 7, "VIII", 'nine', "10.0"]` |
+| `numbers[0:4:2] ` | every second item of the first four numbers       | `["one", "three"]`                                              |
+| `numbers[3::2] `  | every second item starting at the fourth item     | `[4.0, "six", "VIII", "10.0"]`                                  |
+| `numbers[::2] `   | every second item                                 | `["one", "three", 5, 7, 'nine']`                                |
 
 The slicing syntax can also be used to *set* values in a list, for example
 
