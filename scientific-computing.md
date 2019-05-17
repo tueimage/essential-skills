@@ -964,7 +964,14 @@ The function has one mandatory argument named `input`. Below the prototype speci
 
 ###### Exercises
 
-For each of the following questions, you can use the following code to generate an image of a white disk on a black background:
+For each of the following questions, you can use the following code to load an image and turn it into grayscale:
+
+```python
+image = plt.imread('/path/to/some/image')
+image = np.mean(image[:, :, :3], axis=2)
+```
+
+or generate an image of a white disk on a black background using the code
 
 ```python
 si, sj = 63, 63
