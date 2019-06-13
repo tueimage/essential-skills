@@ -651,5 +651,5 @@ There are plenty more Linux commands that can be very useful, but it goes too fa
 
 * `history` lets you view all commands you have typed. You can use it with `grep` to search in it, by piping the output, like this: `history | grep python`.
 
-
+* `feh` lets you view 2D images from the terminal, e.g. `feh some_image.png`
 
