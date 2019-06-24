@@ -1,6 +1,6 @@
 # Keras and TensorFlow essentials
 
-TensorFlow is the most popular toolbox for deep learning. TensorFlow was created and is maintained by the Google Brain Team. Actually, TensorFlow is more than a deep learning toolbox: it is also a library for differentiable computing. Training deep neural networks requires computation of gradientsients of networks, which can be done using differentiable operators.
+TensorFlow is the most popular toolbox for deep learning. TensorFlow was created and is maintained by the Google Brain Team. Actually, TensorFlow is more than a deep learning toolbox: it is also a library for differentiable computing. Training deep neural networks requires computation of gradients of networks, which can be done using differentiable operators.
 
 TensorFlow allows you to write computational graphs of operators. For each of these operators, the derivative is known. Therefore, you can backtrace the graph to find a chain of derivatives. Using the chain rule, you can construct a derivative for the full graph, which is useful in backpropagation of loss functions in neural networks (more on that later).
 
@@ -11,6 +11,8 @@ Summarized, TensorFlow excels at two things that fit training deep neural networ
 However, using TensorFlow directly means that you have to write a lot of code *de novo* every time you want to program a neural network. Therefore it is useful to run *front-ends* on top of TensorFlow that already contain the building blocks of neural networks. The most popular of those is called Keras, and we will use it together with TensorFlow as back-end to build neural networks in this chapter.
 
 Because Keras is such a popular front-end to TensorFlow, Keras has actually been included with TensorFlow since version 1.13.0.
+
+In this tutorial, we will look at very basic TensorFlow code to explain the graph-based auto-differentiation, and then progress to a very simple network in Keras. We will slowly expand on this simple network until we have one that can perform a real task.
 
 
 
@@ -243,7 +245,7 @@ Which will print `2.0`.
 
 ## How TensorFlow computes derivatives
 
-So how does TensorFlow know that the derivative of 2 * x is 2 and the derivative of sin(x) is cos(x)? Well, it just knows. It has a large look-up table for every operator in which it can look up what it should do. Does the function contain a constant multiplied by the variable? Then the derivative is equal to the constant. Does the function contain a sine? Then the derivative is a cosine. It just looks these things up in a table.
+So how does TensorFlow know that the derivative of 2 * x is 2 and the derivative of sin(x) is cos(x)? Well, it just knows. It has a large look-up table for every operator in which it can look up what it should do. Does the function contain a constant multiplied by the variable? Then the derivative is equal to the constant. Does the function contain a sine? Then the derivative is a cosine. Is there a product of two functions? Then it will apply the product rule. It just looks these things up in a table.
 
 Whenever a function is composed of multiple operators (i.e. sin(2 * x)), it applies operator *priority* and the chain rule. The priority is implicit in the graph. In the sin(2 * x) example, it understands that the graph looks like this:
 
@@ -266,12 +268,98 @@ Whenever a function is composed of multiple operators (i.e. sin(2 * x)), it appl
 
 Hence, to compute dy/dx, TensorFlow traverses the graph upwards, first computing the derivative of sin(g(x)) w.r.t. x. It looks up that for a function sin(g(x)) the derivative is cos(g(x)) * g'(x). Then, it needs to go further up the graph to compute g'(x) = 2 * x. Because it knows that the derivative of a constant times a variable is equal to the constant, it will return 2. Then it assembles the full derivative as being cos(2 * x) * 2. 
 
-In essence, it does nothing more than what you learned in your Calculus courses.
+In essence, it does nothing more than what you learned in your Calculus courses. 
+
+We are now going to apply TensorFlow's auto-differentiation capabilities on the simplest neural network possible.
 
 
-# Neural networks in TensorFlow
+# Building a perceptron in TensorFlow
+
+The simplest network that we can build is called a perceptron. A perceptron has an input layer, an output layer, and one so-called hidden layer. This hidden layer will have a matrix of weights $\mathbf{W}$ that is learned during training. In addition, there will be one additional bias weight vector $\mathbf{b}$ that will also be learned. The input layer will receive an input vector $\mathbf{x}$. It will compute the inner product $\mathbf{W} \dot \mathbf{x}$ and add the bias weights. On top of that, a so-called activation function will be applied. In this case, we choose the ReLU function. The output layer will return a vector $\mathbf{y}$ with outputs computed by
+
+$$\mathbf{y} = ReLU(\mathbf{W} \dot \mathbf{x})$$
+
+Let's build this model in TensorFlow.
+
+```python
+
+import tensorflow as tf
+import keras
+
+# Placeholders for input and output
+x = tf.placeholder(dtype=tf.float32, shape=[None, 29*29])
+y = tf.placeholder(dtype=tf.float32, shape=[None, 10])
+
+# Variables for the weights and biases
+w = tf.Variable(tf.zeros([29*29, 10]))
+b = tf.Variable(tf.zeros([10]))
+
+# Compute the dot product
+product = tf.matmul(x, w)
+with_bias = tf.add(product, b)
+y_hat = tf.nn.softmax(logits)
+```
+
+That is the whole network! The `y` placeholder will hold the actual labels of the training set, and the `y_hat` variable will output estimates for both images in the training and validation sets.
+
+
+
+
+
+
+
+
+
+# Getting the MNIST data set
+
+The MNIST data set is an often-used example data set consisting of images of hand-written numbers between zero and nine. The task is to classify which number the images show.
+
+To (down)load the data set, you can execute the following script:
+
+```python
+import keras
+import numpy as np
+import matplotlib.pyplot as plt
+
+(training_images, training_labels), (val_images, val_labels) = mnist.load_data()
+```
+
+This will download the MNIST data set if that has not been done before, and divide it into a training set and a validation set.
+
+Let's inspect what is in these sets. Show the size of `training_images` and `training_labels` using
+
+```python
+print(training_images.shape)
+print(training_labels.shape)
+```
+
+This will show `(60000, 28, 28)` and `(60000,)`. Hence, the set contains 60,000 images of 28 x 28 and 60,000 labels.
+
+Plot the first image by executing
+
+```python
+plt.imshow(training_images[0])
+plt.show()
+```
+
+This should print a 5, and the corresponding label, `training_labels[0]` should reflect that.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Neural networks in Keras
+
 
 # Convolutional neural networks
 
