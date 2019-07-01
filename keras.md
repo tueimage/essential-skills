@@ -4,15 +4,23 @@ TensorFlow is the most popular toolbox for deep learning. TensorFlow was created
 
 TensorFlow allows you to write computational graphs of operators. For each of these operators, the derivative is known. Therefore, you can backtrace the graph to find a chain of derivatives. Using the chain rule, you can construct a derivative for the full graph, which is useful in backpropagation of loss functions in neural networks (more on that later).
 
-In addition, TensorFlow allows you to run these graphs on Central Processing Units (CPUs, where almost all code you have written in Python or Matlab runs on) *and* on Graphics Processing Units (GPUs). As the name implies, the latter are processors specialized in graphical computations (such as games). However, because that kind of computation (e.g. convolutions, inner products) significantly overlaps with the computations in neural networks, GPUs can accellerate those.
+In addition, TensorFlow allows you to run these graphs on Central Processing Units (CPUs, where almost all code you have written in Python or Matlab runs on) *and* on Graphics Processing Units (GPUs). As the name implies, the latter are processors specialized in graphical computations (such as games). However, because that kind of computation (e.g. convolutions, inner products) significantly overlaps with the computations in neural networks, GPUs can accellerate those as well.
 
-Summarized, TensorFlow excels at two things that fit training deep neural networks: differentiable computing, and GPU accelleration.
+Summarized, TensorFlow excels at two things that are suited for training deep neural networks: differentiable computing, and GPU accelleration.
 
-However, using TensorFlow directly means that you have to write a lot of code *de novo* every time you want to program a neural network. Therefore it is useful to run *front-ends* on top of TensorFlow that already contain the building blocks of neural networks. The most popular of those is called Keras, and we will use it together with TensorFlow as back-end to build neural networks in this chapter.
+However, using TensorFlow directly means that you have to write a lot of code *de novo* every time you want to program a neural network. Therefore it is useful to run *front-ends* on top of TensorFlow that already contain the building blocks of neural networks. In these front-ends, popular layers, optimization methods, loss functions, and activation functions are already implemented. The most popular front-end to TensorFlow is Keras, and we will use it together with TensorFlow as back-end to build neural networks in this chapter.
 
 Because Keras is such a popular front-end to TensorFlow, Keras has actually been included with TensorFlow since version 1.13.0.
 
 In this tutorial, we will look at very basic TensorFlow code to explain the graph-based auto-differentiation, and then progress to a very simple network in Keras. We will slowly expand on this simple network until we have one that can perform a real task.
+
+This tutorial is by no means a full overview of (convolutional) neural networks, but rather introduces you to the relevant tools to implement basic algorithms. This chapter will cover
+
+* Symbolic computation in TensorFlow
+* Logistic regression in Keras
+* Multi-layer preceptrons in Keras
+* Convolutional neural networks in Keras
+* Accessing trained weights and outputs in neural networks
 
 
 
@@ -49,7 +57,7 @@ $ pip install --user tensorflow-gpu
 ```
 
 
-## Hello world in TensorFlow
+## TensorFlow
 
 The simplest functional TensorFlow program we could think of is adding two numbers. The code to do that in TensorFlow is this:
 
@@ -86,7 +94,7 @@ By the way: if you run the code above you will get a lot of output on your scree
 
 
 
-## Computation graphs
+### Computation graphs
 
 However small this example is, we can actually use it to show what TensorFlow is doing. If we cut-off the script above, and instead print `y`, we will see what it is doing behind the scene:
 
@@ -129,7 +137,7 @@ Why is that useful? It is the perfect way of describing the forward pass and bac
 
 
 
-## Derivatives on the graphs
+### Derivatives on the graphs
 
 Let's look at another example, where we multiply a number by a constant factor of 2:
 
@@ -270,9 +278,9 @@ Hence, to compute dy/dx, TensorFlow traverses the graph upwards, first computing
 
 In essence, it does nothing more than what you learned in your Calculus courses. 
 
-We are now going to apply TensorFlow's auto-differentiation capabilities on the simplest neural network possible.
+Now you have an idea of how auto-differentiation is implemented in TensorFlow, we are going to apply this on the simplest neural network possible with Keras. Be aware that using Keras, you will not have to explicitly define the computational graph anymore: this will happen automatically.
 
-
+<!-- 
 # Building a perceptron in TensorFlow
 
 The simplest network that we can build is called a perceptron. A perceptron has an input layer, an output layer, and one so-called hidden layer. This hidden layer will have a matrix of weights $\mathbf{W}$ that is learned during training. In addition, there will be one additional bias weight vector $\mathbf{b}$ that will also be learned. The input layer will receive an input vector $\mathbf{x}$. It will compute the inner product $\mathbf{W} \dot \mathbf{x}$ and add the bias weights. On top of that, a so-called activation function will be applied. In this case, we choose the ReLU function. The output layer will return a vector $\mathbf{y}$ with outputs computed by
@@ -302,6 +310,7 @@ y_hat = tf.nn.softmax(logits)
 
 That is the whole network! The `y` placeholder will hold the actual labels of the training set, and the `y_hat` variable will output estimates for both images in the training and validation sets.
 
+ -->
 
 
 
@@ -309,8 +318,7 @@ That is the whole network! The `y` placeholder will hold the actual labels of th
 
 
 
-
-# Getting the MNIST data set
+## A practical example in Keras
 
 The MNIST data set is an often-used example data set consisting of images of hand-written numbers between zero and nine. The task is to classify which number the images show.
 
