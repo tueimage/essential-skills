@@ -347,7 +347,26 @@ Here we have added one extra layer, with 256 'neurons'. These neurons have a rec
 
 ## Inspecting weights and layer outputs
 
-Sometimes it can be useful to look at the output of specific layers in your network. It may also be handy to get the learned weights and biases out of the network.
+Sometimesi is useful to get the learned weights and biases out of the network. To get the weights of the MLP we have trained in the previous section,
+we first get the individual layers of the network:
+
+```python
+layers = mlp.layers
+```
+
+A layer instance has a `get_weights()` method. However, not every layer has weights. For example, the first layer is the `Flatten` layer, which has no weights at all. The second and third layer are `Dense` layers that have weights matrices and bias vectors. You can extract these using
+
+```
+[W1, b1] = layers[1].get_weights()
+[W2, b2] = layers[1].get_weights()
+```
+
+From here, you can plot the matrices and check the bias weights. This becomes especially interesting when looking at convolutional neural networks.
+
+When we run the `predict()` method, we obtain the result of the last layer. However, sometimes, it is interesting to see intermediate results of the network. This requires compiling a new sub-network:
+
+
+
 
 ## A more in-depth look at differentiable computing in TensorFlow
 
