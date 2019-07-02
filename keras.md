@@ -72,7 +72,7 @@ somewhere at the start of your script. Also import NumPy and Matplotlib.
 
 ---
 
-**Be aware that an code that imports Keras or TensorFlow will be run on the GPU automatically if you installed the GPU-optimized version of TensorFlow. If you are running this script on a server with multiple GPUs, TensorFlow will greedily use all of them to run the script, even when you only import TensorFlow or Keras. That can also be annoying for people who were using the GPUs. Please use the instructions in hthe Linux tutorial [here](linux-essentials) to run the script on a single GPU and prevent this.**
+**Be aware that any code that imports Keras or TensorFlow will be run on the GPU automatically if you installed the GPU-optimized version of TensorFlow. If you are running this script on a server with multiple GPUs, TensorFlow will greedily use all of them to run the script, even when you only import TensorFlow or Keras. That can also be annoying for people who were using the GPUs. Please use the instructions in hthe Linux tutorial [here](linux-essentials) to run the script on a single GPU and prevent this.**
 
 ---
 
@@ -365,8 +365,12 @@ From here, you can plot the matrices and check the bias weights. This becomes es
 
 When we run the `predict()` method, we obtain the result of the last layer. However, sometimes, it is interesting to see intermediate results of the network. This requires compiling a new sub-network:
 
+```python
+layer = mlp.layers[1]
+layer_output = K.function([model.input], [layer.output])
+```
 
-
+This may seem strange. Why do we need to create this `function()`?  (Despite not starting with a capital, it is really a class, not a function.) If you look back at how we defined the networks before, you may remember we had to compile it. When we did that, a Keras `function()` object was created implicitly. T
 
 ## A more in-depth look at differentiable computing in TensorFlow
 
