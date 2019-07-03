@@ -42,7 +42,7 @@ $ pip install --user tensorflow
 
 #### Preliminaries
 
-If your computer has an Nvidia GPU, you can use the GPU version of TensorFlow. 
+If your computer has an Nvidia GPU, you can use the GPU version of TensorFlow.
 For that to work however, you will also need the CUDA and CUDNN libraries. As a rule of thumb, the latest versions of CUDA, CUDNN, and TensorFlow should be compatible. If you want to install TensorFlow on a Medical Image Analysis Group server, you can skip the following to [Installing `tensorflow-gpu`].
 
 If you have a PC running Windows or Linux, you can find the CUDA installation instructions on the Nvidia website: [Linux](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/) | [Windows](http://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/).
@@ -68,7 +68,7 @@ Keras can be imported as a sub-library from TensorFlow, by putting
 from tensorflow import keras
 ```
 
-somewhere at the start of your script. Also import NumPy and Matplotlib. 
+somewhere at the start of your script. Also import NumPy and Matplotlib.
 
 ---
 
@@ -79,13 +79,13 @@ somewhere at the start of your script. Also import NumPy and Matplotlib.
 
 ### Loading the MNIST data set
 
-First, we need to load a data set such that we can do some simple experiments. For that, we are going to use the MNIST data set that is built-in to Keras. The MNIST data set contains 60,000 images of handwritten digits between 0 and 9. The task is to find which number is in an image. To load the dataset, we use the `keras.mnist.load_data()` function, which automatically splits the data into a training and test set. However, we also require a validation set to tune parameters like the learning rate. In addition, we also need to reformat the data such that our neural networks can use them directly. In order to do that, we write our own `load_mnist()` function. To indicate what each line does, we have added comments (starting with `#`) that you can leave out in your own script.
+First, we need to load a data set such that we can do some simple experiments. For that, we are going to use the MNIST data set that is built-in to Keras. The MNIST data set contains 60,000 images of handwritten digits between 0 and 9. The task is to find which number is in an image. To load the dataset, we use the `keras.mnist.load_data()` function, which automatically splits the data into a training and test set. However, we also require a validation set to tune parameters like the learning rate. In addition, we also need to reformat the data such that our neural networks can use them directly. In order to do that, we write our own `load_data()` function. To indicate what each line does, we have added comments (starting with `#`) that you can leave out in your own script.
 
 ```python
 from tensorflow import keras
 
 
-def load_mnist(nval):
+def load_data(nval):
     """
     Load the MNIST data set.
 
@@ -98,20 +98,20 @@ def load_mnist(nval):
     (train_images, train_labels), (test_images, test_labels) = keras.datasets.mnist.load_data()
 
     # Convert the train labels to one-hot encoding, for example if the
-    # label is 3, the one-hot encoding is [0, 0, 0, 1, 0, 0, 0, 0, 0, 0], if 
+    # label is 3, the one-hot encoding is [0, 0, 0, 1, 0, 0, 0, 0, 0, 0], if
     # the label is 5, the one-hot  encoding is [0, 0, 0, 0, 0, 1, 0, 0, 0, 0]
     train_labels = keras.utils.to_categorical(train_labels, 10)
     test_labels = keras.utils.to_categorical(test_labels, 10)
 
-    # Devide the train set into a train and val set, 
+    # Devide the train set into a train and val set,
     val_images = train_images[:nval]
     train_images = train_images[nval:]
     val_labels = train_labels[:nval]
     train_labels = train_labels[nval:]
 
-    # Add an extra axis to the arrays of images, i.e. the shape is initially 
+    # Add an extra axis to the arrays of images, i.e. the shape is initially
     # (10000, 28, 28), it now becomes (10000, 28, 28, 1). This is required,
-    # because Keras wants to know how many channels there are in the images. 
+    # because Keras wants to know how many channels there are in the images.
     # Because The images are grayscale, we only have one. For RGB color image,
     # the shape would end in 3.
     val_images = val_images[:, :, :, None]
@@ -122,18 +122,18 @@ def load_mnist(nval):
 
 ```
 
-You can use the function (here we are assuming a validation set size of 1000 images) as follows. 
+You can use the function (here we are assuming a validation set size of 1000 images) as follows.
 
 ```python
-(train_images, train_labels), (val_images, val_labels), (test_images, test_labels) = load_mnist(nval=1000)
+(train_images, train_labels), (val_images, val_labels), (test_images, test_labels) = load_data(nval=1000)
 ```
 
 ---
-**Tip:**
-If you save the function definition above as `mnist.py`, you can import it as a module (`import mnist`) instead
+
+**Tip:** If you save the function definition above as `mnist.py`, you can import it as a module (`import mnist`) instead for the remainder of this tutorial:
 
 ```python
-(train_images, train_labels), (val_images, val_labels), (test_images, test_labels) = mnist.load_mnist(nval=1000)
+(train_images, train_labels), (val_images, val_labels), (test_images, test_labels) = mnist.load_data(nval=1000)
 ```
 
 ---
@@ -233,13 +233,14 @@ predicted_values = [np.argmax(x) for x in perceptron.predict(test_images)]
 ```
 
 ---
-**If you are not familiar with list comprehensions, the syntax above may seem weird. A list comprehension is a fast way of typing simple loop functions. For example `[x**2 for x in range(1, 11)]` is a fast way of computing a series of squares ([1, 4, 9, 16, 25, 36, 49, 64, 81, 100]). The longer equivalant would be
 
+**Tip:** If you are not familiar with list comprehensions, the syntax above may seem weird. A list comprehension is a fast way of typing simple loop functions. For example `[x**2 for x in range(1, 11)]` is a fast way of computing a series of squares ([1, 4, 9, 16, 25, 36, 49, 64, 81, 100]). The longer equivalant would be
 ```python
 l = []
 for x in range(1, 11):
     l.append(x**2)
 ```
+
 ---
 
 
@@ -294,10 +295,12 @@ The output is a dictionary with the accuracy and losses throughout time:
         confusion_matrix[pred, true] += 1
 
     plt.imshow(confusion_matrix)
+    plt.xlabel('True digit')
+    plt.ylabel('Network output')
     plt.show()
     ```
 
-    It should show a diagonal line, indicating that in most cases, the network predicts the correct digit. Digits that look similarly when hand-written (e.g. 1 and 7, 3 and 8, or 4 and 9), can also lead to higher values, especially when limiting the amount of training.
+    It should show high values on the diagonal, indicating that in most cases, the network predicts the correct digit. Digits that look similarly when hand-written (e.g. 1 and 7, 3 and 8, or 4 and 9), can also lead to higher values, especially when limiting the amount of training.
     </p></details>
 
 3. Try to optimize the learning rate. Can you get an even higher validation accuracy?
@@ -311,16 +314,16 @@ Of course, it is now easy to add more `Dense` layers to the network. Let's do th
 
 ```python
 def create_mlp(input_shape, n_outputs):
-    model = keras.models.Sequential()
+    network = keras.models.Sequential()
 
-    model.add(keras.layers.InputLayer(input_shape))
-    model.add(keras.layers.Flatten())
-    model.add(keras.layers.Dense(256, activation='relu'))
-    model.add(keras.layers.Dense(n_outputs, activation='softmax'))
-    return model
+    network.add(keras.layers.InputLayer(input_shape))
+    network.add(keras.layers.Flatten())
+    network.add(keras.layers.Dense(256, activation='relu'))
+    network.add(keras.layers.Dense(n_outputs, activation='softmax'))
+    return network
 ```
 
-Here we have added one extra layer, with 256 'neurons'. These neurons have a recitfied linear unit (ReLU) activation function. If you run this model instead of the single layer perceptron, you will notice the accuracy will be higher than with a single layer. This Multilayer Perceptron (MLP) design used to be state of the art in neural network design until quite recently.
+Here we have added one extra layer, with 256 'neurons'. These neurons have a rectified linear unit (ReLU) activation function. If you run this network instead of the single layer perceptron, you will notice the accuracy will be higher than with a single layer. This Multilayer Perceptron (MLP) design used to be state of the art in neural network design until quite recently.
 
 ###### Exercises
 
@@ -330,12 +333,12 @@ Here we have added one extra layer, with 256 'neurons'. These neurons have a rec
     The input layer has 28 x 28 inputs that are flattened to a 784-length vector. The middle layer has 256 units. The last layer has 10 units. Between the input and middle layer, there are 784 * 256 normal weights and 256 bias weights. The output layer has 256 * 10 normal weights and 10 bias weights, so 203530 weights in total.
     </p></details>
 
-2. Look at the loss curves of the MLP. It is likely that your network is overfitting. How do you see this in these curves? Why do you think the network overfits?
+2. Train the MLP for 20 epochs. Look at the loss curves of the MLP. It is likely that your network is overfitting. How do you see this in these curves? Why do you think the network overfits?
 
     <details><summary>Answer</summary><p>
-    It is likely that the training accuracy has not converged after 20 epochs, i.e. it is still rising, while the validation accuracy is *decreasing* after a few epochs. 
+    It is likely that the training accuracy has not converged after 20 epochs, i.e. it is still rising, while the validation accuracy is staying constant or even *decreasing* after a few epochs.
 
-    Using the architecture as defined above, there are so many parameters, that the network will overfit on details or noise in the training set (e.g. it will know that a certain image of a 9 in the training set has some noise in the top right and use that to deduce it is should output 9, because it was taught that in previous epochs.). 
+    Using the architecture as defined above, there are so many parameters, that the network will overfit on details or noise in the training set (e.g. it will know that a certain image of a 9 in the training set has some noise in the top right and use that to deduce it is should output 9, because it was taught that in previous epochs.). The network will specialize so much on the training set that in this case it can easily reach an accuracy on that set of 100%.
     </p></details>
 
 3. How can you combat the overfitting without adding more code?
@@ -344,10 +347,12 @@ Here we have added one extra layer, with 256 'neurons'. These neurons have a rec
     Reducing the number of neurons in the hidden middle layer. Try using 64 units instead of 256. This time, the validation and training curves will be much more similar, indicating there is no overfitting. It may even be beneficial to train for more epochs if the training has not converged yet.
     </p></details>
 
+---
+
 
 ## Inspecting weights and layer outputs
 
-Sometimesi is useful to get the learned weights and biases out of the network. To get the weights of the MLP we have trained in the previous section,
+Sometimes it is useful to get the learned weights and biases out of the network. To get the weights of the MLP we have trained in the previous section,
 we first get the individual layers of the network:
 
 ```python
@@ -358,7 +363,7 @@ A layer instance has a `get_weights()` method. However, not every layer has weig
 
 ```
 [W1, b1] = layers[1].get_weights()
-[W2, b2] = layers[1].get_weights()
+[W2, b2] = layers[2].get_weights()
 ```
 
 From here, you can plot the matrices and check the bias weights. This becomes especially interesting when looking at convolutional neural networks.
@@ -366,13 +371,128 @@ From here, you can plot the matrices and check the bias weights. This becomes es
 When we run the `predict()` method, we obtain the result of the last layer. However, sometimes, it is interesting to see intermediate results of the network. This requires compiling a new sub-network:
 
 ```python
-layer = mlp.layers[1]
-layer_output = K.function([model.input], [layer.output])
+layer1 = mlp.layers[1]
+layer1_output = keras.function([mlp.input], [layer1.output])
 ```
 
-This may seem strange. Why do we need to create this `function()`?  (Despite not starting with a capital, it is really a class, not a function.) If you look back at how we defined the networks before, you may remember we had to compile it. When we did that, a Keras `function()` object was created implicitly. T
+This may seem strange. Why do we need to create this `function()`?  (Despite not starting with a capital, it is really a class, not a function.) If you look back at how we defined the networks before, you may remember we had to compile it. When we did that, a Keras `function()` object was created implicitly. Here we are essentially making a new network from the old one, in which we have a new output. Hence, we need to make a Keras function. The `function()` function has two parameters: a list of inputs, and a list of outputs. Here we take the same input from the `mlp` network, but as output we take the selected layer. The function is called `layer1_output()` and can be called like a normal Python function, returning the list of outputs. In this case there is only one output, so we need to take the output at index 0:
+
+```python
+intermediate_output = layer1_output(train_images[39][None])[0]
+```
+
+This will give the first layers output for the 40th image in the MNIST data set. Note that the `layer1_output()` function expects something with the size `(None, 28, 28, 1)`, i.e. a batch of 28x28 images with one channel. Hence, we need to add a dimension (with `[None]`). The output will be a list of outputs, which in this case only contains one item that we extract with `[0]`.
+
+
+## Convolutional neural networks
+
+When using images it does not make much sense to use `Dense` fully connected layers. Convolutional layers make much more sense: they are translation equivariant (if you are a mathematician) or covariant (if you are a physicist), and require far fewer parameters compared to perceptrons. The most simple thing we can do to turn the multi-layer perceptron from the previous example into a convolutional neural nework (CNN) is by adding a convolutional layer:
+
+```python
+cnn.add(keras.layers.Conv2D(32, (3, 3)))
+```
+
+Here we added a 2D convolutional layer (because the image is 2D). The layer will learn 32 kernels of nine values arranged as 3x3 matrices. Like the dense layers, it will also compute a bias, computing an output \mathbf{y}$ as $\mathbf{y} = \sigma(\mathbf{W}\star \mathbf{x} + \mathbf{b})$. The $\star$ indicates convolution[^correlation] and by default, the activation function $
+sigma$ will be ReLU.
+
+---
+
+###### Exercises
+
+1. How many weights in total does the 32-unit convolutional layer learn? If we would replace it with a 32-unit fully-connected layer, how many weights would that layer learn?
+
+    <details><summary>Answer</summary><p>
+    The convolutional layer learns 32 x 3 x 3 + 32 = 320 weights. The fully-connected layer would learn 28 x 28 x 32 + 32 = 25120 weights. The fully-connected layers learn connections between all inputs and the outputs of the layer, which means they learn vastly more weights than a convolutional layer. The convolutional layer still takes the full image into account, without requiring that number of weights.
+    </p></details>
+
+2. What is the output size of the convolutional layer?
+
+    <details><summary>Answer</summary><p>
+    The output will be 32 feature maps of size 26 x 26. This is because by default, the convolutional layer computes *valid* convolutions, that is, convolutions in which the kernel always covers only pixels inside the image. If you overlay the kernel at the top left of the image, you will see that there is no output for the top row en leftmost column. The same holds for the bottom row and rightmost column. The output of the layer will therefore be 1 x 26 x 26 x 32. You can check this using the following code:
+
+    ```python
+    print('Shape of layer 1:', cnn.layers[0].output_shape)
+    ```
+
+    </p></details>
+
+3. Does this network work better compared to the MLP?
+
+    <details><summary>Answer</summary><p>
+    It should work slightly better. You can get much higher accuracy with more convolutional layers however.
+    </p></details>
+
+4. Change the kernel size to 5x5 and inspect the learned kernels after 20 epochs. What do they look like?
+
+    <details><summary>Answer</summary><p>
+    Change the kernel size from (3, 3) to (5, 5). The kernels can be plotted using
+
+    ```python
+    [W0, b0] = cnn.layers[0].get_weights()
+    fig, ax = plt.subplots(4, 8)
+    for i in range(32):
+        ax.flatten()[i].imshow(W0[:, :, 0, i])
+
+    [x.set_axis_off() for x in ax.flatten()]
+    plt.show()
+    ```
+
+    They should show smooth edge filters, something like this:
+
+    ![](keras_cnn_filters.png)
+
+    </p></details>
+
+---
+
+
+
+## Larger convolutional networks
+
+In most convolutional neural networks, pooling layers are used to downsample the feature maps. This acts as an extra non-linearity, but also reduces the amount of data, forcing the network to learn more abstract features. A fairly typical examples is this network:
+
+```python
+def create_larger_cnn(input_shape, n_outputs):
+    network = keras.models.Sequential()
+
+    network.add(keras.layers.InputLayer(input_shape))
+    network.add(keras.layers.Conv2D(32, (3, 3)))
+    network.add(keras.layers.Conv2D(32, (3, 3)))
+    network.add(keras.layers.MaxPooling2D((2, 2)))
+
+    network.add(keras.layers.Conv2D(64, (3, 3)))
+    network.add(keras.layers.Conv2D(64, (3, 3)))
+    network.add(keras.layers.MaxPooling2D((2, 2)))
+
+    network.add(keras.layers.Flatten())
+    network.add(keras.layers.Dense(n_outputs, activation='softmax'))
+    return network
+```
+
+As you can see, we have specified a pooling size of 2x2, and use max-pooling: in the 2x2 windows the network selects the maximum value of each feature map. This will effectively downsample the feature maps by a factor four.
+
+---
+
+###### Exercises
+
+1. Without using an `output_shape()` method, what is the output shape of the second max-pooling layer here? Check your answer using the method.
+
+    <details><summary>Answer</summary><p>
+    The input to the network is 28 x 28. The feature maps of the first convolutional layer are 26 x 26, for the second convolutional layer 24 x 24, then 12 x 12 for the pooling layer, 10 x 10 for the third convolutional layer, 8 x 8 for the fourth, and 4 x 4 for the second pooling layer. Because the convolutional layer before it computed 64 feature maps, the output of the pooling layer should be 1 x 4 x 4 x 64.
+    </p></details>
+
+2. On the Keras documentation webpage [keras.io](keras.io) you can find information about more layers included in Keras. Read the documentation for the `BatchNormalization` layer which normalizes the activations of a layer to zero mean and unit standard deviation. Add it after all the convolutional layers in the network above. Does this improve performance?
+
+3. Keras has multiple optimizers built-in in addition to SGD. An example is the Adam optimizer. Try to train the network again using the Adam optimizer and make sure you tweak the learning rate again. Can you obtain a better result than before using this optimizer?
+
+4. Try to beat our record on the MNIST data set of 98% accuracy using the architecture above as a basis. Be sure to at least tweak the learning rate, and increase the number of epochs. New MNIST records can be emailed to awesome_mnist_results@gullible.com. Good luck!
+
+---
+
 
 ## A more in-depth look at differentiable computing in TensorFlow
+
+This section is in no way required to train your own neural networks in projects or courses at TU/e. However, it may be useful to obtain some intuition on how those networks are actually trained. The network is optimized using a steepest descent algorithm, like SGD or a variant like Adam. For this, it is necessary to compute the derivative of the loss function with respect to all learnable weights, kernels, and biases. This is done symbolically: TensorFlow computes those derivatives using the chain rule, product rule, quotient rule, and rules specific to other operators (e.g. d/dx sin(x) = cos(x), d/dx exp(x) = exp(x), etc.). To see how this works in practice, we have some small examples to show how TensorFlow does this. For that, we start simple.
 
 The simplest functional TensorFlow program we could think of is adding two numbers. The code to do that in TensorFlow is this:
 
@@ -389,7 +509,7 @@ result = sess.run(y, feed_dict={a: 1, b:2})
 print(result)
 ```
 
-which will print '3' (thankfully...). 
+which will print '3' (thankfully...).
 
 That seems like an awful lot of code for something so simple. Let's break it down to understand why we need all this session and placeholder misery.
 
@@ -433,18 +553,8 @@ Tensor("add:0", dtype=float32)
 
 So what is `y`? It is a 32-bit float tensor, in this case with the rather unimaginative name 'add:0', which just is an automatic name. It is also an edge (that is a link between nodes) of the computation graph. The operators are the nodes of this graph. That plus operation between `a` and `b` is therefore a node. The two placeholders are edges as well. Hence, a graphical representation would be this:
 
-```
 
-    a         b
-    |         |
-    |         |
-     --> + <-- 
-         |
-         |
-         v
-
-         y
-```
+![](figures/tf_a+b.png)
 
 This shows you, that in TensorFlow, the data (i.e the tensors) are the stuff that moves around along the edges of a graph of operators.
 
@@ -467,18 +577,7 @@ y = 2 * x
 
 The graph for this looks like this:
 
-```
-
-    2         x
-    |         |
-    |         |
-     --> * <-- 
-         |
-         |
-         v
-
-         y
-```
+![](figures/tf_2x.png)
 
 Nothing too exciting. What *is* exciting (ok, maybe not to everone) is the fact that TensorFlow can traverse the graph backwards to compute the derivative of `y` with respect to `x`. Note that that is only possible because the graphs are defined with placeholder inputs, and because of the graphical organization.
 
@@ -531,7 +630,7 @@ Which will print `2.0`.
     ```
 
     Should print `True`. Since we tested it for 1 million equidistant points between -10 and 10, we can safely assume TensorFlow gets the derivative right here.
-    
+
     </p></details>
 
 2. The derivative of sin(x) is cos(x). Show that TensorFlow agrees by plotting the derivative of sin(x) between $-2\pi$ and $2 \pi$. Note that for operators like sin and cos you need to use TensorFlow's versions `tf.sin()` and `tf.cos()`.
@@ -560,7 +659,7 @@ Which will print `2.0`.
     ```
 
     This should show the graph of cos(x).
-    
+
     </p></details>
 
 ---
@@ -572,119 +671,8 @@ So how does TensorFlow know that the derivative of 2 * x is 2 and the derivative
 
 Whenever a function is composed of multiple operators (i.e. sin(2 * x)), it applies operator *priority* and the chain rule. The priority is implicit in the graph. In the sin(2 * x) example, it understands that the graph looks like this:
 
-```
-    x       2
-    |       |
-    |       |
-     -- * --
-        |
-        |
-        v
+![](figures/tf_sin2x.png)
 
-       sin
-        |
-        |
-        v
+Hence, to compute dy/dx, TensorFlow traverses the graph upwards, first computing the derivative of sin(g(x)) w.r.t. x. It looks up that for a function sin(g(x)) the derivative is cos(g(x)) * g'(x). Then, it needs to go further up the graph to compute g'(x) = 2 * x. Because it knows that the derivative of a constant times a variable is equal to the constant, it will return 2. Then it assembles the full derivative as being cos(2 * x) * 2.
 
-        y
-```
-
-Hence, to compute dy/dx, TensorFlow traverses the graph upwards, first computing the derivative of sin(g(x)) w.r.t. x. It looks up that for a function sin(g(x)) the derivative is cos(g(x)) * g'(x). Then, it needs to go further up the graph to compute g'(x) = 2 * x. Because it knows that the derivative of a constant times a variable is equal to the constant, it will return 2. Then it assembles the full derivative as being cos(2 * x) * 2. 
-
-In essence, it does nothing more than what you learned in your Calculus courses. 
-
-Now you have an idea of how auto-differentiation is implemented in TensorFlow, we are going to apply this on the simplest neural network possible with Keras. Be aware that using Keras, you will not have to explicitly define the computational graph anymore: this will happen automatically.
-
-<!-- 
-# Building a perceptron in TensorFlow
-
-The simplest network that we can build is called a perceptron. A perceptron has an input layer, an output layer, and one so-called hidden layer. This hidden layer will have a matrix of weights $\mathbf{W}$ that is learned during training. In addition, there will be one additional bias weight vector $\mathbf{b}$ that will also be learned. The input layer will receive an input vector $\mathbf{x}$. It will compute the inner product $\mathbf{W} \dot \mathbf{x}$ and add the bias weights. On top of that, a so-called activation function will be applied. In this case, we choose the ReLU function. The output layer will return a vector $\mathbf{y}$ with outputs computed by
-
-$$\mathbf{y} = ReLU(\mathbf{W} \dot \mathbf{x})$$
-
-Let's build this model in TensorFlow.
-
-```python
-
-import tensorflow as tf
-import keras
-
-# Placeholders for input and output
-x = tf.placeholder(dtype=tf.float32, shape=[None, 29*29])
-y = tf.placeholder(dtype=tf.float32, shape=[None, 10])
-
-# Variables for the weights and biases
-w = tf.Variable(tf.zeros([29*29, 10]))
-b = tf.Variable(tf.zeros([10]))
-
-# Compute the dot product
-product = tf.matmul(x, w)
-with_bias = tf.add(product, b)
-y_hat = tf.nn.softmax(logits)
-```
-
-That is the whole network! The `y` placeholder will hold the actual labels of the training set, and the `y_hat` variable will output estimates for both images in the training and validation sets.
-
- -->
-
-
-
-
-
-
-
-## A practical example in Keras
-
-The MNIST data set is an often-used example data set consisting of images of hand-written numbers between zero and nine. The task is to classify which number the images show.
-
-To (down)load the data set, you can execute the following script:
-
-```python
-import keras
-import numpy as np
-import matplotlib.pyplot as plt
-
-(training_images, training_labels), (val_images, val_labels) = mnist.load_data()
-```
-
-This will download the MNIST data set if that has not been done before, and divide it into a training set and a validation set.
-
-Let's inspect what is in these sets. Show the size of `training_images` and `training_labels` using
-
-```python
-print(training_images.shape)
-print(training_labels.shape)
-```
-
-This will show `(60000, 28, 28)` and `(60000,)`. Hence, the set contains 60,000 images of 28 x 28 and 60,000 labels.
-
-Plot the first image by executing
-
-```python
-plt.imshow(training_images[0])
-plt.show()
-```
-
-This should print a 5, and the corresponding label, `training_labels[0]` should reflect that.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Neural networks in Keras
-
-
-# Convolutional neural networks
-
-
-
+In essence, it does nothing more than what you learned in your Calculus courses.
