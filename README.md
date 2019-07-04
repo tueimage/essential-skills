@@ -4,7 +4,7 @@ The tutorials are still work in progress. Thus far, the following tutorials are 
 * [Python essentials](python-essentials.md)
 * [Numerical and scientific computing in Python](scientific-computing.md)
 * [Working with medical images in Python](medical-images.md)
-* [Deep learning with Keras][keras.md]
+* [Deep learning with Keras](keras.md)
 * [Linux essentials](linux-essentials.md)
 * [Git essentials](version-control-with-git.md)
 
