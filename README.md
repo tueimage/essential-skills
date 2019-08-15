@@ -8,4 +8,4 @@ The tutorials are still work in progress. Thus far, the following tutorials are 
 * [Linux essentials](linux-essentials.md)
 * [Git essentials](version-control-with-git.md)
 
-Some generic Python hints are written down [here](python-hints.md).
+Some generic tips about doing large projects in Python: [link](python-hints.md).
