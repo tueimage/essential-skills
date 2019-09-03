@@ -280,7 +280,7 @@ larger than or equal, and smaller than or equal using the operators `>`, `<`,
 
 ```python
 1 + 2 + 3 > 6  # gives False
-1 + 2 + 3 >= 10  # gives True
+1 + 2 + 3 >= 1  # gives True
 1 + 2 + 3 != 6  # gives False
 ```
 
