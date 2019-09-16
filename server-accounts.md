@@ -6,7 +6,7 @@ If you use Windows, you will need to install a Terminal application called Cygwi
 
 ### Windows only: installing Cygwin
 
-1. Download Cygwin from https://cygwin.com/install.html. Most likely you will need the 64-bit version.
+1. Download Cygwin from [https://cygwin.com/install.html](https://cygwin.com/install.html). Most likely you will need the 64-bit version.
 2. Open the installer.
 3. Choose next on the first screen.
 4. Choose ‘Install from Internet’ when selecting an Installation Type. Click next.
@@ -16,7 +16,7 @@ If you use Windows, you will need to install a Terminal application called Cygwi
 8. After the installation has completed, you can optionally let the installer create icons on the Desktop and Start Menu.
 
 
-### Getting the keys to the server
+<!-- ### Getting the keys to the server
 
 You are going to setup a secure key that you can use to login to the server. A key is basically a super long password that will be used to let the server know that it is really you who wants access. The key consists of two parts: a public key and a private key. The private key is on your own computer. The public key will be put on the server by the administrator. 
 
@@ -34,7 +34,7 @@ When you log in, your computer will send an encrypted version of the private key
 9. If you do not know the answers to these two questions, read the part of the [Linux tutorial about running scripts on GPUs](linux-essentials.md/#running-python scripts-on-gpus).
 
 The administrator will now make sure the key will be known by the server. Once you get a confirmation that this is done, you can login to the server.
-
+ -->
 
 ### Logging in
 
@@ -44,9 +44,13 @@ From the prompt, type the following command:
 ssh -X amalia@saruman.bmt.tue.nl
 ```
 
-This will let the user `amalia` login to the server at the address `saruman.bmt.tue.nl` using the secure shell. Of course, you will have to replace this with your name and the correct address for the server you want to use. The `-X` is there to make sure you can view plots and figures on the server later (see `Running Python on the server`).
+This will let the user `amalia` login to the server at the address `saruman.bmt.tue.nl` using the secure shell. Of course, you will have to replace this with your name and the correct address for the server you want to use. The `-X` is there to make sure you can view plots and figures on the server later (see [Running Python on the server](linux-essentials#running-programs-and-scripts)). Now you need to type the password the administrator gave you. There will be no real indication that you are actually typing anything, but that is normal. Once you have typed the full password, press enter.
 
-You will now see some text that indicates your login was succesful. It will also display which machine you are connected to and which operating system it uses. Depending on the operating system, there may be a  more text that you can ignore for now.
+---
+The first time you log-in the system might ask you to replace the password by a new one. You will need to type the password twice.
+---
+
+You will now see some text that indicates your login was succesful. It will also display which machine you are connected to and which operating system it uses. Depending on the operating system, there may be a more text that you can ignore for now.
 
 Below all that text is a new prompt. By default, it will look something like this:
 
@@ -54,6 +58,6 @@ Below all that text is a new prompt. By default, it will look something like thi
 amalia@saruman:~$
 ```
 
-From this prompt you can type commands like `whoami` or `date`. Now, these commands will run *on the server*. The results will be send back to your own PC and show up on the screen like normal. It is virtually indistinguishable from running commands on your own system, except for the difference in prompt.
+From this prompt you can type commands like `whoami` or `date`. Now, these commands will run *on the server*. The results will be send back to your own PC and show up on the screen like normal. It is virtually indistinguishable from running commands on your own system, except for the difference in prompt. If you are not sure if you are running things on the server or your own PC, you can use the `hostname` command to figure out what system you are using.
 
 To quit the connection and log out, press <kbd>Ctrl-D</kbd>. This will return you to the prompt on your own PC.
