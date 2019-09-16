@@ -736,4 +736,4 @@ Whenever a function is composed of multiple operators (i.e. sin(2 × x)), it app
 
 Hence, to compute *dy/dx*, TensorFlow traverses the graph upwards, first computing the derivative of *sin*(*g*(*x*)) w.r.t. x. It looks up that for a function sin(g(*x*)) the derivative is *cos*(*g*(*x*)) × *g*'(*x*). Then, it needs to go further up the graph to compute *g*'(*x*) = 2 × *x*. Because it knows that the derivative of a constant times a variable is equal to the constant, it will return 2. Then it assembles the full derivative as being *cos*(2 × *x*) × 2.
 
-In essence, it does nothing more than what you learned in your Calculus courses.
+So in essence, it does exactly what you learned in your Calculus courses.

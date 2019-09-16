@@ -44,7 +44,7 @@ From the prompt, type the following command:
 ssh -X amalia@saruman.bmt.tue.nl
 ```
 
-This will let the user `amalia` login to the server at the address `saruman.bmt.tue.nl` using the secure shell. Of course, you will have to replace this with your name and the correct address for the server you want to use. The `-X` is there to make sure you can view plots and figures on the server later (see [Running Python on the server](linux-essentials#running-programs-and-scripts)). Now you need to type the password the administrator gave you. There will be no real indication that you are actually typing anything, but that is normal. Once you have typed the full password, press enter.
+This will let the user `amalia` login to the server at the address `saruman.bmt.tue.nl` using the secure shell. Of course, you will have to replace this with your name and the correct address for the server you want to use. The `-X` is there to make sure you can view plots and figures on the server later. Now you need to type the password the administrator gave you. There will be no real indication that you are actually typing anything, but that is normal. Once you have typed the full password, press enter.
 
 ---
 The first time you log-in the system might ask you to replace the password by a new one. You will need to type the password twice.
