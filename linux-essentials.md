@@ -447,7 +447,7 @@ At the moment, GPUs 0 and 2 are occupied (indexes start at 0). As you can see, t
 In Keras and TensorFlow, you can select a GPU using the `CUDA_VISIBLE_DEVICES` environment variable. An environment variable is a variable in Linux that can be read by anything that runs in the current Terminal window. You can set these at the Bash prompt, like this:
 
 ```bash
-$ CUDA_VISIBLE_DEVICES=1
+$ export CUDA_VISIBLE_DEVICES=1
 ```
 
 **Do not blindly follow this example, but use the number of the GPU you actually can use.**
@@ -475,7 +475,13 @@ Run it with `python -i` to make sure that the Python interpreter keeps running a
 
 Check how much GPU memory (VRAM) the script is using. It is probably using all it can get, which is clearly not necessary for a script that adds two numbers.
 
-Quit `nvtop` with <kbd>Ctrl-C</kbd>. Press `fg` to go back to the Python interpreter, and quit that with <kbd>Ctrl-D</kbd>.
+Quit `nvtop` with <kbd>Ctrl-C</kbd>. Press `fg` to go back to the Python interpreter, and quit that with <kbd>Ctrl-D</kbd>. If you want to run a new script, remember to set `CUDA_VISIBLE_DEVICES` again.
+
+As an alternative to setting `CUDA_VISIBLE_DEVICES` with `export`, you can also set the variable right before calling `python`:
+
+```bash
+CUDA_VISIBLE_DEVICES=1 python -i script.py
+```
 
 
 ### Limiting memory use in TensorFlow (with or without Keras)
