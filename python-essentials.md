@@ -72,7 +72,7 @@ can skip the next section.
 
 ### Installation instructions
 
-Go to **anaconda.org/downloads** and look for a download button. Make sure you
+Go to **anaconda.com** and look for a download button. Make sure you
 download the Python 3.7 (or higher) version.
 
 * On Windows and macOS you can simply open the installer and follow the instructions
@@ -162,7 +162,7 @@ Before <kbd>Shift-Enter</kbd>   |   After <kbd>Shift-Enter</kbd>
 ------    |  ------
 ![Before <kbd>Shift-Enter</kbd>](figures/jupyter_notebook_raw.png) | ![After <kbd>Shift-Enter</kbd>](figures/jupyter_notebook_evaluated.png)
 
-Jupyter notebooks run a so-called Python 'kernel'. Should your script take longer than you hoped, or it crashes altogheter, you can always press the stop button (the black square) or the reload kernel buttion (the rounded arrow next to it) in the toolbar.
+Jupyter notebooks run a so-called Python 'kernel'. Should your script take longer than you hoped, or it crashes altogether, you can always press the stop button (the black square) or the reload kernel button (the rounded arrow next to it) in the toolbar.
 
 
 ### Errors, warnings, and exceptions
@@ -270,7 +270,7 @@ is a frequent source of bugs, so be careful.
 * Exponentiations, additions, multiplications, and subtractions containing *at least one* `float` will return a `float`, i.e. `2 ** 3 + 1.0 + 2 * 3` returns `15.0`, not `15`. 
 * Division *always* returns a `float`, i.e. `10 / 5` returns `2.0`, not `2`. To ensure the result of a division is rounded down to an integer, you can use the special integer division operator `//` i.e. `10 // 5` will return `2`. It will always round *down* to the closest integer.
 * Division by 0 will result in a `ZeroDivisionError` which will stop your program if you do not take care to solve it.
-* By default, there is no square root operator. You can use the power operator for this, i.e. `9 ** 0.5` returns `3.0`, or you can import a library that has a square root function, which is dicussed in the the [module on SciPy](numpy-scipy-matplotlib.md).
+* By default, there is no square root operator. You can use the power operator for this, i.e. `9 ** 0.5` returns `3.0`, or you can import a library that has a square root function, which is dicussed in the [module on SciPy](numpy-scipy-matplotlib.md).
 
 You can also check equality and inequality of numeric variables, using the
 operators `==` and `!=`. These will return a boolean value, i.e. `True` or
@@ -485,7 +485,7 @@ The index syntax can also be used to *slice* lists, that is, create "sub lists" 
 small_number = numbers[0:4]
 ```
 
-Here `:` slices the array from index 0 to (but not including!) index 4. We can also define as step size when slicing a list:
+Here `:` slices the array from index 0 to (but not including!) index 4. We can also define a step size when slicing a list:
 
 ```python
 odd_numbers = numbers[0:8:2]
@@ -552,7 +552,7 @@ A method is a function associated with a specific type of variable, in this case
 ```python
 l = [1, 1, 2, 3, 2, 3, 3, 3, 1]
 l.count(1)  # Counts how many times 1 occurs in list l
-l.index(2)  # Gives the index of the first occurence of 2 in l
+l.index(2)  # Gives the index of the first occurrence of 2 in l
 ```
 
 We can also insert or remove items from the list using list methods. The `insert()` method can insert an item at a specific index, while the `remove()` method looks for the first occurrence of an item and removes it from the list. The `pop()` method removes (and returns) the last item of the list.
@@ -601,14 +601,14 @@ sentence = 'The quick brown fox jumped over the lazy dog'
 words = sentence.split(' ')
 ```
 
-and a `find` method, that returns the index of the first occurence of a series of characters in a string:
+and a `find` method, that returns the index of the first occurrence of a series of characters in a string:
 
 ```python
 sentence = 'The quick brown fox jumped over the lazy dog'
 sentence.find('jumped')  # returns 20
 ```
 
-We can also slices strings:
+We can also slice strings:
 
 ```python
 print(sentence[:20])  # prints 'The quick brown fox '
@@ -695,7 +695,7 @@ The `dict_keys` and `dict_values` type can be converted to a list using the list
 print(list(my_dictionary.keys()))  # prints '['aardvark', 'aardwolf', 'abaca', 'aback']'
 ```
 
-Dictionaries also support the `pop()` method that removes an value by key, i.e.:
+Dictionaries also support the `pop()` method that removes a value by key, i.e.:
 
 ```python
 d = {'a': 1, 'b': 2, 'c': 3}
