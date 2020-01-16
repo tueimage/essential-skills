@@ -653,7 +653,7 @@ which saves the array `a` in binary format to the file `my_file.npy`.
 
 ### Random numbers
 
-NumPy can generate arrays of random numbers with `np.random` sublibrary. Those arrays can drawn from uniform and normal distributions. Here are some specific examples:
+NumPy can generate arrays of random numbers with `np.random` sublibrary. Those arrays can draw from uniform and normal distributions. Here are some specific examples:
 
 * `np.random.random_integers(low=5, high=10, size=(3, 2))` gives an array of shape 3x2 with random integers between 5 and 10. The integers are uniformly distributed.
 * `np.random.uniform(low=4, high=9, size=(3, 2))` gives an array of shape 3x2 with uniformly distributed random numbers between 4 and 9.
