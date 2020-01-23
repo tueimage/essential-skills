@@ -491,7 +491,7 @@ Here `:` slices the array from index 0 to (but not including!) index 4. We can a
 odd_numbers = numbers[0:8:2]
 ```
 
-where the `2` at the end specifies that we should take every second item. Hence, between the slicing operator takes the form `start_index:end_index:step_size`.   
+where the `2` at the end specifies that we should take every second item. The slicing operator takes the form `start_index:end_index:step_size`.   
 
 An overview of the slicing syntax is given in the following table:
 
@@ -564,15 +564,18 @@ l.remove('two')  # l now contains ['one', three', 'four']
 v = l.pop()  # l now contains ['one', three'], v contains 'four'
 ```
 
+Note that the behavior of `l.insert(2, 'three')` is different from `l[2] = 'three'`. In the first case the list grows by one item, while the second case just replaces an item.
 Likewise there are methods to reverse and sort the list *in place*: 
 
 ```python    
 l = ['b', 'c', 'a']
+l.reverse()
+print(l)  # prints ['a', 'c', 'b']
 l.sort()
 print(l)  # prints ['a', 'b', 'c']
-l.reverse()
-print(l)  # prints ['c', 'b', 'a']
 ```
+
+By default, the `sort()` method sorts strings alphabetically. A list of numbers is sorted ascendingly by default.
 
 Finally, there is a *function* (not a method!) that is very useful when working with lists and strings, called `len()` that gets you the length:
 
@@ -905,9 +908,9 @@ Sometimes, you want to check for multiple conditions. Then you can use the elif 
 if len(l) == 0:
     print('List is empty')
 elif len(l) < 10:
-    print('List contains less than 10 items')
+    print('List contains fewer than 10 items')
 else:
-    print('List contains more than 10 items')
+    print('List contains 10 items or more')
 ```
 
 You can add as many `elif` statements between the `if` and `else` as you want. You can also nest if blocks, by indenting once more, i.e.:
@@ -954,7 +957,7 @@ There are special conditionals to check if an item is in a list, or a letter is 
 ```python
 the_list = [1, 2, 3, 9, 0]
 
-if 9 in my_list:
+if 9 in the_list:
     print('Yes, 9 is in the list')
 ```
 
@@ -1108,7 +1111,7 @@ has the same effect.
 Functions like the `len`-function return a value, i.e. 
 
 ```python
-    list_length = len(my_list)
+    list_length = len(the_list)
 ```
 
 results in the variable `list_length` to contain an integer value.
@@ -1228,7 +1231,7 @@ Of course, you can also return lists, sets, tuples, or dictionaries from functio
     def translate_point(translation, point):
         new_point = []
         for a, b in zip(translation, point):
-            new_list.append(a + b)
+            new_point.append(a + b)
         return new_point
 ```
 
@@ -1411,7 +1414,7 @@ Now, running `is_prime(56, debug=True)` will print that 21 is not divisible by 2
 
 ###### Exercises
 
-* Write a function called `root()` that will compute the square root of the first argument `k` and has an optional argument `order` that specifies the order of the root. If the order is odd the function should print message if the number is negative.
+* Write a function called `root()` that will compute the square root of the first argument `k`. It should have an optional argument `order` that specifies the order of the root. In the that the order is odd, and `k` is negative, the root does not exist, and the function should print an error message.
 
     <details><summary>Answer</summary><p>
 
