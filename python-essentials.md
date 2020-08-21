@@ -73,7 +73,7 @@ can skip the next section.
 ### Installation instructions
 
 Go to **anaconda.com** and look for a download button. Make sure you
-download the Python 3.7 (or higher) version.
+download the Python 3.6 (or higher) version.
 
 * On Windows and macOS you can simply open the installer and follow the instructions
 * On Linux you open the Terminal and navigate to the folder to which you downloaded 
