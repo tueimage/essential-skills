@@ -627,11 +627,11 @@ Given the matrix `a = np.array([[1, 2, 0], [1, 3, 1], [2, 1, 2]])` and vector `y
 
 ### Loading and saving data
 
-The simplest way to save your data is to save them to a binary NumPy file with the `write()` function. For example, you can save an array as follows:
+The simplest way to save your data is to save them to a binary NumPy file with the `save()` function. For example, you can save an array as follows:
 
 ```python
 a = np.array([[1, 2, 0], [1, 3, 1], [2, 1, 2]])
-np.write('my_file.npy', a)
+np.save('my_file.npy', a)
 ```
 
 which saves the array `a` in binary format to the file `my_file.npy`. 
